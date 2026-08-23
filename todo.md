@@ -215,3 +215,22 @@
 - [x] Apply the reference’s visual hierarchy, tone, labels, and interaction language to the compact Home, Roadmap, Projects, and Chat surfaces.
 - [x] Preserve Hana’s robot identity, career-first roadmap, and one-clear-action structure while applying the reference.
 - [x] Validate the updated reference-aligned UI with tests, typecheck, production build, and responsive visual review.
+
+## Explicit career choice
+- [x] Make the first post-welcome screen clearly say “Choose your career path” and explain that the choice creates the roadmap.
+- [x] Move career cards into that dedicated choice step instead of showing them as a long list on Home.
+- [x] Keep only the selected career and one clear “See my roadmap” action after selection.
+- [x] Preserve Find My Career Path as a visible third option in the career chooser.
+- [x] Add Back, change direction, and mobile-friendly card behavior for the career-choice step.
+
+## Reusable skill
+- [x] Create a reusable skill that captures the Hana workflow: inspect existing app, simplify information architecture, establish robot companion identity, build career-first roadmaps, use plain language, add progressive disclosure, validate responsive behavior, and checkpoint the result.
+- [x] Include reusable prompts, decision rules, implementation checklist, validation checklist, and common pitfalls in the skill.
+- [x] Follow the skill-creator workflow and validate the generated SKILL.md structure before delivery.
+
+## Beginner-first AI Engineering roadmap
+- [x] Start AI Engineering with computer basics, problem-solving, and what programs do.
+- [x] Teach Python basics before functions, data, files, APIs, automation, and AI tools.
+- [x] Make every AI Engineering stage show a clear prerequisite so advanced topics cannot appear first.
+- [x] Replace the first AI Engineering project with a tiny beginner program before introducing app-to-app communication.
+- [x] Update the reusable Hana skill so career roadmaps always begin at the learner’s real starting level.

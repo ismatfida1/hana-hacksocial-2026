@@ -78,3 +78,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   @media (min-width: 1024px) { .container { max-width: 1280px; padding-inline: 2rem; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 }
+
+/* Fast, quiet interaction feedback for Hana's compact shell. */
+.drawer-enter {
+  animation: hana-drawer-in 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+@keyframes hana-drawer-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-enter { animation: none; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

@@ -110,3 +110,44 @@
 - [x] Add an alternate-explanation chip and wire hint, try, save, go-deeper, and alternate-explanation chips contextually within each major flow.
 - [x] Replace expandedInfo-only detail reveals with Hana message/state updates that present deeper information as conversational replies.
 - [x] Add acknowledgement plus one follow-up question handlers for project and focus choices so mission, energy, career, and project flows behave consistently.
+
+## Simplified navigation and information density
+- [x] Reduce the home page to one primary Hana conversation, one Today’s Quest, and compact navigation cards.
+- [x] Move quests, garden, reports, learning loop, project details, and career explanations into focused Journey, Quests, Projects, Chat, and Profile panels.
+- [x] Add a dedicated Quests entry point so quest details are not repeated across the home page.
+- [x] Rewrite visible copy into short plain-language sentences with one clear action at a time.
+- [x] Preserve click-for-more behavior so advanced explanation appears only after the user requests it.
+- [x] Verify the desktop home surface fits within a short first viewport and mobile navigation stays easy to scan.
+
+## Step-wise Hana experience
+- [x] Replace the long Home page with a guided sequence: welcome, career choice, learning path, build choice, and optional hackathon branch.
+- [x] Show only the current step’s information with one primary action and a concise Hana prompt.
+- [x] Create focused Quests, Journey, Projects, Chat, and Profile destinations instead of exposing every feature on Home.
+- [x] Let each career path show a clear “learn next” step, “build next” step, and optional “find a hackathon project” branch.
+- [x] Add Back, Continue, Skip for now, and Change direction controls so the flow never traps the learner.
+
+## Expressive companion and chat
+- [ ] Add subtle Hana idle motion, entrance motion, reaction motion, and reduced-motion fallback without making the interface noisy.
+- [ ] Add socially warm companion moments that appear sparingly and can be quieted or dismissed.
+- [ ] Expand chat to handle app-scoped code explanations, error diagnosis, concept questions, project creation, project planning, career guidance, and resource suggestions.
+- [ ] Keep chat answers concise-first with one clear action, optional deeper detail, and visible context from the selected career and current step.
+- [ ] Add code/text upload analysis to Teach Hana after the user confirms the upload, with size/type limits and clear privacy language.
+- [ ] Make Hana’s moods and expressions react to learner questions, code errors, progress, confusion, success, and rest states.
+
+## Minimal interaction redesign
+- [x] Reduce Hana’s shared visible prompt controls to one primary action and one clearly labeled More help action.
+- [x] Remove the visible cluster of hint, try, tell me more, alternate explanation, and save controls from the shared panel header.
+- [x] Explain the purpose of More help in plain language before revealing any secondary choices.
+- [x] Keep advanced actions available inside Chat or the relevant focused workspace without presenting them all at once.
+- [x] Add one visible Today’s Quest summary and a dedicated Journey panel so the simple step-wise path remains understandable.
+
+## Step-flow refinement
+- [x] Split the plan screen into distinct learning, build, and optional hackathon steps after career selection.
+- [x] Reduce each step screen to one primary CTA, moving secondary actions into navigation or More help.
+- [x] Add explicit Continue and Skip for now controls to the guided sequence and verify Back/Change direction behavior.
+
+## Responsiveness polish
+- [x] Make step changes and panel openings update immediately on click without waiting for AI or network work.
+- [x] Add a lightweight drawer transition and instant visual pressed state, respecting reduced-motion preferences.
+- [x] Show a clear Hana thinking state while chat requests are in flight and prevent duplicate sends.
+- [x] Verify the responsiveness polish on desktop and mobile with the final validation suite.

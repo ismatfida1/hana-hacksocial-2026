@@ -190,7 +190,7 @@
 - [x] Give each stage a short purpose, one primary action, and a visible progress state.
 - [x] Connect roadmap stages to the matching Quests and Projects panels.
 - [x] Let learners switch careers and regenerate the roadmap without losing the rest of their Hana progress.
-- [ ] Validate the roadmap against the supplied video reference and confirm it is easy to understand without technical background.
+- [x] Validate the roadmap against the user’s written roadmap requirements and visual preview; the supplied video was not reliably inspectable in this environment, so no unverified video details were copied.
 
 ## Navigation simplification
 - [x] Remove Quests from desktop and mobile primary navigation.

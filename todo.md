@@ -48,7 +48,7 @@
 ## Secure AI integration
 - [x] Upgrade Hana with a secure server-side AI foundation so provider credentials never reach the browser.
 - [x] Add a project-aware chat contract for Hana’s personality, approved memory, current quest, active project, response mode, and career discovery context.
-- [ ] Add structured AI actions for career recommendations, project plans, debugging checklists, concise explanations, learner notes, confidence check-ins, and “show your work” portfolio summaries.
+- [x] Add structured AI actions for career recommendations, project plans, debugging checklists, concise explanations, learner notes, confidence check-ins, and “show your work” portfolio summaries.
 - [x] Add a clear uncertainty and safety behavior so Hana does not invent answers or overstate career guidance.
 - [x] Expand Find My Career Path with explicit preferred project type and career goal prompts, while preserving short visual interaction.
 - [x] Make the saved career recommendation drive a path-specific next mission in Hana Journey.
@@ -61,29 +61,29 @@
 - [x] Add a clearly visible Try Hana / Explore Demo mode using the real app UI with all major features unlocked.
 - [x] Add a replayable interactive demo tour covering Hana, sample mission, recommendation, resource, practice, chat, roadmap, project step, reward, and room change.
 - [x] End Demo Mode with a choice among AI Engineering, Computer Science, and Find My Career Path, while preserving normal locks in real journeys.
-- [ ] Add a tiny optional skill assessment before a real journey and use it to adjust the starting point.
-- [ ] Model prerequisites such as Python basics, functions, APIs, automation, and AI agents so advanced topics do not unlock from clicks alone.
-- [ ] Give every lesson the Learn, Try, Build, Check structure with an active practice step after resources.
-- [ ] Add supportive struggle recovery: explain differently, example, hint, simpler problem, previous step, alternative resource, or review mission.
-- [ ] Add a weekly Hana review card based on recently learned topics.
+- [x] Add a tiny optional skill assessment before a real journey and use it to adjust the starting point.
+- [x] Model prerequisites such as Python basics, functions, APIs, automation, and AI agents so advanced topics do not unlock from clicks alone.
+- [x] Give every lesson the Learn, Try, Build, Check structure with an active practice step after resources.
+- [x] Add supportive struggle recovery: explain differently, example, hint, simpler problem, previous step, alternative resource, or review mission.
+- [x] Add a weekly Hana review card based on recently learned topics.
 - [x] Optimize progress for understanding, practice, and projects rather than hours watched or course completion.
 
 ## Companion modes and product depth
 - [x] Add a persistent Today’s Mission surface with one clear task, time, reason, and Start action.
 - [x] Add an always-available I’m Stuck action that opens learning-oriented hints without immediately revealing the answer.
-- [ ] Add Teach Hana for explaining a concept back in the learner’s own words.
-- [ ] Add separate Learn and Build modes with meaningful project outcomes.
+- [x] Add Teach Hana for explaining a concept back in the learner’s own words.
+- [x] Add separate Learn and Build modes with meaningful project outcomes.
 - [x] Add Hana’s Lab Experiment Mode for safe APIs, prompts, code, AI tools, and project play.
-- [ ] Add a Where am I going? chain from today’s skill to bigger skill, project, and career.
+- [x] Add a Where am I going? chain from today’s skill to bigger skill, project, and career.
 - [x] Add a visual Skill Garden where demonstrated programming, AI, cloud, cybersecurity, and data skills grow distinct plants.
-- [ ] Add meaningful rewards only after understanding, practice, or building, including room decorations and Hana poses.
-- [ ] Add Career Explorer recommendations based on observed learning behavior, not only the initial conversation.
-- [ ] Add a visually shareable Weekly Hana Report with learned skills, built projects, strongest skill, and next direction.
+- [x] Add meaningful rewards only after understanding, practice, or building, including room decorations and Hana poses.
+- [x] Add Career Explorer recommendations based on observed learning behavior, not only the initial conversation.
+- [x] Add a visually shareable Weekly Hana Report with learned skills, built projects, strongest skill, and next direction.
 - [x] Add a real Portfolio section for completed projects with description, technologies, demonstrated skills, GitHub link, screenshots, and learning notes.
-- [ ] Add real-world mission framing such as Make Hana fetch information from an API and Give Hana a memory.
+- [x] Add real-world mission framing such as Make Hana fetch information from an API and Give Hana a memory.
 - [x] Add Light, Normal, and Deep energy modes that reshape the mission without punishment.
-- [ ] Add occasional personality moments and a gentle enough-for-today rest state.
-- [ ] Let learners pause journeys, switch paths, revisit lessons, change time and goals, and explore other fields without feeling trapped.
+- [x] Add occasional personality moments and a gentle enough-for-today rest state.
+- [x] Let learners pause journeys, switch paths, revisit lessons, change time and goals, and explore other fields without feeling trapped.
 - [x] Reflect Hana’s three layers in the architecture: Companion, Coach, and Builder.
 
 ## Final polish and progressive disclosure
@@ -106,7 +106,7 @@
 - [x] Add consistent acknowledgement plus one useful follow-up question after learner choices in mission, energy, career, and project flows.
 
 ## Flow-specific conversational refinement
-- [ ] Convert demo, career, focus, and project drawers into explicit multi-step conversations with per-flow Hana prompts, learner choice chips, and stateful follow-up responses.
-- [ ] Add an alternate-explanation chip and wire hint, try, save, go-deeper, and alternate-explanation chips contextually within each major flow.
-- [ ] Replace expandedInfo-only detail reveals with Hana message/state updates that present deeper information as conversational replies.
-- [ ] Add acknowledgement plus one follow-up question handlers for project and focus choices so mission, energy, career, and project flows behave consistently.
+- [x] Convert demo, career, focus, and project drawers into explicit multi-step conversations with per-flow Hana prompts, learner choice chips, and stateful follow-up responses.
+- [x] Add an alternate-explanation chip and wire hint, try, save, go-deeper, and alternate-explanation chips contextually within each major flow.
+- [x] Replace expandedInfo-only detail reveals with Hana message/state updates that present deeper information as conversational replies.
+- [x] Add acknowledgement plus one follow-up question handlers for project and focus choices so mission, energy, career, and project flows behave consistently.

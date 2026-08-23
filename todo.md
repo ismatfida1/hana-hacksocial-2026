@@ -198,3 +198,14 @@
 - [x] Make Projects the place where the learner chooses what to build, with hackathon ideas inside it.
 - [x] Remove duplicate quest entry points from Home and replace them with one roadmap or project action.
 - [x] Keep existing quest content available as roadmap learning steps without presenting it as a separate feature.
+
+## Real roadmap content
+- [x] Replace generic roadmap labels with real beginner-friendly lessons for Software Engineering, AI Engineering, Data Science, and Cybersecurity.
+- [x] Give every lesson a clear goal, simple explanation, tiny practice task, and “you’re ready” check.
+- [x] Add specific buildable projects at starter, portfolio, and stretch levels for every career path.
+- [x] Add project outcomes, suggested tools, skills practiced, and a simple first build step.
+- [x] Keep roadmap copy concise and explain technical words in plain English.
+- [x] Make Roadmap and Projects use the selected career’s real lesson and project content when the learner switches paths.
+
+## Roadmap content validation fix
+- [x] Replace stale generic lesson detail references with the new lesson goal/practice fields and restore a clean TypeScript build.

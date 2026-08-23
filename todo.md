@@ -182,3 +182,19 @@
 - [x] Add CSS rules for Hana’s idle float and mood-specific reaction motion, with reduced-motion fallback.
 - [x] Throttle Hana companion interjections so each flow gets at most one automatic moment until the user changes context or reopens it.
 - [x] Add a distinct progress mood path and deterministic tests for confusion, error, success, progress, and rest states.
+
+## Career-first roadmap
+- [x] Make career choice the first meaningful step after Hana’s welcome.
+- [x] Add a dedicated visual roadmap for the selected career instead of only showing a generic Journey summary.
+- [x] Show clear career stages in order: foundations to learn, practice missions, projects to build, and optional hackathon or real-world work.
+- [x] Give each stage a short purpose, one primary action, and a visible progress state.
+- [x] Connect roadmap stages to the matching Quests and Projects panels.
+- [x] Let learners switch careers and regenerate the roadmap without losing the rest of their Hana progress.
+- [ ] Validate the roadmap against the supplied video reference and confirm it is easy to understand without technical background.
+
+## Navigation simplification
+- [x] Remove Quests from desktop and mobile primary navigation.
+- [x] Make Career Roadmap the place where the learner sees what to learn next.
+- [x] Make Projects the place where the learner chooses what to build, with hackathon ideas inside it.
+- [x] Remove duplicate quest entry points from Home and replace them with one roadmap or project action.
+- [x] Keep existing quest content available as roadmap learning steps without presenting it as a separate feature.

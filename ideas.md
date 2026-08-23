@@ -78,3 +78,13 @@ The home composition should read as an asymmetric pinboard rather than a uniform
 Pressed Cobalt #3157C8 is reserved for precise technical guidance, active chat states, technical actions, constellation centers, and Hana’s core mark. Oat, sage, mist blue, dusty rose, butter, and ink carry the calmer emotional surfaces.
 
 The primary brand lockup is “HANA — Your AI Learning Companion,” supported by the message “You don’t have to know what’s next. Hana does.” The wordmark should feel pressed-flower/bracket-derived rather than like ordinary lowercase UI text.
+
+## Latest product guidance from user attachments
+
+Hana should include a real Try Hana / Explore Demo mode that uses the same UI and interactions as the product, starts with a short replayable tour, unlocks sample content, and ends with choices for AI Engineering, Computer Science, and Find My Career Path. The latest direction removes voice interaction from this tour.
+
+The learning loop should optimize for understanding, practice, and projects rather than completion or hours watched. A compact skill assessment can adjust the starting point; prerequisites should guide unlocks; each lesson should follow Learn → Try → Build → Check; resources should lead to active challenges; struggling learners should receive alternate explanations, examples, hints, simpler problems, prior steps, alternative resources, or review missions.
+
+Hana should present one clear Today’s Mission, remember why a learner struggles, offer an always-available I’m Stuck flow, support Teach Hana, separate Learn and Build modes, include a safe Hana’s Lab for experiments, show the chain from today’s skill to larger skill to project to career, and grow a Skill Garden. Rewards should recognize understanding, practice, and building. Career recommendations should later reflect observed learning behavior. A weekly Hana report and project portfolio should capture skills, technologies, descriptions, GitHub links, screenshots, and learning notes. Energy modes should include Light, Normal, and Deep. Learners should be able to pause, switch paths, revisit lessons, change time and goals, and explore without shame.
+
+Progressive disclosure is required: Hana gives a concise answer or option first, and the learner clicks for further information. Explanations should not appear automatically or overwhelm the screen.

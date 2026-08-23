@@ -20,7 +20,7 @@ const ASSETS = {
 type Mood = "happy" | "worried" | "confused" | "thinking" | "curious" | "sleepy" | "celebrating";
 type Panel = "career" | "journey" | "quests" | "projects" | "chat" | "profile" | "focus" | "upload" | null;
 type Mode = "short" | "analogy" | "example" | "debug" | "deep" | "career" | "project";
-type Path = "AI Engineering" | "Computer Science" | "Software Engineering" | "Data Science" | "Cybersecurity" | "Find My Career Path";
+type Path = "AI Engineering" | "Computer Science" | "Software Engineering" | "Data Science" | "Cybersecurity" | "Cloud / DevOps" | "Web / Full-Stack Development" | "Find My Career Path";
 type Memory = { id: string; label: string; value: string };
 
 type Lesson = { title: string; topic: string; time: string; goal: string; practice: string; check: string };
@@ -77,6 +77,24 @@ const paths: CareerPath[] = [
     { name: "Phishing lesson", level: "Portfolio · weekend", outcome: "Teach beginners how to spot a suspicious message.", skills: "Threat thinking, UX, writing", firstStep: "Collect five safe, made-up examples and explain each clue." },
     { name: "Small-team risk map", level: "Stretch · 1–2 weeks", outcome: "Help a club see its important data and safer habits.", skills: "Risk analysis, identity, communication", firstStep: "Ask what information the team would be most upset to lose." },
   ] },
+  { name: "Cloud / DevOps", icon: "☁", color: "#dce7f4", oneLine: "Keep software running well.", learn: "Linux, networking, automation, containers, and cloud.", build: "Deploy a small app with logs and a safe update path.", hack: "A useful service for a student club.", lessons: [
+    { title: "Meet the command line", topic: "Linux basics", time: "15 min", goal: "Use a text window to move around files and run a simple command.", practice: "Create a folder, add a note, and find it again.", check: "You can explain what a folder and command are." },
+    { title: "See how the web moves", topic: "Networking", time: "20 min", goal: "Understand how a browser finds a service and gets a response.", practice: "Draw browser → network → server in three steps.", check: "You can say where a slow step might happen." },
+    { title: "Package a small app", topic: "Docker", time: "25 min", goal: "Put an app and what it needs into one repeatable package.", practice: "Write down the app, its command, and its one required setting.", check: "You can explain why repeatable setup helps a team." },
+  ], projects: [
+    { name: "Command-line study log", level: "Starter · 1 hour", outcome: "Save and find study notes using simple commands.", skills: "Linux, files, Bash", firstStep: "Write three notes you want to save." },
+    { name: "Safe app deploy", level: "Portfolio · weekend", outcome: "Run a small app with a repeatable setup and a health check.", skills: "Docker, HTTP, logs", firstStep: "Choose a tiny app and write the command that starts it." },
+    { name: "Club service monitor", level: "Stretch · 1–2 weeks", outcome: "Show whether a shared service is working and what changed.", skills: "Cloud, monitoring, communication", firstStep: "List the one signal that would tell you the service is healthy." },
+  ] },
+  { name: "Web / Full-Stack Development", icon: "▱", color: "#f0e1df", oneLine: "Build useful things for the web.", learn: "HTML, CSS, JavaScript, React, servers, and data.", build: "A small web app from idea to working version.", hack: "A focused tool people can use online.", lessons: [
+    { title: "Make your first web page", topic: "HTML and CSS", time: "15 min", goal: "Put text, buttons, and simple layout on a page.", practice: "Make a page that introduces a club or hobby.", check: "You can point to the content and the style." },
+    { title: "Make the page respond", topic: "JavaScript", time: "20 min", goal: "Use a click to change what someone sees.", practice: "Build a button that shows or hides a short message.", check: "You can explain what happens after the click." },
+    { title: "Save one piece of data", topic: "Backend basics", time: "25 min", goal: "Send a small form answer to a server and save it.", practice: "Plan a tiny form that stores one useful note.", check: "You know what the browser sends and what the server saves." },
+  ], projects: [
+    { name: "Personal homepage", level: "Starter · 1 hour", outcome: "Share who you are and one thing you care about online.", skills: "HTML, CSS, accessibility", firstStep: "Write the three things your page should say." },
+    { name: "Study notes app", level: "Portfolio · weekend", outcome: "Create, view, and remove short notes in a friendly interface.", skills: "React, state, forms", firstStep: "Sketch the empty screen and the screen with one note." },
+    { name: "Community directory", level: "Stretch · 1–2 weeks", outcome: "Help people search a useful list with clear filters.", skills: "Frontend, backend, SQL, testing", firstStep: "Choose the people and information the directory should help with." },
+  ] },
   { name: "Find My Career Path", icon: "?", color: "#f0e1df", oneLine: "Find a direction that fits you.", learn: "Notice what you enjoy, then try a small sample.", build: "A tiny project in a field that feels interesting.", hack: "A low-pressure project sampler.", lessons: [
     { title: "Notice what pulls you in", topic: "Interests", time: "10 min", goal: "Name the kinds of problems, people, or ideas that make you curious.", practice: "Choose three: build, design, analyze, protect, research, or help.", check: "You can name one kind of work you want to try." },
     { title: "Try one small skill", topic: "Exploration", time: "20 min", goal: "Test a tiny activity before choosing a bigger direction.", practice: "Pick one mini task from a career card and notice what felt easy or fun.", check: "You can say what you liked and what you did not." },
@@ -124,7 +142,19 @@ export default function Home() {
   const chatMutation = trpc.hana.chat.useMutation();
   const selectedPath = useMemo(() => paths.find((item) => item.name === path) ?? paths[0], [path]);
   const selectedQuest = selectedPath.lessons[questIndex % selectedPath.lessons.length];
-  const roadmapStages = useMemo<RoadmapStage[]>(() => [
+  const roadmapStages = useMemo<RoadmapStage[]>(() => {
+    if (path === "AI Engineering") return [
+      { title: "Programming foundations", purpose: "Learn how programs work before adding AI tools.", time: "6–10 weeks", prerequisite: "No previous experience needed.", resource: "Python basics: variables, choices, loops, functions, files, and testing", practice: "Write a small Python program that gives a study suggestion.", build: selectedPath.projects[0].outcome, next: "Computer science foundations" },
+      { title: "Computer science foundations", purpose: "Understand the ideas that help you build reliable software.", time: "6–10 weeks", prerequisite: "Basic Python and problem-solving.", resource: "Data structures, algorithms, Git, Linux, databases, and networking", practice: "Compare two ways to find an item in a list and explain which is easier to grow.", build: "A tested command-line tool with a saved data file.", next: "Math for AI" },
+      { title: "Math for AI", purpose: "Build intuition for how models learn from examples.", time: "4–8 weeks", prerequisite: "Comfort with Python and basic algebra.", resource: "Probability, statistics, vectors, and the idea of a model", practice: "Use a small table to calculate an average and explain what it does not tell you.", build: "A tiny notebook that compares two simple patterns.", next: "Data tools" },
+      { title: "Data tools", purpose: "Learn to clean, explore, and show data before training a model.", time: "4–6 weeks", prerequisite: "Python basics and simple statistics.", resource: "NumPy, Pandas, charts, cleaning, and exploration", practice: "Find one missing value in a small table and choose how to handle it.", build: selectedPath.projects[1].outcome, next: "Machine learning" },
+      { title: "Machine learning", purpose: "Teach a model to spot patterns and check whether it is useful.", time: "6–10 weeks", prerequisite: "Data tools and basic statistics.", resource: "Regression, classification, clustering, features, and evaluation", practice: "Split a small dataset into examples for learning and checking.", build: "A simple model with a short note about what it gets wrong.", next: "Deep learning" },
+      { title: "Deep learning", purpose: "Understand neural networks and when they help with harder patterns.", time: "6–10 weeks", prerequisite: "Machine learning and linear algebra basics.", resource: "Neural networks, optimization, PyTorch, and transformers", practice: "Draw the input, hidden steps, and output of a tiny network.", build: "A small image or text classifier with a clear test set.", next: "Modern AI" },
+      { title: "Modern AI", purpose: "Use language and vision models with care and clear tests.", time: "4–8 weeks", prerequisite: "Machine learning and data evaluation.", resource: "Embeddings, retrieval, language models, prompts, and agents", practice: "Compare two prompts and record which answer is more useful.", build: selectedPath.projects[1].outcome, next: "AI applications" },
+      { title: "AI applications", purpose: "Only now connect models to real apps, users, and data.", time: "4–8 weeks", prerequisite: "Programming, data, and AI basics.", resource: "APIs, REST, authentication, backend integration, databases, and deployment", practice: "Draw the safe path from a user question to a model answer.", build: "A small AI app with one clear job and a safe failure message.", next: "Production" },
+      { title: "Production and portfolio", purpose: "Make your work reliable, explainable, and ready to show.", time: "Ongoing", prerequisite: "One working AI application.", resource: "Docker, cloud, monitoring, CI/CD, responsible AI, GitHub, and interviews", practice: "Write what your app does, what it cannot do, and how you tested it.", build: selectedPath.projects[2].outcome, next: "Career preparation" },
+    ];
+    return [
     { title: "Foundation", purpose: `Learn the basics of ${path} and why they matter.`, time: "2–4 weeks", prerequisite: "No previous experience needed.", resource: `${selectedPath.lessons[0].topic}: ${selectedPath.lessons[0].title}`, practice: selectedPath.lessons[0].practice, build: selectedPath.projects[0].outcome, next: "Core skills" },
     { title: "Core skills", purpose: `Practice the everyday skills people use in ${path}.`, time: "4–8 weeks", prerequisite: selectedPath.lessons[0].title, resource: `${selectedPath.lessons[1].topic}: ${selectedPath.lessons[1].title}`, practice: selectedPath.lessons[1].practice, build: selectedPath.projects[0].outcome, next: "Specialization" },
     { title: "Specialization", purpose: `Choose one area of ${path} that you want to explore more deeply.`, time: "4–8 weeks", prerequisite: selectedPath.lessons[1].title, resource: `${selectedPath.lessons[2].topic}: ${selectedPath.lessons[2].title}`, practice: selectedPath.lessons[2].practice, build: selectedPath.projects[1].outcome, next: "Projects" },
@@ -132,7 +162,8 @@ export default function Home() {
     { title: "Experience", purpose: "Work with real people, real constraints, or a small team. A club, volunteer project, internship, or hackathon can count.", time: "Alongside study", prerequisite: selectedPath.projects[0].name, resource: selectedPath.projects[2].name, practice: "Ask someone what problem they need help with.", build: selectedPath.projects[2].outcome, next: "Portfolio" },
     { title: "Portfolio", purpose: "Show what you made, what you learned, and how you made decisions.", time: "1–2 weeks per project", prerequisite: selectedPath.projects[1].name, resource: "Write a simple project story", practice: "Explain the problem, your choice, and the result in three sentences.", build: selectedPath.projects[1].outcome, next: "Job preparation" },
     { title: "Job preparation", purpose: "Practice talking about your work and find roles that match your skills.", time: "Ongoing", prerequisite: "One finished project and a clear project story.", resource: "Practice one project conversation", practice: "Answer: What did you build, and what would you improve?", build: "A simple resume project entry and interview story.", next: "Career" },
-  ], [path, selectedPath]);
+    ];
+  }, [path, selectedPath]);
 
   useEffect(() => { if (!focusRunning) return; const timer = window.setInterval(() => setFocusSeconds((seconds) => seconds > 0 ? seconds - 1 : 0), 1000); return () => window.clearInterval(timer); }, [focusRunning]);
   useEffect(() => { if (focusSeconds === 0) { setFocusRunning(false); setMood("happy"); setHanaLine("You stayed with it. That counts. Want to rest or keep the thread warm?"); } }, [focusSeconds]);

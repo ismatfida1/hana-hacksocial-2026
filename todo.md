@@ -234,3 +234,15 @@
 - [x] Make every AI Engineering stage show a clear prerequisite so advanced topics cannot appear first.
 - [x] Replace the first AI Engineering project with a tiny beginner program before introducing app-to-app communication.
 - [x] Update the reusable Hana skill so career roadmaps always begin at the learner’s real starting level.
+
+## Updated reference and final flow
+- [x] Read the new reference and record its actionable design and wording rules in Hana’s design notes.
+- [x] Make the visible user journey exactly Welcome → Choose a career → Roadmap → Projects and online work.
+- [x] Keep Welcome focused on a short Hana greeting and one clear next action.
+- [x] Make career choice a dedicated screen with a text prompt, clear options, and a simple explanation that the choice creates the roadmap.
+- [x] Make the selected career open a visible career roadmap with learn, practice, build, and online-work stages.
+- [x] Add an Online Work section with safe beginner-friendly real-world task ideas related to the selected career.
+- [x] Let learners chat with Hana from inside the roadmap using concise, structured answers with headings, short paragraphs, and bullets when helpful.
+- [x] Keep Hana as an expressive, encouraging tour guide with occasional progress and congratulations messages tied to actions.
+- [x] Remove or hide extra surfaces that distract from the five-step flow.
+- [x] Do not add unnecessary external APIs; use the existing secure AI layer unless a new integration is clearly required.

@@ -209,3 +209,9 @@
 
 ## Roadmap content validation fix
 - [x] Replace stale generic lesson detail references with the new lesson goal/practice fields and restore a clean TypeScript build.
+
+## Reference alignment
+- [x] Read the attached design and wording reference and capture its actionable rules in Hana’s design notes.
+- [x] Apply the reference’s visual hierarchy, tone, labels, and interaction language to the compact Home, Roadmap, Projects, and Chat surfaces.
+- [x] Preserve Hana’s robot identity, career-first roadmap, and one-clear-action structure while applying the reference.
+- [x] Validate the updated reference-aligned UI with tests, typecheck, production build, and responsive visual review.

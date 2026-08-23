@@ -101,3 +101,35 @@ button:active:not(:disabled) {
   .drawer-enter { animation: none; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+/* Hana herself moves gently, so the companion feels present without demanding attention. */
+.hana-robot-motion {
+  transform-origin: 50% 85%;
+  animation: hana-idle-float 4.8s ease-in-out infinite;
+}
+.hana-mood-thinking { animation-duration: 2.2s; }
+.hana-mood-curious { animation-duration: 3.2s; }
+.hana-mood-worried { animation: hana-worried-nudge 1.8s ease-in-out infinite; }
+.hana-mood-confused { animation: hana-confused-tilt 2.4s ease-in-out infinite; }
+.hana-mood-celebrating { animation: hana-celebrate 1.2s ease-in-out 2; }
+.hana-mood-sleepy { animation-duration: 7s; }
+@keyframes hana-idle-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-1deg); }
+}
+@keyframes hana-worried-nudge {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(-2deg); }
+  70% { transform: rotate(1deg); }
+}
+@keyframes hana-confused-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg) translateY(-2px); }
+}
+@keyframes hana-celebrate {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hana-robot-motion, .hana-mood-worried, .hana-mood-confused, .hana-mood-celebrating { animation: none; }
+}

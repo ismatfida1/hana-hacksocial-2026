@@ -127,12 +127,12 @@
 - [x] Add Back, Continue, Skip for now, and Change direction controls so the flow never traps the learner.
 
 ## Expressive companion and chat
-- [ ] Add subtle Hana idle motion, entrance motion, reaction motion, and reduced-motion fallback without making the interface noisy.
-- [ ] Add socially warm companion moments that appear sparingly and can be quieted or dismissed.
-- [ ] Expand chat to handle app-scoped code explanations, error diagnosis, concept questions, project creation, project planning, career guidance, and resource suggestions.
-- [ ] Keep chat answers concise-first with one clear action, optional deeper detail, and visible context from the selected career and current step.
-- [ ] Add code/text upload analysis to Teach Hana after the user confirms the upload, with size/type limits and clear privacy language.
-- [ ] Make Hana’s moods and expressions react to learner questions, code errors, progress, confusion, success, and rest states.
+- [x] Add subtle Hana idle motion, entrance motion, reaction motion, and reduced-motion fallback without making the interface noisy.
+- [x] Add socially warm companion moments that appear sparingly and can be quieted or dismissed.
+- [x] Expand chat to handle app-scoped code explanations, error diagnosis, concept questions, project creation, project planning, career guidance, and resource suggestions.
+- [x] Keep chat answers concise-first with one clear action, optional deeper detail, and visible context from the selected career and current step.
+- [x] Add code/text upload analysis to Teach Hana after the user confirms the upload, with size/type limits and clear privacy language.
+- [x] Make Hana’s moods and expressions react to learner questions, code errors, progress, confusion, success, and rest states.
 
 ## Minimal interaction redesign
 - [x] Reduce Hana’s shared visible prompt controls to one primary action and one clearly labeled More help action.
@@ -151,3 +151,34 @@
 - [x] Add a lightweight drawer transition and instant visual pressed state, respecting reduced-motion preferences.
 - [x] Show a clear Hana thinking state while chat requests are in flight and prevent duplicate sends.
 - [x] Verify the responsiveness polish on desktop and mobile with the final validation suite.
+
+## Final companion-quality fixes
+- [x] Add a real Hana idle/reaction animation system tied to mood changes, with reduced-motion behavior.
+- [x] Add a dismiss/quiet control and throttle for warm companion interjections.
+- [x] Show current path and current step context inside Chat and keep responses concise-first with an explicit deeper path.
+- [x] Add explicit project-creation and resource-suggestion chat actions.
+- [x] Validate uploaded file extensions in code and handle file-reading failures gracefully.
+- [x] Complete deliberate mood mapping for confusion, code errors, success, progress, and rest.
+
+## Plain-language final pass
+- [x] Use short, everyday English in Hana’s UI, missions, prompts, reports, chat fallbacks, and notifications.
+- [x] Explain technical words immediately with simple words or a tiny example.
+- [x] Make “I don’t understand” produce a simpler re-explanation instead of repeating the same wording.
+- [x] Keep answers concise by default and reveal longer explanations only when the learner asks.
+- [x] Remove professor-like, corporate, academic, and unnecessary wording from the learner-facing experience.
+
+## Plain-language enforcement
+- [x] Audit all visible Home copy and rewrite remaining formal or unclear wording in everyday English.
+- [x] Add a deterministic confusion-recovery helper that detects “I don’t understand” and similar phrases and switches to a simpler response.
+- [x] Add an explicit More detail action in Chat so deeper answers are requested, not automatic.
+- [x] Add tests for confusion recovery and concise-first chat behavior.
+
+## Plain-language completion fixes
+- [x] Rewrite remaining visible labels such as direction, hackathon, portfolio, and project wording into everyday language or add a short explanation.
+- [x] Ensure client helper tests are included by the Vitest configuration and pass in the project test command.
+- [x] Add a deterministic test for concise-first mode and explicit More detail behavior.
+
+## Final motion and mood verification
+- [x] Add CSS rules for Hana’s idle float and mood-specific reaction motion, with reduced-motion fallback.
+- [x] Throttle Hana companion interjections so each flow gets at most one automatic moment until the user changes context or reopens it.
+- [x] Add a distinct progress mood path and deterministic tests for confusion, error, success, progress, and rest states.

@@ -626,3 +626,10 @@
 - [x] Keep the compact Journey card readable above the bottom navigation on phone screens.
 - [x] Preserve mastery submission, resource links, progress saving, and career-specific content inside the expanded details.
 - [x] Validate the compact Journey at mobile and desktop widths and run the regression suite.
+
+## Roadmap.sh-inspired vision — 2026-08-24
+- [x] Use Roadmap.sh as a structural reference for clear foundations, core skills, projects, and career outcomes.
+- [x] Keep Hana’s roadmap adaptive to the student’s goal, current knowledge, degree, and progress instead of copying a fixed curriculum.
+- [x] Present roadmap nodes compactly with the current step first and deeper explanations behind a click.
+- [x] Connect roadmap steps to prerequisites, free learning resources, small projects, evidence, and next career outcomes.
+- [x] Add a visible source note linking to Roadmap.sh where its structure informs Hana’s roadmap experience.

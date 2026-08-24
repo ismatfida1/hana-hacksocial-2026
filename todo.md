@@ -619,3 +619,10 @@
 - [x] Add an accessible visual progress bar showing completed and remaining tour stages.
 - [x] Show an accurate 100% completion state before the user opens the demo.
 - [x] Validate the progress indicator on mobile and in the production build.
+
+## Compact Journey detail pattern — 2026-08-24
+- [x] Show each Journey step with a short title, one-line purpose, status, and one clear action first.
+- [x] Move finish-line tasks, prerequisites, practice, Hana check, resources, and project details behind expandable controls.
+- [x] Keep the compact Journey card readable above the bottom navigation on phone screens.
+- [x] Preserve mastery submission, resource links, progress saving, and career-specific content inside the expanded details.
+- [x] Validate the compact Journey at mobile and desktop widths and run the regression suite.

@@ -1,43 +1,106 @@
-export type JourneyStep = { title: string; purpose: string; kind: "learn" | "practice" | "build" };
+export type JourneyKind = "learn" | "practice" | "demonstrate" | "master" | "build";
+export type JourneyStatus = "locked" | "active" | "complete";
+
+export type JourneyStep = {
+  title: string;
+  purpose: string;
+  kind: JourneyKind;
+  day: number;
+  duration: string;
+  prerequisite: string;
+  finishLine: string[];
+  resource: { label: string; url: string };
+  practice: string;
+  masteryCheck: string;
+  projectOutcome: string;
+  unlocks: string;
+  status?: JourneyStatus;
+};
+
+const step = (
+  title: string,
+  purpose: string,
+  kind: JourneyKind,
+  day: number,
+  duration: string,
+  prerequisite: string,
+  finishLine: string[],
+  resource: { label: string; url: string },
+  practice: string,
+  masteryCheck: string,
+  projectOutcome: string,
+  unlocks: string,
+): JourneyStep => ({ title, purpose, kind, day, duration, prerequisite, finishLine, resource, practice, masteryCheck, projectOutcome, unlocks });
+
+const programming = [
+  step("Variables and data types", "Store information and choose the right kind of value.", "learn", 1, "45 min", "None — Hana starts here.", ["Create variables", "Use strings, numbers, and booleans", "Explain what each value means"], { label: "Python variables", url: "https://docs.python.org/3/tutorial/introduction.html" }, "Make a small student profile that stores a name, semester, and study time.", "Hana asks you to predict the output of three tiny examples.", "A command-line student profile", "Conditions and repeated actions"),
+  step("Conditions and loops", "Make a program choose and repeat instead of doing one fixed thing.", "practice", 2, "60 min", "Variables and data types", ["Write if/else logic", "Use a for loop", "Explain when a loop stops"], { label: "Python control flow", url: "https://docs.python.org/3/tutorial/controlflow.html" }, "Build a study reminder that prints a different message for each available time.", "Change one input and explain why the output changes.", "A simple study reminder", "Functions"),
+  step("Functions", "Package a small job so you can reuse and test it.", "learn", 3, "75 min", "Conditions and loops", ["Define a function", "Use parameters and arguments", "Return a value", "Explain basic scope"], { label: "Python functions", url: "https://docs.python.org/3/tutorial/controlflow.html#defining-functions" }, "Write `minutes_left(total, used)` and test it with three examples.", "Hana gives you a broken function; fix it and explain the return value.", "A reusable study-time calculator", "Lists and dictionaries"),
+  step("Lists and dictionaries", "Keep related information together so your programs can work with real data.", "practice", 4, "75 min", "Functions", ["Create a list", "Read and update an item", "Use a dictionary with keys and values"], { label: "Python data structures", url: "https://docs.python.org/3/tutorial/datastructures.html" }, "Store three lessons and their status, then print the active lesson.", "Add a new lesson without changing the rest of the program.", "A small lesson tracker", "Files and modules"),
+  step("Files and modules", "Save useful data and split a project into clear pieces.", "learn", 5, "75 min", "Lists and dictionaries", ["Read a text file", "Write a text file", "Import a helper function"], { label: "Python modules", url: "https://docs.python.org/3/tutorial/modules.html" }, "Save the lesson tracker to a file and load it when the program starts.", "Hana checks that your program still works after you reopen it.", "A saved study tracker", "APIs"),
+  step("APIs", "Let your program talk to another service using a clear request and response.", "build", 6, "90 min", "Functions, data structures, and files", ["Explain an API in simple words", "Send one safe request", "Read JSON data", "Handle a failed request"], { label: "MDN HTTP overview", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" }, "Build a small weather or quote viewer using a documented public API.", "Explain what your request sends and what the response gives back.", "A beginner API application", "Project review and portfolio notes"),
+];
 
 const journeys: Record<string, JourneyStep[]> = {
-  Cybersecurity: [
-    { title: "Computer and network basics", purpose: "Understand what you are protecting.", kind: "learn" },
-    { title: "Linux essentials", purpose: "Work comfortably in the systems security teams use.", kind: "practice" },
-    { title: "Build a security checklist", purpose: "Turn what you learned into a useful project.", kind: "build" },
-  ],
-  "UI/UX": [
-    { title: "Find a real user problem", purpose: "Start with the person, not the tool.", kind: "learn" },
-    { title: "Sketch a simple flow", purpose: "Practice making one task easy to complete.", kind: "practice" },
-    { title: "Build a small case study", purpose: "Show your thinking in a portfolio project.", kind: "build" },
-  ],
-  "Web Development": [
-    { title: "How a web page works", purpose: "Learn the browser’s basic building blocks.", kind: "learn" },
-    { title: "Make one page interactive", purpose: "Practice turning an idea into a working screen.", kind: "practice" },
-    { title: "Build a personal site", purpose: "Create a project you can share.", kind: "build" },
+  "Software Engineering": [
+    step("Programming foundations", "Learn to break a problem into small, testable steps.", "learn", 1, "90 min", "None — Hana starts with your level check.", ["Use variables and conditions", "Write a small function", "Test two inputs"], { label: "CS50 Week 1", url: "https://cs50.harvard.edu/x/2025/weeks/1/" }, "Build a command-line grade calculator with clear input and output.", "Explain one test that passes and one edge case.", "A tested command-line tool", "Git and GitHub"),
+    step("Git and GitHub", "Save your work safely and show how your project changed.", "practice", 2, "60 min", "Programming foundations", ["Create a repository", "Make focused commits", "Write a useful README"], { label: "GitHub Hello World", url: "https://docs.github.com/en/get-started/start-your-journey/hello-world" }, "Publish your grade calculator with setup steps and a screenshot.", "Hana checks whether a new person could run your project.", "A shareable GitHub repository", "Web fundamentals"),
+    step("Web fundamentals", "Understand how a browser turns HTML, CSS, and JavaScript into a page.", "learn", 3, "90 min", "Programming foundations", ["Structure a page", "Style a layout", "Handle one click"], { label: "MDN Learn Web Development", url: "https://developer.mozilla.org/en-US/docs/Learn" }, "Build a one-page study dashboard with one interactive control.", "Change the page from a short written specification.", "An interactive study page", "Data and APIs"),
+    step("Data and APIs", "Connect a useful interface to real information.", "practice", 4, "90 min", "Web fundamentals", ["Read JSON", "Show loading and error states", "Keep user input safe"], { label: "MDN Fetch API", url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" }, "Turn your study page into a small resource finder.", "Explain what happens when the network fails.", "A resource finder", "Software design"),
+    step("Software design", "Make a project easier to change, test, and explain.", "demonstrate", 5, "90 min", "Data and APIs", ["Split work into small parts", "Name files clearly", "Write a short design note"], { label: "Google engineering practices", url: "https://abseil.io/resources/swe-book" }, "Refactor the resource finder and record two design decisions.", "Hana reviews structure, naming, bugs, and documentation.", "A cleaned-up portfolio project", "Portfolio and interview preparation"),
   ],
   "AI / Machine Learning": [
-    { title: "How data becomes useful", purpose: "Understand examples and simple patterns first.", kind: "learn" },
-    { title: "Compare a few predictions", purpose: "Practice checking whether a model is useful.", kind: "practice" },
-    { title: "Build a small AI feature", purpose: "Turn one clear idea into a safe project.", kind: "build" },
+    step("Programming foundations", "Build the coding base needed to work with data and models.", "learn", 1, "90 min", "None — Hana starts with your level check.", ["Use variables and functions", "Work with lists", "Read simple errors"], { label: "Python tutorial", url: "https://docs.python.org/3/tutorial/" }, "Write a small program that summarizes a list of study scores.", "Explain the input, transformation, and output.", "A score summary tool", "Math for AI"),
+    step("Math for AI: functions and probability", "Understand patterns, uncertainty, and what a prediction means.", "learn", 2, "90 min", "Programming foundations", ["Read a simple function on a graph", "Explain probability in plain English", "Compare two outcomes"], { label: "Khan Academy probability", url: "https://www.khanacademy.org/math/statistics-probability" }, "Estimate the chance of two study outcomes from a small table.", "Hana checks your explanation rather than your memorisation.", "A small prediction worksheet", "Data handling"),
+    step("Data handling", "Prepare examples so a model can learn from them fairly.", "practice", 3, "90 min", "Programming foundations", ["Load tabular data", "Find missing values", "Separate inputs from labels"], { label: "pandas getting started", url: "https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html" }, "Clean a tiny CSV and describe one data-quality problem.", "Identify one risk of drawing a conclusion from incomplete data.", "A documented clean dataset", "Model evaluation"),
+    step("Model evaluation", "Check whether a prediction is useful instead of trusting a score blindly.", "demonstrate", 4, "90 min", "Data handling and probability", ["Split examples", "Compare predictions", "Explain one false positive and false negative"], { label: "Google ML classification", url: "https://developers.google.com/machine-learning/crash-course/classification" }, "Compare two simple classifiers on a small dataset.", "Choose the better model for a stated goal and explain why.", "A model comparison note", "Modern AI and safe use"),
+    step("Modern AI and safe use", "Use AI tools with clear prompts, checks, privacy, and human review.", "build", 5, "90 min", "Programming and evaluation basics", ["Write a precise prompt", "Check an answer", "Avoid sending private data", "State limitations"], { label: "Google responsible AI", url: "https://ai.google/responsibility/principles/" }, "Build a small AI study helper with a visible review step.", "Hana asks you to find one possible failure and add a safeguard.", "A safe AI feature", "Portfolio and project review"),
   ],
-  Programming: [
-    { title: "Problem-solving basics", purpose: "Learn to break a problem into small steps.", kind: "learn" },
-    { title: "Write and test a small function", purpose: "Practice turning steps into code.", kind: "practice" },
-    { title: "Build a useful mini tool", purpose: "Use your skills in a project you can explain.", kind: "build" },
+  Cybersecurity: [
+    step("Computer and network basics", "Understand what you are protecting before learning attacks.", "learn", 1, "90 min", "None — Hana starts with your level check.", ["Explain a client and server", "Trace a simple request", "Name three assets worth protecting"], { label: "Cisco Introduction to Cybersecurity", url: "https://www.netacad.com/courses/introduction-to-cybersecurity" }, "Draw the path from your phone to a website.", "Explain where a password could be exposed.", "A simple system map", "Linux essentials"),
+    step("Linux essentials", "Use the command line and permissions found in security work.", "practice", 2, "90 min", "Computer and network basics", ["Move through folders", "Read file permissions", "Use safe search commands"], { label: "Linux command line", url: "https://ubuntu.com/tutorials/command-line-for-beginners" }, "Create a practice folder and record five safe commands with notes.", "Hana checks what each command changes before you run it.", "A Linux command reference", "Web and identity safety"),
+    step("Web and identity safety", "Understand how logins, sessions, and common web risks work.", "learn", 3, "90 min", "Linux essentials", ["Explain authentication", "Spot a weak password flow", "Describe least privilege"], { label: "OWASP Top 10", url: "https://owasp.org/www-project-top-ten/" }, "Review a fictional login flow and list three improvements.", "Explain why one fix reduces risk.", "A secure-login review", "Threat modelling"),
+    step("Threat modelling", "Think like a defender and prioritise realistic risks.", "demonstrate", 4, "90 min", "Web and identity safety", ["List assets and threats", "Rank likelihood and impact", "Choose one mitigation"], { label: "OWASP threat modelling", url: "https://owasp.org/www-community/Threat_Modeling" }, "Create a one-page threat model for a student portfolio site.", "Defend your highest-priority risk in a short explanation.", "A threat model document", "Security project"),
+    step("Build a security checklist", "Turn security ideas into a repeatable review a team can use.", "build", 5, "90 min", "Threat modelling", ["Check dependencies", "Review secrets", "Document findings", "Suggest safe fixes"], { label: "OWASP Cheat Sheet Series", url: "https://cheatsheetseries.owasp.org/" }, "Review a small demo project and write a safe, non-destructive checklist.", "Hana checks that each finding has evidence and a practical next step.", "A security review portfolio piece", "CTFs, open source, and internships"),
+  ],
+  "Cloud / DevOps": [
+    step("Linux and version control", "Build the everyday foundation for reliable deployments.", "learn", 1, "90 min", "None — Hana starts with your level check.", ["Use the command line", "Commit a change", "Explain a branch"], { label: "Git documentation", url: "https://git-scm.com/docs/gittutorial" }, "Put a small project under Git and document the run command.", "Hana checks whether another person can reproduce it.", "A reproducible starter project", "HTTP and web services"),
+    step("HTTP and web services", "Understand requests, responses, ports, and service health.", "learn", 2, "75 min", "Linux and version control", ["Read an HTTP request", "Explain a status code", "Test a local service"], { label: "MDN HTTP overview", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" }, "Make a health-check page and record three expected responses.", "Explain what a 404 and a 500 mean.", "A service health note", "Containers and automation"),
+    step("Containers and automation", "Package a service so it runs the same way in different places.", "practice", 3, "90 min", "HTTP and Linux basics", ["Describe an image and container", "Read a build log", "Automate one command"], { label: "Docker get started", url: "https://docs.docker.com/get-started/" }, "Containerise a small web service and write one setup command.", "Rebuild it from a clean folder.", "A reproducible container", "Continuous integration"),
+    step("Continuous integration", "Let every change receive a basic automated check.", "demonstrate", 4, "90 min", "Git and automation", ["Run checks on push", "Read a failed job", "Keep secrets out of logs"], { label: "GitHub Actions quickstart", url: "https://docs.github.com/en/actions/quickstart" }, "Add a check that runs your project tests on GitHub.", "Fix a deliberate failing check and explain the change.", "A working CI pipeline", "Monitoring and release"),
+    step("Monitoring and release", "Ship carefully and know when a service needs attention.", "build", 5, "90 min", "Continuous integration", ["Define a health signal", "Write a rollback note", "Describe one production risk"], { label: "Google SRE workbook", url: "https://sre.google/workbook/" }, "Create a release checklist for your project.", "Hana reviews safety, clarity, and recovery steps.", "A deployment runbook", "Cloud portfolio readiness"),
+  ],
+  "Data Science": [
+    step("Python and data types", "Use code to describe and inspect real information.", "learn", 1, "90 min", "None — Hana starts with your level check.", ["Use variables and lists", "Write a function", "Read a small table"], { label: "Python tutorial", url: "https://docs.python.org/3/tutorial/" }, "Summarise a small study dataset with three useful numbers.", "Explain what each number does and does not tell you.", "A data summary notebook", "Data cleaning"),
+    step("Data cleaning", "Make messy information trustworthy enough to analyse.", "practice", 2, "90 min", "Python and data types", ["Find missing values", "Fix inconsistent labels", "Record your choices"], { label: "pandas tutorials", url: "https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html" }, "Clean a small CSV and write a short data dictionary.", "Find one possible bias or missing field.", "A cleaned dataset with notes", "Visualisation"),
+    step("Visualisation", "Use a clear chart to answer one question.", "learn", 3, "75 min", "Data cleaning", ["Choose a chart", "Label it clearly", "State the main finding"], { label: "Matplotlib quick start", url: "https://matplotlib.org/stable/users/explain/quick_start.html" }, "Make one chart about study time and explain the pattern.", "Hana asks what the chart cannot prove.", "A clear data story", "Statistics and probability"),
+    step("Statistics and probability", "Separate a useful signal from a tempting but weak conclusion.", "demonstrate", 4, "90 min", "Data cleaning and visualisation", ["Explain average and spread", "Describe probability", "Spot a misleading comparison"], { label: "Khan Academy statistics", url: "https://www.khanacademy.org/math/statistics-probability" }, "Compare two small groups and write a careful conclusion.", "Use plain language to state uncertainty.", "A responsible analysis note", "Data project"),
+    step("Build a data project", "Turn a question, dataset, analysis, and conclusion into a shareable project.", "build", 5, "90 min", "Cleaning, visualisation, and statistics", ["State one question", "Show your method", "Share one limitation", "Write a README"], { label: "Data to Viz", url: "https://www.data-to-viz.com/" }, "Build a small dashboard or notebook about a question you care about.", "Hana reviews clarity, reproducibility, and honest conclusions.", "A portfolio-ready data project", "Portfolio and opportunities"),
+  ],
+  Programming: programming,
+  "Web Development": programming,
+  "Mobile Development": programming,
+  "UI/UX": [
+    step("Find a real user problem", "Start with a person and a task, not a screen full of features.", "learn", 1, "60 min", "None — Hana starts with your level check.", ["Name one user", "Describe one task", "Write three user needs"], { label: "Nielsen Norman usability", url: "https://www.nngroup.com/articles/ten-usability-heuristics/" }, "Interview one person or observe one simple task, then write what was difficult.", "Explain which need matters most and why.", "A one-page problem brief", "User flow"),
+    step("Sketch a simple user flow", "Make one important task easy to complete.", "practice", 2, "60 min", "A real user problem", ["Show the starting point", "Show three steps", "Include a success state"], { label: "Figma user flows", url: "https://help.figma.com/hc/en-us/articles/360040314193-Create-and-navigate-between-pages" }, "Sketch the flow for the task you observed.", "Ask someone to follow it without your help.", "A tested user flow", "Wireframes"),
+    step("Create clear wireframes", "Turn the flow into a calm, readable layout.", "learn", 3, "75 min", "User flow", ["Group related content", "Use clear hierarchy", "Leave useful empty space"], { label: "Material Design layout", url: "https://m3.material.io/foundations/layout/understanding-layout" }, "Make two wireframes and choose one using a stated reason.", "Hana checks whether the main action is obvious.", "A low-fidelity product screen", "Prototype testing"),
+    step("Test and improve", "Use feedback to fix confusion before polishing visuals.", "demonstrate", 4, "75 min", "Wireframes", ["Write three test tasks", "Observe without leading", "Make two improvements"], { label: "Nielsen usability testing", url: "https://www.nngroup.com/articles/usability-testing-101/" }, "Test the wireframe with one person and record two changes.", "Explain what evidence caused each change.", "A tested prototype", "Case study"),
+    step("Build a small case study", "Show your thinking, not only the final picture.", "build", 5, "90 min", "Testing and improvement", ["Show the problem", "Show decisions", "Show the final flow", "State what you would test next"], { label: "Nielsen UX portfolio advice", url: "https://www.nngroup.com/articles/ux-career-advice/" }, "Create a short case study with images and plain-language notes.", "Hana reviews clarity, evidence, and accessibility.", "A portfolio case study", "Design opportunities"),
   ],
 };
 
 const defaultJourney: JourneyStep[] = [
-  { title: "Understand the basics", purpose: "Start with the ideas behind your chosen subject.", kind: "learn" },
-  { title: "Try one small task", purpose: "Practice before taking on a bigger project.", kind: "practice" },
-  { title: "Build something you can show", purpose: "Turn your learning into evidence of skill.", kind: "build" },
+  step("Understand the basics", "Start with the ideas behind your chosen subject.", "learn", 1, "60 min", "None — Hana starts here.", ["Name the core idea", "Explain it with one example", "Try one small task"], { label: "MDN Learn", url: "https://developer.mozilla.org/en-US/docs/Learn" }, "Write one small example in your own words.", "Hana checks the idea with a tiny scenario.", "A clear foundation note", "Practice and build"),
+  step("Practice one small task", "Use the idea before you take on a bigger project.", "practice", 2, "75 min", "Understand the basics", ["Follow a short task", "Change one part", "Explain what changed"], { label: "freeCodeCamp", url: "https://www.freecodecamp.org/learn/" }, "Complete a small guided exercise.", "Repeat it with one changed input.", "A working small exercise", "Demonstrate"),
+  step("Demonstrate the skill", "Show Hana that you can use the idea without copying a solution.", "demonstrate", 3, "60 min", "Practice one small task", ["Work from a short brief", "Test the result", "Explain one choice"], { label: "CS50 resources", url: "https://cs50.harvard.edu/x/2025/" }, "Make a small version from a blank file.", "Hana reviews your explanation and result.", "Evidence of understanding", "Mastery check"),
+  step("Master and unlock", "Review the weak spot, then open the next useful step.", "master", 4, "45 min", "Demonstrate the skill", ["Name what you know", "Name one gap", "Choose a next practice"], { label: "MIT OpenCourseWare", url: "https://ocw.mit.edu/" }, "Write a short reflection and fix one weak spot.", "Hana unlocks the next step only after the check.", "A verified skill note", "Your next journey step"),
+  step("Build something you can show", "Turn learning into evidence a person can understand.", "build", 5, "90 min", "Mastery check", ["Define the project", "Build the smallest useful version", "Write a README"], { label: "GitHub documentation", url: "https://docs.github.com/en/get-started" }, "Build a small project that uses the verified skill.", "Hana reviews the result and gives specific improvements.", "A starter portfolio project", "Career and opportunity readiness"),
 ];
 
-export function buildJourney(area: string, level = "", goal = "", time = ""): JourneyStep[] {
+export function buildJourney(area: string, level = "", goal = "", _time = ""): JourneyStep[] {
   const base = journeys[area] || defaultJourney;
-  const steps = level.includes("advanced") ? base.slice(1).concat(base[0]) : base;
-  if (goal.includes("university")) return steps.map((step) => ({ ...step, purpose: `${step.purpose} Keep it close to your current courses.` }));
-  if (time === "10 minutes") return steps.map((step) => ({ ...step, purpose: `${step.purpose} Hana will keep today’s version small.` }));
+  const start = level.toLowerCase().includes("built") || level.toLowerCase().includes("advanced") ? Math.min(1, base.length - 1) : 0;
+  const steps = base.map((item, index) => ({ ...item, day: index + 1, status: index < start ? "complete" as const : index === start ? "active" as const : "locked" as const }));
+  if (goal.toLowerCase().includes("university")) return steps.map((item) => ({ ...item, purpose: `${item.purpose} Hana will connect it to your current university work.` }));
   return steps;
 }

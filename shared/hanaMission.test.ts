@@ -15,6 +15,27 @@ describe("Hana prototype contracts", () => {
     expect(buildJourney("Cybersecurity")[0].title).not.toContain("Python");
   });
 
+  it("creates detailed full-day steps that start today and unlock in order", () => {
+    const journey = buildJourney("AI / Machine Learning", "Starting from zero", "Build a portfolio", "Full study day · start now");
+    expect(journey.length).toBeGreaterThanOrEqual(5);
+    expect(journey[0].day).toBe(1);
+    expect(journey[0].duration).toMatch(/min/);
+    expect(journey[0].finishLine.length).toBeGreaterThanOrEqual(3);
+    expect(journey[0].prerequisite).toContain("None");
+    expect(journey[0].resource.url).toMatch(/^https:\/\//);
+    expect(journey[0].masteryCheck).toBeTruthy();
+    expect(journey[0].status).toBe("active");
+    expect(journey[1].status).toBe("locked");
+  });
+
+  it("keeps subject-specific paths instead of forcing Python everywhere", () => {
+    const security = buildJourney("Cybersecurity");
+    const design = buildJourney("UI/UX");
+    expect(security.map((item) => item.title).join(" ")).not.toContain("Python");
+    expect(design[0].title).toBe("Find a real user problem");
+    expect(design.at(-1)?.projectOutcome).toContain("portfolio");
+  });
+
   it("accepts profile memory but bounds sensitive free text", () => {
     const profile = memoryProfileSchema.parse({ university: "PUCIT", semester: "3", career: "AI Engineering", skills: ["Python"] });
     expect(profile.university).toBe("PUCIT");

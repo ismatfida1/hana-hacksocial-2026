@@ -362,9 +362,32 @@
 - [ ] Verify the exact repository and folder to upload or push.
 
 ## Push and run Android Actions — 2026-08-24
-- [ ] Verify the target Hana Android GitHub repository and current remote state.
-- [ ] Push the contents of `/home/ubuntu/hana-android-app` to the repository root without nested directory wrapping.
-- [ ] Verify `.github/workflows/android-build.yml` is at the repository root.
-- [ ] Run the `Android debug APK` workflow.
-- [ ] Fix any GitHub Actions build failures without changing Hana features or integrations, then rerun the workflow.
-- [ ] Report the final workflow and APK artifact status.
+- [x] Verify the target Hana Android GitHub repository and current remote state.
+- [x] Push the contents of `/home/ubuntu/hana-android-app` to the repository root without nested directory wrapping.
+- [x] Verify `.github/workflows/android-build.yml` is at the repository root.
+- [x] Run the `Android debug APK` workflow.
+- [x] Fix any GitHub Actions build failures without changing Hana features or integrations, then rerun the workflow.
+- [x] Report the final workflow and APK artifact status.
+
+## Hana Android UI and feature repair — 2026-08-24
+- [x] Reproduce and diagnose missing Hana artwork and incorrect color/text rendering in the pushed Android project.
+- [x] Restore readable typography and contrast across the app.
+- [x] Restore working roadmap navigation and career-specific roadmap content.
+- [x] Restore online opportunities/competition content and working external links.
+- [x] Validate the repaired UI and feature flows before rebuilding the APK.
+- [ ] Push the repair and rerun the Android debug APK workflow.
+
+## Full-day detailed Hana journey — 2026-08-24
+- [x] Replace one-hour-style journey framing with a timeline that starts today and supports a full study day.
+- [x] Make each journey step detailed with purpose, prerequisites, lesson outline, practice, demonstration, mastery check, project outcome, and next unlock.
+- [ ] Add unified University Coach and Career Coach context without making the first screen dense.
+- [x] Preserve adaptive paths for career, custom journey, and skill-to-earn pathways.
+- [ ] Preserve secure memory fields for university, degree, semester, subjects, skills, projects, progress, opportunities, competitions, struggles, and preferences.
+- [x] Validate all attached requirements against the implementation before delivery.
+
+## Curated roadmap resources — 2026-08-24
+- [x] Select only necessary resources from the user-provided links and attachments.
+- [x] Use one best resource per roadmap step and no noisy channel directories.
+- [x] Verify the selected links and remove or flag broken, duplicate, redirect, or unnecessary links.
+- [x] Update Hana’s roadmap resource labels and wording to stay simple.
+- [ ] Validate and push the curated resource update.

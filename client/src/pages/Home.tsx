@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Compass, ExternalLink, FolderKanban, Home as HomeIcon, MessageCircle, Play, Trophy, WandSparkles } from "lucide-react";
 import { buildJourney, pathTypeFromLegacy, type JourneyStep } from "@shared/hanaJourney";
 import { trpc } from "@/lib/trpc";
@@ -7,7 +7,7 @@ import { AIChatBox, type Message } from "@/components/AIChatBox";
 const HANA = "/manus-storage/hana-mobile-logo_34c448e2.png";
 const SIGNATURE = "/ismat-fida-signature.png";
 
-type Screen = "greeting" | "start" | "career" | "custom" | "customLevel" | "customGoal" | "customTime" | "skill" | "discover" | "app";
+type Screen = "greeting" | "start" | "career" | "profile" | "custom" | "customLevel" | "customGoal" | "customTime" | "skill" | "discover" | "app";
 type Destination = "Home" | "Journey" | "Projects" | "Opportunities" | "Ask Hana";
 type Pathway = "career" | "custom" | "skill";
 type Plan = { pathway: Pathway; area: string; title: string; goal: string; level: string; time: string; steps: JourneyStep[] };
@@ -70,7 +70,13 @@ export default function Home() {
   const [aiMission, setAiMission] = useState<{ todaysStep?: string; whyToday?: string }>();
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [discoverStep, setDiscoverStep] = useState(0);
+  const [university, setUniversity] = useState("");
+  const [degree, setDegree] = useState("");
+  const [semester, setSemester] = useState("");
+  const [subjects, setSubjects] = useState("");
+  const [profileHydrated, setProfileHydrated] = useState(false);
   const auth = trpc.auth.me.useQuery();
+  const studentContext = trpc.studentContext.get.useQuery(undefined, { enabled: Boolean(auth.data) });
   const chat = trpc.hana.chat.useMutation();
   const deviseJourney = trpc.hana.deviseJourney.useMutation();
   const saveStudentProfile = trpc.studentContext.updateProfile.useMutation();
@@ -79,13 +85,31 @@ export default function Home() {
   const mission = aiMission?.todaysStep || localSteps[0]?.title || "Choose one small next step";
   const missionWhy = aiMission?.whyToday || localSteps[0]?.purpose || "Hana will shape the next step around your goal.";
 
+  useEffect(() => {
+    const profile = studentContext.data?.student;
+    const universityContext = studentContext.data?.university;
+    if (!profileHydrated && profile) {
+      setUniversity(profile.university || "");
+      setDegree(profile.degree || "");
+      setSemester(profile.semester || "");
+      setSubjects(universityContext?.currentSubjects.join(", ") || "");
+      setProfileHydrated(true);
+    }
+  }, [profileHydrated, studentContext.data]);
+
+  const continueFromProfile = () => {
+    const subjectList = subjects.split(",").map((subject) => subject.trim()).filter(Boolean);
+    saveStudentProfile.mutate({ university: university.trim(), degree: degree.trim(), semester: semester.trim(), subjects: subjectList });
+    setScreen("customLevel");
+  };
+
   const createPlan = (nextPathway: Pathway, nextArea: string, nextLevel: string, nextGoal: string, nextTime: string, title: string) => {
     const steps = buildJourney(nextArea, nextLevel, nextGoal, nextTime);
     setPathway(nextPathway); setArea(nextArea); setLevel(nextLevel); setGoal(nextGoal); setTime(nextTime);
     setPlan({ pathway: nextPathway, area: nextArea, title, goal: nextGoal, level: nextLevel, time: nextTime, steps });
     setScreen("app");
     if (auth.data) {
-      saveStudentProfile.mutate({ currentJourney: title, currentActiveStep: steps[0]?.title, availableStudyTime: nextTime, goals: [nextGoal], ...(nextPathway === "career" ? { career: nextArea } : {}) });
+      saveStudentProfile.mutate({ university: university.trim(), degree: degree.trim(), semester: semester.trim(), subjects: subjects.split(",").map((subject) => subject.trim()).filter(Boolean), currentJourney: title, currentActiveStep: steps[0]?.title, availableStudyTime: nextTime, goals: [nextGoal], ...(nextPathway === "career" ? { career: nextArea } : {}) });
     }
     if (auth.data) {
       deviseJourney.mutate({ pathType: pathTypeFromLegacy(nextPathway, nextArea), studyArea: nextArea, target: nextArea, level: nextLevel, goal: nextGoal, availableTime: nextTime, interests: [] }, { onSuccess: (result) => setAiMission(result) });
@@ -102,9 +126,10 @@ export default function Home() {
 
   if (screen === "greeting") return <Shell><section className="flex flex-1 flex-col items-center justify-center pb-14 text-center"><p className="text-sm font-semibold text-[#C98C93]">{new Intl.DateTimeFormat(undefined, { hour: "numeric" }).format(new Date()).includes("AM") ? "Good morning" : "Hello"} 🌸</p><h1 className="mt-3 font-display text-5xl leading-[.95] text-[#3A3540]">Hi, I’m Hana.</h1><p className="mt-4 text-base text-[#625D65]">How’s your day going?</p><div className="mt-8 w-full"><HanaArt /></div><button onClick={() => setScreen("start")} className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#3A3540] px-4 py-4 text-sm font-bold text-white">I’m ready <span>✨</span><ArrowRight size={17} /></button></section></Shell>;
   if (screen === "start") return <Shell back={() => setScreen("greeting")}><ChoiceScreen eyebrow="Let’s begin" title={<>What are you<br /><em className="text-[#725F78]">here for?</em></>} options={["🎓 Build My Career", "🧭 Create My Own Journey", "💼 Learn a Skill & Earn"]} onChoose={(value) => { if (value.includes("Career")) { setPathway("career"); setScreen("career"); } else if (value.includes("Own")) { setPathway("custom"); setScreen("custom"); } else { setPathway("skill"); setScreen("skill"); } }} /> </Shell>;
-  if (screen === "career") return <Shell back={() => setScreen("start")}><ChoiceScreen eyebrow="Build my career" title={<>What do you<br /><em className="text-[#725F78]">want to become?</em></>} options={careers} onChoose={(value) => { setArea(value); setScreen("customLevel"); }} footer={<button onClick={() => { setDiscoverStep(0); setScreen("discover"); }} className="mt-6 w-full text-center text-sm font-bold text-[#625D65]">I don’t know yet — Help me find my path</button>} /></Shell>;
+  if (screen === "career") return <Shell back={() => setScreen("start")}><ChoiceScreen eyebrow="Build my career" title={<>What do you<br /><em className="text-[#725F78]">want to become?</em></>} options={careers} onChoose={(value) => { setArea(value); setScreen("profile"); }} footer={<button onClick={() => { setDiscoverStep(0); setScreen("discover"); }} className="mt-6 w-full text-center text-sm font-bold text-[#625D65]">I don’t know yet — Help me find my path</button>} /></Shell>;
   if (screen === "skill") return <Shell back={() => setScreen("start")}><ChoiceScreen eyebrow="Learn a skill & earn" title={<>Which skill<br /><em className="text-[#725F78]">interests you?</em></>} options={practicalSkills} onChoose={(value) => createPlan("skill", skillAreas[value] || value, "Starting from zero", "Build proof I can show", "Full study day · start now", value)} footer={<p className="mt-7 text-center text-xs text-[#746B72]">Hana never promises income. She helps you build real skill and proof.</p>} /></Shell>;
   if (screen === "custom") return <Shell back={() => setScreen("start")}><section className="flex flex-1 flex-col justify-center pb-12"><p className="text-sm font-semibold text-[#C98C93]">Create my own Journey</p><h1 className="mt-3 font-display text-5xl leading-[.95]">What are you<br /><em className="text-[#725F78]">trying to achieve?</em></h1><textarea value={customGoal} onChange={(event) => setCustomGoal(event.target.value)} placeholder="For example: build a portfolio website" className="mt-7 min-h-32 resize-none rounded-2xl border border-[#D9CEC4] bg-[#FFFEFC] p-4 text-sm text-[#3A3540] outline-none placeholder:text-[#91868A] focus:border-[#C98C93]" /><button onClick={() => customGoal.trim() ? setScreen("customLevel") : setScreen("discover")} className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-[#3A3540] px-4 py-4 text-sm font-bold text-white">Continue <ArrowRight size={17} /></button><button onClick={() => { setDiscoverStep(0); setScreen("discover"); }} className="mt-4 text-sm font-bold text-[#625D65]">Help me find my path instead</button></section></Shell>;
+  if (screen === "profile") return <Shell back={() => setScreen("career")}><section className="flex flex-1 flex-col justify-center pb-12"><p className="text-sm font-semibold text-[#C98C93]">Make Hana personal</p><h1 className="mt-3 font-display text-5xl leading-[.95]">Where do you<br /><em className="text-[#725F78]">study?</em></h1><p className="mt-4 text-sm leading-5 text-[#625D65]">This helps Hana connect today’s step to your real semester.</p><div className="mt-6 grid gap-3"><input value={university} onChange={(event) => setUniversity(event.target.value)} placeholder="University" className="rounded-2xl border border-[#D9CEC4] bg-[#FFFEFC] px-4 py-4 text-sm text-[#3A3540] outline-none placeholder:text-[#91868A] focus:border-[#C98C93]" /><input value={degree} onChange={(event) => setDegree(event.target.value)} placeholder="Degree (for example, BSCS)" className="rounded-2xl border border-[#D9CEC4] bg-[#FFFEFC] px-4 py-4 text-sm text-[#3A3540] outline-none placeholder:text-[#91868A] focus:border-[#C98C93]" /><input value={semester} onChange={(event) => setSemester(event.target.value)} placeholder="Current semester" className="rounded-2xl border border-[#D9CEC4] bg-[#FFFEFC] px-4 py-4 text-sm text-[#3A3540] outline-none placeholder:text-[#91868A] focus:border-[#C98C93]" /><input value={subjects} onChange={(event) => setSubjects(event.target.value)} placeholder="Subjects, separated by commas (optional)" className="rounded-2xl border border-[#D9CEC4] bg-[#FFFEFC] px-4 py-4 text-sm text-[#3A3540] outline-none placeholder:text-[#91868A] focus:border-[#C98C93]" /></div><button disabled={saveStudentProfile.isPending || !university.trim() || !degree.trim() || !semester.trim()} onClick={continueFromProfile} className="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-[#3A3540] px-4 py-4 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50">Save and continue <ArrowRight size={17} /></button><p className="mt-3 text-center text-xs text-[#746B72]">Hana uses this only to make your plan more personal.</p></section></Shell>;
   if (screen === "customLevel") return <Shell back={() => setScreen(pathway === "career" ? "career" : "custom")}><ChoiceScreen eyebrow="Your starting point" title="How much do you know already?" options={levels} onChoose={(value) => { setCustomLevel(value); setScreen("customGoal"); }} /></Shell>;
   if (screen === "customGoal") return <Shell back={() => setScreen("customLevel")}><ChoiceScreen eyebrow="Your direction" title="What would you like to do with it?" options={goals} onChoose={(value) => { setGoal(value); if (pathway === "custom") setCustomGoal(value); setScreen("customTime"); }} /></Shell>;
   if (screen === "customTime") return <Shell back={() => setScreen("customGoal")}><ChoiceScreen eyebrow="Your day" title="How should Hana plan today?" options={times} onChoose={(value) => createPlan(pathway, area || "Programming", customLevel || level, customGoal || goal || "Explore this field first", value, area || customGoal || "My learning goal")} /></Shell>;

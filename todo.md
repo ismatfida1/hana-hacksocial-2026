@@ -433,3 +433,25 @@
 - [x] Make the current learning step show a visible study link and clear Start studying action.
 - [x] Repair roadmap navigation and guest/authenticated behavior.
 - [x] Validate and publish the repaired separate website.
+
+## Next priority: University profile and Today context — 2026-08-24
+- [x] Add a compact profile setup for university, degree, semester, subjects, and available study time.
+- [x] Persist profile changes through `studentContext.updateProfile` instead of local-only state.
+- [x] Load the saved profile into the existing demo so Hana’s current plan reflects it.
+- [x] Add tests for profile normalization and persistence contract.
+- [ ] Validate and publish the updated demo.
+
+## Complete 60-feature Hana implementation — 2026-08-24
+- [ ] Audit all 60 checklist items against the current website and Android source.
+- [ ] Implement the core student, learning, mastery, project, opportunity, AI, memory, companion, tracking, and admin features from the checklist.
+- [ ] Preserve one database-backed source of truth and existing AI/Capacitor integrations.
+- [ ] Add tests, migrations, accessibility checks, and web/mobile validation for the complete scope.
+- [ ] Build and verify the final Android APK through GitHub Actions.
+- [ ] Publish and verify the final separate website.
+
+## Final Hana 60-feature plain-language release — 2026-08-24
+- [ ] Audit the current app against all 60 requested feature names and the full master specification.
+- [ ] Implement all required core, coaching, tracking, companion, opportunity, admin, and link features using real data.
+- [ ] Make every student-facing explanation simple enough for a non-CS learner.
+- [ ] Keep one clear action per screen and one best study link per learning step.
+- [ ] Validate website, database, AI context, Android build, and published demo end to end.

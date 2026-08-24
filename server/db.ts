@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { HanaStudentMemory, InsertHanaStudentMemory, InsertUser, hanaStudentMemory, users } from "../drizzle/schema";
+import { AccountDeletionRequest, HanaStudentMemory, InsertHanaStudentMemory, InsertUser, accountDeletionRequests, hanaStudentMemory, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -102,4 +102,22 @@ export async function upsertHanaStudentMemory(input: Omit<InsertHanaStudentMemor
   await db.insert(hanaStudentMemory).values(input).onDuplicateKeyUpdate({
     set: { profile: input.profile, conversations: input.conversations, memoryEnabled: input.memoryEnabled },
   });
+}
+
+/** Delete the complete HANA-owned account scope without touching other users. */
+export async function deleteUserAccount(userId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.transaction(async (tx) => {
+    await tx.delete(hanaStudentMemory).where(eq(hanaStudentMemory.userId, userId));
+    await tx.delete(users).where(eq(users.id, userId));
+  });
+}
+
+export async function createAccountDeletionRequest(email: string): Promise<AccountDeletionRequest | undefined> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.insert(accountDeletionRequests).values({ email: email.trim().toLowerCase() });
+  const rows = await db.select().from(accountDeletionRequests).where(eq(accountDeletionRequests.email, email.trim().toLowerCase())).orderBy(accountDeletionRequests.id).limit(1);
+  return rows[0];
 }

@@ -17,6 +17,8 @@ export type StudentProfile = {
   completedSkills: string[];
   weakAreas: string[];
   completedLearningSteps: string[];
+  stepNotes: Record<string, string>;
+  stepResources: Record<string, string>;
   projects: string[];
   projectSkills: string[];
   githubProjects: string[];
@@ -51,6 +53,8 @@ export type StudentContext = {
   learning: {
     currentActiveStep?: string;
     completedLearningSteps: string[];
+    stepNotes: Record<string, string>;
+    stepResources: Record<string, string>;
     demonstratedSkills: string[];
     completedSkills: string[];
     weakAreas: string[];
@@ -83,6 +87,14 @@ const asList = (value: unknown): string[] =>
 const asText = (value: unknown): string | undefined =>
   typeof value === "string" && value.trim().length > 0 ? value.trim().slice(0, 240) : undefined;
 
+const asMap = (value: unknown): Record<string, string> => {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return Object.entries(value as Record<string, unknown>).reduce<Record<string, string>>((result, [key, item]) => {
+    if (typeof item === "string" && key.trim()) result[key.slice(0, 160)] = item.trim().slice(0, 2000);
+    return result;
+  }, {});
+};
+
 export function normalizeStudentProfile(raw: unknown): StudentProfile {
   const profile = raw && typeof raw === "object" ? raw as Record<string, unknown> : {};
   return {
@@ -100,6 +112,8 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
     completedSkills: asList(profile.completedSkills),
     weakAreas: asList(profile.weakAreas ?? profile.weaknesses),
     completedLearningSteps: asList(profile.completedLearningSteps ?? profile.progress),
+    stepNotes: asMap(profile.stepNotes),
+    stepResources: asMap(profile.stepResources),
     projects: asList(profile.projects),
     projectSkills: asList(profile.projectSkills),
     githubProjects: asList(profile.githubProjects),
@@ -134,6 +148,8 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
     learning: {
       currentActiveStep: profile.currentActiveStep,
       completedLearningSteps: profile.completedLearningSteps,
+      stepNotes: profile.stepNotes,
+      stepResources: profile.stepResources,
       demonstratedSkills: profile.demonstratedSkills,
       completedSkills: profile.completedSkills,
       weakAreas: profile.weakAreas,
@@ -304,6 +320,19 @@ export async function setLearningStepCompletion(studentId: number, stepTitle: st
   const nextStep = context.roadmap.find((node) => !completedLearningSteps.some((title) => title.toLowerCase() === node.title.toLowerCase()) && node.status !== "locked");
   await updateStudentProfile(studentId, { completedLearningSteps, currentActiveStep: nextStep?.title || (completed ? step.title : current.currentActiveStep), learningHistory: [...current.learningHistory, `${completed ? "Marked" : "Unmarked"} learning step: ${step.title}.`].slice(-100) });
   return { success: true, completed, step: step.title, message: completed ? `${step.title} marked complete. Hana check still confirms mastery.` : `${step.title} marked as not complete.` } as const;
+}
+
+export async function saveStepReference(studentId: number, stepTitle: string, note: string | undefined, resourceUrl: string | undefined) {
+  const existing = await getHanaStudentMemory(studentId);
+  const current = normalizeStudentProfile(existing?.profile);
+  const cleanTitle = stepTitle.trim().slice(0, 160);
+  if (!cleanTitle) return { success: false, message: "Hana needs a roadmap step name first." } as const;
+  const stepNotes = { ...current.stepNotes };
+  const stepResources = { ...current.stepResources };
+  if (note?.trim()) stepNotes[cleanTitle] = note.trim().slice(0, 2000); else delete stepNotes[cleanTitle];
+  if (resourceUrl?.trim()) stepResources[cleanTitle] = resourceUrl.trim().slice(0, 500); else delete stepResources[cleanTitle];
+  await updateStudentProfile(studentId, { stepNotes, stepResources });
+  return { success: true, message: "Saved to this roadmap step." } as const;
 }
 
 export async function recordLearningHistory(studentId: number, note: string) {

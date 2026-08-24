@@ -4,8 +4,8 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
-import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, setLearningStepCompletion, submitMasteryCheck, updateStudentProfile } from "./studentContext";
+import { createAccountDeletionRequest, deleteUserAccount, getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
+import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
 
@@ -23,7 +23,7 @@ export const memoryProfileSchema = z.object({
   career: z.string().max(120).optional(), careerGoal: z.string().max(160).optional(), currentJourney: z.string().max(160).optional(), currentActiveStep: z.string().max(160).optional(),
   demonstratedSkills: z.array(z.string().max(120)).max(80).default([]), completedSkills: z.array(z.string().max(120)).max(80).default([]), weakAreas: z.array(z.string().max(120)).max(80).default([]), completedLearningSteps: z.array(z.string().max(160)).max(100).default([]),
   skills: z.array(z.string().max(80)).max(40).default([]), progress: z.array(z.string().max(120)).max(80).default([]), projects: z.array(z.string().max(160)).max(40).default([]), projectSkills: z.array(z.string().max(120)).max(80).default([]), githubProjects: z.array(z.string().max(200)).max(40).default([]), portfolioProjects: z.array(z.string().max(200)).max(40).default([]), competitions: z.array(z.string().max(200)).max(40).default([]),
-  careerReadiness: z.string().max(160).optional(), preferredLearningTime: z.string().max(120).optional(), availableStudyTime: z.string().max(120).optional(), energyMode: z.enum(["light", "normal", "deep"]).optional(), masteryChecks: z.array(z.string().max(2400)).max(100).default([]), learningHistory: z.array(z.string().max(240)).max(100).default([]), goals: z.array(z.string().max(160)).max(20).default([]),
+  careerReadiness: z.string().max(160).optional(), preferredLearningTime: z.string().max(120).optional(), availableStudyTime: z.string().max(120).optional(), energyMode: z.enum(["light", "normal", "deep"]).optional(), stepNotes: z.record(z.string().max(160), z.string().max(2000)).default({}), stepResources: z.record(z.string().max(160), z.string().url().max(500)).default({}), masteryChecks: z.array(z.string().max(2400)).max(100).default([]), learningHistory: z.array(z.string().max(240)).max(100).default([]), goals: z.array(z.string().max(160)).max(20).default([]),
 });
 
 type HanaMemoryProfileInput = z.infer<typeof memoryProfileSchema>;
@@ -46,6 +46,18 @@ export const appRouter = router({
   system: systemRouter,
   demo: router({
     verify: publicProcedure.input(z.object({ password: z.string().min(1).max(200) })).mutation(({ input }) => ({ authorized: verifyDemoPassword(input.password) })),
+  }),
+  account: router({
+    requestDeletion: publicProcedure.input(z.object({ email: z.string().email().max(320) })).mutation(async ({ input }) => {
+      await createAccountDeletionRequest(input.email);
+      return { success: true } as const;
+    }),
+    delete: protectedProcedure.input(z.object({ confirmation: z.literal("DELETE MY ACCOUNT") })).mutation(async ({ ctx }) => {
+      await deleteUserAccount(ctx.user.id);
+      const cookieOptions = getSessionCookieOptions(ctx.req);
+      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+      return { success: true } as const;
+    }),
   }),
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
@@ -86,6 +98,7 @@ export const appRouter = router({
     careerReadiness: protectedProcedure.query(({ ctx }) => getCareerReadiness(ctx.user.id)),
     submitMastery: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), answer: z.string().min(1).max(2400) })).mutation(({ ctx, input }) => submitMasteryCheck(ctx.user.id, input.stepTitle, input.answer)),
     setStepCompletion: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), completed: z.boolean() })).mutation(({ ctx, input }) => setLearningStepCompletion(ctx.user.id, input.stepTitle, input.completed)),
+    saveStepReference: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), note: z.string().max(2000).optional(), resourceUrl: z.string().url().max(500).optional() })).mutation(({ ctx, input }) => saveStepReference(ctx.user.id, input.stepTitle, input.note, input.resourceUrl)),
     coachContext: protectedProcedure.input(z.object({ module: z.enum(["ask-hana", "daily-mission", "career-coach", "project-coach", "career-readiness", "opportunity-matching", "university-coach", "weekly-report"]) })).query(({ ctx, input }) => buildCoachContext(ctx.user.id, input.module)),
     addProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(160), skills: z.array(z.string().max(120)).max(12).default([]) })).mutation(({ ctx, input }) => addStudentProject(ctx.user.id, input.title, input.skills)),
     addPortfolioProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addPortfolioProject(ctx.user.id, input.title)),

@@ -641,3 +641,162 @@
 - [x] Update Journey and Profile overall completion percentages from the saved source of truth.
 - [x] Preserve locked-step prerequisites and existing mastery submission behavior.
 - [x] Validate checkbox interactions, save feedback, refresh restoration, mobile layout, tests, and production build.
+
+## Roadmap filters, references, and completion celebration — 2026-08-24
+- [ ] Add a compact roadmap filter toggle for All, Pending, and Completed steps.
+- [ ] Store personal notes per roadmap step in the signed-in student memory.
+- [ ] Store helpful personal resource links per roadmap step in the signed-in student memory.
+- [ ] Keep notes and links hidden until the user opens a step’s details.
+- [ ] Show a restrained Hana badge or celebration when the saved roadmap reaches 100%.
+- [ ] Keep the Roadmap.sh-inspired behavior and structure without copying its site design.
+- [ ] Create and validate a reusable skill describing this Hana roadmap workflow.
+- [ ] Run tests, responsive visual checks, and a production build before publishing.
+
+## Simple interactive Journey map — 2026-08-24
+- [ ] Keep Home focused on Hana’s greeting and one Today’s Step action.
+- [ ] Replace the Journey list-first view with a connected major-topic career map.
+- [ ] Show clear completed, current, and upcoming/locked node states.
+- [ ] Allow a major topic to open its smaller subtopics without showing all details at once.
+- [ ] Add a focused learning screen for the selected topic with a short Learn list, time, Why, and one Start action.
+- [ ] Preserve compact click-to-expand details, filters, notes, personal links, resources, projects, mastery, and account-backed progress.
+- [ ] Validate the map and drill-down flow on mobile and desktop and run the full test/build checks.
+
+## Journey 2.0 layered map — 2026-08-24
+- [ ] Add a Level 1 career map showing connected major topics and outcomes.
+- [ ] Add Level 2 topic drill-down with compact topic nodes.
+- [ ] Add Level 3 subtopic drill-down with focused subtopic nodes.
+- [ ] Open detailed explanation, resources, practice, and mastery only at Level 4 after Start learning.
+- [ ] Add visual complete, current, upcoming, locked, recommended, and needs-review states.
+- [ ] Keep the journey simple, mobile-first, and tap-driven while preserving saved progress and references.
+- [ ] Validate all four levels, back navigation, visual states, filters, notes, resources, and production behavior.
+
+## Journey 2.0 full experience expansion — 2026-08-24
+- [ ] Add layered Career Map, Topic, Subtopic, and Learning views with back navigation.
+- [ ] Add clear visual states for complete, current, upcoming, locked, recommended, and needs review.
+- [ ] Add concise Why actions for major topics and connect them to the student’s goal.
+- [ ] Add logically ordered career-specific dependencies and only useful alternate routes.
+- [ ] Add practical skill verification before marking claimed skills complete.
+- [ ] Add non-numeric skill confidence states and lightweight review prompts.
+- [ ] Add smart prerequisite explanations that name the missing skill and reason.
+- [ ] Keep university and industry views connected but visibly separate.
+- [ ] Add a compact semester-aware and four-year planning layer behind the current next step.
+- [ ] Add meaningful career milestones without XP or arbitrary gamification.
+- [ ] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections.
+- [ ] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.
+- [ ] Keep earning pathways separate, support Create my own Journey, and preserve prior progress when the Journey adapts.
+- [ ] Update the reusable skill with the complete Journey 2.0 interaction and validation rules.
+
+## Connector and AI integration vision — 2026-08-24
+- [ ] Audit actual OpenAI, Gemini, Supabase, Web, GitHub, Canva, and optional voice/file availability before claiming support.
+- [ ] Keep OpenAI as Hana’s primary server-side AI and route every personalized answer through real student context.
+- [ ] Keep Gemini optional and avoid duplicating every request across providers.
+- [ ] Keep Canva optional for visual content and never make normal Hana operation depend on it.
+- [ ] Verify account-backed student memory, university context, skills, learning steps, projects, opportunities, portfolio, and conversations use one source of truth.
+- [ ] Add or verify evidence-based skill confidence, review prompts, prerequisite explanations, project gates, opportunity matching, and simple next-action coaching.
+- [ ] Add safe file/screenshot learning workflows only when storage and model support are genuinely available.
+- [ ] Keep all secrets server-side, enforce ownership and admin boundaries, and avoid fake or invented external data.
+- [ ] Produce an honest connected/not-available integration report with tests and user authorization requirements.
+
+## Hana simple-friend teaching loop — 2026-08-24
+- [ ] Add concise explanation modes: normal, simple, new learner, before-test, example, exam answer, and practice questions.
+- [ ] Add an always-available “I’m confused” action that requests a different explanation path.
+- [ ] Add short checks for understanding after explanations instead of relying on self-reported understanding.
+- [ ] Store useful explanation preferences from real interactions without rigidly labeling the student.
+- [ ] Keep Hana calm, smart, patient, and occasionally playful without constant emojis or forced slang.
+- [ ] Keep Home and Android-ready entry points focused on Ask, Study, Test Prep, and My Path while preserving the approved main navigation.
+- [ ] Update the reusable Hana skill with the simple-friend teaching loop and validate the existing web architecture.
+
+## Progressive disclosure across Hana — 2026-08-24
+- [ ] Keep Journey topic cards limited to a short summary and one primary action by default.
+- [ ] Add contextual Further info controls for Journey topics and learning details.
+- [ ] Show Project summaries first and reveal requirements, milestones, tools, and evaluation only on request.
+- [ ] Show Opportunity summaries first and reveal eligibility, skills, deadline context, and Hana’s reasoning only on request.
+- [ ] Add concise Ask Hana actions for Further info, Give me an example, Test me, and I’m confused.
+- [ ] Keep detail panels contextual rather than opening a large information dump.
+- [ ] Validate the one-primary-action pattern and mobile readability across the app.
+
+## Complete Hana pre-publish audit — 2026-08-24
+- [ ] Consolidate all supplied text specifications into a coverage matrix with working, incomplete, unavailable, and authorization-required states.
+- [ ] Audit every client screen, server router, database model, asset, integration, security rule, and Android/deployment file.
+- [ ] Verify sign-in, private Demo Mode, profile save, progress save, memory controls, and account ownership behavior.
+- [ ] Verify Home, Journey 2.0 layers, filters, notes, links, learning details, projects, opportunities, Profile, and Ask Hana behavior.
+- [ ] Verify AI provider routing and real student-context delivery without exposing credentials.
+- [ ] Verify Web, GitHub, Canva, storage, file, and voice capabilities honestly without inventing support.
+- [ ] Fix only verified defects and add regression tests for each fix.
+- [ ] Run production build, responsive screenshots, security review, and Android readiness checks before publishing.
+- [ ] Deliver a detailed integration and feature coverage report with exact limitations and user authorization steps.
+- [ ] Resolve the Android audit finding: the workflow and Capacitor config exist, but the current repository has no generated `android/` platform directory.
+
+## Persistent account memory and session audit — 2026-08-24
+- [ ] Verify the first sign-in creates a durable secure session and reopening Hana restores the account without repeated login.
+- [ ] Verify explicit logout, session expiry, reauthentication, and security-event boundaries.
+- [ ] Verify one account restores profile, journey, progress, projects, notes, resources, preferences, and history across devices.
+- [ ] Keep essential progress memory separate from user-visible chat history.
+- [ ] Add or verify user-controlled chat-history viewing and deletion without deleting essential progress memory.
+- [ ] Confirm all memory and progress reads/writes enforce signed-in account ownership.
+- [ ] Add regression coverage for session restore, logout, memory separation, chat deletion, and cross-device restoration semantics.
+
+## Commercial-readiness and privacy review — 2026-08-24
+- [ ] Create a dependency and ownership record covering Hana code, original content, assets, fonts, icons, open-source packages, Manus, AI providers, storage, and Canva.
+- [ ] Confirm the app does not claim ownership of third-party services, models, assets, or user data.
+- [ ] Document current data collection, storage, AI processing, retention, user controls, contact path, and deletion requirements.
+- [ ] Separate essential progress memory from user-visible chat history and plan secure account/data deletion controls.
+- [ ] Add launch documentation for privacy policy, terms of service, licenses, domain, repository history, and distribution readiness.
+- [ ] Keep commercial-launch advice clearly informational and flag items requiring legal or provider-term review.
+
+## Dependency license audit — 2026-08-24
+- [x] Inventory all direct and transitive dependencies from the lockfile.
+- [x] Record declared license metadata and repository/source links for each package.
+- [x] Separate production/runtime dependencies from development-only dependencies.
+- [x] Flag copyleft, dual-license, non-standard, missing, or ambiguous license terms.
+- [x] Cross-check high-risk and ambiguous packages against authoritative package or license sources.
+- [x] Produce a complete dependency license inventory and commercial-use review notes.
+
+## Final publication gate — 2026-08-24
+- [ ] Do not publish the final Hana release until every supplied text file and attachment has been included in the master acceptance matrix.
+- [ ] Mark each requirement as verified, implemented with limitations, externally blocked, authorization-required, or not applicable.
+- [ ] Publish only after technical validation, security review, dependency review, Android readiness, and commercial-readiness documentation are complete.
+
+## Remaining requirements audit — 2026-08-24
+- [x] Inventory every remaining project Markdown, text, configuration, workflow, and audit file.
+- [x] Cross-check all supplied requirements against actual implementation evidence, not checklist claims alone.
+- [x] Re-verify current runtime, build, tests, persistence, authentication, integrations, security, Android, and dependency status.
+- [x] Update the master acceptance matrix with the complete remaining gap list.
+- [x] Report whether Hana is fully implemented and whether final publication is justified.
+
+## Privacy management implementation — 2026-08-24
+- [ ] Add account-scoped chat-history viewing with clear timestamps and conversation boundaries.
+- [ ] Add selective and full chat-history deletion with confirmation and ownership checks.
+- [ ] Add confirmed account/data deletion that removes Hana-owned user data without affecting other accounts.
+- [ ] Keep essential learning memory separate from user-visible chat history during deletion.
+- [ ] Add a simple privacy panel explaining stored profile/progress data, chat history, AI processing, memory pause, and deletion.
+- [ ] Add tests for ownership isolation, deletion safety, memory pause behavior, session invalidation, and refresh restoration.
+- [ ] Run responsive, security, data-integrity, TypeScript, regression, and production-build validation before publishing.
+
+## Security, privacy, and Play readiness requirements — 2026-08-24
+- [ ] Add visible Privacy Policy, Terms of Service, AI disclosure, creator/ownership notice, app version, and support/contact surfaces.
+- [ ] Document exactly what Hana stores, why it is stored, where it is stored, which providers process it, retention, and deletion behavior.
+- [ ] Verify no AI keys, service-role keys, database passwords, admin credentials, GitHub tokens, payment secrets, or signing keys enter web or Android client assets.
+- [ ] Verify account ownership, session restoration, logout, recovery boundaries, and cross-account isolation.
+- [ ] Implement secure account deletion and applicable web-based deletion path before commercial/Play launch.
+- [ ] Prepare accurate Google Play Data Safety, content, developer, signing, target API, and store-listing records.
+- [ ] Complete ownership, third-party license, Canva, Manus, AI-provider, and open-source commercial-use records.
+
+## Full ownership and commercial licensing audit — 2026-08-24
+- [ ] Inventory every third-party component, dependency, SDK, API, asset, font, icon, video, template, generated asset, and external service actually used by HANA.
+- [ ] Record source, exact version, license/terms, commercial-use permission, attribution, modification, redistribution, and Play Store obligations for each item.
+- [ ] Audit Manus-generated code/assets and all connected AI, database, hosting, design, repository, storage, and research services against current terms.
+- [ ] Scan frontend bundles, Android files, configuration, logs, and documentation for exposed secrets, tokens, passwords, service-role keys, and signing material.
+- [ ] Produce source-linked Safe, Requires verification/legal review, and Must remove/replace sections.
+- [ ] Identify every issue that could block commercial sale or Google Play distribution and avoid legal-clearance claims.
+## Ordered commercial release clearance — 2026-08-25
+- [x] Audit and classify all unresolved package licenses: UNKNOWN, SEE LICENSE, BlueOak, CC-BY, MPL, and Unlicense.
+- [ ] Resolve or replace any package that does not clearly permit commercial distribution and preserve required notices.
+- [x] Create an asset provenance and commercial-permission register for Canva, fonts, icons, images, video, logo, signature, and uploaded assets.
+- [ ] Verify OpenAI and Gemini production plans, data-processing terms, retention, and sensitive-data handling.
+- [x] Publish a HANA Privacy Policy and link it inside the app; prepare the public URL for the Google Play listing.
+- [x] Implement protected in-app account and associated-data deletion with confirmation and session clearing; production reauthentication/deletion testing remains a release gate.
+- [x] Implement a public web account-deletion request page.
+- [ ] Complete final web and Android release secret scans for API keys, .env files, source maps, logs, and signing material.
+- [ ] Complete Google Play Data Safety and account-deletion declarations from the final release artifact.
+- [x] Produce final commercial-release readiness report and lawyer-review checklist.

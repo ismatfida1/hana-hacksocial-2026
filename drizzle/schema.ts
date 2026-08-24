@@ -46,6 +46,8 @@ export const hanaStudentMemory = mysqlTable("hana_student_memory", {
     weakAreas?: string[];
     weaknesses?: string[];
     completedLearningSteps?: string[];
+    stepNotes?: Record<string, string>;
+    stepResources?: Record<string, string>;
     skills?: string[];
     progress?: string[];
     projects?: string[];
@@ -68,3 +70,13 @@ export const hanaStudentMemory = mysqlTable("hana_student_memory", {
 
 export type HanaStudentMemory = typeof hanaStudentMemory.$inferSelect;
 export type InsertHanaStudentMemory = typeof hanaStudentMemory.$inferInsert;
+
+/** Public deletion requests contain only a contact identifier and workflow metadata. */
+export const accountDeletionRequests = mysqlTable("account_deletion_requests", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AccountDeletionRequest = typeof accountDeletionRequests.$inferSelect;
+export type InsertAccountDeletionRequest = typeof accountDeletionRequests.$inferInsert;

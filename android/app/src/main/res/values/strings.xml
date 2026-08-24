@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Hana — Your AI Learning Companion</string>
+    <string name="title_activity_main">Hana — Your AI Learning Companion</string>
+    <string name="package_name">com.hana.learningcompanion</string>
+    <string name="custom_url_scheme">com.hana.learningcompanion</string>
+</resources>

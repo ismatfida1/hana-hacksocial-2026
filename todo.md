@@ -411,7 +411,7 @@
 - [x] Complete the database-backed student context integration for every Hana AI request.
 - [x] Persist recent Hana conversations without storing secrets or duplicating progress.
 - [x] Add tests for context-aware responses and prerequisite-aware recommendations.
-- [ ] Validate web and Android builds end to end before delivery.
+- [x] Validate web and Android builds end to end before delivery.
 
 ## Shared path-based roadmap contract — 2026-08-24
 - [x] Add shared `PathType`, `RoadmapInput`, and `RoadmapNode` contracts.

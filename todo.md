@@ -500,3 +500,5 @@
 - [ ] Add free labeled resources, adaptive roadmap approval, small roadmap projects, big final projects, progress, creator information, and security protections.
 
 - [x] Add baseline security headers, disable Express fingerprinting, and keep demo-password verification server-side with constant-time comparison.
+
+- [x] Restore the Hana logo and robot artwork in the published greeting screen after the latest security-header update.

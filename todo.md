@@ -633,3 +633,11 @@
 - [x] Present roadmap nodes compactly with the current step first and deeper explanations behind a click.
 - [x] Connect roadmap steps to prerequisites, free learning resources, small projects, evidence, and next career outcomes.
 - [x] Add a visible source note linking to Roadmap.sh where its structure informs Hana’s roadmap experience.
+
+## Roadmap step completion controls — 2026-08-24
+- [x] Add an interactive checkbox or completion control to every roadmap step.
+- [x] Keep completion evidence-based and prevent a checkbox from falsely claiming mastery.
+- [x] Persist eligible step completion to the signed-in student account.
+- [x] Update Journey and Profile overall completion percentages from the saved source of truth.
+- [x] Preserve locked-step prerequisites and existing mastery submission behavior.
+- [x] Validate checkbox interactions, save feedback, refresh restoration, mobile layout, tests, and production build.

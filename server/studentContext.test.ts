@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, normalizeStudentProfile } from "./studentContext";
+import { buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, mergeCompletedLearningSteps, normalizeStudentProfile } from "./studentContext";
 import { buildJourney, resolveJourneyArea } from "../shared/hanaJourney";
 
 describe("student context layer", () => {
@@ -107,6 +107,13 @@ describe("student context layer", () => {
     expect(mission.title).toBe(context.roadmap.find((node) => node.status === "active")?.title);
     expect(report.learned).toEqual(["Variables"]);
     expect(readiness.level).toBe("building");
+  });
+
+  it("persists roadmap checkbox intent without duplicating completion entries", () => {
+    expect(mergeCompletedLearningSteps(["Networking foundations"], "Linux essentials", true)).toEqual(["Networking foundations", "Linux essentials"]);
+    expect(mergeCompletedLearningSteps(["Linux essentials"], "linux essentials", true)).toEqual(["Linux essentials"]);
+    expect(mergeCompletedLearningSteps(["Networking foundations", "Linux essentials"], "Linux essentials", false)).toEqual(["Networking foundations"]);
+    expect(mergeCompletedLearningSteps(["Networking foundations"], "", true)).toEqual(["Networking foundations"]);
   });
 
   it("restores profile and progress from stored cloud memory", () => {

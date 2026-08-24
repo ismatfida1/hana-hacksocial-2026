@@ -286,6 +286,26 @@ export async function submitMasteryCheck(studentId: number, stepTitle: string, a
   return { passed: true, message: `Nice work. ${step.title} is now complete, and Hana unlocked the next step.`, completedStep: step.title, nextStep: nextStep?.title };
 }
 
+export function mergeCompletedLearningSteps(existing: string[], stepTitle: string, completed: boolean) {
+  const cleanTitle = stepTitle.trim();
+  if (!cleanTitle) return [...existing];
+  if (!completed) return existing.filter((item) => item.toLowerCase() !== cleanTitle.toLowerCase());
+  if (existing.some((item) => item.toLowerCase() === cleanTitle.toLowerCase())) return [...existing];
+  return [...existing, cleanTitle];
+}
+
+export async function setLearningStepCompletion(studentId: number, stepTitle: string, completed: boolean) {
+  const existing = await getHanaStudentMemory(studentId);
+  const current = normalizeStudentProfile(existing?.profile);
+  const context = buildStudentContextFromMemory(existing);
+  const step = context.roadmap.find((node) => node.title.toLowerCase() === stepTitle.trim().toLowerCase());
+  if (!step) return { success: false, message: "Hana could not find that roadmap step." } as const;
+  const completedLearningSteps = mergeCompletedLearningSteps(current.completedLearningSteps, step.title, completed);
+  const nextStep = context.roadmap.find((node) => !completedLearningSteps.some((title) => title.toLowerCase() === node.title.toLowerCase()) && node.status !== "locked");
+  await updateStudentProfile(studentId, { completedLearningSteps, currentActiveStep: nextStep?.title || (completed ? step.title : current.currentActiveStep), learningHistory: [...current.learningHistory, `${completed ? "Marked" : "Unmarked"} learning step: ${step.title}.`].slice(-100) });
+  return { success: true, completed, step: step.title, message: completed ? `${step.title} marked complete. Hana check still confirms mastery.` : `${step.title} marked as not complete.` } as const;
+}
+
 export async function recordLearningHistory(studentId: number, note: string) {
   const existing = await getHanaStudentMemory(studentId);
   const profile = normalizeStudentProfile(existing?.profile);

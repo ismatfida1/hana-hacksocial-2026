@@ -25,6 +25,8 @@ export type StudentProfile = {
   careerReadiness?: string;
   preferredLearningTime?: string;
   availableStudyTime?: string;
+  energyMode?: "light" | "normal" | "deep";
+  masteryChecks: string[];
   learningHistory: string[];
   goals: string[];
 };
@@ -65,7 +67,12 @@ export type StudentContext = {
   preferences: {
     preferredLearningTime?: string;
     availableStudyTime?: string;
+    energyMode?: "light" | "normal" | "deep";
     goals: string[];
+  };
+  mastery: {
+    checks: string[];
+    completedCount: number;
   };
   roadmap: RoadmapNode[];
 };
@@ -101,6 +108,8 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
     careerReadiness: asText(profile.careerReadiness),
     preferredLearningTime: asText(profile.preferredLearningTime),
     availableStudyTime: asText(profile.availableStudyTime ?? profile.studyTime),
+    energyMode: profile.energyMode === "light" || profile.energyMode === "deep" || profile.energyMode === "normal" ? profile.energyMode : undefined,
+    masteryChecks: asList(profile.masteryChecks),
     learningHistory: asList(profile.learningHistory),
     goals: asList(profile.goals),
   };
@@ -141,7 +150,12 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
     preferences: {
       preferredLearningTime: profile.preferredLearningTime,
       availableStudyTime: profile.availableStudyTime,
+      energyMode: profile.energyMode,
       goals: profile.goals,
+    },
+    mastery: {
+      checks: profile.masteryChecks,
+      completedCount: profile.completedLearningSteps.length,
     },
     roadmap,
   };
@@ -184,6 +198,26 @@ export async function getStudentCareerContext(studentId: number) {
   return { ...context.career, goals: context.preferences.goals };
 }
 
+export type CoachModule = "ask-hana" | "daily-mission" | "career-coach" | "project-coach" | "career-readiness" | "opportunity-matching" | "university-coach" | "weekly-report";
+
+export function buildCoachContextFromStudentContext(context: StudentContext, module: CoachModule) {
+  const focusByModule: Record<CoachModule, string> = {
+    "ask-hana": "Answer the learner using their current step and real context.",
+    "daily-mission": "Choose one realistic next action for the learner’s available time and energy.",
+    "career-coach": "Connect the learner’s goal, demonstrated skills, projects, and gaps to a career next step.",
+    "project-coach": "Recommend a project that matches demonstrated skills and the current roadmap step.",
+    "career-readiness": "Assess readiness only from stored skills, mastery evidence, projects, and learning history.",
+    "opportunity-matching": "Match only verified opportunity records to demonstrated skills and current goals.",
+    "university-coach": "Connect the learner’s university, degree, semester, and stored subjects to the journey.",
+    "weekly-report": "Summarize only stored learning, mastery, project, and conversation history.",
+  };
+  return { module, focus: focusByModule[module], studentContext: context };
+}
+
+export async function buildCoachContext(studentId: number, module: CoachModule) {
+  return buildCoachContextFromStudentContext(await getStudentContext(studentId), module);
+}
+
 export async function buildHanaContext(studentId: number) {
   return getStudentContext(studentId);
 }
@@ -202,4 +236,90 @@ export async function recordHanaConversation(studentId: number, messages: Array<
 
 export function formatStudentContextForHana(context: StudentContext): string {
   return JSON.stringify(context, null, 2);
+}
+
+export function buildDailyMissionFromContext(context: StudentContext) {
+  const active = context.roadmap.find((node) => node.status === "active") || context.roadmap.find((node) => node.status !== "complete") || context.roadmap[0];
+  return {
+    title: active?.title || context.learning.currentActiveStep || "Choose one small next step",
+    reason: active?.description || "Hana will shape the next step around your saved goal and progress.",
+    durationMinutes: active?.estimatedMinutes || 25,
+    resourceUrl: active?.resourceUrl,
+    resourceTitle: active?.resourceTitle,
+    energyMode: context.preferences.energyMode || "normal",
+  };
+}
+
+export async function getDailyMission(studentId: number) {
+  return buildDailyMissionFromContext(await getStudentContext(studentId));
+}
+
+export function evaluateMasteryAnswer(step: { title: string }, answer: string) {
+  const cleanAnswer = answer.trim().slice(0, 2400);
+  const titleWords = step.title.toLowerCase().split(/[^a-z0-9]+/).filter((word) => word.length > 3 && !["with", "from", "and", "the", "for"].includes(word));
+  const answerWords = new Set(cleanAnswer.toLowerCase().split(/[^a-z0-9]+/));
+  const hasRelevantIdea = titleWords.some((word) => answerWords.has(word)) || /because|example|return|function|variable|request|response|risk|test|data/.test(cleanAnswer.toLowerCase());
+  return { passed: cleanAnswer.length >= 24 && hasRelevantIdea, cleanAnswer };
+}
+
+export async function submitMasteryCheck(studentId: number, stepTitle: string, answer: string) {
+  const existing = await getHanaStudentMemory(studentId);
+  const current = normalizeStudentProfile(existing?.profile);
+  const context = buildStudentContextFromMemory(existing);
+  const step = context.roadmap.find((node) => node.title.toLowerCase() === stepTitle.trim().toLowerCase()) || context.roadmap.find((node) => node.status === "active");
+  if (!step) return { passed: false, message: "Hana could not find that step yet. Open Journey and choose the active step." };
+
+  const { cleanAnswer, passed } = evaluateMasteryAnswer(step, answer);
+  const attempt = `${step.title}: ${passed ? "passed" : "needs another try"} — ${cleanAnswer.slice(0, 180)}`;
+  const checks = [...current.masteryChecks, attempt].slice(-100);
+
+  if (!passed) {
+    await updateStudentProfile(studentId, { masteryChecks: checks, weakAreas: [...current.weakAreas, step.title].filter((item, index, list) => list.indexOf(item) === index).slice(-80), learningHistory: [...current.learningHistory, `Practised ${step.title}; needs another explanation.`].slice(-100) });
+    return { passed: false, message: "Not quite yet. Hana saved your attempt. Try one tiny example, then check again.", step: step.title };
+  }
+
+  const completedLearningSteps = [...current.completedLearningSteps, step.title].filter((item, index, list) => list.indexOf(item) === index);
+  const completedSkills = [...current.completedSkills, step.title].filter((item, index, list) => list.indexOf(item) === index);
+  const demonstratedSkills = [...current.demonstratedSkills, step.title].filter((item, index, list) => list.indexOf(item) === index);
+  const nextStep = context.roadmap.find((node) => node.title !== step.title && !completedLearningSteps.includes(node.title) && (!node.prerequisiteIds?.length || node.prerequisiteIds.every((id) => completedLearningSteps.some((title) => title.toLowerCase().includes(id.toLowerCase())))));
+  await updateStudentProfile(studentId, { masteryChecks: checks, completedLearningSteps, completedSkills, demonstratedSkills, currentActiveStep: nextStep?.title || step.title, weakAreas: current.weakAreas.filter((item) => item !== step.title), learningHistory: [...current.learningHistory, `Passed mastery check for ${step.title}.`].slice(-100) });
+  return { passed: true, message: `Nice work. ${step.title} is now complete, and Hana unlocked the next step.`, completedStep: step.title, nextStep: nextStep?.title };
+}
+
+export async function recordLearningHistory(studentId: number, note: string) {
+  const existing = await getHanaStudentMemory(studentId);
+  const profile = normalizeStudentProfile(existing?.profile);
+  const history = [...profile.learningHistory, note.trim().slice(0, 240)].filter(Boolean).slice(-100);
+  return updateStudentProfile(studentId, { learningHistory: history });
+}
+
+export function buildWeeklyReportFromContext(context: StudentContext) {
+  const recent = context.learning.history.slice(-7);
+  return {
+    learned: context.learning.completedLearningSteps.slice(-5),
+    built: context.work.projects.slice(-3),
+    strongestSkill: context.learning.demonstratedSkills.at(-1) || context.learning.completedSkills.at(-1),
+    next: context.learning.currentActiveStep || context.roadmap.find((node) => node.status === "active")?.title,
+    recentActivity: recent,
+  };
+}
+
+export async function getWeeklyReport(studentId: number) {
+  return buildWeeklyReportFromContext(await getStudentContext(studentId));
+}
+
+export function buildCareerReadinessFromContext(context: StudentContext) {
+  const evidence = [
+    { label: "Demonstrated skills", ready: context.learning.demonstratedSkills.length > 0 },
+    { label: "Completed learning", ready: context.learning.completedLearningSteps.length > 0 },
+    { label: "Project proof", ready: context.work.projects.length > 0 },
+    { label: "Portfolio", ready: context.work.portfolioProjects.length > 0 },
+    { label: "Practical experience", ready: context.work.competitions.length > 0 || context.work.githubProjects.length > 0 },
+  ];
+  const readyCount = evidence.filter((item) => item.ready).length;
+  return { level: readyCount >= 4 ? "building" : readyCount >= 2 ? "starting" : "not-yet", evidence, nextAction: evidence.find((item) => !item.ready)?.label || "Keep practising with a real project." };
+}
+
+export async function getCareerReadiness(studentId: number) {
+  return buildCareerReadinessFromContext(await getStudentContext(studentId));
 }

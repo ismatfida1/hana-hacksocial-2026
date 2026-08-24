@@ -455,3 +455,13 @@
 - [ ] Make every student-facing explanation simple enough for a non-CS learner.
 - [ ] Keep one clear action per screen and one best study link per learning step.
 - [ ] Validate website, database, AI context, Android build, and published demo end to end.
+
+### Verified implementation slice — unified coaching context and mastery
+- [x] Add persisted mastery-check history to the single student profile record.
+- [x] Require a relevant written explanation before marking a learning step complete.
+- [x] Unlock the next roadmap step from stored completion evidence and prerequisites.
+- [x] Add the protected `studentContext.submitMastery` procedure.
+- [x] Add a compact mastery-check UI to the active Journey step.
+- [x] Add the protected `studentContext.coachContext` adapter for all eight coaching modules.
+- [x] Add tests for mastery evaluation and all eight shared coach modules.
+- [x] Validate with 14 passing tests, TypeScript check, and production build.

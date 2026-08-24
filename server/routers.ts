@@ -5,7 +5,7 @@ import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
-import { buildHanaContext, formatStudentContextForHana, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, recordHanaConversation, updateStudentProfile } from "./studentContext";
+import { buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 
 const hanaSystemPrompt = `You are Hana, a cute cream robot who helps people learn. You are a smart, patient friend — not a professor or a business tool.
@@ -22,7 +22,7 @@ export const memoryProfileSchema = z.object({
   career: z.string().max(120).optional(), careerGoal: z.string().max(160).optional(), currentJourney: z.string().max(160).optional(), currentActiveStep: z.string().max(160).optional(),
   demonstratedSkills: z.array(z.string().max(120)).max(80).default([]), completedSkills: z.array(z.string().max(120)).max(80).default([]), weakAreas: z.array(z.string().max(120)).max(80).default([]), completedLearningSteps: z.array(z.string().max(160)).max(100).default([]),
   skills: z.array(z.string().max(80)).max(40).default([]), progress: z.array(z.string().max(120)).max(80).default([]), projects: z.array(z.string().max(160)).max(40).default([]), projectSkills: z.array(z.string().max(120)).max(80).default([]), githubProjects: z.array(z.string().max(200)).max(40).default([]), portfolioProjects: z.array(z.string().max(200)).max(40).default([]), competitions: z.array(z.string().max(200)).max(40).default([]),
-  careerReadiness: z.string().max(160).optional(), preferredLearningTime: z.string().max(120).optional(), availableStudyTime: z.string().max(120).optional(), learningHistory: z.array(z.string().max(240)).max(100).default([]), goals: z.array(z.string().max(160)).max(20).default([]),
+  careerReadiness: z.string().max(160).optional(), preferredLearningTime: z.string().max(120).optional(), availableStudyTime: z.string().max(120).optional(), energyMode: z.enum(["light", "normal", "deep"]).optional(), masteryChecks: z.array(z.string().max(2400)).max(100).default([]), learningHistory: z.array(z.string().max(240)).max(100).default([]), goals: z.array(z.string().max(160)).max(20).default([]),
 });
 
 type HanaMemoryProfileInput = z.infer<typeof memoryProfileSchema>;
@@ -68,6 +68,11 @@ export const appRouter = router({
     progress: protectedProcedure.query(({ ctx }) => getStudentProgress(ctx.user.id)),
     projects: protectedProcedure.query(({ ctx }) => getStudentProjects(ctx.user.id)),
     career: protectedProcedure.query(({ ctx }) => getStudentCareerContext(ctx.user.id)),
+    dailyMission: protectedProcedure.query(({ ctx }) => getDailyMission(ctx.user.id)),
+    weeklyReport: protectedProcedure.query(({ ctx }) => getWeeklyReport(ctx.user.id)),
+    careerReadiness: protectedProcedure.query(({ ctx }) => getCareerReadiness(ctx.user.id)),
+    submitMastery: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), answer: z.string().min(1).max(2400) })).mutation(({ ctx, input }) => submitMasteryCheck(ctx.user.id, input.stepTitle, input.answer)),
+    coachContext: protectedProcedure.input(z.object({ module: z.enum(["ask-hana", "daily-mission", "career-coach", "project-coach", "career-readiness", "opportunity-matching", "university-coach", "weekly-report"]) })).query(({ ctx, input }) => buildCoachContext(ctx.user.id, input.module)),
   }),
   hana: router({
     chat: protectedProcedure.input(chatInput).mutation(async ({ ctx, input }) => {

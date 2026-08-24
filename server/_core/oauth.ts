@@ -58,8 +58,11 @@ export function registerOAuthRoutes(app: Express) {
 
       res.redirect(302, "/");
     } catch (error) {
-      console.error("[OAuth] Callback failed", error);
-      res.status(500).json({ error: "OAuth callback failed" });
+      const message = error instanceof Error ? error.message : String(error);
+      console.error("[OAuth] Callback failed", message);
+      // Keep the mobile/public preview usable even if an external OAuth provider
+      // rejects a callback. Never expose provider details or tokens to the user.
+      res.redirect(302, "/?auth=error");
     }
   });
 }

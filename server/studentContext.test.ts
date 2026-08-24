@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, normalizeStudentProfile } from "./studentContext";
-import { resolveJourneyArea } from "../shared/hanaJourney";
+import { buildJourney, resolveJourneyArea } from "../shared/hanaJourney";
 
 describe("student context layer", () => {
   it("normalizes the full student profile into one coach context", () => {
@@ -45,6 +45,13 @@ describe("student context layer", () => {
     expect(context.learning.recentConversations[0]?.text).toContain("What should");
     expect(context.roadmap[0]?.status).toBe("active");
     expect(resolveJourneyArea("AI Engineering")).toBe("AI / Machine Learning");
+  });
+
+  it("starts Cybersecurity with networking foundations", () => {
+    const steps = buildJourney("Cybersecurity", "Starting from zero", "Get job-ready", "Full study day");
+    expect(steps[0]?.title).toBe("Networking foundations");
+    expect(steps[0]?.title.toLowerCase()).not.toContain("python");
+    expect(steps[1]?.title).toBe("Linux essentials");
   });
 
   it("does not turn active or unverified skills into completed skills", () => {

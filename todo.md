@@ -473,4 +473,11 @@
 - [x] Add Ismat Fida signature branding in appropriate About/profile areas without cluttering learning screens.
 - [x] Keep an always-available custom career requirement field for deeply written user goals.
 - [x] Verify secure OpenAI/Gemini provider routing for career discovery and journey decisions.
-- [ ] Add tests and validate responsive UI, production build, website publication, and Android workflow.
+- [x] Add tests and validate responsive UI, production build, website publication, and Android workflow.
+
+## Screenshot-reported blockers — 2026-08-24
+- [x] Fix the public OAuth callback failure so the demo does not show `{"error":"OAuth callback failed"}`.
+- [x] Prevent mobile bottom-navigation labels from overlapping; use compact readable labels and safe spacing.
+- [x] Ensure the selected career is persisted and used to build the first roadmap step.
+- [x] Make Cybersecurity start with networking, Linux, and security foundations rather than Python or generic programming.
+- [x] Validate all career roadmap defaults and the public demo after the fix.

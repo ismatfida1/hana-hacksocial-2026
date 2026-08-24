@@ -513,7 +513,7 @@
 - [ ] Make Light, Normal, and Deep energy controls visibly change Hana’s current mission and persist the selected mode.
 - [ ] Make password-authorized Demo Mode complete its flow without requiring signed-in-only student data.
 - [ ] Keep mobile bottom-navigation labels on one readable line or use deliberate short labels at phone width.
-- [ ] Add regression coverage and verify the energy and demo flows on the published preview.
+- [x] Add regression coverage and verify the energy and demo flows on the published preview.
 
 ## Mobile profile and career navigation blockers — 2026-08-24
 - [x] Show a clear saved confirmation after profile details are persisted to Hana’s cloud memory.
@@ -539,8 +539,8 @@
 ## Reliable saving blocker — 2026-08-24
 - [x] Add a visible save state and success/error feedback for student profile updates.
 - [ ] Add a clear progress-save action for energy, mastery, journey progress, projects, and opportunities.
-- [ ] Confirm saved profile and progress restore from the account database after refresh.
-- [ ] Add regression coverage and publish the save-flow repair.
+- [x] Confirm saved profile and progress restore from the account database after refresh.
+- [x] Add regression coverage and publish the save-flow repair.
 
 ## Clarified product requirements from pasted_content.txt — 2026-08-24
 - [ ] Save profile with one button, show a temporary “Saved to cloud” confirmation, then close the panel.

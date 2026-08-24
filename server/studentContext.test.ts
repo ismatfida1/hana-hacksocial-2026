@@ -108,4 +108,14 @@ describe("student context layer", () => {
     expect(report.learned).toEqual(["Variables"]);
     expect(readiness.level).toBe("building");
   });
+
+  it("restores profile and progress from stored cloud memory", () => {
+    const restored = buildStudentContextFromMemory({ profile: { university: "BSU", degree: "BSCS", semester: "4", career: "Cybersecurity", currentActiveStep: "Linux essentials", completedLearningSteps: ["Networking foundations"], projects: ["Packet tracer lab"] }, conversations: [], memoryEnabled: 1 } as never);
+    expect(restored.student.university).toBe("BSU");
+    expect(restored.student.degree).toBe("BSCS");
+    expect(restored.career.goal).toBe("Cybersecurity");
+    expect(restored.learning.currentActiveStep).toBe("Linux essentials");
+    expect(restored.learning.completedLearningSteps).toEqual(["Networking foundations"]);
+    expect(restored.work.projects).toEqual(["Packet tracer lab"]);
+  });
 });

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Hana style reminder: Paper Constellation — a calm editorial study room, tactile paper surfaces, expressive cream robot, and flower-inspired growth without turning Hana into a flower. */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 5px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 1.05rem;
+  --background: oklch(0.975 0.016 84);
+  --foreground: oklch(0.23 0.025 52);
+  --card: oklch(0.995 0.009 86);
+  --card-foreground: oklch(0.23 0.025 52);
+  --popover: oklch(0.995 0.009 86);
+  --popover-foreground: oklch(0.23 0.025 52);
+  --primary: oklch(0.48 0.19 261);
+  --primary-foreground: oklch(0.99 0.008 90);
+  --secondary: oklch(0.91 0.045 8);
+  --secondary-foreground: oklch(0.31 0.05 8);
+  --muted: oklch(0.94 0.025 84);
+  --muted-foreground: oklch(0.52 0.025 52);
+  --accent: oklch(0.91 0.06 121);
+  --accent-foreground: oklch(0.29 0.045 95);
+  --border: oklch(0.84 0.035 75);
+  --input: oklch(0.84 0.035 75);
+  --ring: oklch(0.48 0.19 261);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--background); color: var(--foreground); font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; background-image: radial-gradient(oklch(0.4 0.02 70 / 0.055) .7px, transparent .7px); background-size: 8px 8px; }
+button, a, input, textarea { font: inherit; }
+button { cursor: pointer; }
+button:active { transform: scale(.975); }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid color-mix(in oklch, #3157c8 55%, white); outline-offset: 3px; }
+
+@layer base { * { @apply border-border; } body { @apply text-foreground; } }
+@layer components {
+  .container { width: 100%; margin: 0 auto; padding-inline: 1rem; }
+  .font-display { font-family: 'Fraunces', Georgia, serif; }
+  .hana-wordmark { position: relative; display: inline-block; letter-spacing: .08em; }
+  .hana-wordmark::before { content: '⌜'; margin-right: 2px; color: #3157c8; font-family: 'DM Sans', sans-serif; font-size: .8em; }
+  .hana-wordmark::after { content: '⌟'; margin-left: 2px; color: #3157c8; font-family: 'DM Sans', sans-serif; font-size: .8em; }
+  .paper-card { background: color-mix(in srgb, var(--card) 92%, white); border: 1px solid color-mix(in srgb, var(--border) 72%, transparent); box-shadow: 0 18px 45px rgba(85, 65, 39, .08), 0 3px 7px rgba(85, 65, 39, .05); }
+  .grain { position: relative; overflow: hidden; }
+  .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .16; background-image: radial-gradient(rgba(64, 52, 39, .17) .5px, transparent .5px); background-size: 7px 7px; mix-blend-mode: multiply; }
+  .pin-label { box-shadow: 3px 4px 0 rgba(47, 42, 37, .09); transform: rotate(-2deg); }
+  .lift { transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), border-color 220ms var(--ease-out); }
+  .lift:hover { transform: translateY(-4px) rotate(.2deg); box-shadow: 0 22px 46px rgba(85, 65, 39, .13), 0 4px 8px rgba(85, 65, 39, .06); }
+  .fade-up { animation: fade-up 480ms var(--ease-out) both; }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @media (min-width: 640px) { .container { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .container { max-width: 1280px; padding-inline: 2rem; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+}
+
+/* Fast, quiet interaction feedback for Hana's compact shell. */
+.drawer-enter {
+  animation: hana-drawer-in 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+@keyframes hana-drawer-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-enter { animation: none; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* Hana herself moves gently, so the companion feels present without demanding attention. */
+.hana-robot-motion {
+  transform-origin: 50% 85%;
+  animation: hana-idle-float 4.8s ease-in-out infinite;
+}
+.hana-mood-thinking { animation-duration: 2.2s; }
+.hana-mood-curious { animation-duration: 3.2s; }
+.hana-mood-worried { animation: hana-worried-nudge 1.8s ease-in-out infinite; }
+.hana-mood-confused { animation: hana-confused-tilt 2.4s ease-in-out infinite; }
+.hana-mood-celebrating { animation: hana-celebrate 1.2s ease-in-out 2; }
+.hana-mood-sleepy { animation-duration: 7s; }
+@keyframes hana-idle-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-1deg); }
+}
+@keyframes hana-worried-nudge {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(-2deg); }
+  70% { transform: rotate(1deg); }
+}
+@keyframes hana-confused-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg) translateY(-2px); }
+}
+@keyframes hana-celebrate {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hana-robot-motion, .hana-mood-worried, .hana-mood-confused, .hana-mood-celebrating { animation: none; }
+}

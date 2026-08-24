@@ -498,3 +498,5 @@
 - [x] Add password-protected authorized demo access from the sign-in screen.
 - [x] Keep five-item navigation: Home, Journey, Projects, Opportunities, Profile; expose Ask Hana at the top level.
 - [ ] Add free labeled resources, adaptive roadmap approval, small roadmap projects, big final projects, progress, creator information, and security protections.
+
+- [x] Add baseline security headers, disable Express fingerprinting, and keep demo-password verification server-side with constant-time comparison.

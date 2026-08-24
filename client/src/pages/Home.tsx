@@ -45,10 +45,20 @@ const skillAreas: Record<string, string> = {
   "AI Automation": "Programming", "Web Development": "Web Development", "Python Automation": "Programming", "Data Analysis": "Data Science", "UI/UX Design": "UI/UX", "Video Editing": "Content Creation", "Content Creation": "Content Creation", SEO: "Digital Marketing",
 };
 const opportunities = [
-  { title: "Google Summer of Code", type: "Open-source programme", detail: "Work with an open-source organisation and learn from mentors.", url: "https://summerofcode.withgoogle.com/" },
-  { title: "MLH Hackathons", type: "Student hackathons", detail: "Find online and campus hackathons for student builders.", url: "https://mlh.io/seasons/2026/events" },
-  { title: "GitHub Good First Issues", type: "Open-source practice", detail: "Find small, beginner-friendly issues in real projects.", url: "https://github.com/search?q=label%3A%22good+first+issue%22+state%3Aopen&type=issues" },
-  { title: "Devpost Hackathons", type: "Project competitions", detail: "Browse current online hackathons and build challenges.", url: "https://devpost.com/hackathons" },
+  { title: "Devpost Hackathons", type: "Project competitions", detail: "Browse online and in-person hackathons. Use a small project you are already building.", url: "https://devpost.com/hackathons" },
+  { title: "Major League Hacking", type: "Student hackathons", detail: "Find official student hacker events, including digital events and campus hackathons.", url: "https://www.mlh.com/seasons/2026/events" },
+  { title: "Kaggle Competitions", type: "AI and data competitions", detail: "Start with beginner-friendly machine-learning challenges and practise explaining your results.", url: "https://www.kaggle.com/competitions" },
+  { title: "NASA Space Apps Challenge", type: "Global hackathon", detail: "Build a project around real space and Earth data. Check the official page for the next challenge.", url: "https://www.spaceappschallenge.org/" },
+  { title: "HackerRank Contests", type: "Coding competitions", detail: "Practise timed coding problems and compare your solutions with other learners.", url: "https://www.hackerrank.com/contests" },
+  { title: "ICPC", type: "University programming", detail: "Explore university programming contests and find the regional contest route for your location.", url: "https://icpc.global/" },
+  { title: "picoCTF / CyLab Security Academy", type: "Cybersecurity CTF", detail: "Learn security by solving safe Capture the Flag challenges. The site now directs learners to Carnegie Mellon’s CyLab platform.", url: "https://picoctf.org/" },
+  { title: "CTFtime", type: "CTF calendar", detail: "Browse cybersecurity competitions and choose a beginner-friendly event after learning the basics.", url: "https://ctftime.org/" },
+  { title: "Google Summer of Code", type: "Open-source programme", detail: "Work with an open-source organisation and learn from mentors. Check current eligibility on the official page.", url: "https://summerofcode.withgoogle.com/" },
+  { title: "Outreachy", type: "Open-source internship", detail: "Explore remote open-source internships. Eligibility, dates, and applications are explained on the official site.", url: "https://www.outreachy.org/" },
+  { title: "LFX Mentorship", type: "Open-source mentorship", detail: "Look for mentorship projects in open-source communities and practise contributing with guidance.", url: "https://mentorship.lfx.linuxfoundation.org/" },
+  { title: "GitHub Good First Issues", type: "Open-source practice", detail: "Find small, beginner-friendly issues in real projects and learn how to make your first contribution.", url: "https://github.com/search?q=label%3A%22good+first+issue%22+state%3Aopen&type=issues" },
+  { title: "The Forage", type: "Online work simulation", detail: "Try free employer-created work simulations to understand what different roles involve.", url: "https://www.theforage.com/" },
+  { title: "First Timers Only", type: "Contribution starter", detail: "Find projects that welcome first-time open-source contributors.", url: "https://www.firsttimersonly.com/" },
 ];
 
 function todayText() {
@@ -96,9 +106,10 @@ export default function Home() {
   const [subjects, setSubjects] = useState("");
   const [profileHydrated, setProfileHydrated] = useState(false);
   const [saveNotice, setSaveNotice] = useState<"saving" | "saved" | "progress-saved" | "error" | "">("");
+  const [authNotice, setAuthNotice] = useState("");
   const auth = trpc.auth.me.useQuery();
   const verifyDemo = trpc.demo.verify.useMutation();
-  const memory = trpc.memory.get.useQuery(undefined, { enabled: Boolean(auth.data) });
+  const memory = trpc.memory.get.useQuery(undefined, { enabled: Boolean(auth.data) && screen === "app" });
   const setMemoryEnabled = trpc.memory.setEnabled.useMutation();
   const clearMemory = trpc.memory.clear.useMutation();
   const studentContext = trpc.studentContext.get.useQuery(undefined, { enabled: Boolean(auth.data) });
@@ -109,13 +120,26 @@ export default function Home() {
   const addProject = trpc.studentContext.addProject.useMutation();
   const addPortfolioProject = trpc.studentContext.addPortfolioProject.useMutation();
   const addCompetition = trpc.studentContext.addCompetition.useMutation();
-  const dailyMission = trpc.studentContext.dailyMission.useQuery(undefined, { enabled: Boolean(auth.data) });
-  const weeklyReport = trpc.studentContext.weeklyReport.useQuery(undefined, { enabled: Boolean(auth.data) });
-  const careerReadiness = trpc.studentContext.careerReadiness.useQuery(undefined, { enabled: Boolean(auth.data) });
+  const dailyMission = trpc.studentContext.dailyMission.useQuery(undefined, { enabled: Boolean(auth.data) && screen === "app" && destination === "Home" });
+  const weeklyReport = trpc.studentContext.weeklyReport.useQuery(undefined, { enabled: Boolean(auth.data) && screen === "app" && destination === "Home" });
+  const careerReadiness = trpc.studentContext.careerReadiness.useQuery(undefined, { enabled: Boolean(auth.data) && screen === "app" && destination === "Profile" });
   const chosenArea = area || (pathway === "custom" ? customGoal : "Software Engineering") || "Software Engineering";
   const localSteps = useMemo(() => buildJourney(chosenArea, level || customLevel, goal || customGoal, time), [chosenArea, level, customLevel, goal, customGoal, time]);
   const mission = aiMission?.todaysStep || localSteps[0]?.title || "Choose one small next step";
   const missionWhy = aiMission?.whyToday || localSteps[0]?.purpose || "Hana will shape the next step around your goal.";
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("auth") === "error") {
+      setScreen("signin");
+      setAuthNotice("Sign-in could not be completed. Please try again.");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (auth.error && screen === "signin") setAuthNotice("Hana could not check your account right now. Please try again.");
+  }, [auth.error, screen]);
 
   useEffect(() => {
     const profile = studentContext.data?.student;
@@ -176,7 +200,7 @@ export default function Home() {
   };
 
   if (screen === "greeting") return <Shell><section className="flex flex-1 flex-col items-center justify-center pb-14 text-center"><p className="text-sm font-semibold text-[#C98C93]">{new Intl.DateTimeFormat(undefined, { hour: "numeric" }).format(new Date()).includes("AM") ? "Good morning" : "Hello"} 🌸</p><h1 className="mt-3 font-display text-5xl leading-[.95] text-[#3A3540]">Hi, I’m Hana.</h1><p className="mt-4 text-base text-[#625D65]">How’s your day going?</p><div className="mt-8 w-full"><HanaArt /></div><button onClick={() => setScreen(auth.data ? "start" : "signin")} className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#3A3540] px-4 py-4 text-sm font-bold text-white">I’m ready <span>✨</span><ArrowRight size={17} /></button></section></Shell>;
-  if (screen === "signin") return <Shell back={() => setScreen("greeting")}><section className="flex flex-1 flex-col justify-center pb-12"><p className="text-sm font-semibold text-[#C98C93]">Your private learning space</p><h1 className="mt-3 font-display text-5xl leading-[.95]">Sign in to<br /><em className="text-[#725F78]">continue with Hana.</em></h1><p className="mt-4 text-sm leading-5 text-[#625D65]">Your journey, projects, profile, and conversations are saved to your account and available on your other devices.</p><button onClick={() => startLogin()} className="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#3A3540] px-4 py-4 text-sm font-bold text-white">Sign in or create account <ArrowRight size={17} /></button><details className="mt-5 rounded-2xl border border-[#D9CEC4] bg-[#FFFDF9] p-4"><summary className="cursor-pointer text-sm font-bold text-[#3A3540]">Preview for authorized users</summary><p className="mt-2 text-xs leading-5 text-[#625D65]">This private demo is only for people with the password. It does not save demo progress to a real student account.</p><input type="password" value={demoPassword} onChange={(event) => { setDemoPassword(event.target.value); setDemoStatus(""); }} placeholder="Demo password" className="mt-3 w-full rounded-xl border border-[#D9CEC4] bg-white px-3 py-3 text-sm text-[#3A3540]" /><button disabled={verifyDemo.isPending || !demoPassword} onClick={() => verifyDemo.mutate({ password: demoPassword }, { onSuccess: (result) => { if (result.authorized) { const demoArea = "Cybersecurity"; const demoSteps = buildJourney(demoArea, "Starting from zero", "Explore this field first", "Flexible pace"); setDemoAuthorized(true); setDemoPassword(""); setDemoStatus("Demo unlocked — Hana prepared a sample Cybersecurity path."); setPathway("career"); setArea(demoArea); setLevel("Starting from zero"); setGoal("Explore this field first"); setTime("Flexible pace"); setPlan({ pathway: "career", area: demoArea, title: "Cybersecurity demo", goal: "Explore this field first", level: "Starting from zero", time: "Flexible pace", steps: demoSteps }); setScreen("preview"); } else setDemoStatus("That password did not work. Please try again."); } })} className="mt-2 w-full rounded-xl bg-[#E5E5F0] px-4 py-3 text-sm font-bold text-[#51486A] disabled:opacity-50">{verifyDemo.isPending ? "Checking…" : "Open private demo"}</button>{demoStatus && <p className="mt-2 text-xs text-[#5D6556]" role="status">{demoStatus}</p>}</details></section></Shell>;
+  if (screen === "signin") return <Shell back={() => setScreen("greeting")}><section className="flex flex-1 flex-col justify-center pb-12"><p className="text-sm font-semibold text-[#C98C93]">Your private learning space</p><h1 className="mt-3 font-display text-5xl leading-[.95]">Sign in to<br /><em className="text-[#725F78]">continue with Hana.</em></h1><p className="mt-4 text-sm leading-5 text-[#625D65]">Your journey, projects, profile, and conversations are saved to your account and available on your other devices.</p><button onClick={() => { setAuthNotice("Opening secure sign-in…"); startLogin(); }} className="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#3A3540] px-4 py-4 text-sm font-bold text-white">Sign in or create account <ArrowRight size={17} /></button>{authNotice && <p className="mt-3 rounded-xl bg-[#F6E9EA] px-3 py-2 text-xs leading-4 text-[#6F4D55]" role="status">{authNotice}</p>}<details className="mt-5 rounded-2xl border border-[#D9CEC4] bg-[#FFFDF9] p-4"><summary className="cursor-pointer text-sm font-bold text-[#3A3540]">Preview for authorized users</summary><p className="mt-2 text-xs leading-5 text-[#625D65]">This private demo is only for people with the password. It does not save demo progress to a real student account.</p><input type="password" value={demoPassword} onChange={(event) => { setDemoPassword(event.target.value); setDemoStatus(""); }} placeholder="Demo password" className="mt-3 w-full rounded-xl border border-[#D9CEC4] bg-white px-3 py-3 text-sm text-[#3A3540]" /><button disabled={verifyDemo.isPending || !demoPassword} onClick={() => verifyDemo.mutate({ password: demoPassword }, { onSuccess: (result) => { if (result.authorized) { const demoArea = "Cybersecurity"; const demoSteps = buildJourney(demoArea, "Starting from zero", "Explore this field first", "Flexible pace"); setDemoAuthorized(true); setDemoPassword(""); setDemoStatus("Demo unlocked — Hana prepared a sample Cybersecurity path."); setPathway("career"); setArea(demoArea); setLevel("Starting from zero"); setGoal("Explore this field first"); setTime("Flexible pace"); setPlan({ pathway: "career", area: demoArea, title: "Cybersecurity demo", goal: "Explore this field first", level: "Starting from zero", time: "Flexible pace", steps: demoSteps }); setScreen("preview"); } else setDemoStatus("That password did not work. Please try again."); } })} className="mt-2 w-full rounded-xl bg-[#E5E5F0] px-4 py-3 text-sm font-bold text-[#51486A] disabled:opacity-50">{verifyDemo.isPending ? "Checking…" : "Open private demo"}</button>{demoStatus && <p className="mt-2 text-xs text-[#5D6556]" role="status">{demoStatus}</p>}</details></section></Shell>;
   if (screen === "start") return <Shell back={() => setScreen("greeting")}><ChoiceScreen eyebrow="Let’s begin" title={<>What are you<br /><em className="text-[#725F78]">here for?</em></>} options={["🎓 Build My Career", "🧭 Create My Own Journey", "💼 Learn a Skill & Earn"]} onChoose={(value) => { if (value.includes("Career")) { setPathway("career"); setScreen("career"); } else if (value.includes("Own")) { setPathway("custom"); setScreen("custom"); } else { setPathway("skill"); setScreen("skill"); } }} /> </Shell>;
   if (screen === "career") return <Shell back={() => setScreen("start")}><ChoiceScreen eyebrow="Build my career" title={<>What do you<br /><em className="text-[#725F78]">want to become?</em></>} options={careers} onChoose={(value) => { setArea(value); setScreen("profile"); }} footer={<button onClick={() => { setDiscoverStep(0); setScreen("discover"); }} className="mt-6 w-full text-center text-sm font-bold text-[#625D65]">I don’t know yet — Help me find my path</button>} /></Shell>;
   if (screen === "skill") return <Shell back={() => setScreen("start")}><ChoiceScreen eyebrow="Learn a skill & earn" title={<>Which skill<br /><em className="text-[#725F78]">interests you?</em></>} options={practicalSkills} onChoose={(value) => createPlan("skill", skillAreas[value] || value, "Starting from zero", "Build proof I can show", "Full study day · start now", value)} footer={<div className="mt-6 space-y-3 text-center"><button onClick={() => { setPathway("custom"); setScreen("custom"); }} className="text-sm font-bold text-[#625D65] underline underline-offset-4">Write my own requirement</button><p className="text-xs text-[#746B72]">Hana never promises income. She helps you build real skill and proof.</p></div>} /></Shell>;

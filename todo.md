@@ -551,9 +551,9 @@
 - [ ] Route no-career users to Career options and returning users to saved Home/Journey.
 - [ ] Make University Coach request university context when it is useful, while keeping onboarding fields optional.
 - [ ] Show the best resource by default, optional alternatives when useful, and direct university lessons when available.
-- [ ] Keep resource links working and hide or replace broken links.
-- [ ] Keep private Demo Mode isolated with temporary data and demonstrate saving/progress without writing to real student data.
-- [ ] Keep Ask Hana in the top-right and bottom navigation as confirmed in the clarified requirements.
+- [x] Keep resource links working and hide or replace broken links.
+- [x] Keep private Demo Mode isolated with temporary data and demonstrate saving/progress without writing to real student data.
+- [x] Superseded by the final navigation clarification: keep Ask Hana only in the top-right.
 - [ ] Keep normal users fully away from admin, API-key, database, deployment, and demo-password controls.
 - [ ] Confirm before saving uploaded files, show them under Memory, and allow deletion.
 - [ ] Show the How Hana Works guide once for new users and add Replay guide in Profile.
@@ -566,3 +566,24 @@
 
 - [x] Open a sample Cybersecurity roadmap immediately after a correct private-demo password without requiring signed-in student data.
 - [x] Show a visible Progress saved state when authenticated energy mode changes are persisted.
+
+## Private demo blocker — 2026-08-24
+- [ ] Make the authorized demo password flow work reliably from the sign-in screen to the isolated demo roadmap.
+- [ ] Show clear wrong-password, server-error, and successful-unlock states with a retry path.
+- [ ] Confirm Demo Mode never reads or writes a real student account and publish only after testing the exact flow.
+
+## Expanded opportunities — 2026-08-24
+- [ ] Add more verified competitions and hackathons across software, AI, data, cybersecurity, and design.
+- [ ] Add CTFs, open-source programs, internships, and online-work paths with short purpose labels.
+- [ ] Keep opportunity cards compact, categorized, and free to browse where possible.
+- [ ] Verify every new opportunity URL, add regression coverage, and publish the update.
+
+## Normal sign-in and speed blockers — 2026-08-24
+- [ ] Repair normal account sign-in and route a signed-in user to Career options or saved Home/Journey.
+- [ ] Separate normal sign-in errors from private Demo Mode errors and show a clear retry path.
+- [ ] Add fast loading states for auth hydration, protected student context, AI roadmap generation, and navigation.
+- [ ] Reduce duplicate requests and avoid blocking the whole app on slow optional data.
+- [ ] Test normal sign-in and loading behavior before publishing.
+
+- [x] Show a recoverable normal-sign-in error state when OAuth returns `auth=error` and provide a retry action.
+- [x] Add immediate loading feedback for sign-in and defer optional mission/report queries until their screens are needed.

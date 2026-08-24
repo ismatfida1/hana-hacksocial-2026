@@ -25,3 +25,16 @@
 - Professor Messer YouTube: https://www.youtube.com/@ProfessorMesser — professional networking and security video route.
 - freeCodeCamp YouTube: https://www.youtube.com/@freecodecamp — professional programming/AI/DevOps video route.
 - Nielsen Norman Group YouTube: https://www.youtube.com/@NNgroup — professional UX video route.
+
+## Opportunity research — 2026-08-24
+- Devpost Hackathons: https://devpost.com/hackathons — live official hub for online and in-person hackathons; useful for browsing current project competitions.
+- Major League Hacking 2026 schedule: https://www.mlh.com/seasons/2026/events — official student hacker-event schedule with digital and in-person events.
+- Google Summer of Code: https://summerofcode.withgoogle.com/ — official open-source mentoring program information.
+- GitHub Good First Issues: https://github.com/search?q=label%3A%22good+first+issue%22+state%3Aopen&type=issues — live search for beginner-friendly open-source issues.
+- NIST Cybersecurity Framework: https://www.nist.gov/cyberframework — verified public cybersecurity framework reference used as a learning document.
+
+## Additional opportunity research — 2026-08-24
+- Kaggle Competitions: https://www.kaggle.com/competitions — official competition hub with beginner-friendly machine-learning fundamentals, hackathons, research, and community competitions.
+- NASA Space Apps Challenge: https://www.spaceappschallenge.org/ — official NASA challenge hub; use the link to check current challenge information because event dates change.
+- CyLab Security Academy / picoCTF: https://picoctf.org/ — Carnegie Mellon-linked free cybersecurity learning and competition route; current site directs learners to CyLab Security Academy.
+- Outreachy: https://www.outreachy.org/ — official remote open-source internship program information; eligibility and dates must be checked on the official page.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildStudentContextFromMemory, formatStudentContextForHana, normalizeStudentProfile } from "./studentContext";
+import { buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, normalizeStudentProfile } from "./studentContext";
 import { resolveJourneyArea } from "../shared/hanaJourney";
 
 describe("student context layer", () => {
@@ -56,5 +56,42 @@ describe("student context layer", () => {
     expect(context.learning.completedSkills).toEqual([]);
     expect(prompt).toContain('"completedSkills": []');
     expect(prompt).toContain('"currentActiveStep": "APIs"');
+  });
+
+  it("keeps energy mode in the unified context", () => {
+    const context = buildStudentContextFromMemory({ profile: { energyMode: "light", currentActiveStep: "Variables" }, conversations: [] } as never);
+    expect(context.preferences.energyMode).toBe("light");
+  });
+
+  it("routes all eight coaching modules through one student context", () => {
+    const context = buildStudentContextFromMemory({ profile: { career: "Software Engineering", completedLearningSteps: ["Variables"] }, conversations: [] } as never);
+    const modules = ["ask-hana", "daily-mission", "career-coach", "project-coach", "career-readiness", "opportunity-matching", "university-coach", "weekly-report"] as const;
+    modules.forEach((module) => {
+      const routed = buildCoachContextFromStudentContext(context, module);
+      expect(routed.module).toBe(module);
+      expect(routed.studentContext).toBe(context);
+      expect(routed.studentContext.learning.completedLearningSteps).toEqual(["Variables"]);
+    });
+  });
+
+  it("requires a relevant explanation before marking mastery complete", () => {
+    expect(evaluateMasteryAnswer({ title: "Python Functions" }, "I know it.").passed).toBe(false);
+    expect(evaluateMasteryAnswer({ title: "Python Functions" }, "A function takes parameters and returns a value, so I can reuse the same logic in another part of a program.").passed).toBe(true);
+  });
+
+  it("uses stored evidence for readiness and report helpers", () => {
+    const memory = {
+      id: 1, userId: 7, profile: { currentActiveStep: "Functions", completedLearningSteps: ["Variables"], demonstratedSkills: ["Python"], projects: ["Study timer"], portfolioProjects: ["Study timer"], learningHistory: ["Finished variables"], energyMode: "normal" }, conversations: [], memoryEnabled: 1,
+    } as never;
+    const context = buildStudentContextFromMemory(memory);
+    const mission = buildDailyMissionFromContext(context);
+    const report = buildWeeklyReportFromContext(context);
+    const readiness = buildCareerReadinessFromContext(context);
+    expect(context.preferences.energyMode).toBe("normal");
+    expect(context.learning.completedLearningSteps).toEqual(["Variables"]);
+    expect(mission.energyMode).toBe("normal");
+    expect(mission.title).toBe(context.roadmap.find((node) => node.status === "active")?.title);
+    expect(report.learned).toEqual(["Variables"]);
+    expect(readiness.level).toBe("building");
   });
 });

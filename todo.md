@@ -426,3 +426,42 @@
 - [x] Verify the Android Actions run and APK artifact.
 - [x] Verify the separate public website URL and publication status.
 - [x] Report exact completion status and concise installation/publishing steps.
+
+## Simplify app and restore study links — 2026-08-24
+- [x] Reproduce the reported broken app flow and inspect runtime logs.
+- [x] Simplify Hana to one clear next action at a time.
+- [x] Make the current learning step show a visible study link and clear Start studying action.
+- [x] Repair roadmap navigation and guest/authenticated behavior.
+- [x] Validate and publish the repaired separate website.
+
+## Next priority: University profile and Today context — 2026-08-24
+- [x] Add a compact profile setup for university, degree, semester, subjects, and available study time.
+- [x] Persist profile changes through `studentContext.updateProfile` instead of local-only state.
+- [x] Load the saved profile into the existing demo so Hana’s current plan reflects it.
+- [x] Add tests for profile normalization and persistence contract.
+- [ ] Validate and publish the updated demo.
+
+## Complete 60-feature Hana implementation — 2026-08-24
+- [ ] Audit all 60 checklist items against the current website and Android source.
+- [ ] Implement the core student, learning, mastery, project, opportunity, AI, memory, companion, tracking, and admin features from the checklist.
+- [ ] Preserve one database-backed source of truth and existing AI/Capacitor integrations.
+- [ ] Add tests, migrations, accessibility checks, and web/mobile validation for the complete scope.
+- [ ] Build and verify the final Android APK through GitHub Actions.
+- [ ] Publish and verify the final separate website.
+
+## Final Hana 60-feature plain-language release — 2026-08-24
+- [ ] Audit the current app against all 60 requested feature names and the full master specification.
+- [ ] Implement all required core, coaching, tracking, companion, opportunity, admin, and link features using real data.
+- [ ] Make every student-facing explanation simple enough for a non-CS learner.
+- [ ] Keep one clear action per screen and one best study link per learning step.
+- [ ] Validate website, database, AI context, Android build, and published demo end to end.
+
+### Verified implementation slice — unified coaching context and mastery
+- [x] Add persisted mastery-check history to the single student profile record.
+- [x] Require a relevant written explanation before marking a learning step complete.
+- [x] Unlock the next roadmap step from stored completion evidence and prerequisites.
+- [x] Add the protected `studentContext.submitMastery` procedure.
+- [x] Add a compact mastery-check UI to the active Journey step.
+- [x] Add the protected `studentContext.coachContext` adapter for all eight coaching modules.
+- [x] Add tests for mastery evaluation and all eight shared coach modules.
+- [x] Validate with 14 passing tests, TypeScript check, and production build.

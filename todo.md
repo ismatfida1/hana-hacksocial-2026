@@ -613,3 +613,9 @@
 - [x] Trace the reported normal sign-in failure through OAuth redirect, callback, session cookie, and auth hydration.
 - [x] Improve the sign-in error message and retry behavior without weakening authentication or changing Demo Mode isolation.
 - [ ] Test both Demo Mode introduction choices and the normal sign-in error path before publishing.
+
+## Interactive tour progress clarity — 2026-08-24
+- [x] Add a visible Step X of 7 counter to the Demo Mode tour.
+- [x] Add an accessible visual progress bar showing completed and remaining tour stages.
+- [x] Show an accurate 100% completion state before the user opens the demo.
+- [x] Validate the progress indicator on mobile and in the production build.

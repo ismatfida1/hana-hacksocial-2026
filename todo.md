@@ -592,3 +592,17 @@
 - [x] Add immediate sign-in feedback and defer optional protected queries to reduce first-screen loading work.
 
 - [x] Preserve the greeting-first screen for existing sessions while still routing a user returning from OAuth directly to Career options or saved Home/Journey.
+
+## Authentication and persistence repair — 2026-08-24
+- [ ] Fix normal account sign-in session handling and post-auth routing.
+- [ ] Make profile saving persist to the signed-in account with visible success and retry states.
+- [ ] Make journey progress, mastery, energy, projects, portfolio items, and competitions persist to the signed-in account.
+- [ ] Verify saved profile and progress restore after refresh and across devices through the account backend.
+- [ ] Publish only after the authentication and persistence flows pass tests and mobile validation.
+
+## Demo Mode guide enhancement — 2026-08-24
+- [ ] Add an original short Hana video guide to the authorized Demo Mode.
+- [x] Add a staged interactive Hana tour with unlocked steps, robot hand/pose guidance, arrows, and short captions.
+- [x] Add skip, replay, and continue controls without overwhelming the demo user.
+- [x] Keep demo progress isolated from signed-in student cloud memory.
+- [x] Test media loading, mobile layout, guided-stage behavior, and production build before publishing.

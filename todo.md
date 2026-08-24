@@ -563,3 +563,6 @@
 ## Final navigation clarification — 2026-08-24
 - [x] Use Home, Journey, Projects, Opportunities, Profile in the bottom navigation.
 - [x] Keep Ask Hana accessible only from the top-right action.
+
+- [x] Open a sample Cybersecurity roadmap immediately after a correct private-demo password without requiring signed-in student data.
+- [x] Show a visible Progress saved state when authenticated energy mode changes are persisted.

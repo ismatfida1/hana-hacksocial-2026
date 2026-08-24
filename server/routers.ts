@@ -5,7 +5,7 @@ import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
-import { buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, submitMasteryCheck, updateStudentProfile } from "./studentContext";
+import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 
 const hanaSystemPrompt = `You are Hana, a cute cream robot who helps people learn. You are a smart, patient friend — not a professor or a business tool.
@@ -73,6 +73,10 @@ export const appRouter = router({
     careerReadiness: protectedProcedure.query(({ ctx }) => getCareerReadiness(ctx.user.id)),
     submitMastery: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), answer: z.string().min(1).max(2400) })).mutation(({ ctx, input }) => submitMasteryCheck(ctx.user.id, input.stepTitle, input.answer)),
     coachContext: protectedProcedure.input(z.object({ module: z.enum(["ask-hana", "daily-mission", "career-coach", "project-coach", "career-readiness", "opportunity-matching", "university-coach", "weekly-report"]) })).query(({ ctx, input }) => buildCoachContext(ctx.user.id, input.module)),
+    addProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(160), skills: z.array(z.string().max(120)).max(12).default([]) })).mutation(({ ctx, input }) => addStudentProject(ctx.user.id, input.title, input.skills)),
+    addPortfolioProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addPortfolioProject(ctx.user.id, input.title)),
+    addCompetition: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addCompetition(ctx.user.id, input.title)),
+    recordLearning: protectedProcedure.input(z.object({ note: z.string().min(1).max(240) })).mutation(({ ctx, input }) => recordLearningHistory(ctx.user.id, input.note)),
   }),
   hana: router({
     chat: protectedProcedure.input(chatInput).mutation(async ({ ctx, input }) => {

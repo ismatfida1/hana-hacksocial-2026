@@ -293,6 +293,31 @@ export async function recordLearningHistory(studentId: number, note: string) {
   return updateStudentProfile(studentId, { learningHistory: history });
 }
 
+async function appendProfileItem(studentId: number, field: "projects" | "portfolioProjects" | "competitions", item: string) {
+  const existing = await getHanaStudentMemory(studentId);
+  const profile = normalizeStudentProfile(existing?.profile);
+  const clean = item.trim().slice(0, 200);
+  if (!clean) return buildStudentContextFromMemory(existing);
+  const next = [...profile[field], clean].filter((value, index, list) => list.indexOf(value) === index).slice(-40);
+  return updateStudentProfile(studentId, { [field]: next });
+}
+
+export function buildProjectRecord(title: string, skills: string[] = []) {
+  return { title: title.trim().slice(0, 160), skills: skills.map((skill) => skill.trim().slice(0, 120)).filter(Boolean).slice(0, 12), status: "planned" as const };
+}
+
+export async function addStudentProject(studentId: number, title: string, skills: string[] = []) {
+  return appendProfileItem(studentId, "projects", buildProjectRecord(title, skills).title);
+}
+
+export async function addPortfolioProject(studentId: number, title: string) {
+  return appendProfileItem(studentId, "portfolioProjects", title);
+}
+
+export async function addCompetition(studentId: number, title: string) {
+  return appendProfileItem(studentId, "competitions", title);
+}
+
 export function buildWeeklyReportFromContext(context: StudentContext) {
   const recent = context.learning.history.slice(-7);
   return {

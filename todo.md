@@ -465,3 +465,12 @@
 - [x] Add the protected `studentContext.coachContext` adapter for all eight coaching modules.
 - [x] Add tests for mastery evaluation and all eight shared coach modules.
 - [x] Validate with 14 passing tests, TypeScript check, and production build.
+
+## Layout and roadmap repair — 2026-08-24
+- [x] Prevent all text and bottom-navigation labels from overlapping at mobile and desktop widths.
+- [x] Keep Journey and Projects as distinct navigation destinations with non-overlapping labels.
+- [x] Render the roadmap as clear numbered steps with a simple project suggestion after each step.
+- [x] Add Ismat Fida signature branding in appropriate About/profile areas without cluttering learning screens.
+- [x] Keep an always-available custom career requirement field for deeply written user goals.
+- [x] Verify secure OpenAI/Gemini provider routing for career discovery and journey decisions.
+- [ ] Add tests and validate responsive UI, production build, website publication, and Android workflow.

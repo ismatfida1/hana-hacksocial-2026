@@ -390,4 +390,32 @@
 - [x] Use one best resource per roadmap step and no noisy channel directories.
 - [x] Verify the selected links and remove or flag broken, duplicate, redirect, or unnecessary links.
 - [x] Update Hana’s roadmap resource labels and wording to stay simple.
-- [ ] Validate and push the curated resource update.
+- [x] Validate and push the curated resource update.
+
+## Master product specification comparison — 2026-08-24
+- [ ] Read and extract the complete attached master specification.
+- [ ] Audit the current web/mobile UI, adaptive journey, memory, AI, opportunities, resources, and Android packaging against the specification.
+- [ ] Record an honest implemented/partial/missing gap assessment.
+- [ ] Report current functionality separately from future work.
+
+## Persistent student context system — 2026-08-24
+- [x] Inspect the existing schema, database helpers, routers, AI context, journey model, UI, and tests.
+- [x] Design one database-backed source of truth for profile, skills, progress, projects, opportunities, portfolio, readiness, preferences, and learning history.
+- [x] Implement reusable `getStudentContext`, `updateStudentProfile`, `getStudentSkills`, `getStudentProgress`, `getStudentProjects`, `getStudentCareerContext`, and `buildHanaContext` helpers.
+- [x] Wire Hana AI and future coach-facing procedures to the assembled student context.
+- [x] Add tests and apply/verify the migration without duplicating fake progress.
+- [x] Validate the unchanged UI behavior and document authentication requirements.
+
+## API-integrated context completion — 2026-08-24
+- [x] Verify all configured AI providers and server-side fallback behavior remain intact.
+- [x] Complete the database-backed student context integration for every Hana AI request.
+- [x] Persist recent Hana conversations without storing secrets or duplicating progress.
+- [x] Add tests for context-aware responses and prerequisite-aware recommendations.
+- [ ] Validate web and Android builds end to end before delivery.
+
+## Shared path-based roadmap contract — 2026-08-24
+- [x] Add shared `PathType`, `RoadmapInput`, and `RoadmapNode` contracts.
+- [x] Map career, skill-to-earn, create-own, and not-sure onboarding choices to the shared contract.
+- [x] Include university, degree, semester, and existing skills in roadmap generation input.
+- [x] Preserve locked, active, and complete status with prerequisite IDs.
+- [x] Add tests for path mapping, prerequisite order, and existing-skill handling.

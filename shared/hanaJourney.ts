@@ -1,6 +1,35 @@
 export type JourneyKind = "learn" | "practice" | "demonstrate" | "master" | "build";
 export type JourneyStatus = "locked" | "active" | "complete";
 
+export type PathType = "career" | "skill-to-earn" | "create-own" | "not-sure";
+
+export type RoadmapInput = {
+  pathType: PathType;
+  target?: string;
+  university?: string;
+  degree?: string;
+  semester?: string;
+  existingSkills?: string[];
+};
+
+export type RoadmapCategory = "foundation" | "core" | "project" | "portfolio" | "career";
+
+export type RoadmapNode = {
+  id: string;
+  title: string;
+  description: string;
+  category: RoadmapCategory;
+  status: JourneyStatus;
+  estimatedMinutes: number;
+  prerequisiteIds?: string[];
+  learningObjective: string;
+  finishLine: string[];
+  resourceUrl: string;
+  resourceTitle: string;
+  practiceTask: string;
+  masteryQuestion: string;
+};
+
 export type JourneyStep = {
   title: string;
   purpose: string;
@@ -97,8 +126,66 @@ const defaultJourney: JourneyStep[] = [
   step("Build something you can show", "Turn learning into evidence a person can understand.", "build", 5, "90 min", "Mastery check", ["Define the project", "Build the smallest useful version", "Write a README"], { label: "GitHub documentation", url: "https://docs.github.com/en/get-started" }, "Build a small project that uses the verified skill.", "Hana reviews the result and gives specific improvements.", "A starter portfolio project", "Career and opportunity readiness"),
 ];
 
+const minutesFromDuration = (duration: string) => Number(duration.match(/\d+/)?.[0] ?? 60);
+
+const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const journeyAreaAliases: Record<string, string> = {
+  "ai engineering": "AI / Machine Learning",
+  "ai/ml engineering": "AI / Machine Learning",
+  "machine learning": "AI / Machine Learning",
+  "software engineering": "Software Engineering",
+  "data science / data engineering": "Data Science",
+  "data engineering": "Data Science",
+  "cloud/devops": "Cloud / DevOps",
+  "cloud & devops": "Cloud / DevOps",
+  "mobile development": "Mobile Development",
+  "ui/ux design": "UI/UX",
+};
+
+export function resolveJourneyArea(area: string): string {
+  return journeyAreaAliases[area.trim().toLowerCase()] || area;
+}
+
+export function pathTypeFromLegacy(pathway: "career" | "custom" | "skill", area?: string): PathType {
+  if (pathway === "skill") return "skill-to-earn";
+  if (pathway === "custom") return "create-own";
+  if (!area || area === "not-sure") return "not-sure";
+  return "career";
+}
+
+export function buildRoadmap(input: RoadmapInput): RoadmapNode[] {
+  const area = resolveJourneyArea(input.target || (input.pathType === "skill-to-earn" ? "Programming" : "Software Engineering"));
+  const steps = buildJourney(area, "", "", "Full study day");
+  const completed = new Set((input.existingSkills ?? []).map((skill) => skill.toLowerCase().trim()));
+  let unlocked = true;
+  return steps.map((step, index) => {
+    const id = `${slugify(area)}-${index + 1}-${slugify(step.title)}`;
+    const prerequisiteIds = index === 0 ? [] : [`${slugify(area)}-${index}-${slugify(steps[index - 1].title)}`];
+    const explicitlyComplete = completed.has(step.title.toLowerCase()) || completed.has(id.toLowerCase());
+    const status: JourneyStatus = explicitlyComplete ? "complete" : unlocked ? "active" : "locked";
+    unlocked = status === "complete";
+    const category: RoadmapCategory = step.kind === "build" ? "project" : index === 0 ? "foundation" : step.kind === "demonstrate" ? "career" : "core";
+    return {
+      id,
+      title: step.title,
+      description: step.purpose,
+      category,
+      status,
+      estimatedMinutes: minutesFromDuration(step.duration),
+      prerequisiteIds,
+      learningObjective: step.purpose,
+      finishLine: step.finishLine,
+      resourceUrl: step.resource.url,
+      resourceTitle: step.resource.label,
+      practiceTask: step.practice,
+      masteryQuestion: step.masteryCheck,
+    };
+  });
+}
+
 export function buildJourney(area: string, level = "", goal = "", _time = ""): JourneyStep[] {
-  const base = journeys[area] || defaultJourney;
+  const base = journeys[resolveJourneyArea(area)] || defaultJourney;
   const start = level.toLowerCase().includes("built") || level.toLowerCase().includes("advanced") ? Math.min(1, base.length - 1) : 0;
   const steps = base.map((item, index) => ({ ...item, day: index + 1, status: index < start ? "complete" as const : index === start ? "active" as const : "locked" as const }));
   if (goal.toLowerCase().includes("university")) return steps.map((item) => ({ ...item, purpose: `${item.purpose} Hana will connect it to your current university work.` }));

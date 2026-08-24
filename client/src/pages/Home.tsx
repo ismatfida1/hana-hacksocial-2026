@@ -1,6 +1,6 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Compass, ExternalLink, FolderKanban, Home as HomeIcon, MessageCircle, Play, Trophy, WandSparkles } from "lucide-react";
-import { buildJourney, type JourneyStep } from "@shared/hanaJourney";
+import { buildJourney, pathTypeFromLegacy, type JourneyStep } from "@shared/hanaJourney";
 import { trpc } from "@/lib/trpc";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 
@@ -70,8 +70,10 @@ export default function Home() {
   const [aiMission, setAiMission] = useState<{ todaysStep?: string; whyToday?: string }>();
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [discoverStep, setDiscoverStep] = useState(0);
+  const auth = trpc.auth.me.useQuery();
   const chat = trpc.hana.chat.useMutation();
   const deviseJourney = trpc.hana.deviseJourney.useMutation();
+  const saveStudentProfile = trpc.studentContext.updateProfile.useMutation();
   const chosenArea = area || "Programming";
   const localSteps = useMemo(() => buildJourney(chosenArea, level || customLevel, goal || customGoal, time), [chosenArea, level, customLevel, goal, customGoal, time]);
   const mission = aiMission?.todaysStep || localSteps[0]?.title || "Choose one small next step";
@@ -82,10 +84,19 @@ export default function Home() {
     setPathway(nextPathway); setArea(nextArea); setLevel(nextLevel); setGoal(nextGoal); setTime(nextTime);
     setPlan({ pathway: nextPathway, area: nextArea, title, goal: nextGoal, level: nextLevel, time: nextTime, steps });
     setScreen("app");
-    deviseJourney.mutate({ studyArea: nextArea, level: nextLevel, goal: nextGoal, availableTime: nextTime, interests: [] }, { onSuccess: (result) => setAiMission(result) });
+    if (auth.data) {
+      saveStudentProfile.mutate({ currentJourney: title, currentActiveStep: steps[0]?.title, availableStudyTime: nextTime, goals: [nextGoal], ...(nextPathway === "career" ? { career: nextArea } : {}) });
+    }
+    if (auth.data) {
+      deviseJourney.mutate({ pathType: pathTypeFromLegacy(nextPathway, nextArea), studyArea: nextArea, target: nextArea, level: nextLevel, goal: nextGoal, availableTime: nextTime, interests: [] }, { onSuccess: (result) => setAiMission(result) });
+    }
   };
   const sendChat = (content: string) => {
     setChatMessages((messages) => [...messages, { role: "user", content }]);
+    if (!auth.data) {
+      setChatMessages((messages) => [...messages, { role: "assistant", content: "## Sign in to continue\n\nHana needs your account to remember your journey and give personal advice. Your learning context stays tied to your account." }]);
+      return;
+    }
     chat.mutate({ message: content, mode: "short", context: { currentQuest: mission, availableTime: time || "Full study day", approvedMemories: [plan?.area, plan?.goal, plan?.level].filter(Boolean) as string[] } }, { onSuccess: (response) => setChatMessages((messages) => [...messages, { role: "assistant", content: response.text }]) });
   };
 

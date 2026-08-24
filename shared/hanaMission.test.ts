@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getTodayMission } from "./hanaMission";
-import { buildJourney } from "./hanaJourney";
+import { buildJourney, buildRoadmap, pathTypeFromLegacy } from "./hanaJourney";
 import { memoryProfileSchema } from "../server/routers";
 
 describe("Hana prototype contracts", () => {
@@ -34,6 +34,19 @@ describe("Hana prototype contracts", () => {
     expect(security.map((item) => item.title).join(" ")).not.toContain("Python");
     expect(design[0].title).toBe("Find a real user problem");
     expect(design.at(-1)?.projectOutcome).toContain("portfolio");
+  });
+
+  it("maps the four onboarding path types and creates prerequisite-aware nodes", () => {
+    expect(pathTypeFromLegacy("career", "AI / Machine Learning")).toBe("career");
+    expect(pathTypeFromLegacy("skill", "Programming")).toBe("skill-to-earn");
+    expect(pathTypeFromLegacy("custom", "Programming")).toBe("create-own");
+    expect(pathTypeFromLegacy("career")).toBe("not-sure");
+
+    const roadmap = buildRoadmap({ pathType: "career", target: "AI / Machine Learning", university: "PUCIT/FCIT", degree: "BSCS", semester: "1", existingSkills: ["Programming foundations"] });
+    expect(roadmap[0]).toMatchObject({ title: "Programming foundations", status: "complete", estimatedMinutes: 90, category: "foundation" });
+    expect(roadmap[1]?.status).toBe("active");
+    expect(roadmap[1]?.prerequisiteIds).toHaveLength(1);
+    expect(roadmap.at(-1)?.status).toBe("locked");
   });
 
   it("accepts profile memory but bounds sensitive free text", () => {

@@ -4,7 +4,17 @@ import type { TrpcContext } from "./_core/context";
 
 function createContext(): TrpcContext {
   return {
-    user: null,
+    user: {
+      id: 7,
+      openId: "test-student",
+      name: "Test Student",
+      email: "student@example.com",
+      loginMethod: "test",
+      role: "user",
+      createdAt: new Date("2026-08-24T00:00:00.000Z"),
+      updatedAt: new Date("2026-08-24T00:00:00.000Z"),
+      lastSignedIn: new Date("2026-08-24T00:00:00.000Z"),
+    },
     req: { protocol: "https", headers: {} } as TrpcContext["req"],
     res: {} as TrpcContext["res"],
   };

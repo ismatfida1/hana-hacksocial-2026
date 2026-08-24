@@ -33,10 +33,31 @@ export const hanaStudentMemory = mysqlTable("hana_student_memory", {
     degree?: string;
     department?: string;
     semester?: string;
+    subjects?: string[];
+    upcomingSubjects?: string[];
+    completedSubjects?: string[];
     career?: string;
+    careerGoal?: string;
+    currentJourney?: string;
+    currentActiveStep?: string;
+    activeStep?: string;
+    demonstratedSkills?: string[];
+    completedSkills?: string[];
+    weakAreas?: string[];
+    weaknesses?: string[];
+    completedLearningSteps?: string[];
     skills?: string[];
     progress?: string[];
     projects?: string[];
+    projectSkills?: string[];
+    githubProjects?: string[];
+    portfolioProjects?: string[];
+    competitions?: string[];
+    careerReadiness?: string;
+    preferredLearningTime?: string;
+    availableStudyTime?: string;
+    studyTime?: string;
+    learningHistory?: string[];
     goals?: string[];
   }>().notNull(),
   conversations: json("conversations").$type<Array<{ role: "user" | "hana"; text: string; createdAt: string }>>().notNull(),

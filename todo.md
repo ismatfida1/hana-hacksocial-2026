@@ -504,3 +504,5 @@
 - [x] Restore the Hana logo and robot artwork in the published greeting screen after the latest security-header update.
 
 - [x] Add a lightweight per-instance API rate limit and validate it with the full test, typecheck, and production build suite.
+
+- [x] Add a concise in-app “How Hana works” guide with captions for choosing, planning, building, and proving skills.

@@ -119,7 +119,7 @@ export default function Home() {
       saveStudentProfile.mutate({ university: university.trim(), degree: degree.trim(), semester: semester.trim(), subjects: subjects.split(",").map((subject) => subject.trim()).filter(Boolean), currentJourney: title, currentActiveStep: steps[0]?.title, availableStudyTime: nextTime, goals: [nextGoal], ...(nextPathway === "career" ? { career: nextArea } : {}) });
     }
     if (auth.data) {
-      deviseJourney.mutate({ pathType: pathTypeFromLegacy(nextPathway, nextArea), studyArea: nextArea, target: nextArea, level: nextLevel, goal: nextGoal, availableTime: nextTime, interests: [] }, { onSuccess: (result) => setAiMission(result) });
+      deviseJourney.mutate({ pathType: pathTypeFromLegacy(nextPathway, nextArea), studyArea: nextArea, target: nextArea, level: nextLevel, goal: nextGoal, availableTime: nextTime, interests: [], university: university.trim() || undefined, degree: degree.trim() || undefined, semester: semester.trim() || undefined, existingSkills: [...(studentContext.data?.learning.completedSkills || []), ...(studentContext.data?.learning.demonstratedSkills || [])].slice(0, 80) }, { onSuccess: (result) => setAiMission(result) });
     }
   };
   const sendChat = (content: string) => {

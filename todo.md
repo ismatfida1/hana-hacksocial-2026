@@ -481,3 +481,5 @@
 - [x] Ensure the selected career is persisted and used to build the first roadmap step.
 - [x] Make Cybersecurity start with networking, Linux, and security foundations rather than Python or generic programming.
 - [x] Validate all career roadmap defaults and the public demo after the fix.
+
+- [x] Pass university, degree, semester, and saved demonstrated skills into the AI journey designer so career roadmaps are personalized rather than generic.

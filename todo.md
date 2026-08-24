@@ -508,3 +508,25 @@
 - [x] Add a concise in-app “How Hana works” guide with captions for choosing, planning, building, and proving skills.
 
 - [x] Separate Big Final Projects from small roadmap builds in the Projects destination and route planning through Ask Hana.
+
+## Reported blockers — 2026-08-24
+- [ ] Make Light, Normal, and Deep energy controls visibly change Hana’s current mission and persist the selected mode.
+- [ ] Make password-authorized Demo Mode complete its flow without requiring signed-in-only student data.
+- [ ] Keep mobile bottom-navigation labels on one readable line or use deliberate short labels at phone width.
+- [ ] Add regression coverage and verify the energy and demo flows on the published preview.
+
+## Mobile profile and career navigation blockers — 2026-08-24
+- [ ] Show a clear saved confirmation after profile details are persisted to Hana’s cloud memory.
+- [ ] Use the provided clean Ismat Fida signature asset rather than the incorrect faded treatment.
+- [ ] Add a clear Back action and a Switch career action from the saved Journey/Profile experience.
+- [ ] Validate these fixes on the mobile preview and publish the correction.
+
+## Authentication handoff blocker — 2026-08-24
+- [ ] After successful sign-in, open the career options page reliably instead of returning to the greeting screen.
+- [ ] Preserve the returning student’s saved profile and roadmap while showing career options when no path is selected.
+- [ ] Validate the sign-in handoff on mobile and publish the repair.
+
+## Optional university details — 2026-08-24
+- [x] Let students skip university, degree, semester, and study-resource location details while still creating a personalized roadmap.
+- [x] Add clear optional wording and a Skip for now action to the profile step.
+- [x] Validate the skip path and publish the correction.

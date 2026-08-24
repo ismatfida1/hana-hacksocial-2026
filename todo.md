@@ -246,3 +246,190 @@
 - [x] Keep Hana as an expressive, encouraging tour guide with occasional progress and congratulations messages tied to actions.
 - [x] Remove or hide extra surfaces that distract from the five-step flow.
 - [x] Do not add unnecessary external APIs; use the existing secure AI layer unless a new integration is clearly required.
+
+## Separate visual prototype — 2026-08-24
+- [ ] Create a separate Hana prototype copy so the current published release is not overwritten.
+- [ ] Keep the supplied Hana robot as visual inspiration while creating original, improved artwork and expressive states.
+- [ ] Make Home mobile-first and minimal: Hana greeting, Today’s Mission, duration, reason, and one Start action.
+- [ ] Refine Hana’s personality to calm, focused, warm, professional, and occasionally playful without childish or emotional-support language.
+- [ ] Add secure cloud/user-account memory for university, semester, career, skills, progress, projects, and approved conversation context.
+- [ ] Preserve complexity behind the scenes and avoid onboarding instructions, feature walls, and long explanatory paragraphs.
+- [ ] Validate the separate prototype on mobile and desktop before delivery.
+- [ ] Add Vitest coverage for the memory contract and Today’s Mission selection behavior.
+
+## Separate visual prototype — 2026-08-24
+- [x] Create a separate Hana prototype copy so the current published release is not overwritten.
+- [x] Keep the supplied Hana robot as visual inspiration while creating original, improved artwork and expressive states.
+- [x] Make Home mobile-first and minimal: Hana greeting, Today’s Mission, duration, reason, and one Start action.
+- [x] Refine Hana’s personality to calm, focused, warm, professional, and occasionally playful without childish or emotional-support language.
+- [x] Add secure cloud/user-account memory for university, semester, career, skills, progress, projects, and approved conversation context.
+- [x] Preserve complexity behind the scenes and avoid onboarding instructions, feature walls, and long explanatory paragraphs.
+- [x] Validate the separate prototype on mobile and desktop before delivery.
+- [x] Add Vitest coverage for the memory contract and Today’s Mission selection behavior.
+- [x] Keep the existing secure server-side AI layer; no new external API was needed for this prototype.
+- [x] Host the separate prototype on a temporary public preview URL and verify the Home screen loads successfully.
+- [ ] Publish this separate prototype at a stable public URL without overwriting the existing Hana release.
+- [x] Correct the separate prototype page order so the first screen is only Hana’s greeting, the next moment focuses on Today’s Mission, and the third screen asks the student to choose a career.
+- [x] Remove the incorrect one-screen Home implementation from the separate prototype.
+- [x] Revalidate the corrected page sequence on mobile before sharing another preview.
+- [x] Redesign only the Home screen around Hana as the visual focus and Today’s Mission as the single primary task.
+- [x] Remove secondary cards, feature explanations, dashboard content, and extra Home actions that compete with the mission.
+- [x] Add the requested bottom navigation labels: Home, Journey, Projects, Opportunities, Ask Hana.
+- [x] Apply a premium cream, muted rose, lavender, sage, and soft-blue visual language with original expressive Hana treatment.
+- [x] Validate only the Home screen on mobile and desktop before continuing to other screens.
+
+## Complete product specification follow-through — 2026-08-24
+- [x] Preserve Screen 1 as Hana greeting only with one ready action and no feature content.
+- [x] Preserve Screen 2 as career choice only, including Other and Help me find my path, without mission or dashboard content.
+- [ ] Add Screen 3 university profile for university, degree, and semester.
+- [ ] Add safe curriculum retrieval with an official-source preference and manual Add / Edit Subjects fallback when verification fails.
+- [ ] Keep post-onboarding Home focused on one automatically selected Today’s Step card and the exact five-item bottom navigation.
+- [ ] Use the label Your Journey instead of Roadmap and keep learning complexity behind the current step.
+- [ ] Keep Projects, Opportunities, and Ask Hana as focused destinations rather than Home cards.
+- [ ] Preserve original expressive Hana artwork and the cream, rose, lavender, sage, blue, ink design tokens.
+- [ ] Validate the ordered flow and prevent invented university subjects or unsupported curriculum claims.
+
+## Adaptive journey architecture — 2026-08-24
+- [x] Replace the fixed Python mission with a study-area-first onboarding question.
+- [x] Add study areas for Programming, AI / Machine Learning, Web Development, App Development, Cybersecurity, Data Science, Game Development, Computer Science Fundamentals, Cloud / DevOps, Robotics, UI/UX, and Something else / I don’t know yet.
+- [x] Make Something else open a text field asking what the student would like to learn.
+- [x] Keep Help me find my path as a guided discovery branch instead of forcing a career selection.
+- [x] Collect current level, goal, available study time, interests, and preferred activities through short steps.
+- [x] Devise different prerequisite sequences and Today’s Step content for each selected study area.
+- [x] Adapt the journey based on progress, failed checks, current projects, and changing goals.
+- [x] Add tests proving Cybersecurity and UI/UX do not start with the Python mission.
+
+## Connected AI providers — 2026-08-24
+- [x] Enable the existing OpenAI and Google Gemini connectors only after the user’s review confirmation.
+- [x] Route Hana chat through a provider-aware server-side AI layer with a reliable fallback.
+- [x] Use structured AI output for adaptive journey generation, including prerequisites, first step, practice, and project direction.
+- [x] Keep provider credentials and approved student memory on the server; never expose them in the browser.
+- [x] Add tests for provider fallback, schema validation, and privacy-safe context shaping.
+
+## Three starting pathways — 2026-08-24
+- [ ] Replace the direct study-area prompt with three starting choices: Build My Career, Create My Own Journey, and Learn a Skill & Earn.
+- [ ] Keep Build My Career focused on selecting a career and generating a personalized career Journey.
+- [ ] Add Create My Own Journey questions for achievement, existing knowledge, built work, study time, and target level.
+- [ ] Let Create My Own Journey verify known skills and skip demonstrated prerequisites instead of restarting from zero.
+- [ ] Add Learn a Skill & Earn with a small set of practical-skill recommendations and no income or employment guarantees.
+- [ ] Convert Career, Custom Journey, and Skill & Earn into one unified Your Journey system.
+- [ ] Track active step, verified or skipped skills, mastery checks, projects, demonstrated skills, goals, portfolio work, opportunities, and direction in the unified journey model.
+- [ ] Allow Hana to update the Journey when the student changes direction instead of forcing a restart.
+
+## GitHub progress source — 2026-08-24
+- [ ] Verify that ismatfida1/baymax-care-companion is accessible and identify its default branch.
+- [ ] Confirm whether the current session has permission to write to the repository.
+- [ ] Prepare a non-destructive sync of the separate Hana prototype into the repository.
+- [ ] Save the prototype progress to a clearly named branch or commit if write access is available.
+- [ ] Validate the repository state after syncing and report any access blocker without overwriting unrelated work.
+
+## Browser and GitHub connection — 2026-08-24
+- [ ] Inspect whether My Browser is available and whether it is currently enabled.
+- [ ] Enable My Browser and GitHub through the supported connector flow.
+- [ ] Connect the user’s browser session when GitHub login or repository access requires it.
+- [ ] Verify access to ismatfida1/baymax-care-companion before syncing any files.
+
+## Supabase connection — 2026-08-24
+- [ ] Inspect whether a Supabase connector already exists and whether it is enabled.
+- [ ] Enable or request Supabase access without exposing project keys in source code.
+- [ ] Verify Supabase can support Hana’s account memory and unified Journey data safely.
+
+## End-to-end Hana app build — 2026-08-24
+- [ ] Build the approved greeting screen and three starting pathways without crowding the first view.
+- [ ] Build adaptive onboarding for Build My Career, Create My Own Journey, and Learn a Skill & Earn.
+- [ ] Build one unified Your Journey engine with Learn, Practice, Demonstrate, Master, and Unlock next step states.
+- [ ] Store active journey progress, verified skills, mastery checks, projects, goals, portfolio work, opportunities, and direction in account memory.
+- [ ] Build focused Journey, Projects, Opportunities, and Ask Hana destinations with the exact bottom navigation.
+- [ ] Keep AI provider calls server-side and use connected OpenAI, Gemini, and existing fallback services safely.
+- [ ] Use Supabase-backed capabilities only where they improve account memory or journey persistence.
+- [ ] Validate the full app with tests, typecheck, production build, and mobile/desktop browser checks.
+
+## Expo mobile app conversion — 2026-08-24
+- [ ] Create a separate Expo SDK 54 mobile project without overwriting the web prototype or published app.
+- [ ] Recreate greeting-first onboarding and the three starting pathways in native-compatible React Native screens.
+- [ ] Add adaptive subject, career, custom, and skill journey flows to the mobile app.
+- [ ] Add mobile Journey, Projects, Opportunities, Ask Hana, and account-memory surfaces.
+- [ ] Keep AI and Supabase credentials server-side and reuse the connected provider routing.
+- [ ] Add native-safe asset handling, navigation, press feedback, and safe-area layout.
+- [ ] Validate mobile web preview, TypeScript, tests, and production-compatible build output.
+
+## GitHub Actions Android build — 2026-08-24
+- [x] Inspect the existing Capacitor Android project and Gradle/SDK requirements.
+- [x] Add `.github/workflows/android-build.yml` for Ubuntu Java, Android SDK, Node, web build, Capacitor sync, debug APK, and artifact upload.
+- [x] Keep the existing Capacitor architecture and Hana integrations unchanged.
+- [x] Write `ANDROID_BUILD.md` with GitHub setup, Actions run, phone APK download, and signed release instructions.
+- [x] Validate the workflow locally as far as the sandbox allows and document any missing local SDK limitation.
+- [ ] Verify the exact repository and folder to upload or push.
+
+## Push and run Android Actions — 2026-08-24
+- [x] Verify the target Hana Android GitHub repository and current remote state.
+- [x] Push the contents of `/home/ubuntu/hana-android-app` to the repository root without nested directory wrapping.
+- [x] Verify `.github/workflows/android-build.yml` is at the repository root.
+- [x] Run the `Android debug APK` workflow.
+- [x] Fix any GitHub Actions build failures without changing Hana features or integrations, then rerun the workflow.
+- [x] Report the final workflow and APK artifact status.
+
+## Hana Android UI and feature repair — 2026-08-24
+- [x] Reproduce and diagnose missing Hana artwork and incorrect color/text rendering in the pushed Android project.
+- [x] Restore readable typography and contrast across the app.
+- [x] Restore working roadmap navigation and career-specific roadmap content.
+- [x] Restore online opportunities/competition content and working external links.
+- [x] Validate the repaired UI and feature flows before rebuilding the APK.
+- [ ] Push the repair and rerun the Android debug APK workflow.
+
+## Full-day detailed Hana journey — 2026-08-24
+- [x] Replace one-hour-style journey framing with a timeline that starts today and supports a full study day.
+- [x] Make each journey step detailed with purpose, prerequisites, lesson outline, practice, demonstration, mastery check, project outcome, and next unlock.
+- [ ] Add unified University Coach and Career Coach context without making the first screen dense.
+- [x] Preserve adaptive paths for career, custom journey, and skill-to-earn pathways.
+- [ ] Preserve secure memory fields for university, degree, semester, subjects, skills, projects, progress, opportunities, competitions, struggles, and preferences.
+- [x] Validate all attached requirements against the implementation before delivery.
+
+## Curated roadmap resources — 2026-08-24
+- [x] Select only necessary resources from the user-provided links and attachments.
+- [x] Use one best resource per roadmap step and no noisy channel directories.
+- [x] Verify the selected links and remove or flag broken, duplicate, redirect, or unnecessary links.
+- [x] Update Hana’s roadmap resource labels and wording to stay simple.
+- [x] Validate and push the curated resource update.
+
+## Master product specification comparison — 2026-08-24
+- [ ] Read and extract the complete attached master specification.
+- [ ] Audit the current web/mobile UI, adaptive journey, memory, AI, opportunities, resources, and Android packaging against the specification.
+- [ ] Record an honest implemented/partial/missing gap assessment.
+- [ ] Report current functionality separately from future work.
+
+## Persistent student context system — 2026-08-24
+- [x] Inspect the existing schema, database helpers, routers, AI context, journey model, UI, and tests.
+- [x] Design one database-backed source of truth for profile, skills, progress, projects, opportunities, portfolio, readiness, preferences, and learning history.
+- [x] Implement reusable `getStudentContext`, `updateStudentProfile`, `getStudentSkills`, `getStudentProgress`, `getStudentProjects`, `getStudentCareerContext`, and `buildHanaContext` helpers.
+- [x] Wire Hana AI and future coach-facing procedures to the assembled student context.
+- [x] Add tests and apply/verify the migration without duplicating fake progress.
+- [x] Validate the unchanged UI behavior and document authentication requirements.
+
+## API-integrated context completion — 2026-08-24
+- [x] Verify all configured AI providers and server-side fallback behavior remain intact.
+- [x] Complete the database-backed student context integration for every Hana AI request.
+- [x] Persist recent Hana conversations without storing secrets or duplicating progress.
+- [x] Add tests for context-aware responses and prerequisite-aware recommendations.
+- [x] Validate web and Android builds end to end before delivery.
+
+## Shared path-based roadmap contract — 2026-08-24
+- [x] Add shared `PathType`, `RoadmapInput`, and `RoadmapNode` contracts.
+- [x] Map career, skill-to-earn, create-own, and not-sure onboarding choices to the shared contract.
+- [x] Include university, degree, semester, and existing skills in roadmap generation input.
+- [x] Preserve locked, active, and complete status with prerequisite IDs.
+- [x] Add tests for path mapping, prerequisite order, and existing-skill handling.
+
+## Final release audit and links — 2026-08-24
+- [x] Audit the latest repository against the master requirements and current gap report.
+- [x] Run final tests, typecheck, production build, and inspect the latest commit.
+- [x] Verify the Android Actions run and APK artifact.
+- [x] Verify the separate public website URL and publication status.
+- [x] Report exact completion status and concise installation/publishing steps.
+
+## Simplify app and restore study links — 2026-08-24
+- [x] Reproduce the reported broken app flow and inspect runtime logs.
+- [x] Simplify Hana to one clear next action at a time.
+- [x] Make the current learning step show a visible study link and clear Start studying action.
+- [x] Repair roadmap navigation and guest/authenticated behavior.
+- [x] Validate and publish the repaired separate website.

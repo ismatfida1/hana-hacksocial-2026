@@ -156,7 +156,7 @@ export default function Home() {
   }, [profileHydrated, studentContext.data]);
 
   useEffect(() => {
-    if (screen !== "signin" || auth.isLoading || !auth.data || studentContext.isLoading) return;
+    if (!(screen === "signin" || screen === "greeting" || screen === "start") || auth.isLoading || !auth.data || studentContext.isLoading) return;
     const savedCareer = studentContext.data?.career.goal;
     if (savedCareer) {
       const savedSteps = buildJourney(savedCareer, "I know the basics", "Continue my saved path", studentContext.data?.preferences.availableStudyTime || "Flexible pace");

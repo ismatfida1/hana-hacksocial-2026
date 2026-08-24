@@ -587,3 +587,6 @@
 
 - [x] Show a recoverable normal-sign-in error state when OAuth returns `auth=error` and provide a retry action.
 - [x] Add immediate loading feedback for sign-in and defer optional mission/report queries until their screens are needed.
+
+- [x] Route a successfully hydrated normal account from the returned homepage into Career options or the saved journey, and validate the client build.
+- [x] Add immediate sign-in feedback and defer optional protected queries to reduce first-screen loading work.

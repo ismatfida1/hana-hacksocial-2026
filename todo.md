@@ -486,3 +486,15 @@
 
 - [x] Add a dedicated Mathematics for Computing roadmap with foundations before coding-heavy work.
 - [x] Add a compact University Coach entry point that reuses the student’s stored degree, semester, and subjects through Hana’s existing context-aware chat.
+
+- [x] Show a calm skeleton loading animation while Hana generates a personalized career roadmap.
+
+- [x] Move Ask Hana out of bottom navigation and expose it as a prominent top-level chat action.
+- [x] Keep Home, Journey, Projects, Opportunities, and Profile as the five bottom-navigation items.
+
+## Final web version — confirmed scope
+- [ ] Publish the final confirmed Hana web experience over the existing deployment.
+- [x] Require sign-in for the main app and preserve secure cloud memory across devices.
+- [x] Add password-protected authorized demo access from the sign-in screen.
+- [x] Keep five-item navigation: Home, Journey, Projects, Opportunities, Profile; expose Ask Hana at the top level.
+- [ ] Add free labeled resources, adaptive roadmap approval, small roadmap projects, big final projects, progress, creator information, and security protections.

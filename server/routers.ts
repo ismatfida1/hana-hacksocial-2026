@@ -7,6 +7,7 @@ import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
+import { verifyDemoPassword } from "./demoAccess";
 
 const hanaSystemPrompt = `You are Hana, a cute cream robot who helps people learn. You are a smart, patient friend — not a professor or a business tool.
 
@@ -43,6 +44,9 @@ const chatInput = z.object({
 
 export const appRouter = router({
   system: systemRouter,
+  demo: router({
+    verify: publicProcedure.input(z.object({ password: z.string().min(1).max(200) })).mutation(({ input }) => ({ authorized: verifyDemoPassword(input.password) })),
+  }),
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -59,6 +63,11 @@ export const appRouter = router({
     save: protectedProcedure.input(z.object({ profile: memoryProfileSchema, conversations: z.array(memoryConversation).max(100), memoryEnabled: z.boolean() })).mutation(async ({ ctx, input }) => {
       await upsertHanaStudentMemory({ userId: ctx.user.id, profile: input.profile, conversations: input.conversations, memoryEnabled: input.memoryEnabled ? 1 : 0 });
       return { success: true } as const;
+    }),
+    setEnabled: protectedProcedure.input(z.object({ enabled: z.boolean() })).mutation(async ({ ctx, input }) => {
+      const current = await getHanaStudentMemory(ctx.user.id);
+      await upsertHanaStudentMemory({ userId: ctx.user.id, profile: current?.profile || {}, conversations: current?.conversations || [], memoryEnabled: input.enabled ? 1 : 0 });
+      return { success: true, enabled: input.enabled } as const;
     }),
   }),
   studentContext: router({

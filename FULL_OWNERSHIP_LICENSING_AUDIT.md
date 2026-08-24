@@ -171,6 +171,9 @@ Do not ship any literal secret, signing key, service-role token, or private cred
 
 - `DEPENDENCY_LICENSE_AUDIT.md` — full package inventory and flagged dependency categories.
 - `dependency-license-inventory.json` — machine-readable installed package metadata.
+- `FLAGGED_PACKAGE_LICENSE_EVIDENCE.md` — exact local license-file evidence and source metadata for the 24 flagged package records.
+- `THIRD_PARTY_NOTICES.md` — generated attribution index for the current installed package set.
+- `ASSET_PROVENANCE_REGISTER.md` — asset-level ownership and permission evidence checklist.
 - `commercial-audit-sources.md` — source notes gathered during the audit.
 - `integration-audit-notes.md` — provider and integration observations.
 - `ANDROID_BUILD.md` — Android workflow instructions and current build constraints.

@@ -419,3 +419,10 @@
 - [x] Include university, degree, semester, and existing skills in roadmap generation input.
 - [x] Preserve locked, active, and complete status with prerequisite IDs.
 - [x] Add tests for path mapping, prerequisite order, and existing-skill handling.
+
+## Final release audit and links — 2026-08-24
+- [x] Audit the latest repository against the master requirements and current gap report.
+- [x] Run final tests, typecheck, production build, and inspect the latest commit.
+- [x] Verify the Android Actions run and APK artifact.
+- [x] Verify the separate public website URL and publication status.
+- [x] Report exact completion status and concise installation/publishing steps.

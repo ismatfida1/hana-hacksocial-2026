@@ -58,6 +58,7 @@ The workflow performs these steps on Ubuntu:
 | Node | Installs Node.js 22. npm is available with Node, and pnpm is installed at the project’s pinned version. |
 | Android SDK | Installs platform-tools, Android platform 36, and build-tools 36.0.0. |
 | Web build | Installs the lockfile dependencies, runs the TypeScript check, and builds the production web assets. |
+| Security scan | Runs `pnpm security:scan` and fails if release paths contain literal secret patterns, environment/signing files, or source maps. |
 | Capacitor | Runs `pnpm exec cap sync android` to copy the web build into Android. |
 | Android | Runs `./gradlew assembleDebug`. |
 | Artifact | Uploads `android/app/build/outputs/apk/debug/app-debug.apk` as an Actions artifact. |

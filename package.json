@@ -10,6 +10,7 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
+    "security:scan": "node scripts/release-security-scan.mjs",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "cap:sync": "pnpm build && pnpm exec cap sync android",
     "cap:open": "pnpm exec cap open android",

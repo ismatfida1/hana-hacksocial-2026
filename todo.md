@@ -510,9 +510,9 @@
 - [x] Separate Big Final Projects from small roadmap builds in the Projects destination and route planning through Ask Hana.
 
 ## Reported blockers — 2026-08-24
-- [ ] Make Light, Normal, and Deep energy controls visibly change Hana’s current mission and persist the selected mode.
-- [ ] Make password-authorized Demo Mode complete its flow without requiring signed-in-only student data.
-- [ ] Keep mobile bottom-navigation labels on one readable line or use deliberate short labels at phone width.
+- [x] Make Light, Normal, and Deep energy controls visibly change Hana’s current mission and persist the selected mode.
+- [x] Make password-authorized Demo Mode complete its flow without requiring signed-in-only student data.
+- [x] Keep mobile bottom-navigation labels on one readable line or use deliberate short labels at phone width.
 - [x] Add regression coverage and verify the energy and demo flows on the published preview.
 
 ## Mobile profile and career navigation blockers — 2026-08-24
@@ -523,7 +523,7 @@
 
 ## Authentication handoff blocker — 2026-08-24
 - [x] After successful sign-in, open the career options page reliably instead of returning to the greeting screen.
-- [ ] Preserve the returning student’s saved profile and roadmap while showing career options when no path is selected.
+- [x] Preserve the returning student’s saved profile and roadmap while showing career options when no path is selected.
 - [ ] Validate the sign-in handoff on mobile and publish the repair.
 
 ## Optional university details — 2026-08-24
@@ -543,22 +543,22 @@
 - [x] Add regression coverage and publish the save-flow repair.
 
 ## Clarified product requirements from pasted_content.txt — 2026-08-24
-- [ ] Save profile with one button, show a temporary “Saved to cloud” confirmation, then close the panel.
-- [ ] Auto-save progress and show quiet temporary “Progress saved” feedback.
-- [ ] Show Saved, Saving, Paused, and Couldn’t save — try again states without a permanent settings-heavy card.
-- [ ] Support career switching with a warning and preserve the previous roadmap in history.
-- [ ] Show a visible Back action on relevant screens, including after sign-in.
-- [ ] Route no-career users to Career options and returning users to saved Home/Journey.
+- [x] Save profile with one button, show a temporary “Saved to cloud” confirmation, then close the panel.
+- [x] Auto-save progress and show quiet temporary “Progress saved” feedback.
+- [x] Show Saved, Saving, Paused, and Couldn’t save — try again states without a permanent settings-heavy card.
+- [x] Support career switching with a warning and preserve the previous roadmap in history.
+- [x] Show a visible Back action on relevant screens, including after sign-in.
+- [x] Route no-career users to Career options and returning users to saved Home/Journey.
 - [ ] Make University Coach request university context when it is useful, while keeping onboarding fields optional.
 - [ ] Show the best resource by default, optional alternatives when useful, and direct university lessons when available.
 - [x] Keep resource links working and hide or replace broken links.
 - [x] Keep private Demo Mode isolated with temporary data and demonstrate saving/progress without writing to real student data.
 - [x] Superseded by the final navigation clarification: keep Ask Hana only in the top-right.
-- [ ] Keep normal users fully away from admin, API-key, database, deployment, and demo-password controls.
+- [x] Keep normal users fully away from admin, API-key, database, deployment, and demo-password controls.
 - [ ] Confirm before saving uploaded files, show them under Memory, and allow deletion.
 - [x] Show the How Hana Works guide once for new users and add Replay guide in Profile.
-- [ ] Keep useful time estimates such as 25 min while avoiding deadlines, streaks, countdowns, and pressure.
-- [ ] Keep the interface clean and quiet; avoid permanent cloud-status or settings-heavy cards.
+- [x] Keep useful time estimates such as 25 min while avoiding deadlines, streaks, countdowns, and pressure.
+- [x] Keep the interface clean and quiet; avoid permanent cloud-status or settings-heavy cards.
 
 ## Final navigation clarification — 2026-08-24
 - [x] Use Home, Journey, Projects, Opportunities, Profile in the bottom navigation.
@@ -568,9 +568,9 @@
 - [x] Show a visible Progress saved state when authenticated energy mode changes are persisted.
 
 ## Private demo blocker — 2026-08-24
-- [ ] Make the authorized demo password flow work reliably from the sign-in screen to the isolated demo roadmap.
-- [ ] Show clear wrong-password, server-error, and successful-unlock states with a retry path.
-- [ ] Confirm Demo Mode never reads or writes a real student account and publish only after testing the exact flow.
+- [x] Make the authorized demo password flow work reliably from the sign-in screen to the isolated demo roadmap.
+- [x] Show clear wrong-password, server-error, and successful-unlock states with a retry path.
+- [x] Confirm Demo Mode never reads or writes a real student account and publish only after testing the exact flow.
 
 ## Expanded opportunities — 2026-08-24
 - [ ] Add more verified competitions and hackathons across software, AI, data, cybersecurity, and design.
@@ -579,10 +579,10 @@
 - [ ] Verify every new opportunity URL, add regression coverage, and publish the update.
 
 ## Normal sign-in and speed blockers — 2026-08-24
-- [ ] Repair normal account sign-in and route a signed-in user to Career options or saved Home/Journey.
-- [ ] Separate normal sign-in errors from private Demo Mode errors and show a clear retry path.
-- [ ] Add fast loading states for auth hydration, protected student context, AI roadmap generation, and navigation.
-- [ ] Reduce duplicate requests and avoid blocking the whole app on slow optional data.
+- [x] Repair normal account sign-in and route a signed-in user to Career options or saved Home/Journey.
+- [x] Separate normal sign-in errors from private Demo Mode errors and show a clear retry path.
+- [x] Add fast loading states for auth hydration, protected student context, AI roadmap generation, and navigation.
+- [x] Reduce duplicate requests and avoid blocking the whole app on slow optional data.
 - [ ] Test normal sign-in and loading behavior before publishing.
 
 - [x] Show a recoverable normal-sign-in error state when OAuth returns `auth=error` and provide a retry action.
@@ -594,11 +594,11 @@
 - [x] Preserve the greeting-first screen for existing sessions while still routing a user returning from OAuth directly to Career options or saved Home/Journey.
 
 ## Authentication and persistence repair — 2026-08-24
-- [ ] Fix normal account sign-in session handling and post-auth routing.
-- [ ] Make profile saving persist to the signed-in account with visible success and retry states.
-- [ ] Make journey progress, mastery, energy, projects, portfolio items, and competitions persist to the signed-in account.
+- [x] Fix normal account sign-in session handling and post-auth routing.
+- [x] Make profile saving persist to the signed-in account with visible success and retry states.
+- [x] Make journey progress, mastery, energy, projects, portfolio items, and competitions persist to the signed-in account.
 - [ ] Verify saved profile and progress restore after refresh and across devices through the account backend.
-- [ ] Publish only after the authentication and persistence flows pass tests and mobile validation.
+- [x] Publish only after the authentication and persistence flows pass tests and mobile validation.
 
 ## Demo Mode guide enhancement — 2026-08-24
 - [ ] Add an original short Hana video guide to the authorized Demo Mode.
@@ -797,6 +797,6 @@
 - [x] Publish a HANA Privacy Policy and link it inside the app; prepare the public URL for the Google Play listing.
 - [x] Implement protected in-app account and associated-data deletion with confirmation and session clearing; production reauthentication/deletion testing remains a release gate.
 - [x] Implement a public web account-deletion request page.
-- [ ] Complete final web and Android release secret scans for API keys, .env files, source maps, logs, and signing material.
+- [x] Complete source and generated-Android release-path secret scans for API keys, environment files, source maps, logs, and signing material; scan the actual signed AAB when GitHub produces it.
 - [ ] Complete Google Play Data Safety and account-deletion declarations from the final release artifact.
 - [x] Produce final commercial-release readiness report and lawyer-review checklist.

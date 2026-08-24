@@ -556,7 +556,7 @@
 - [x] Superseded by the final navigation clarification: keep Ask Hana only in the top-right.
 - [ ] Keep normal users fully away from admin, API-key, database, deployment, and demo-password controls.
 - [ ] Confirm before saving uploaded files, show them under Memory, and allow deletion.
-- [ ] Show the How Hana Works guide once for new users and add Replay guide in Profile.
+- [x] Show the How Hana Works guide once for new users and add Replay guide in Profile.
 - [ ] Keep useful time estimates such as 25 min while avoiding deadlines, streaks, countdowns, and pressure.
 - [ ] Keep the interface clean and quiet; avoid permanent cloud-status or settings-heavy cards.
 

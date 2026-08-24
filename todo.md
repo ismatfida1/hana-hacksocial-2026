@@ -493,7 +493,7 @@
 - [x] Keep Home, Journey, Projects, Opportunities, and Profile as the five bottom-navigation items.
 
 ## Final web version — confirmed scope
-- [ ] Publish the final confirmed Hana web experience over the existing deployment.
+- [x] Publish the final confirmed Hana web experience over the existing deployment.
 - [x] Require sign-in for the main app and preserve secure cloud memory across devices.
 - [x] Add password-protected authorized demo access from the sign-in screen.
 - [x] Keep five-item navigation: Home, Journey, Projects, Opportunities, Profile; expose Ask Hana at the top level.
@@ -506,3 +506,5 @@
 - [x] Add a lightweight per-instance API rate limit and validate it with the full test, typecheck, and production build suite.
 
 - [x] Add a concise in-app “How Hana works” guide with captions for choosing, planning, building, and proving skills.
+
+- [x] Separate Big Final Projects from small roadmap builds in the Projects destination and route planning through Ask Hana.

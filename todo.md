@@ -375,7 +375,7 @@
 - [x] Restore working roadmap navigation and career-specific roadmap content.
 - [x] Restore online opportunities/competition content and working external links.
 - [x] Validate the repaired UI and feature flows before rebuilding the APK.
-- [ ] Push the repair and rerun the Android debug APK workflow.
+- [x] Push the repair and rerun the Android debug APK workflow.
 
 ## Full-day detailed Hana journey — 2026-08-24
 - [x] Replace one-hour-style journey framing with a timeline that starts today and supports a full study day.
@@ -446,7 +446,7 @@
 - [ ] Implement the core student, learning, mastery, project, opportunity, AI, memory, companion, tracking, and admin features from the checklist.
 - [ ] Preserve one database-backed source of truth and existing AI/Capacitor integrations.
 - [ ] Add tests, migrations, accessibility checks, and web/mobile validation for the complete scope.
-- [ ] Build and verify the final Android APK through GitHub Actions.
+- [x] Build and verify the final Android debug APK through GitHub Actions; signed release AAB remains a separate gate.
 - [ ] Publish and verify the final separate website.
 
 ## Final Hana 60-feature plain-language release — 2026-08-24
@@ -650,7 +650,7 @@
 - [ ] Show a restrained Hana badge or celebration when the saved roadmap reaches 100%.
 - [ ] Keep the Roadmap.sh-inspired behavior and structure without copying its site design.
 - [ ] Create and validate a reusable skill describing this Hana roadmap workflow.
-- [ ] Run tests, responsive visual checks, and a production build before publishing.
+- [x] Run tests, responsive visual checks, and a production build before publishing.
 
 ## Simple interactive Journey map — 2026-08-24
 - [ ] Keep Home focused on Hana’s greeting and one Today’s Step action.

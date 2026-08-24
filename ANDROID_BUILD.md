@@ -126,7 +126,7 @@ For Google Play, prefer a signed `.aab`. For direct testing, a signed release AP
 
 ## 8. Local verification status
 
-The project’s production web build, TypeScript validation, dependency installation, and Capacitor synchronization were verified in the Manus environment. A native APK was **not claimed as locally generated** because the sandbox does not have a complete Android SDK installation. The GitHub Actions runner installs the required Android packages before running Gradle, so the authoritative APK result is the completed GitHub Actions job.
+The project’s production web build, TypeScript validation, dependency installation, Capacitor synchronization, release-path security scan, and native debug APK were verified. The sandbox itself does not have a complete Android SDK, so the local Gradle attempt was blocked; the authoritative hosted build succeeded in GitHub Actions on run [32773054358](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32773054358). The generated `app-debug.apk` artifact was uploaded successfully.
 
 If the GitHub job fails, open the failed step first. Common causes are an incomplete repository upload, a missing `android/` directory, a workflow file placed under the wrong path, or a project lockfile that does not match `package.json`.
 

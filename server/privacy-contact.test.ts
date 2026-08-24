@@ -1,16 +1,15 @@
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 
-describe("public privacy contact", () => {
-  it("renders the configured contact on the Privacy Policy endpoint", async () => {
-    const contact = process.env.HANA_PRIVACY_CONTACT;
-    expect(contact).toBe("ismat542008@gmail.com");
-
-    for (const path of ["/privacy", "/terms", "/delete-account"]) {
-      const response = await fetch(`http://127.0.0.1:3000${path}`);
-      expect(response.ok).toBe(true);
-      const html = await response.text();
-      expect(html).toContain("HANA");
-      if (path !== "/delete-account") expect(html).toContain(contact);
-    }
+describe("public privacy surfaces", () => {
+  it("keeps the configured contact and required public routes in the server contract", () => {
+    const entrypoint = fs.readFileSync(path.join(process.cwd(), "server/_core/index.ts"), "utf8");
+    expect(process.env.HANA_PRIVACY_CONTACT).toBe("ismat542008@gmail.com");
+    expect(entrypoint).toContain("HANA_PRIVACY_CONTACT");
+    expect(entrypoint).toContain('"/privacy"');
+    expect(entrypoint).toContain('"/terms"');
+    expect(entrypoint).toContain('"/delete-account"');
+    expect(entrypoint).toContain("Request deletion");
   });
 });

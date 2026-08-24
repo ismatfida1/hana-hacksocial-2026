@@ -483,3 +483,6 @@
 - [x] Validate all career roadmap defaults and the public demo after the fix.
 
 - [x] Pass university, degree, semester, and saved demonstrated skills into the AI journey designer so career roadmaps are personalized rather than generic.
+
+- [x] Add a dedicated Mathematics for Computing roadmap with foundations before coding-heavy work.
+- [x] Add a compact University Coach entry point that reuses the student’s stored degree, semester, and subjects through Hana’s existing context-aware chat.

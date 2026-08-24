@@ -47,6 +47,13 @@ describe("student context layer", () => {
     expect(resolveJourneyArea("AI Engineering")).toBe("AI / Machine Learning");
   });
 
+  it("starts Mathematics for Computing with foundations", () => {
+    const steps = buildJourney("Mathematics for Computing", "Starting from zero", "Pass my university courses", "Full study day");
+    expect(steps[0]?.title).toBe("Algebra for computing");
+    expect(steps[0]?.title.toLowerCase()).not.toContain("python");
+    expect(steps[2]?.title).toBe("Logic and discrete thinking");
+  });
+
   it("starts Cybersecurity with networking foundations", () => {
     const steps = buildJourney("Cybersecurity", "Starting from zero", "Get job-ready", "Full study day");
     expect(steps[0]?.title).toBe("Networking foundations");

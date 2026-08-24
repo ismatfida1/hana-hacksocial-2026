@@ -69,6 +69,10 @@ export const appRouter = router({
       await upsertHanaStudentMemory({ userId: ctx.user.id, profile: current?.profile || {}, conversations: current?.conversations || [], memoryEnabled: input.enabled ? 1 : 0 });
       return { success: true, enabled: input.enabled } as const;
     }),
+    clear: protectedProcedure.mutation(async ({ ctx }) => {
+      await upsertHanaStudentMemory({ userId: ctx.user.id, profile: {}, conversations: [], memoryEnabled: 0 });
+      return { success: true } as const;
+    }),
   }),
   studentContext: router({
     get: protectedProcedure.query(({ ctx }) => buildHanaContext(ctx.user.id)),

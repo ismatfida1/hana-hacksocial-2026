@@ -30,6 +30,20 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 
 async function startServer() {
   const app = express();
+  const apiWindows = new Map<string, { count: number; resetAt: number }>();
+  app.use("/api/trpc", (req, res, next) => {
+    const key = req.ip || req.socket.remoteAddress || "unknown";
+    const now = Date.now();
+    const current = apiWindows.get(key);
+    const windowState = !current || current.resetAt <= now ? { count: 0, resetAt: now + 5 * 60 * 1000 } : current;
+    windowState.count += 1;
+    apiWindows.set(key, windowState);
+    if (windowState.count > 120) {
+      res.status(429).json({ error: "Too many requests. Please try again shortly." });
+      return;
+    }
+    next();
+  });
   app.disable("x-powered-by");
   app.use((_req, res, next) => {
     res.setHeader("X-Content-Type-Options", "nosniff");

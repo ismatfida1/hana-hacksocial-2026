@@ -380,9 +380,9 @@
 ## Full-day detailed Hana journey — 2026-08-24
 - [x] Replace one-hour-style journey framing with a timeline that starts today and supports a full study day.
 - [x] Make each journey step detailed with purpose, prerequisites, lesson outline, practice, demonstration, mastery check, project outcome, and next unlock.
-- [ ] Add unified University Coach and Career Coach context without making the first screen dense.
+- [x] Add unified University Coach and Career Coach context without making the first screen dense.
 - [x] Preserve adaptive paths for career, custom journey, and skill-to-earn pathways.
-- [ ] Preserve secure memory fields for university, degree, semester, subjects, skills, projects, progress, opportunities, competitions, struggles, and preferences.
+- [x] Preserve secure memory fields for university, degree, semester, subjects, skills, projects, progress, opportunities, competitions, struggles, and preferences.
 - [x] Validate all attached requirements against the implementation before delivery.
 
 ## Curated roadmap resources — 2026-08-24
@@ -502,3 +502,5 @@
 - [x] Add baseline security headers, disable Express fingerprinting, and keep demo-password verification server-side with constant-time comparison.
 
 - [x] Restore the Hana logo and robot artwork in the published greeting screen after the latest security-header update.
+
+- [x] Add a lightweight per-instance API rate limit and validate it with the full test, typecheck, and production build suite.

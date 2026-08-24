@@ -156,7 +156,10 @@ export default function Home() {
   }, [profileHydrated, studentContext.data]);
 
   useEffect(() => {
-    if (!(screen === "signin" || screen === "greeting" || screen === "start") || auth.isLoading || !auth.data || studentContext.isLoading) return;
+    let authReturn = false;
+    try { authReturn = sessionStorage.getItem("hana-auth-return") === "1"; } catch { /* storage may be unavailable */ }
+    if (!(screen === "signin" || authReturn) || auth.isLoading || !auth.data || studentContext.isLoading) return;
+    try { sessionStorage.removeItem("hana-auth-return"); } catch { /* storage may be unavailable */ }
     const savedCareer = studentContext.data?.career.goal;
     if (savedCareer) {
       const savedSteps = buildJourney(savedCareer, "I know the basics", "Continue my saved path", studentContext.data?.preferences.availableStudyTime || "Flexible pace");

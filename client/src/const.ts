@@ -18,6 +18,7 @@ export const startLogin = () => {
   const redirectUri = `${window.location.origin}/api/oauth/callback`;
 
   const nonce = crypto.randomUUID();
+  try { sessionStorage.setItem("hana-auth-return", "1"); } catch { /* storage may be unavailable */ }
   document.cookie = `${OAUTH_STATE_COOKIE}=${nonce}; Path=/; Max-Age=600; SameSite=None; Secure`;
   const state = encodeOAuthState({ redirectUri, nonce });
 

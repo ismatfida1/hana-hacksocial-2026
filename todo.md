@@ -590,3 +590,5 @@
 
 - [x] Route a successfully hydrated normal account from the returned homepage into Career options or the saved journey, and validate the client build.
 - [x] Add immediate sign-in feedback and defer optional protected queries to reduce first-screen loading work.
+
+- [x] Preserve the greeting-first screen for existing sessions while still routing a user returning from OAuth directly to Career options or saved Home/Journey.

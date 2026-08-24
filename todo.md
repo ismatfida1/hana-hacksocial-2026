@@ -516,13 +516,13 @@
 - [ ] Add regression coverage and verify the energy and demo flows on the published preview.
 
 ## Mobile profile and career navigation blockers — 2026-08-24
-- [ ] Show a clear saved confirmation after profile details are persisted to Hana’s cloud memory.
-- [ ] Use the provided clean Ismat Fida signature asset rather than the incorrect faded treatment.
-- [ ] Add a clear Back action and a Switch career action from the saved Journey/Profile experience.
+- [x] Show a clear saved confirmation after profile details are persisted to Hana’s cloud memory.
+- [x] Use the provided clean Ismat Fida signature asset rather than the incorrect faded treatment.
+- [x] Add a clear Back action and a Switch career action from the saved Journey/Profile experience.
 - [ ] Validate these fixes on the mobile preview and publish the correction.
 
 ## Authentication handoff blocker — 2026-08-24
-- [ ] After successful sign-in, open the career options page reliably instead of returning to the greeting screen.
+- [x] After successful sign-in, open the career options page reliably instead of returning to the greeting screen.
 - [ ] Preserve the returning student’s saved profile and roadmap while showing career options when no path is selected.
 - [ ] Validate the sign-in handoff on mobile and publish the repair.
 
@@ -530,3 +530,36 @@
 - [x] Let students skip university, degree, semester, and study-resource location details while still creating a personalized roadmap.
 - [x] Add clear optional wording and a Skip for now action to the profile step.
 - [x] Validate the skip path and publish the correction.
+
+## Journey learning routes — 2026-08-24
+- [x] Give every Journey step three learning routes: document, YouTube video, and university lesson.
+- [x] Verify every Journey resource URL and replace broken or ambiguous links.
+- [x] Add regression coverage for the three-route resource structure and publish the update.
+
+## Reliable saving blocker — 2026-08-24
+- [x] Add a visible save state and success/error feedback for student profile updates.
+- [ ] Add a clear progress-save action for energy, mastery, journey progress, projects, and opportunities.
+- [ ] Confirm saved profile and progress restore from the account database after refresh.
+- [ ] Add regression coverage and publish the save-flow repair.
+
+## Clarified product requirements from pasted_content.txt — 2026-08-24
+- [ ] Save profile with one button, show a temporary “Saved to cloud” confirmation, then close the panel.
+- [ ] Auto-save progress and show quiet temporary “Progress saved” feedback.
+- [ ] Show Saved, Saving, Paused, and Couldn’t save — try again states without a permanent settings-heavy card.
+- [ ] Support career switching with a warning and preserve the previous roadmap in history.
+- [ ] Show a visible Back action on relevant screens, including after sign-in.
+- [ ] Route no-career users to Career options and returning users to saved Home/Journey.
+- [ ] Make University Coach request university context when it is useful, while keeping onboarding fields optional.
+- [ ] Show the best resource by default, optional alternatives when useful, and direct university lessons when available.
+- [ ] Keep resource links working and hide or replace broken links.
+- [ ] Keep private Demo Mode isolated with temporary data and demonstrate saving/progress without writing to real student data.
+- [ ] Keep Ask Hana in the top-right and bottom navigation as confirmed in the clarified requirements.
+- [ ] Keep normal users fully away from admin, API-key, database, deployment, and demo-password controls.
+- [ ] Confirm before saving uploaded files, show them under Memory, and allow deletion.
+- [ ] Show the How Hana Works guide once for new users and add Replay guide in Profile.
+- [ ] Keep useful time estimates such as 25 min while avoiding deadlines, streaks, countdowns, and pressure.
+- [ ] Keep the interface clean and quiet; avoid permanent cloud-status or settings-heavy cards.
+
+## Final navigation clarification — 2026-08-24
+- [x] Use Home, Journey, Projects, Opportunities, Profile in the bottom navigation.
+- [x] Keep Ask Hana accessible only from the top-right action.

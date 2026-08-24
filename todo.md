@@ -606,3 +606,10 @@
 - [x] Add skip, replay, and continue controls without overwhelming the demo user.
 - [x] Keep demo progress isolated from signed-in student cloud memory.
 - [x] Test media loading, mobile layout, guided-stage behavior, and production build before publishing.
+
+## Demo introduction selector and sign-in failure — 2026-08-24
+- [x] Add a Demo Mode choice between the product-introduction video and the interactive Hana tour.
+- [ ] Keep the video option clearly marked unavailable until a real video asset exists; do not show a fake or broken player.
+- [x] Trace the reported normal sign-in failure through OAuth redirect, callback, session cookie, and auth hydration.
+- [x] Improve the sign-in error message and retry behavior without weakening authentication or changing Demo Mode isolation.
+- [ ] Test both Demo Mode introduction choices and the normal sign-in error path before publishing.

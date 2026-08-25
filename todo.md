@@ -924,3 +924,4 @@
 - [x] Show only active, admin-verified opportunity records to signed-in students; keep unverified and unreachable records visible only to the owner for repair.
 - [x] Flag verified opportunity records older than 30 days for owner review without automatically changing student visibility or inventing a new deadline.
 - [x] Add a concise owner note explaining that only active, verified records appear to signed-in students and Demo Mode remains separate.
+- [x] Recheck the minimal HANA greeting shell at a 375px mobile viewport after the opportunity-management updates.

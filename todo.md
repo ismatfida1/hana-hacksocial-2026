@@ -891,3 +891,7 @@
 ## Resource health refinement — 2026-08-25
 - [x] Add a bounded protected resource-verification procedure with timeout, redirect limits, public-host validation, and regression tests.
 - [x] Check authenticated expanded learning resources and place reachable curated alternatives before unavailable links, with clear status messaging.
+
+## Tour priority change — 2026-08-25
+- [x] Pause video-tour generation and integration work until the user requests it again.
+- [x] Focus the next implementation pass on the in-app Hana robot tour, including real control guidance, expressive callouts, arrows/highlights, and reliable Back/Next/Skip navigation.

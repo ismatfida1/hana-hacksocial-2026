@@ -131,6 +131,13 @@ export async function archiveOpportunity(id: number): Promise<Opportunity | unde
   return updateOpportunity(id, { active: 0 });
 }
 
+export async function getOpportunity(id: number): Promise<Opportunity | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(opportunities).where(eq(opportunities.id, id)).limit(1);
+  return rows[0];
+}
+
 /** Delete the complete HANA-owned account scope without touching other users. */
 export async function deleteUserAccount(userId: number): Promise<void> {
   const db = await getDb();

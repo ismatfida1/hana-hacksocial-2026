@@ -917,3 +917,4 @@
 - [x] Verify official URLs server-side, add regression tests, run the production build, and run the release security scan.
 - [x] Use saved demonstrated skills in Hana’s opportunity-fit explanation while keeping the official record and eligibility source authoritative.
 - [x] Explain clearly when the active admin opportunity catalog is empty instead of presenting a blank or broken-looking student screen.
+- [x] Add a protected “Verify now” action for admins so an existing opportunity URL can be rechecked and its verification timestamp/status refreshed before students rely on it.

@@ -21,6 +21,7 @@ describe("admin-managed opportunity records", () => {
     expect(router).toContain("adminCreate: adminProcedure");
     expect(router).toContain("adminUpdate: adminProcedure");
     expect(router).toContain("adminArchive: adminProcedure");
+    expect(router).toContain("adminVerify: adminProcedure");
     expect(router).toContain("validateResourceCandidate");
     expect(db).toContain("export async function archiveOpportunity");
   });
@@ -45,6 +46,8 @@ describe("admin-managed opportunity records", () => {
     expect(manager).toContain("adminCreate.useMutation");
     expect(manager).toContain("adminUpdate.useMutation");
     expect(manager).toContain("adminArchive.useMutation");
+    expect(manager).toContain("adminVerify.useMutation");
+    expect(manager).toContain("Verify now");
     expect(manager).toContain("Official HTTPS URL");
     expect(manager).toContain("Current deadline");
   });

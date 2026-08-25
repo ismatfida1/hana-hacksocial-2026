@@ -4,7 +4,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { archiveOpportunity, createAccountDeletionRequest, createOpportunity, deleteUserAccount, getHanaStudentMemory, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
+import { archiveOpportunity, createAccountDeletionRequest, createOpportunity, deleteUserAccount, getHanaStudentMemory, getOpportunity, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setOpportunityOutcome, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
@@ -112,6 +112,12 @@ export const appRouter = router({
       return updateOpportunity(input.id, changes);
     }),
     adminArchive: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(({ input }) => archiveOpportunity(input.id)),
+    adminVerify: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => {
+      const current = await getOpportunity(input.id);
+      if (!current) throw new Error("Opportunity not found");
+      const checked = (await verifyResourceCandidates([{ label: current.title, url: current.officialUrl }]))[0];
+      return updateOpportunity(input.id, { verificationStatus: checked?.reachable ? "verified" : "unreachable", verifiedAt: checked?.reachable ? new Date() : null });
+    }),
   }),
   studentContext: router({
     get: protectedProcedure.query(({ ctx }) => buildHanaContext(ctx.user.id)),

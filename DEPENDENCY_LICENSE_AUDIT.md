@@ -63,6 +63,17 @@ The previously identified `streamdown → mermaid → khroma` path was removed f
 
 Packages declared BlueOak, MPL-2.0, Unlicense, CC-BY-4.0, `SEE LICENSE`, or UNKNOWN require notice preservation and targeted review. A permissive package license does not remove the need to comply with trademarks, bundled assets, fonts, provider terms, or application privacy obligations.
 
+## Authoritative source checks — 2026-08-25
+
+| License family | Source and current reading | Hana release implication |
+|---|---|---|
+| Blue Oak Model License 1.0.0 | [Choose a License — Blue Oak 1.0.0](https://choosealicense.com/licenses/blueoak-1.0.0/) states that commercial use, distribution, modification, patent use, and larger works are permitted, subject to passing the license/copyright notice and the no-warranty/no-liability terms. | Not an automatic blocker, but include the exact notice/license text in the distribution notice bundle and keep package provenance. |
+| MPL-2.0 | [Mozilla MPL FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/) explains that commercial use is permitted and that distributed MPL-covered files/modifications carry file-level source and notice obligations. | Not an automatic blocker for an app, but preserve notices and document how recipients can obtain corresponding MPL-covered source where required. Review the exact files and distribution form. |
+| Unlicense | [Unlicense](https://unlicense.org/) describes commercial use, modification, compilation, sale, and distribution as permitted, with the software provided without warranty. | Not an automatic blocker for the package itself; preserve provenance and inspect each package’s actual license file for any mismatch. |
+| wouter | [wouter repository](https://github.com/molefrog/wouter) identifies the repository as Unlicense. | Record the package source and retain the Unlicense notice in the final notice bundle. |
+
+These source checks improve the inventory but do **not** clear packages marked `UNKNOWN`, `SEE LICENSE`, or unavailable local metadata, and they do not resolve Canva/asset provenance, Manus/AI-provider terms, or the final app’s notice delivery. A package-family license page cannot substitute for the exact license text shipped by each dependency.
+
 ## Recommended release actions
 
 1. Freeze the lockfile and generate the notice index from the exact release build.

@@ -931,3 +931,4 @@
 - [x] Add focused regression coverage for verified university-source mapping and no-deadline study-capacity choices.
 - [x] Add concise Ask Hana quick actions for Further info, Give me an example, Test me, and I’m confused using the existing context-aware chat surface.
 - [x] Add Teach Hana code/text upload persistence through server-side storage with confirmation, account ownership, metadata-only database records, and deletion from the visible memory surface.
+- [x] Add the documented `pnpm typecheck` alias alongside the existing `pnpm check` script for clean-checkout and CI compatibility.

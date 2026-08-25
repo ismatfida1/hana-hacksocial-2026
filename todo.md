@@ -895,3 +895,4 @@
 ## Tour priority change — 2026-08-25
 - [x] Pause video-tour generation and integration work until the user requests it again.
 - [x] Focus the next implementation pass on the in-app Hana robot tour, including real control guidance, expressive callouts, arrows/highlights, and reliable Back/Next/Skip navigation.
+- [x] Clear stale hand-cue geometry whenever the interactive tour changes stage or cannot find its current real target.

@@ -88,6 +88,7 @@ function DemoTour({ stage, onStage, onDestination, privateDemo = false }: DemoTo
   const finished = stage >= demoTourStages.length;
   const [targetRect, setTargetRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
   useEffect(() => {
+    setTargetRect(null);
     if (finished || !current) return;
     const target = document.querySelector(current.selector);
     if (!target) return;

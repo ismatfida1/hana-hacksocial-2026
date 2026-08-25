@@ -66,6 +66,8 @@ export type SemesterPlanSummary = {
 export type ProjectProgressSummary = {
   activeProject?: string;
   nextGate: string;
+  difficulty: "starting" | "building" | "proof";
+  nextOpportunityAction: string;
   completedProjects: string[];
   portfolioReadyProjects: string[];
 };
@@ -212,7 +214,9 @@ export function buildProjectProgressSummary(projects: ProjectRecord[]): ProjectP
   const completedProjects = projects.filter((project) => project.status === "complete").map((project) => project.title);
   const portfolioReadyProjects = projects.filter((project) => project.status === "complete" && project.milestones.some((milestone) => /readme|review|portfolio/i.test(milestone.title))).map((project) => project.title);
   const nextGate = active?.milestones.find((milestone) => !milestone.complete)?.title || (active ? "Review this project with Hana" : "Choose a small project after your current learning step");
-  return { activeProject: active?.title, nextGate, completedProjects, portfolioReadyProjects };
+  const difficulty = active ? (active.milestones.length >= 5 ? "proof" : active.milestones.length >= 3 ? "building" : "starting") : completedProjects.length ? "proof" : "starting";
+  const nextOpportunityAction = portfolioReadyProjects.length ? "Choose an opportunity that matches your demonstrated skills" : "Finish the project gate before applying to an opportunity";
+  return { activeProject: active?.title, nextGate, difficulty, nextOpportunityAction, completedProjects, portfolioReadyProjects };
 }
 
 export function buildSemesterPlanSummary(profile: StudentProfile, roadmap: RoadmapNode[] = []): SemesterPlanSummary {

@@ -4,7 +4,7 @@ import { buildJourney, resolveJourneyArea } from "../shared/hanaJourney";
 
 describe("student context layer", () => {
   it("derives the next project gate and portfolio-ready evidence from project records", () => {
-    expect(buildProjectProgressSummary([{ id: "p1", title: "API tracker", skills: ["APIs"], status: "in_progress", milestones: [{ title: "Build the first working version", complete: true }, { title: "Write a clear README", complete: false }] }, { id: "p2", title: "Weather app", skills: ["Python"], status: "complete", milestones: [{ title: "Review the project with Hana", complete: true }] }])).toEqual({ activeProject: "API tracker", nextGate: "Write a clear README", completedProjects: ["Weather app"], portfolioReadyProjects: ["Weather app"] });
+    expect(buildProjectProgressSummary([{ id: "p1", title: "API tracker", skills: ["APIs"], status: "in_progress", milestones: [{ title: "Build the first working version", complete: true }, { title: "Write a clear README", complete: false }] }, { id: "p2", title: "Weather app", skills: ["Python"], status: "complete", milestones: [{ title: "Review the project with Hana", complete: true }] }])).toEqual({ activeProject: "API tracker", nextGate: "Write a clear README", difficulty: "starting", nextOpportunityAction: "Choose an opportunity that matches your demonstrated skills", completedProjects: ["Weather app"], portfolioReadyProjects: ["Weather app"] });
   });
 
   it("builds a compact semester-aware plan summary from the saved profile", () => {

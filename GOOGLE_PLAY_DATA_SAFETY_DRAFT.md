@@ -43,3 +43,17 @@ The public URL must be entered into the Play Console account-deletion field afte
 - [ ] Complete Play Console Data Safety questions.
 - [ ] Compare the Play answers with the final Privacy Policy and Terms.
 - [ ] Save a PDF or export/screenshot of the submitted declarations with the release record.
+
+## Current evidence refresh — 2026-08-25
+
+The inspected Android manifest declares only `android.permission.INTERNET`. No contacts, location, camera, microphone, phone, calendar, advertising ID, or storage permission was found in the current project manifest. Recheck the exact signed AAB before submission.
+
+The GitHub Actions `Android debug APK` workflow succeeded on the non-destructive branch `hana-progress-2026-08-25` in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562), and the downloaded debug artifact was confirmed. This is **not** evidence of a signed release AAB or final Play artifact.
+
+Hana currently uses MySQL/Drizzle as its active database source of truth for profile, learning progress, projects, opportunities, memory, and chat metadata. Supabase API availability is recorded, but Supabase RLS/database architecture is not claimed as the active persistence layer. Managed upload bytes use the server-side storage helper; the database stores account-owned upload metadata. The application deletion procedure removes Hana-owned database records and metadata, while object-storage, authentication-provider, AI-provider, analytics, and backup retention still require production verification.
+
+The current AI boundary uses server-side provider adapters and minimized student context. OpenAI/Gemini availability and production plan/data-retention terms must be confirmed against the release configuration before the Play form or Privacy Policy claims a specific provider. Canva is enabled as an optional connector but is not required for normal app operation. Optional voice transcription is framework-capable but is not exposed as a current Hana feature.
+
+## Release decision
+
+This draft supports preparation only. It does not establish that HANA is ready for commercial sale or Google Play submission. Keep the existing open checklist items—signed-AAB scan, provider configuration and retention, analytics payloads, storage-object deletion, production account deletion, and Play Console review—open until they are tested against the final release artifact.

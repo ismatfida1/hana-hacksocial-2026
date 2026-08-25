@@ -939,3 +939,4 @@
 - [x] Refresh the existing GitHub progress branch with the latest release-document corrections without changing the protected `main` branch: remote commit `053f914`.
 - [x] Synchronize `FINAL_BUILD_REPORT.md` with the verified hosted debug APK artifact and retain the signed-AAB limitation.
 - [x] Synchronize the latest validated managed-project checkpoint to the existing GitHub progress branch without changing protected `main`: remote commit `bd5ffda`.
+- [x] Prepare an evidence-based Google Play Data Safety draft from Hana’s actual data flows, Android permissions, AI processing, storage, and deletion controls; label it as a draft requiring Play Console confirmation.

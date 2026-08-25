@@ -52,7 +52,7 @@ export function AdminOpportunityManager() {
   };
 
   return <section className="mt-4 rounded-3xl border border-[#C9BFE3] bg-[#F5F3FB] p-4" aria-label="Admin opportunity management">
-    <div className="flex items-start justify-between gap-3"><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#62566A]">Owner tools</p><h2 className="mt-1 font-display text-2xl text-[#3A3540]">Manage opportunities</h2><p className="mt-1 text-xs leading-4 text-[#625D65]">Every saved official link is checked on the server. Students see only active records.</p></div><Plus size={18} className="text-[#725F78]" /></div>
+    <div className="flex items-start justify-between gap-3"><div><p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#62566A]">Owner tools</p><h2 className="mt-1 font-display text-2xl text-[#3A3540]">Manage opportunities</h2><p className="mt-1 text-xs leading-4 text-[#625D65]">Every saved official link is checked on the server. Students see only active, verified records; unverified records stay here for repair.</p></div><Plus size={18} className="text-[#725F78]" /></div>
     <form onSubmit={submit} className="mt-4 grid gap-2">
       <input required value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} placeholder="Opportunity title" className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
       <input required value={draft.type} onChange={(event) => setDraft({ ...draft, type: event.target.value })} placeholder="Type, for example Hackathon" className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />

@@ -44,6 +44,7 @@ export type StudentProfile = {
   preferredLearningTime?: string;
   availableStudyTime?: string;
   energyMode?: "light" | "normal" | "deep";
+  explanationStyle?: "short" | "simple" | "new-learner" | "before-test" | "analogy" | "example" | "exam-answer" | "practice" | "debug" | "deep";
   masteryChecks: string[];
   learningHistory: string[];
   goals: string[];
@@ -115,6 +116,7 @@ export type StudentContext = {
     preferredLearningTime?: string;
     availableStudyTime?: string;
     energyMode?: "light" | "normal" | "deep";
+    explanationStyle?: StudentProfile["explanationStyle"];
     goals: string[];
   };
   mastery: {
@@ -202,6 +204,7 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
     preferredLearningTime: asText(profile.preferredLearningTime),
     availableStudyTime: asText(profile.availableStudyTime ?? profile.studyTime),
     energyMode: profile.energyMode === "light" || profile.energyMode === "deep" || profile.energyMode === "normal" ? profile.energyMode : undefined,
+    explanationStyle: ["short", "simple", "new-learner", "before-test", "analogy", "example", "exam-answer", "practice", "debug", "deep"].includes(profile.explanationStyle as string) ? profile.explanationStyle as StudentProfile["explanationStyle"] : undefined,
     masteryChecks: asList(profile.masteryChecks),
     learningHistory: asList(profile.learningHistory),
     goals: asList(profile.goals),
@@ -276,6 +279,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
       preferredLearningTime: profile.preferredLearningTime,
       availableStudyTime: profile.availableStudyTime,
       energyMode: profile.energyMode,
+      explanationStyle: profile.explanationStyle,
       goals: profile.goals,
     },
     mastery: {
@@ -376,7 +380,7 @@ export function formatStudentContextForHana(context: StudentContext, question = 
     ...(wantsUniversity || !wantsWork && !wantsProgress ? { university: context.university } : {}),
     ...(wantsProgress || !wantsUniversity && !wantsWork ? { learning: { currentActiveStep: context.learning.currentActiveStep, completedLearningSteps: context.learning.completedLearningSteps.slice(-20), demonstratedSkills: context.learning.demonstratedSkills, completedSkills: context.learning.completedSkills, weakAreas: context.learning.weakAreas, history: context.learning.history.slice(-10) } } : {}),
     ...(wantsWork ? { work: context.work } : {}),
-    preferences: { availableStudyTime: context.preferences.availableStudyTime, energyMode: context.preferences.energyMode, goals: context.preferences.goals },
+    preferences: { availableStudyTime: context.preferences.availableStudyTime, energyMode: context.preferences.energyMode, explanationStyle: context.preferences.explanationStyle, goals: context.preferences.goals },
     ...(wantsProgress ? { roadmap: context.roadmap.slice(0, 20) } : {}),
   };
   return JSON.stringify(minimal, null, 2);

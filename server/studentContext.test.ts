@@ -94,6 +94,12 @@ describe("student context layer", () => {
     expect(context.work.opportunityOutcomes).toEqual([{ opportunityTitle: "Devpost", status: "saved", updatedAt: "2026-08-24T00:00:00.000Z" }]);
   });
 
+  it("restores a bounded explanation preference into Hana context", () => {
+    const context = buildStudentContextFromMemory({ profile: { explanationStyle: "simple" }, conversations: [] } as never);
+    expect(context.preferences.explanationStyle).toBe("simple");
+    expect(formatStudentContextForHana(context, "Explain this simply")).toContain('"explanationStyle": "simple"');
+  });
+
   it("keeps energy mode in the unified context", () => {
     const context = buildStudentContextFromMemory({ profile: { energyMode: "light", currentActiveStep: "Variables" }, conversations: [] } as never);
     expect(context.preferences.energyMode).toBe("light");

@@ -701,7 +701,7 @@
 - [x] Add concise explanation modes: normal, simple, new learner, before-test, example, exam answer, and practice questions.
 - [x] Add an always-available “I’m confused” action that requests a different explanation path.
 - [x] Add short checks for understanding after explanations instead of relying on self-reported understanding.
-- [ ] Store useful explanation preferences from real interactions without rigidly labeling the student.
+- [x] Store useful explanation preferences from real interactions without rigidly labeling the student; Hana stores only the selected concise response mode and feeds it into minimized context.
 - [x] Keep Hana calm, smart, patient, and occasionally playful without constant emojis or forced slang.
 - [ ] Keep Home and Android-ready entry points focused on Ask, Study, Test Prep, and My Path while preserving the approved main navigation.
 - [x] Update the reusable Hana skill with the simple-friend teaching loop and validate the existing web architecture.

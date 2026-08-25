@@ -49,7 +49,7 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Curriculum failure fallback | **PARTIAL** | Inspected profile fields and Journey input contract | Subjects can be entered and passed into roadmap generation. The explicit failed-lookup message and dedicated Add/Edit/Remove/Verify curriculum workflow are not complete. |
 | University changes the actual Journey | **PARTIAL** | Inspected `buildRoadmap`, `deviseJourney`, and university-context passing | University, degree, semester, subjects, and study time reach the planner and can affect copy/context. The deterministic sequence remains largely career-template based and does not yet perform true curriculum overlap/gap analysis. |
 | Student-specific Journey | **PARTIAL** | Inspected AI request, context builder, deterministic fallback, and context-minimization tests | AI requests use stored student context and the formatter now minimizes data per question. The complete generated roadmap is not stored as a durable per-student structured curriculum, and fallback paths remain templated. |
-| “I already know this” placement | **NOT IMPLEMENTED** | Searched Journey UI and server placement procedures | Existing level/mastery controls are not the requested per-node placement action that accepts evidence or starts a short mastery check. |
+| “I already know this” placement | **VERIFIED at code level** | Inspected `PlacementCheckPanel`, active-step gating, and mastery mutation wiring | Each active Journey node exposes “I already know this,” accepts a short evidence example, and sends it through the existing mastery/placement procedure. A fully authenticated browser walkthrough remains external validation. |
 | Evidence-based unlocks | **PARTIAL** | Ran student-context/mastery tests and inspected prerequisite rules | Mastery and step completion exist. Full durable prerequisite enforcement, retest, diagnosis, and skill-placement behavior are incomplete. |
 | Roadmap.sh interaction model without copying | **VERIFIED** | Inspected phase map, copy, and current Journey screenshot | HANA uses a compact connected phase map and does not reproduce Roadmap.sh branding or artwork. |
 | Layered Journey | **PARTIAL** | Inspected renderer and Journey data model | Summary → detail behavior exists. A complete Career → Topic → Subtopic → Learning hierarchy with independent durable states is not fully represented. |
@@ -78,7 +78,7 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Check | Result |
 |---|---|
 | TypeScript | Passed with `pnpm run check` |
-| Automated tests | Passed: 14 test files, 42 tests |
+| Automated tests | Passed: 15 test files, 47 tests |
 | Production build | Passed with `pnpm run build` |
 | Release security scan | Passed with `pnpm run security:scan` |
 | Mobile visual check | Greeting screen rendered cleanly at 390×844; full authenticated flows were not exercised end to end |
@@ -92,7 +92,7 @@ The third attachment is a list of 50 educational YouTube channels plus a WhatsAp
 
 ## Final decision
 
-HANA is a **published working prototype / progress release**, not a fully completed final implementation of all supplied requirements. The repository is technically healthy under the recorded checks, but the following gates remain open: successful real authentication, official university curriculum retrieval and explicit fallback, true per-student gap-driven Journey generation, per-node placement checks, verified resource failover, structured opportunity records, milestone-based project completion, the complete product video, end-to-end deletion verification, final signed-AAB scan, and Google Play Console declarations.
+HANA is a **published working prototype / progress release**, not a fully completed final implementation of all supplied requirements. The repository is technically healthy under the recorded checks, but the following gates remain open: successful real authentication, official university curriculum retrieval and explicit fallback, true per-student gap-driven Journey generation, verified resource failover, complete structured opportunity population, authenticated milestone-based project walkthrough, the complete product video, end-to-end deletion verification, final signed-AAB scan, and Google Play Console declarations. Per-node placement, compact Ask Hana quick actions, paused-memory behavior, and the new security/privacy contracts are now implemented and regression-tested, but authenticated end-to-end walkthroughs remain open.
 
 Therefore, the truthful result is **not 100% complete**. The latest published prototype may be reviewed at [hanacompact-lpgytise.manus.space](https://hanacompact-lpgytise.manus.space), but it should not be marketed as having every requested feature until the open items above are independently tested.
 

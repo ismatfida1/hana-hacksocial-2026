@@ -707,12 +707,12 @@
 - [x] Update the reusable Hana skill with the simple-friend teaching loop and validate the existing web architecture.
 
 ## Progressive disclosure across Hana — 2026-08-24
-- [ ] Keep Journey topic cards limited to a short summary and one primary action by default.
-- [ ] Add contextual Further info controls for Journey topics and learning details.
-- [ ] Show Project summaries first and reveal requirements, milestones, tools, and evaluation only on request.
-- [ ] Show Opportunity summaries first and reveal eligibility, skills, deadline context, and Hana’s reasoning only on request.
-- [ ] Add concise Ask Hana actions for Further info, Give me an example, Test me, and I’m confused.
-- [ ] Keep detail panels contextual rather than opening a large information dump.
+- [x] Keep Journey topic cards limited to a short summary and one primary action by default.
+- [x] Add contextual Further info controls for Journey topics and learning details.
+- [x] Show Project summaries first and reveal requirements, milestones, tools, and evaluation only on request.
+- [x] Show Opportunity summaries first and reveal eligibility, skills, deadline context, and Hana’s reasoning only on request.
+- [x] Add concise Ask Hana actions for Further info, Give me an example, Test me, and I’m confused.
+- [x] Keep detail panels contextual rather than opening a large information dump.
 - [ ] Validate the one-primary-action pattern and mobile readability across the app.
 
 ## Complete Hana pre-publish audit — 2026-08-24
@@ -844,18 +844,18 @@
 - [x] Add security/privacy regression tests and update the release-risk documentation without claiming 100% security or legal compliance.
 
 ## Full supplied-requirements acceptance audit — 2026-08-25
-- [ ] Collect every supplied requirements attachment and existing acceptance/audit document into one normalized checklist.
-- [ ] Trace sign-in and provider support against the actual configured authentication backend; distinguish working options from UI labels.
-- [ ] Trace opportunity detail data and source-link presentation against real stored fields; mark missing verified fields as incomplete.
-- [ ] Trace resource verification and fallback behavior against actual reachable-link logic and stored alternatives.
-- [ ] Trace automatic and manual project completion from event to database to refresh persistence.
-- [ ] Trace product video generation/integration and distinguish a real asset from a placeholder or storyboard.
+- [x] Collect every supplied requirements attachment and existing acceptance/audit document into one normalized checklist.
+- [x] Trace sign-in and provider support against the actual configured authentication backend; distinguish working options from UI labels.
+- [x] Trace opportunity detail data and source-link presentation against real stored fields; mark missing verified fields as incomplete.
+- [x] Trace resource verification and fallback behavior against actual reachable-link logic and stored alternatives.
+- [x] Trace automatic and manual project completion from event to database to refresh persistence.
+- [x] Trace product video generation/integration and distinguish a real asset from a placeholder or storyboard.
 - [x] Trace the Hana-led tour against actual highlighted controls and cloud-style guidance.
-- [ ] Trace university curriculum retrieval, fallback subjects, and personalized roadmap generation end to end.
-- [ ] Trace security, privacy, account deletion, AI data minimization, admin protection, demo isolation, and Android secret handling.
+- [x] Trace university curriculum retrieval, fallback subjects, and personalized roadmap generation end to end.
+- [x] Trace security, privacy, account deletion, AI data minimization, admin protection, demo isolation, and Android secret handling.
 - [x] Run tests, production build, security scan, mobile visual checks, and artifact verification.
-- [ ] Write a complete requirement-by-requirement matrix with Implemented, Partial, Blocked, and Not implemented statuses and evidence.
-- [ ] Do not publish or claim a final version until the audit clearly states every remaining blocker.
+- [x] Write a complete requirement-by-requirement matrix with Implemented, Partial, Blocked, and Not implemented statuses and evidence.
+- [x] Do not publish or claim a final version until the audit clearly states every remaining blocker.
 
 ## Dual roadmap and PUCIT/FCIT alignment requirements — 2026-08-25
 - [x] Model the main four-year BSCS/software-engineering journey separately from the parallel AI Automation Engineer earning specialization.

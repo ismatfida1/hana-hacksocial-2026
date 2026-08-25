@@ -50,6 +50,13 @@ export type StudentProfile = {
   tourCompleted?: boolean;
 };
 
+export type SemesterPlanSummary = {
+  academicAnchor: string;
+  industryFocus: string;
+  paceNote: string;
+  scopeNote: string;
+};
+
 export type StudentContext = {
   student: {
     university?: string;
@@ -99,6 +106,7 @@ export type StudentContext = {
     completedCount: number;
   };
   roadmap: RoadmapNode[];
+  planning: SemesterPlanSummary;
 };
 
 const asList = (value: unknown): string[] =>
@@ -185,6 +193,13 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
   };
 }
 
+export function buildSemesterPlanSummary(profile: StudentProfile): SemesterPlanSummary {
+  const academicAnchor = [profile.university, profile.degree, profile.semester].filter(Boolean).join(" · ") || "Add university details when ready";
+  const industryFocus = profile.currentActiveStep || profile.career || "Choose a direction first";
+  const paceNote = profile.availableStudyTime || profile.preferredLearningTime || "Flexible pace · no deadline";
+  return { academicAnchor, industryFocus, paceNote, scopeNote: "Academic foundation + industry skills · move at your own pace" };
+}
+
 export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null): StudentContext {
   const profile = normalizeStudentProfile(memory?.profile);
   const roadmap = buildRoadmap({ pathType: profile.career ? "career" : "create-own", target: profile.career || profile.currentJourney || "Software Engineering", university: profile.university, degree: profile.degree, semester: profile.semester, existingSkills: [...profile.completedSkills, ...profile.completedLearningSteps] });
@@ -233,6 +248,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
       completedCount: profile.completedLearningSteps.length,
     },
     roadmap,
+    planning: buildSemesterPlanSummary(profile),
   };
 }
 

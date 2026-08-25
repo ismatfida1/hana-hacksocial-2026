@@ -679,7 +679,7 @@
 - [x] Add non-numeric skill confidence states and lightweight review prompts.
 - [x] Add smart prerequisite explanations that name the missing skill and reason.
 - [x] Keep university and industry views connected but visibly separate.
-- [ ] Add a compact semester-aware and four-year planning layer behind the current next step.
+- [x] Add a compact semester-aware and four-year planning layer behind the current next step. The unified context now carries an academic anchor, industry focus, and no-deadline pace note.
 - [ ] Add meaningful career milestones without XP or arbitrary gamification.
 - [ ] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections.
 - [x] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.

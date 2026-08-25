@@ -1,8 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { appendHanaConversations, buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, mergeCompletedLearningSteps, normalizeStudentProfile } from "./studentContext";
+import { appendHanaConversations, buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildSemesterPlanSummary, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, mergeCompletedLearningSteps, normalizeStudentProfile } from "./studentContext";
 import { buildJourney, resolveJourneyArea } from "../shared/hanaJourney";
 
 describe("student context layer", () => {
+  it("builds a compact semester-aware plan summary from the saved profile", () => {
+    const profile = normalizeStudentProfile({ university: "PUCIT/FCIT", degree: "BSCS", semester: "3", career: "Software Engineering", currentActiveStep: "Data Structures", availableStudyTime: "Full study day · start now" });
+    expect(buildSemesterPlanSummary(profile)).toEqual({ academicAnchor: "PUCIT/FCIT · BSCS · 3", industryFocus: "Data Structures", paceNote: "Full study day · start now", scopeNote: "Academic foundation + industry skills · move at your own pace" });
+  });
+
   it("normalizes the full student profile into one coach context", () => {
     const context = buildStudentContextFromMemory({
       id: 1,

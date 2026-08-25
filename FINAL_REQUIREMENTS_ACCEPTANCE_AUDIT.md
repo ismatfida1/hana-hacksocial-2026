@@ -79,12 +79,12 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Check | Result |
 |---|---|
 | TypeScript | Passed with `pnpm run typecheck` (alias `pnpm run check`) |
-| Automated tests | Passed: 19 test files, 61 tests, including logout invalidation, returning-user hydration, semester-aware planning, derived career milestones, project-gate evidence, persisted explanation-preference coverage, resource failover, and official opportunity-directory contracts |
+| Automated tests | Passed: 20 test files, 63 tests, including the prior coverage plus provider-aware greeting-first authentication contract coverage |
 | Production build | Passed with `pnpm run build` |
 | Release security scan | Passed with `pnpm run security:scan` |
-| Mobile visual check | Greeting screen rendered cleanly at 390×844; full authenticated flows were not exercised end to end |
+| Mobile visual check | Greeting screen rendered cleanly at 375×812; full authenticated flows were not exercised end to end |
 | Android | Hosted `Android debug APK` workflow succeeded on branch `hana-progress-2026-08-25` in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562); an actual signed release AAB remains unverified in this audit |
-| External OAuth | Not proven because the supplied screenshot shows a provider handoff error |
+| External OAuth | Not proven because provider allowlisting, Google enablement, cookie behavior, and a real callback were not exercised end to end; the source-aware sign-in contract and smoke-test runbook are now documented |
 | Video | Complete product video not available; the selector honestly keeps the video option unavailable and generation remains quota-blocked |
 
 ## Supplied YouTube list

@@ -887,3 +887,7 @@
 - [x] Add an explicit “Skip for now” action to the first-entry tour choice while preserving later Profile restart access.
 - [x] Re-validate both tour paths and all Next, Back, Skip, and Start Exploring actions after the refinement.
 - [x] Keep the real-product video status honest until an actual HANA-interface walkthrough asset is integrated.
+
+## Resource health refinement — 2026-08-25
+- [x] Add a bounded protected resource-verification procedure with timeout, redirect limits, public-host validation, and regression tests.
+- [x] Check authenticated expanded learning resources and place reachable curated alternatives before unavailable links, with clear status messaging.

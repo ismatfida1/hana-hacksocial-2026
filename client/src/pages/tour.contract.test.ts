@@ -34,4 +34,9 @@ describe("Hana interactive tour contract", () => {
     expect(source).toContain('You’re ready! Let’s start your HANA journey.');
     expect(source).toContain('Start Exploring');
   });
+
+  it("does not invent university subjects when official curriculum data is unavailable", () => {
+    expect(source).toContain('Hana will not guess your university subjects. Add them here if an official curriculum is not available.');
+    expect(source).toContain('Hana will use these saved subjects with your degree and semester.');
+  });
 });

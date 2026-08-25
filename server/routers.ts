@@ -8,6 +8,7 @@ import { createAccountDeletionRequest, deleteUserAccount, getHanaStudentMemory, 
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
+import { validateResourceCandidate, verifyResourceCandidates } from "./resourceVerification";
 
 const hanaSystemPrompt = `You are Hana, a cute cream robot who helps people learn. You are a smart, patient friend — not a professor or a business tool.
 
@@ -84,6 +85,12 @@ export const appRouter = router({
     clear: protectedProcedure.mutation(async ({ ctx }) => {
       await upsertHanaStudentMemory({ userId: ctx.user.id, profile: {}, conversations: [], memoryEnabled: 0 });
       return { success: true } as const;
+    }),
+  }),
+  resources: router({
+    verify: protectedProcedure.input(z.object({ resources: z.array(z.object({ label: z.string().min(1).max(180), url: z.string().url().max(500) })).min(1).max(4) })).query(async ({ input }) => {
+      const safeCandidates = input.resources.filter(validateResourceCandidate);
+      return { resources: await verifyResourceCandidates(safeCandidates) };
     }),
   }),
   studentContext: router({

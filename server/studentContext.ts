@@ -297,10 +297,15 @@ export async function buildHanaContext(studentId: number) {
   return getStudentContext(studentId);
 }
 
+export function appendHanaConversations(existing: HanaStudentMemory | null | undefined, messages: Array<{ role: "user" | "hana"; text: string; createdAt: string }>): HanaStudentMemory["conversations"] | null {
+  if (existing?.memoryEnabled === 0) return null;
+  return [...(existing?.conversations ?? []), ...messages].slice(-100);
+}
+
 export async function recordHanaConversation(studentId: number, messages: Array<{ role: "user" | "hana"; text: string; createdAt: string }>) {
   const existing = await getHanaStudentMemory(studentId);
-  if (existing?.memoryEnabled === 0) return;
-  const conversations = [...(existing?.conversations ?? []), ...messages].slice(-100);
+  const conversations = appendHanaConversations(existing, messages);
+  if (!conversations) return;
   await upsertHanaStudentMemory({
     userId: studentId,
     profile: existing?.profile ?? normalizeStudentProfile({}),

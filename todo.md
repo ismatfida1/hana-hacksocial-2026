@@ -841,7 +841,7 @@
 - [ ] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
 - [ ] Verify account deletion removes associated HANA data according to the documented retention policy and remains accessible in-app and publicly.
 - [ ] Avoid unnecessary Android permissions and do not collect contacts, location, microphone, camera, or device identifiers without a real feature need.
-- [ ] Add security/privacy regression tests and update the release-risk documentation without claiming 100% security or legal compliance.
+- [x] Add security/privacy regression tests and update the release-risk documentation without claiming 100% security or legal compliance.
 
 ## Full supplied-requirements acceptance audit — 2026-08-25
 - [ ] Collect every supplied requirements attachment and existing acceptance/audit document into one normalized checklist.

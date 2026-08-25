@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, mergeCompletedLearningSteps, normalizeStudentProfile } from "./studentContext";
+import { appendHanaConversations, buildCareerReadinessFromContext, buildCoachContextFromStudentContext, buildDailyMissionFromContext, buildStudentContextFromMemory, buildWeeklyReportFromContext, evaluateMasteryAnswer, formatStudentContextForHana, mergeCompletedLearningSteps, normalizeStudentProfile } from "./studentContext";
 import { buildJourney, resolveJourneyArea } from "../shared/hanaJourney";
 
 describe("student context layer", () => {
@@ -104,6 +104,13 @@ describe("student context layer", () => {
   it("requires a relevant explanation before marking mastery complete", () => {
     expect(evaluateMasteryAnswer({ title: "Python Functions" }, "I know it.").passed).toBe(false);
     expect(evaluateMasteryAnswer({ title: "Python Functions" }, "A function takes parameters and returns a value, so I can reuse the same logic in another part of a program.").passed).toBe(true);
+  });
+
+  it("does not append conversations while cloud memory is paused", () => {
+    const paused = appendHanaConversations({ memoryEnabled: 0, conversations: [{ role: "user", text: "old", createdAt: "2026-08-24T00:00:00.000Z" }] } as never, [{ role: "hana", text: "new", createdAt: "2026-08-25T00:00:00.000Z" }]);
+    const enabled = appendHanaConversations({ memoryEnabled: 1, conversations: [] } as never, [{ role: "hana", text: "new", createdAt: "2026-08-25T00:00:00.000Z" }]);
+    expect(paused).toBeNull();
+    expect(enabled).toHaveLength(1);
   });
 
   it("uses stored evidence for readiness and report helpers", () => {

@@ -18,8 +18,8 @@
 | Dependency remediation | `streamdown` removed; current graph no longer contains the previous streamdown → mermaid → khroma path | Remediated for that known conflict |
 | Third-party notices | `THIRD_PARTY_NOTICES.md` generated from 703 installed package records | Generated; exact license texts and flagged terms still require review |
 | Secret scan | Prior source/client/Android scan found no literal provider keys, passwords, service-role keys, or private keys | No obvious literal exposure found; repeat on final APK/AAB required |
-| Build and tests | TypeScript check, 20 Vitest tests, and production build passed | Verified |
-| Android automation | `.github/workflows/android-build.yml` exists and targets Ubuntu 24.04, Java 21, Android API 36, and debug APK artifact upload | Workflow present; an actual successful hosted build was not generated in this checkpoint |
+| Build and tests | TypeScript check, 54 Vitest tests, and production build passed | Verified |
+| Android automation | `.github/workflows/android-build.yml` targets Ubuntu 24.04, Java 21, Android API 36, Capacitor sync, security scan, and debug APK artifact upload | Hosted debug build succeeded in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562) on branch `hana-progress-2026-08-25`; signed release AAB remains unverified |
 
 ## Remaining release blockers
 
@@ -28,7 +28,7 @@
 3. **AI providers:** Confirm the actual OpenAI and Gemini plans, data-processing terms, retention, region, and DPA posture. Do not send sensitive student data to a configuration whose terms do not support that use.
 4. **Deletion operations:** Test deletion against production database and storage records, confirm all sessions are invalidated, define handling of provider-side copies and legal/security retention, and test the public request workflow operationally.
 5. **Google Play:** Complete Data Safety, account-deletion URL, content declarations, target API/SDK, privacy-policy, store-listing, and reviewer-access declarations from the exact final AAB.
-6. **Android release:** Run the GitHub Actions debug build, then create and verify a signed release AAB using protected signing secrets. Never commit signing material.
+6. **Android release:** The GitHub Actions debug build is verified; create and verify a signed release AAB using protected signing secrets before Play submission. Never commit signing material.
 7. **Legal review:** Have qualified counsel review the policy, terms, package notices, asset evidence, provider contracts, business model, and launch jurisdictions.
 
 ## Release decision

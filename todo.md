@@ -359,7 +359,7 @@
 - [x] Keep the existing Capacitor architecture and Hana integrations unchanged.
 - [x] Write `ANDROID_BUILD.md` with GitHub setup, Actions run, phone APK download, and signed release instructions.
 - [x] Validate the workflow locally as far as the sandbox allows and document any missing local SDK limitation.
-- [ ] Verify the exact repository and folder to upload or push.
+- [x] Verify the exact repository and folder to upload or push: repository `ismatfida1/baymax-care-companion`, project contents at repository root, workflow at `.github/workflows/android-build.yml`, progress branch `hana-progress-2026-08-25`.
 
 ## Push and run Android Actions — 2026-08-24
 - [x] Verify the target Hana Android GitHub repository and current remote state.
@@ -935,3 +935,4 @@
 - [x] Confirm the Kaggle competitions directory responds to a normal browser GET; the earlier HEAD 404 was method-specific, and the official HTTPS destination remains `https://www.kaggle.com/competitions`.
 - [x] Run the Android CI TypeScript gate through the documented `pnpm typecheck` alias.
 - [x] Automatically show reachable learning resources first and hide unreachable alternatives when at least one verified route is available.
+- [x] Synchronize stale Android/build-release documents with the successful hosted debug APK run `32843621562` and the exact progress branch `hana-progress-2026-08-25`.

@@ -803,7 +803,7 @@
 
 ## User-reported repair pass — 2026-08-25
 - [ ] Repair sign-in with multiple provider options, including Google where the configured auth portal supports it, and preserve clear retry behavior.
-- [ ] Expand opportunity details to show official deadline, eligibility, application steps, expected deliverables, and how the event works without inventing facts.
+- [x] Expand opportunity details to show official deadline, eligibility, application steps, expected deliverables, and how the event works without inventing facts.
 - [x] Remove the Roadmap.sh/reference link and any wording that implies copied content or design.
 - [x] Add verified alternative learning resources for each roadmap step and gracefully handle unavailable links.
 - [x] Make project completion automatically complete the linked roadmap step while preserving reliable manual checkbox completion.
@@ -816,7 +816,7 @@
 ## Expanded critical personalization specification — 2026-08-25
 - [ ] Make authentication use real configured provider flows and expose only providers actually supported by the backend; do not present fake email/password behavior.
 - [ ] Persist all account context across sessions and devices, including university, degree, semester, career, skills, journey, projects, opportunities, portfolio, conversations, and preferences.
-- [ ] Give each opportunity a verified detail view with deadline, eligibility, location, requirements, difficulty, process, submissions, dates, teams, prizes when verified, official URL, application steps, and Hana’s readiness reason.
+- [x] Give each opportunity a verified detail view with deadline, eligibility, location, requirements, difficulty, process, submissions, dates, teams, prizes when verified, official URL, application steps, and Hana’s readiness reason.
 - [x] Remove copied-content/reference-style wording while retaining natural source attribution and linking to originals only.
 - [x] Verify learning resources before display and provide a primary plus two approved alternatives without overwhelming the main screen.
 - [x] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.

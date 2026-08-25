@@ -10,10 +10,16 @@ type OpportunityDraft = {
   deadlineAt: string;
   eligibility: string;
   prizeDetails: string;
+  location: string;
+  requirements: string;
+  applicationSteps: string;
+  submissionFormat: string;
+  teamInfo: string;
+  difficulty: string;
   active: boolean;
 };
 
-const emptyDraft: OpportunityDraft = { title: "", type: "Hackathon", detail: "", officialUrl: "", deadlineAt: "", eligibility: "", prizeDetails: "", active: true };
+const emptyDraft: OpportunityDraft = { title: "", type: "Hackathon", detail: "", officialUrl: "", deadlineAt: "", eligibility: "", prizeDetails: "", location: "", requirements: "", applicationSteps: "", submissionFormat: "", teamInfo: "", difficulty: "", active: true };
 
 function toInputDate(value?: Date | string | null) {
   if (!value) return "";
@@ -40,14 +46,14 @@ export function AdminOpportunityManager() {
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     setNotice("");
-    const input = { ...draft, deadlineAt: draft.deadlineAt ? new Date(draft.deadlineAt).toISOString() : null, prizeDetails: draft.prizeDetails || null };
+    const input = { ...draft, deadlineAt: draft.deadlineAt ? new Date(draft.deadlineAt).toISOString() : null, prizeDetails: draft.prizeDetails || null, location: draft.location || null, requirements: draft.requirements || null, applicationSteps: draft.applicationSteps || null, submissionFormat: draft.submissionFormat || null, teamInfo: draft.teamInfo || null, difficulty: draft.difficulty || null };
     if (editingId) update.mutate({ id: editingId, changes: input });
     else create.mutate(input);
   };
 
   const edit = (item: NonNullable<typeof list.data>[number]) => {
     setEditingId(item.id);
-    setDraft({ title: item.title, type: item.type, detail: item.detail, officialUrl: item.officialUrl, deadlineAt: toInputDate(item.deadlineAt), eligibility: item.eligibility, prizeDetails: item.prizeDetails || "", active: item.active === 1 });
+    setDraft({ title: item.title, type: item.type, detail: item.detail, officialUrl: item.officialUrl, deadlineAt: toInputDate(item.deadlineAt), eligibility: item.eligibility, prizeDetails: item.prizeDetails || "", location: item.location || "", requirements: item.requirements || "", applicationSteps: item.applicationSteps || "", submissionFormat: item.submissionFormat || "", teamInfo: item.teamInfo || "", difficulty: item.difficulty || "", active: item.active === 1 });
     setNotice("");
   };
 
@@ -61,6 +67,12 @@ export function AdminOpportunityManager() {
       <label className="text-xs font-bold text-[#62566A]">Current deadline<input type="datetime-local" value={draft.deadlineAt} onChange={(event) => setDraft({ ...draft, deadlineAt: event.target.value })} className="mt-1 w-full rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm font-normal text-[#3A3540]" /></label>
       <textarea required value={draft.eligibility} onChange={(event) => setDraft({ ...draft, eligibility: event.target.value })} placeholder="Eligibility from the official rules" className="min-h-16 rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
       <input value={draft.prizeDetails} onChange={(event) => setDraft({ ...draft, prizeDetails: event.target.value })} placeholder="Prize or outcome details (optional)" className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
+      <input value={draft.location} onChange={(event) => setDraft({ ...draft, location: event.target.value })} placeholder="Location (optional; official rules only)" className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
+      <textarea value={draft.requirements} onChange={(event) => setDraft({ ...draft, requirements: event.target.value })} placeholder="Requirements (optional; official rules only)" className="min-h-16 rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
+      <textarea value={draft.applicationSteps} onChange={(event) => setDraft({ ...draft, applicationSteps: event.target.value })} placeholder="Application steps (optional; official rules only)" className="min-h-16 rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
+      <textarea value={draft.submissionFormat} onChange={(event) => setDraft({ ...draft, submissionFormat: event.target.value })} placeholder="Submission format (optional; official rules only)" className="min-h-16 rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
+      <input value={draft.teamInfo} onChange={(event) => setDraft({ ...draft, teamInfo: event.target.value })} placeholder="Team information (optional; official rules only)" className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
+      <input value={draft.difficulty} onChange={(event) => setDraft({ ...draft, difficulty: event.target.value })} placeholder="Difficulty (optional; official rules only)" className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-sm text-[#3A3540]" />
       <label className="flex items-center gap-2 text-xs font-bold text-[#62566A]"><input type="checkbox" checked={draft.active} onChange={(event) => setDraft({ ...draft, active: event.target.checked })} className="size-4 accent-[#947DA3]" /> Show to students</label>
       <div className="flex gap-2"><button type="submit" disabled={create.isPending || update.isPending} className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#3A3540] px-3 py-2.5 text-xs font-bold text-white"><Save size={14} />{editingId ? "Save changes" : "Add opportunity"}</button>{editingId && <button type="button" onClick={() => { setEditingId(null); setDraft(emptyDraft); }} className="rounded-xl border border-[#D9CEC4] bg-white px-3 py-2.5 text-xs font-bold text-[#62566A]">Cancel</button>}</div>
     </form>

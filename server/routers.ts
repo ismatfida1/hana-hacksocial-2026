@@ -29,7 +29,7 @@ export const memoryProfileSchema = z.object({
 
 type HanaMemoryProfileInput = z.infer<typeof memoryProfileSchema>;
 const memoryConversation = z.object({ role: z.enum(["user", "hana"]), text: z.string().max(4000), createdAt: z.string().datetime() });
-const opportunityFields = z.object({ title: z.string().min(1).max(200), type: z.string().min(1).max(80), detail: z.string().min(1).max(4000), officialUrl: z.string().url().max(500), deadlineAt: z.string().datetime().nullable().optional(), eligibility: z.string().min(1).max(4000), prizeDetails: z.string().max(2000).nullable().optional(), active: z.boolean().default(true) });
+const opportunityFields = z.object({ title: z.string().min(1).max(200), type: z.string().min(1).max(80), detail: z.string().min(1).max(4000), officialUrl: z.string().url().max(500), deadlineAt: z.string().datetime().nullable().optional(), eligibility: z.string().min(1).max(4000), prizeDetails: z.string().max(2000).nullable().optional(), location: z.string().max(200).nullable().optional(), requirements: z.string().max(4000).nullable().optional(), applicationSteps: z.string().max(4000).nullable().optional(), submissionFormat: z.string().max(4000).nullable().optional(), teamInfo: z.string().max(2000).nullable().optional(), difficulty: z.string().max(80).nullable().optional(), active: z.boolean().default(true) });
 const opportunityUpdate = opportunityFields.partial();
 
 const chatInput = z.object({
@@ -116,8 +116,8 @@ export const appRouter = router({
     adminUpdate: adminProcedure.input(z.object({ id: z.number().int().positive(), changes: opportunityUpdate })).mutation(async ({ input }) => {
       if (input.changes.officialUrl && !validateResourceCandidate({ label: input.changes.title || "Opportunity", url: input.changes.officialUrl })) throw new Error("Official URL must be a public HTTPS page");
       const checked = input.changes.officialUrl ? (await verifyResourceCandidates([{ label: input.changes.title || "Opportunity", url: input.changes.officialUrl }]))[0] : undefined;
-      const { active, deadlineAt, prizeDetails, ...rest } = input.changes;
-      const changes = { ...rest, ...(deadlineAt !== undefined ? { deadlineAt: deadlineAt ? new Date(deadlineAt) : null } : {}), ...(prizeDetails !== undefined ? { prizeDetails: prizeDetails ?? null } : {}), ...(active !== undefined ? { active: active ? 1 : 0 } : {}), ...(checked ? { verificationStatus: checked.reachable ? "verified" as const : "unreachable" as const, verifiedAt: checked.reachable ? new Date() : null } : {}) };
+      const { active, deadlineAt, prizeDetails, location, requirements, applicationSteps, submissionFormat, teamInfo, difficulty, ...rest } = input.changes;
+      const changes = { ...rest, ...(deadlineAt !== undefined ? { deadlineAt: deadlineAt ? new Date(deadlineAt) : null } : {}), ...(prizeDetails !== undefined ? { prizeDetails: prizeDetails ?? null } : {}), ...(location !== undefined ? { location: location ?? null } : {}), ...(requirements !== undefined ? { requirements: requirements ?? null } : {}), ...(applicationSteps !== undefined ? { applicationSteps: applicationSteps ?? null } : {}), ...(submissionFormat !== undefined ? { submissionFormat: submissionFormat ?? null } : {}), ...(teamInfo !== undefined ? { teamInfo: teamInfo ?? null } : {}), ...(difficulty !== undefined ? { difficulty: difficulty ?? null } : {}), ...(active !== undefined ? { active: active ? 1 : 0 } : {}), ...(checked ? { verificationStatus: checked.reachable ? "verified" as const : "unreachable" as const, verifiedAt: checked.reachable ? new Date() : null } : {}) };
       return updateOpportunity(input.id, changes);
     }),
     adminArchive: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(({ input }) => archiveOpportunity(input.id)),

@@ -674,7 +674,7 @@
 - [x] Add layered Career Map, Topic, Subtopic, and Learning views with back navigation.
 - [x] Add clear visual states for complete, current, upcoming, locked, recommended, and needs review.
 - [x] Add concise Why actions for major topics and connect them to the student’s goal.
-- [ ] Add logically ordered career-specific dependencies and only useful alternate routes.
+- [x] Add logically ordered career-specific dependencies and only useful alternate routes; existing tests verify Cybersecurity starts with networking/Linux and Mathematics for Computing starts with algebra/logic rather than forced Python.
 - [x] Add practical skill verification before marking claimed skills complete.
 - [x] Add non-numeric skill confidence states and lightweight review prompts.
 - [x] Add smart prerequisite explanations that name the missing skill and reason.
@@ -948,3 +948,5 @@
 - [x] Synchronize FINAL_REQUIREMENTS_ACCEPTANCE_AUDIT.md with 20 Vitest files / 63 tests, the 375×812 mobile check, published legal-page reachability, and the documented external OAuth limitation.
 - [x] Verify representative official resource/opportunity destinations (Harvard CS50x, MIT OpenCourseWare, MDN Learn, and Devpost) and record that reachability does not grant redistribution rights; retain final link-health and license review as open.
 - [x] Re-run typecheck, production build, and release security scan after the latest audit/resource updates; all passed, with only the existing client bundle-size warning.
+- [x] Lazy-load the large Home experience behind a branded loading shell to improve initial responsiveness; tests, typecheck, and production build pass, with a remaining non-blocking vendor chunk warning.
+- [x] Align the acceptance audit with the managed-storage contract: account deletion removes user memory, upload metadata, and database references; no unsupported underlying-object delete endpoint is claimed.

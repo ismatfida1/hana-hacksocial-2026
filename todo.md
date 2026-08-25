@@ -676,9 +676,9 @@
 - [x] Add concise Why actions for major topics and connect them to the student’s goal.
 - [ ] Add logically ordered career-specific dependencies and only useful alternate routes.
 - [x] Add practical skill verification before marking claimed skills complete.
-- [ ] Add non-numeric skill confidence states and lightweight review prompts.
+- [x] Add non-numeric skill confidence states and lightweight review prompts.
 - [x] Add smart prerequisite explanations that name the missing skill and reason.
-- [ ] Keep university and industry views connected but visibly separate.
+- [x] Keep university and industry views connected but visibly separate.
 - [ ] Add a compact semester-aware and four-year planning layer behind the current next step.
 - [ ] Add meaningful career milestones without XP or arbitrary gamification.
 - [ ] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections.
@@ -698,11 +698,11 @@
 - [ ] Produce an honest connected/not-available integration report with tests and user authorization requirements.
 
 ## Hana simple-friend teaching loop — 2026-08-24
-- [ ] Add concise explanation modes: normal, simple, new learner, before-test, example, exam answer, and practice questions.
-- [ ] Add an always-available “I’m confused” action that requests a different explanation path.
-- [ ] Add short checks for understanding after explanations instead of relying on self-reported understanding.
+- [x] Add concise explanation modes: normal, simple, new learner, before-test, example, exam answer, and practice questions.
+- [x] Add an always-available “I’m confused” action that requests a different explanation path.
+- [x] Add short checks for understanding after explanations instead of relying on self-reported understanding.
 - [ ] Store useful explanation preferences from real interactions without rigidly labeling the student.
-- [ ] Keep Hana calm, smart, patient, and occasionally playful without constant emojis or forced slang.
+- [x] Keep Hana calm, smart, patient, and occasionally playful without constant emojis or forced slang.
 - [ ] Keep Home and Android-ready entry points focused on Ask, Study, Test Prep, and My Path while preserving the approved main navigation.
 - [x] Update the reusable Hana skill with the simple-friend teaching loop and validate the existing web architecture.
 

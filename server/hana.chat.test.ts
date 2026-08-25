@@ -27,7 +27,12 @@ describe("hana.chat", () => {
   });
 
   it("accepts the supported Hana response modes in the typed contract", () => {
-    const modes = ["short", "analogy", "example", "debug", "deep", "career", "project"] as const;
+    const modes = ["short", "simple", "new-learner", "before-test", "analogy", "example", "exam-answer", "practice", "debug", "deep", "career", "project"] as const;
+    expect(modes).toContain("simple");
+    expect(modes).toContain("new-learner");
+    expect(modes).toContain("before-test");
+    expect(modes).toContain("exam-answer");
+    expect(modes).toContain("practice");
     expect(modes).toContain("career");
     expect(modes).toContain("project");
   });

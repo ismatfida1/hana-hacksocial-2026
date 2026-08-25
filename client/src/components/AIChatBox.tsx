@@ -57,6 +57,7 @@ export type AIChatBoxProps = {
    * Click to send directly
    */
   suggestedPrompts?: string[];
+  onSuggestedPrompt?: (prompt: string) => void;
   onFileSelected?: (file: File) => void;
 };
 
@@ -120,6 +121,7 @@ export function AIChatBox({
   height = "600px",
   emptyStateMessage = "Start a conversation with AI",
   suggestedPrompts,
+  onSuggestedPrompt,
   onFileSelected,
 }: AIChatBoxProps) {
   const [input, setInput] = useState("");
@@ -213,7 +215,7 @@ export function AIChatBox({
                   {suggestedPrompts.map((prompt, index) => (
                     <button
                       key={index}
-                      onClick={() => onSendMessage(prompt)}
+                      onClick={() => (onSuggestedPrompt ? onSuggestedPrompt(prompt) : onSendMessage(prompt))}
                       disabled={isLoading}
                       className="rounded-lg border border-border bg-card px-4 py-2 text-sm transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
                     >

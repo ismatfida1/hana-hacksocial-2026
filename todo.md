@@ -944,3 +944,4 @@
 - [x] Add authoritative source citations and practical notice obligations for Blue Oak 1.0.0, MPL-2.0, Unlicense, and wouter to the dependency-license audit; retain unresolved package/asset/provider gates.
 - [x] Add and pass authentication contract coverage for greeting-first routing, Google sign-in, alternate sign-in, and the separate authorized-demo password area; external OAuth callback/recovery behavior remains open.
 - [x] Document the verified provider-aware sign-in implementation and exact public-domain OAuth smoke-test sequence; keep provider allowlisting, Google enablement, callback, recovery, and cross-account testing open.
+- [x] Create a production verification runbook covering cross-device persistence, account ownership isolation, provider callback, deletion, final AAB scanning, and Play evidence capture; leave execution gates open until real tests are run.

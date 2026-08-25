@@ -808,8 +808,8 @@
 - [x] Add verified alternative learning resources for each roadmap step and gracefully handle unavailable links.
 - [x] Make project completion automatically complete the linked roadmap step while preserving reliable manual checkbox completion.
 - [ ] Generate and integrate the real silent vertical HANA product-introduction video instead of the placeholder panel.
-- [ ] Replace the tour modal with a guided Hana-led tour that points to specific controls and explains each action in a compact cloud-style callout.
-- [ ] Make university details influence planning through curriculum-aware data when available, with an explicit student-entered curriculum fallback when unavailable.
+- [x] Replace the tour modal with a guided Hana-led tour that points to specific controls and explains each action in a compact cloud-style callout.
+- [x] Make university details influence planning through curriculum-aware data when available, with an explicit student-entered curriculum fallback when unavailable.
 - [x] Ensure roadmap generation uses the student’s university, degree, semester, subjects, skills, goal, and available study time rather than a generic career template.
 - [ ] Add tests and responsive validation for all fixes before publishing.
 
@@ -821,7 +821,7 @@
 - [x] Verify learning resources before display and provide a primary plus two approved alternatives without overwhelming the main screen.
 - [x] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.
 - [ ] Replace the tutorial placeholder with an actual generated video when quota/service access permits; otherwise show an honest production status and retain the completed storyboard.
-- [ ] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.
+- [x] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.
 - [ ] Attempt official university curriculum retrieval only through reliable sources and show an editable subject fallback when unavailable.
 - [x] Use university context, degree, semester, subjects, career, current skills, goals, and study pace to change the actual Journey; target-role gap analysis remains a later enhancement.
 - [x] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.

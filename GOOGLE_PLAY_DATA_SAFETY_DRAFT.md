@@ -57,3 +57,19 @@ The current AI boundary uses server-side provider adapters and minimized student
 ## Release decision
 
 This draft supports preparation only. It does not establish that HANA is ready for commercial sale or Google Play submission. Keep the existing open checklist items—signed-AAB scan, provider configuration and retention, analytics payloads, storage-object deletion, production account deletion, and Play Console review—open until they are tested against the final release artifact.
+
+## Play release records to prepare
+
+| Record | Current evidence or draft value | Final status |
+|---|---|---|
+| App identity | HANA — Your AI Learning Companion; Android package configuration must be read from the exact release project. | Confirm in signed AAB and Play Console |
+| Developer/owner | Ismat Fida; privacy contact `ismat542008@gmail.com`. | Confirm developer-account legal details |
+| Content declaration | Educational and career-coaching app with AI-generated explanations and external learning links. It is not a university, recruiter, or professional-advice service. | Owner review required |
+| Target API and SDK | Debug workflow installs Android API 36/build-tools 36.0.0; final target/compile values must be read from the signed release Gradle configuration. | Confirm from release build |
+| Signing | GitHub Actions debug APK was verified. No signed release AAB has been verified in this project state. | Open |
+| Store listing | Use truthful screenshots and descriptions from the final app; do not claim provider integrations, live deadlines, curriculum access, or deletion behavior that are not verified. | Prepare after release UX freeze |
+| Account deletion | Public route: `https://hanacompact-lpgytise.manus.space/delete-account`; in-app deletion exists under Profile → Privacy. | Test with a real production account and record results |
+| Privacy URL | `https://hanacompact-lpgytise.manus.space/privacy` | Reachable; final release-content review required |
+| Terms URL | `https://hanacompact-lpgytise.manus.space/terms` | Reachable; final release-content review required |
+
+These records are a preparation aid. They do not replace Play Console’s declarations, signed-AAB inspection, provider-term confirmation, or qualified legal review.

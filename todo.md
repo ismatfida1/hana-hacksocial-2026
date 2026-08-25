@@ -779,7 +779,7 @@
 - [x] Verify no AI keys, service-role keys, database passwords, admin credentials, GitHub tokens, payment secrets, or signing keys enter web or Android client assets; the actual signed AAB still needs a release scan.
 - [ ] Verify account ownership, session restoration, logout, recovery boundaries, and cross-account isolation.
 - [x] Implement secure account deletion and applicable web-based deletion path before commercial/Play launch; live production deletion and external Play verification remain open.
-- [ ] Prepare accurate Google Play Data Safety, content, developer, signing, target API, and store-listing records.
+- [x] Prepare accurate Google Play Data Safety, content, developer, signing, target API, and store-listing records.
 - [ ] Complete ownership, third-party license, Canva, Manus, AI-provider, and open-source commercial-use records.
 
 ## Full ownership and commercial licensing audit — 2026-08-24

@@ -122,7 +122,7 @@ pnpm start
 
 ### Speaker notes
 
-“The current copied project passes its automated test suite, TypeScript validation, production build, release security scan, and Git diff check. The copied repository is synchronized with GitHub, and the original Hana working tree is clean. The build still reports a non-blocking large JavaScript chunk warning and a warning that the legacy pnpm field is ignored.”
+“The current copied project passes its automated test suite, TypeScript validation, local production build, release security scan, and Git diff check. The copied repository is synchronized with GitHub, and the original Hana working tree is clean. The build still reports a non-blocking large JavaScript chunk warning and a warning that the legacy pnpm field is ignored.”
 
 ---
 
@@ -134,7 +134,7 @@ pnpm start
 
 ### Speaker notes
 
-“The HackSocial evaluator path is designed to fit into a short demonstration. A participant states a goal, reviews a personalized roadmap, starts a mission, asks Hana for help, completes a mastery interaction, receives a project idea, opens an official opportunity destination, and finishes with a progress state.”
+“The HackSocial evaluator path is designed to fit into a short demonstration. A participant states a goal, reviews a compact demo roadmap, starts a mission, asks Hana for help, completes a mastery interaction, receives a project idea, opens an official opportunity destination, and finishes with a progress state.”
 
 “The live AI procedure is non-persisting. When the configured provider is available, it is used. When it is unavailable, the interface says so clearly instead of pretending that a fallback is live AI.”
 

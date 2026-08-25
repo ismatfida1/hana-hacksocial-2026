@@ -15,7 +15,7 @@ const stageOrder: Stage[] = ["goal", "roadmap", "mission", "ask", "mastery", "pr
 
 const stageCopy: Record<Stage, { eyebrow: string; title: string; caption: string }> = {
   goal: { eyebrow: "HackSocial 2026 · Demo Mode", title: "Turn confusion into one clear next step.", caption: "Hana helps a student move from an uncertain goal to something useful they can build." },
-  roadmap: { eyebrow: "Your direction", title: "Here is the path Hana shaped.", caption: "A small path is easier to follow than a giant list of tools." },
+  roadmap: { eyebrow: "Your direction", title: "Here is the compact demo path.", caption: "A small path is easier to follow than a giant list of tools." },
   mission: { eyebrow: "Today’s mission", title: "Make the first useful piece.", caption: "Start with a tiny task. The goal is progress, not a perfect app." },
   ask: { eyebrow: "Ask Hana", title: "You are not stuck alone.", caption: "Ask a focused question while you work." },
   mastery: { eyebrow: "Quick check", title: "Show what you understood.", caption: "Hana checks the idea before moving you forward." },
@@ -31,8 +31,8 @@ export function HackSocial({ onExit }: { onExit: () => void }) {
   const [mastery, setMastery] = useState<"idle" | "correct" | "try-again">("idle");
   const [aiReply, setAiReply] = useState<string | null>(null);
   const demoChat = trpc.hana.demoChat.useMutation({
-    onSuccess: (response) => setAiReply(response.text),
-    onError: () => setAiReply(null),
+    onSuccess: (response) => setAiReply(response.live ? response.text : `Live AI is unavailable right now. Hana’s safe demo guidance is still here: ${response.text}`),
+    onError: () => setAiReply("Live AI is unavailable right now. Please continue with the demo guidance, or try again when the service is available."),
   });
 
   const currentIndex = stageOrder.indexOf(stage);

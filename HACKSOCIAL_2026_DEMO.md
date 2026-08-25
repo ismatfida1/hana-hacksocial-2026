@@ -4,7 +4,7 @@ Hana’s copied HackSocial experience is an isolated evaluator journey inside th
 
 ## Demo story
 
-The primary flow is intentionally short: a student states a goal, reviews Hana’s compact personalized path, starts a small mission, asks Hana for guidance, completes a mastery check, receives a buildable project idea, explores an official opportunity page, and ends with a clear next action. The experience is labeled **HackSocial 2026 · Demo Mode** so evaluators can distinguish it from a real learner account.
+The primary flow is intentionally short: a student states a goal, reviews Hana’s compact demonstration path, starts a small mission, asks Hana for guidance, completes a mastery check, receives a buildable project idea, explores an official opportunity page, and ends with a clear next action. The experience is labeled **HackSocial 2026 · Demo Mode** so evaluators can distinguish it from a real learner account.
 
 ## Data boundaries
 

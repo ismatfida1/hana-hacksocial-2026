@@ -9,6 +9,7 @@ describe("HackSocial 2026 demo contract", () => {
 
   it("keeps the evaluator journey in the intended order", () => {
     const stages = ["goal", "roadmap", "mission", "ask", "mastery", "project", "opportunity", "progress"];
+    expect(component).toContain('const stageOrder: Stage[] = ["goal", "roadmap", "mission", "ask", "mastery", "project", "opportunity", "progress"]');
     let previous = -1;
     for (const stage of stages) {
       const position = component.indexOf(`  ${stage}:`);
@@ -19,6 +20,7 @@ describe("HackSocial 2026 demo contract", () => {
 
   it("labels demo state as isolated and links to an official opportunity page", () => {
     expect(component).toContain("Demo Mode sends no conversation to personal memory");
+    expect(component).toContain("Live AI is unavailable right now");
     expect(component).toContain("https://devpost.com/hackathons");
     expect(component).toContain("Check the official rules, dates, and eligibility");
   });

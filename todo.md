@@ -978,8 +978,16 @@
 - [ ] Audit the copied baseline and identify concrete blockers in the evaluator demo flow without modifying the original HANA project.
 - [ ] Implement a coherent landing → today’s mission → learning → Ask Hana → mastery → project → opportunity → progress experience while preserving existing Hana functionality.
 - [ ] Improve mobile-first hierarchy, loading/error states, accessibility, concise content, and navigation only where the demo needs it.
-- [ ] Preserve real AI/backend/database behavior and use truthful fallbacks without exposing secrets or writing isolated demo activity to real user data.
+- [x] Preserve real AI/backend/database behavior and use truthful fallbacks without exposing secrets or writing isolated demo activity to real user data; local contract, build, and security checks pass.
 - [ ] Run full tests, typecheck, build, security scan, responsive checks, and an end-to-end demo verification.
 - [ ] Commit and push the completed copied HackSocial implementation normally to `ismatfida1/hana-hacksocial-2026` and prepare separate deployment verification.
 - [x] Inspect hosting options and prepare separate public full-stack production configuration for the copied HackSocial project; do not modify the original HANA deployment or publish without explicit approval. The guide recommends separate managed full-stack Autoscale hosting; actual managed deployment remains open.
 - [x] Create a presentation-ready script summarizing HackSocial 2026’s separate deployment configuration, security boundaries, validation evidence, and remaining release gates.
+
+## HackSocial demo-readiness acceptance criteria
+- [x] Audit every presentation claim against the actual copied implementation and deployed behavior; the copied implementation was checked locally, while separate production behavior remains an open gate.
+- [ ] Ensure the judge-facing flow works end to end: goal, roadmap, mission, Ask Hana, mastery, project, opportunity, and progress.
+- [x] Do not call the roadmap AI-personalized unless the entered goal actually changes the roadmap and that behavior is tested; presentation and demo documentation now use truthful compact-demo wording.
+- [x] Verify and repair UI, navigation, AI procedure, authentication boundary, backend/API behavior, and Demo Mode isolation; local checks pass, with real-domain auth and deployment checks still open.
+- [x] Create a concise judge-facing demo runbook for the strongest verified flow.
+- [ ] Run final local and deployed checks, update presentation/readiness documentation, synchronize only the copied project, and report remaining release gates; local checks and browser sign-in-gate verification are complete, but authenticated demo and separate production deployment remain open.

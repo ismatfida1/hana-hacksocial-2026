@@ -5,7 +5,7 @@ import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { createAccountDeletionRequest, deleteUserAccount, getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
-import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, submitMasteryCheck, updateStudentProfile } from "./studentContext";
+import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
 
@@ -100,7 +100,9 @@ export const appRouter = router({
     setStepCompletion: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), completed: z.boolean() })).mutation(({ ctx, input }) => setLearningStepCompletion(ctx.user.id, input.stepTitle, input.completed)),
     saveStepReference: protectedProcedure.input(z.object({ stepTitle: z.string().min(1).max(160), note: z.string().max(2000).optional(), resourceUrl: z.string().url().max(500).optional() })).mutation(({ ctx, input }) => saveStepReference(ctx.user.id, input.stepTitle, input.note, input.resourceUrl)),
     coachContext: protectedProcedure.input(z.object({ module: z.enum(["ask-hana", "daily-mission", "career-coach", "project-coach", "career-readiness", "opportunity-matching", "university-coach", "weekly-report"]) })).query(({ ctx, input }) => buildCoachContext(ctx.user.id, input.module)),
-    addProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(160), skills: z.array(z.string().max(120)).max(12).default([]) })).mutation(({ ctx, input }) => addStudentProject(ctx.user.id, input.title, input.skills)),
+    addProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(160), skills: z.array(z.string().max(120)).max(12).default([]), milestones: z.array(z.string().max(160)).max(20).default([]) })).mutation(({ ctx, input }) => addStudentProject(ctx.user.id, input.title, input.skills, input.milestones)),
+    setProjectMilestone: protectedProcedure.input(z.object({ projectId: z.string().min(1).max(120), milestoneTitle: z.string().min(1).max(160), complete: z.boolean() })).mutation(({ ctx, input }) => setProjectMilestone(ctx.user.id, input.projectId, input.milestoneTitle, input.complete)),
+    setProjectStatus: protectedProcedure.input(z.object({ projectId: z.string().min(1).max(120), status: z.enum(["locked", "active", "in_progress", "complete"]) })).mutation(({ ctx, input }) => setProjectStatus(ctx.user.id, input.projectId, input.status)),
     addPortfolioProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addPortfolioProject(ctx.user.id, input.title)),
     addCompetition: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addCompetition(ctx.user.id, input.title)),
     recordLearning: protectedProcedure.input(z.object({ note: z.string().min(1).max(240) })).mutation(({ ctx, input }) => recordLearningHistory(ctx.user.id, input.note)),

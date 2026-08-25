@@ -123,3 +123,9 @@ The additional attachments define two connected paths: a four-year BSCS/software
 ## Audit conclusion after all supplied attachments
 
 The new attachments reinforce, rather than remove, the previously identified blockers. HANA currently has the **shape** of a personalized career companion and a usable compact Journey, but it does not yet contain the complete curriculum-aware dual-roadmap engine described by the specification. The current code should therefore remain labeled a published prototype/progress release, not the fully completed final product.
+
+## Post-audit implementation addendum — 25 August 2026
+
+Since the earlier matrix, HANA added a backward-compatible account-memory `projectRecords` model with durable project identifiers, skills, milestone lists, and `locked`, `active`, `in_progress`, and `complete` states. Protected tRPC mutations now update milestones and derive project status from milestone completion. This improves the project requirement from **NOT IMPLEMENTED** to **PARTIAL** because the current Projects UI is not yet wired to render and toggle these records end to end, and existing string-only projects are not migrated into milestone records.
+
+The latest validation run passed TypeScript, the complete Vitest suite (**9 files, 23 tests**), the production build, and the release security scan. The scan reported no literal secret patterns, environment files, signing material, or source maps in the scanned paths.

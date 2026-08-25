@@ -2,6 +2,17 @@ import { getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
 import type { HanaStudentMemory } from "../drizzle/schema";
 import { buildRoadmap, type RoadmapNode } from "../shared/hanaJourney";
 
+export type ProjectStatus = "locked" | "active" | "in_progress" | "complete";
+
+export type ProjectRecord = {
+  id: string;
+  title: string;
+  skills: string[];
+  status: ProjectStatus;
+  milestones: Array<{ title: string; complete: boolean }>;
+  requiresReview?: boolean;
+};
+
 export type StudentProfile = {
   university?: string;
   degree?: string;
@@ -20,6 +31,7 @@ export type StudentProfile = {
   stepNotes: Record<string, string>;
   stepResources: Record<string, string>;
   projects: string[];
+  projectRecords: ProjectRecord[];
   projectSkills: string[];
   githubProjects: string[];
   portfolioProjects: string[];
@@ -87,6 +99,26 @@ const asList = (value: unknown): string[] =>
 const asText = (value: unknown): string | undefined =>
   typeof value === "string" && value.trim().length > 0 ? value.trim().slice(0, 240) : undefined;
 
+const asProjectRecords = (value: unknown): ProjectRecord[] => {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((item, index) => {
+    if (!item || typeof item !== "object") return [];
+    const record = item as Record<string, unknown>;
+    const title = asText(record.title);
+    if (!title) return [];
+    const rawMilestones = Array.isArray(record.milestones) ? record.milestones : [];
+    const milestones = rawMilestones.flatMap((milestone) => {
+      if (typeof milestone === "string") return [{ title: milestone.slice(0, 160), complete: false }];
+      if (!milestone || typeof milestone !== "object") return [];
+      const entry = milestone as Record<string, unknown>;
+      const milestoneTitle = asText(entry.title);
+      return milestoneTitle ? [{ title: milestoneTitle, complete: entry.complete === true }] : [];
+    }).slice(0, 30);
+    const status: ProjectStatus = record.status === "locked" || record.status === "active" || record.status === "in_progress" || record.status === "complete" ? record.status : "active";
+    return [{ id: asText(record.id) || `project-${index + 1}`, title, skills: asList(record.skills), status, milestones, requiresReview: record.requiresReview === true }];
+  }).slice(0, 40);
+};
+
 const asMap = (value: unknown): Record<string, string> => {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   return Object.entries(value as Record<string, unknown>).reduce<Record<string, string>>((result, [key, item]) => {
@@ -115,6 +147,7 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
     stepNotes: asMap(profile.stepNotes),
     stepResources: asMap(profile.stepResources),
     projects: asList(profile.projects),
+    projectRecords: asProjectRecords(profile.projectRecords),
     projectSkills: asList(profile.projectSkills),
     githubProjects: asList(profile.githubProjects),
     portfolioProjects: asList(profile.portfolioProjects),
@@ -364,12 +397,41 @@ async function appendProfileItem(studentId: number, field: "projects" | "portfol
   return updateStudentProfile(studentId, { [field]: next });
 }
 
-export function buildProjectRecord(title: string, skills: string[] = []) {
-  return { title: title.trim().slice(0, 160), skills: skills.map((skill) => skill.trim().slice(0, 120)).filter(Boolean).slice(0, 12), status: "planned" as const };
+export function buildProjectRecord(title: string, skills: string[] = [], milestones: string[] = []): ProjectRecord {
+  const cleanTitle = title.trim().slice(0, 160);
+  return {
+    id: `project-${cleanTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80) || Date.now()}`,
+    title: cleanTitle,
+    skills: skills.map((skill) => skill.trim().slice(0, 120)).filter(Boolean).slice(0, 12),
+    status: "active",
+    milestones: milestones.map((milestone) => ({ title: milestone.trim().slice(0, 160), complete: false })).filter((milestone) => milestone.title).slice(0, 20),
+  };
 }
 
-export async function addStudentProject(studentId: number, title: string, skills: string[] = []) {
-  return appendProfileItem(studentId, "projects", buildProjectRecord(title, skills).title);
+export async function addStudentProject(studentId: number, title: string, skills: string[] = [], milestones: string[] = []) {
+  const existing = await getHanaStudentMemory(studentId);
+  const profile = normalizeStudentProfile(existing?.profile);
+  const record = buildProjectRecord(title, skills, milestones);
+  const records = [...profile.projectRecords.filter((item) => item.title.toLowerCase() !== record.title.toLowerCase()), record].slice(-40);
+  return updateStudentProfile(studentId, { projects: [...profile.projects, record.title].filter((item, index, list) => list.indexOf(item) === index).slice(-40), projectRecords: records });
+}
+
+export async function setProjectMilestone(studentId: number, projectId: string, milestoneTitle: string, complete: boolean) {
+  const existing = await getHanaStudentMemory(studentId);
+  const profile = normalizeStudentProfile(existing?.profile);
+  const records = profile.projectRecords.map((project) => {
+    if (project.id !== projectId) return project;
+    const milestones = project.milestones.map((milestone) => milestone.title === milestoneTitle ? { ...milestone, complete } : milestone);
+    const status: ProjectStatus = milestones.length > 0 && milestones.every((milestone) => milestone.complete) ? "complete" : milestones.some((milestone) => milestone.complete) ? "in_progress" : "active";
+    return { ...project, milestones, status };
+  });
+  return updateStudentProfile(studentId, { projectRecords: records });
+}
+
+export async function setProjectStatus(studentId: number, projectId: string, status: ProjectStatus) {
+  const existing = await getHanaStudentMemory(studentId);
+  const profile = normalizeStudentProfile(existing?.profile);
+  return updateStudentProfile(studentId, { projectRecords: profile.projectRecords.map((project) => project.id === projectId ? { ...project, status } : project) });
 }
 
 export async function addPortfolioProject(studentId: number, title: string) {

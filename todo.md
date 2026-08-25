@@ -774,8 +774,8 @@
 - [x] Run responsive, security, data-integrity, TypeScript, regression, and production-build validation before publishing.
 
 ## Security, privacy, and Play readiness requirements — 2026-08-24
-- [ ] Add visible Privacy Policy, Terms of Service, AI disclosure, creator/ownership notice, app version, and support/contact surfaces.
-- [ ] Document exactly what Hana stores, why it is stored, where it is stored, which providers process it, retention, and deletion behavior.
+- [x] Add visible Privacy Policy, Terms of Service, AI disclosure, creator/ownership notice, app version, and support/contact surfaces.
+- [x] Document exactly what Hana stores, why it is stored, where it is stored, which providers process it, retention, and deletion behavior.
 - [ ] Verify no AI keys, service-role keys, database passwords, admin credentials, GitHub tokens, payment secrets, or signing keys enter web or Android client assets.
 - [ ] Verify account ownership, session restoration, logout, recovery boundaries, and cross-account isolation.
 - [ ] Implement secure account deletion and applicable web-based deletion path before commercial/Play launch.

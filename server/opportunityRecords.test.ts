@@ -25,6 +25,12 @@ describe("admin-managed opportunity records", () => {
     expect(db).toContain("export async function archiveOpportunity");
   });
 
+  it("uses stored demonstrated skills when explaining opportunity fit", () => {
+    expect(home).toContain("function opportunityFitReason(area: string | undefined, type: string, demonstratedSkills: string[] = [])");
+    expect(home).toContain("opportunityFitReason(plan?.area, item.type, demonstratedSkills)");
+    expect(home).toContain("This builds on your saved evidence:");
+  });
+
   it("renders active managed records and honest deadline states for students", () => {
     expect(home).toContain("trpc.opportunities.list.useQuery");
     expect(home).toContain("displayOpportunities = demoMode");

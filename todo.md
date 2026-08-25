@@ -915,3 +915,4 @@
 - [x] Add an admin management surface that does not appear to ordinary students.
 - [x] Replace the student opportunity list’s static records with active account-backed records and show live, past, or unverified deadline states honestly.
 - [x] Verify official URLs server-side, add regression tests, run the production build, and run the release security scan.
+- [x] Use saved demonstrated skills in Hana’s opportunity-fit explanation while keeping the official record and eligibility source authoritative.

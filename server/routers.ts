@@ -9,6 +9,7 @@ import { addCompetition, addPortfolioProject, addStudentProject, buildCoachConte
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
 import { validateResourceCandidate, verifyResourceCandidates } from "./resourceVerification";
+import { lookupOfficialCurriculum } from "./curriculum";
 import { storagePut } from "./storage";
 
 const hanaSystemPrompt = `You are Hana, a cute cream robot who helps people learn. You are a smart, patient friend — not a professor or a business tool.
@@ -117,6 +118,9 @@ export const appRouter = router({
       const safeCandidates = input.resources.filter(validateResourceCandidate);
       return { resources: await verifyResourceCandidates(safeCandidates) };
     }),
+  }),
+  curriculum: router({
+    check: protectedProcedure.input(z.object({ university: z.string().max(160) })).query(({ input }) => lookupOfficialCurriculum(input.university)),
   }),
   opportunities: router({
     list: protectedProcedure.query(() => listOpportunities(true)),

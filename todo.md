@@ -282,7 +282,7 @@
 - [x] Preserve Screen 1 as Hana greeting only with one ready action and no feature content.
 - [x] Preserve Screen 2 as career choice only, including Other and Help me find my path, without mission or dashboard content.
 - [x] Add Screen 3 university profile for university, degree, and semester.
-- [ ] Add safe curriculum retrieval with an official-source preference and manual Add / Edit Subjects fallback when verification fails.
+- [x] Add safe curriculum retrieval with an official-source preference and manual Add / Edit Subjects fallback when verification fails.
 - [x] Keep post-onboarding Home focused on one automatically selected Today’s Step card and the exact five-item bottom navigation.
 - [x] Use the label Your Journey instead of Roadmap and keep learning complexity behind the current step.
 - [x] Keep Projects, Opportunities, and Ask Hana as focused destinations rather than Home cards.

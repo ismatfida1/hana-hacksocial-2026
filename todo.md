@@ -725,7 +725,7 @@
 - [ ] Fix only verified defects and add regression tests for each fix.
 - [ ] Run production build, responsive screenshots, security review, and Android readiness checks before publishing.
 - [ ] Deliver a detailed integration and feature coverage report with exact limitations and user authorization steps.
-- [ ] Resolve the Android audit finding: the workflow and Capacitor config exist, but the current repository has no generated `android/` platform directory.
+- [x] Resolve the Android audit finding: the workflow and Capacitor config exist, but the current repository has no generated `android/` platform directory.
 
 ## Persistent account memory and session audit — 2026-08-24
 - [ ] Verify the first sign-in creates a durable secure session and reopening Hana restores the account without repeated login.

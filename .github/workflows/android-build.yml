@@ -21,10 +21,10 @@ jobs:
     timeout-minutes: 30
 
     env:
-      ANDROID_API_LEVEL: '36'
-      ANDROID_BUILD_TOOLS: '36.0.0'
-      NODE_VERSION: '22'
-      PNPM_VERSION: '10.15.1'
+      ANDROID_API_LEVEL: "36"
+      ANDROID_BUILD_TOOLS: "36.0.0"
+      NODE_VERSION: "22"
+      PNPM_VERSION: "10.15.1"
 
     steps:
       - name: Check out repository
@@ -34,7 +34,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: "21"
           cache: gradle
 
       - name: Set up Node.js
@@ -61,6 +61,16 @@ jobs:
             "platform-tools" \
             "platforms;android-${ANDROID_API_LEVEL}" \
             "build-tools;${ANDROID_BUILD_TOOLS}"
+
+      - name: Configure Gradle SDK path
+        shell: bash
+        run: |
+          SDK_PATH="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          if [ -z "$SDK_PATH" ]; then
+            echo "Android SDK path was not provided by setup-android" >&2
+            exit 1
+          fi
+          printf 'sdk.dir=%s\n' "$SDK_PATH" > android/local.properties
 
       - name: Install JavaScript dependencies
         run: pnpm install --frozen-lockfile

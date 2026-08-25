@@ -43,5 +43,7 @@ describe("Hana interactive tour contract", () => {
   it("does not invent university subjects when official curriculum data is unavailable", () => {
     expect(source).toContain('Hana will not guess your university subjects. Add them here if an official curriculum is not available.');
     expect(source).toContain('Hana will use these saved subjects with your degree and semester.');
+    expect(source).toContain('https://pucit.edu.pk/approved-curriculum/');
+    expect(source).toContain('Open the official curriculum source');
   });
 });

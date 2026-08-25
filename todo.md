@@ -827,7 +827,7 @@
 - [x] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.
 - [x] Personalize weekly pace from realistic study hours and keep one primary progress signal visible.
 - [x] Make recommendations traceable with a concise “Why?” explanation and use reliable career/industry requirements without unsupported statistics.
-- [ ] Ensure learning produces proof through practice, projects, GitHub/README, portfolio, and resume-ready evidence.
+- [x] Ensure learning produces proof through practice, projects, GitHub/README, portfolio, and resume-ready evidence.
 - [x] Match opportunities to demonstrated skills and track student-provided outcomes such as applied, interview, accepted, rejected, or completed.
 - [ ] Add regression tests, mobile visual checks, and honest release documentation for every critical fix.
 

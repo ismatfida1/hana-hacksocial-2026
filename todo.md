@@ -1014,3 +1014,7 @@
 - [x] Prepare and verify a separate public deployment URL for judges, or document the exact external hosting blocker if no compatible deployment can be authorized.
 
 - [x] Resume autonomous final public-demo preparation: reconfirm repository/deployment state, run safe validation, attempt authorized publication, verify the public URL if available, and document any blocker without touching original HANA.
+
+- [ ] Assess Netlify as the replacement public-hosting route after Vercel failed; preserve full-stack behavior and document any authorization or platform blocker without using a static-only workaround.
+
+- [ ] Create or request a separate managed Manus web project from the copied HackSocial GitHub repository, deploy it without using original HANA metadata/secrets, and verify the public URL or document the exact authorization blocker.

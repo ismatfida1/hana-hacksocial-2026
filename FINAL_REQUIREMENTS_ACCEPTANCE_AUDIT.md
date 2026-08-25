@@ -83,9 +83,9 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Production build | Passed with `pnpm run build` |
 | Release security scan | Passed with `pnpm run security:scan` |
 | Mobile visual check | Greeting screen rendered cleanly at 390×844; full authenticated flows were not exercised end to end |
-| Android | Capacitor project and GitHub workflow exist; an actual signed release AAB remains unverified in this audit |
+| Android | Hosted `Android debug APK` workflow succeeded on branch `hana-progress-2026-08-25` in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562); an actual signed release AAB remains unverified in this audit |
 | External OAuth | Not proven because the supplied screenshot shows a provider handoff error |
-| Video | Complete product video not available; generation was quota-blocked |
+| Video | Complete product video not available; the selector honestly keeps the video option unavailable and generation remains quota-blocked |
 
 ## Supplied YouTube list
 
@@ -93,7 +93,7 @@ The third attachment is a list of 50 educational YouTube channels plus a WhatsAp
 
 ## Final decision
 
-HANA is a **published working prototype / progress release**, not a fully completed final implementation of all supplied requirements. The repository is technically healthy under the recorded checks, but the following gates remain open: successful real authentication, full curriculum parsing and semester gap analysis, true per-student gap-driven Journey generation, complete verified resource failover, complete structured opportunity population, authenticated milestone-based project walkthrough, the complete product video, end-to-end deletion verification, final signed-AAB scan, and Google Play Console declarations. Per-node placement, compact Ask Hana quick actions, paused-memory behavior, and the new security/privacy contracts are now implemented and regression-tested, but authenticated end-to-end walkthroughs remain open.
+HANA is a **published working prototype / progress release**, not a fully completed final implementation of all supplied requirements. The repository is technically healthy under the recorded checks, and the hosted debug APK is verified, but the following gates remain open: successful real authentication, full curriculum parsing and semester gap analysis, true per-student gap-driven Journey generation, production deletion verification, the complete product video, final signed-AAB scan, and Google Play Console declarations. Reachable-first resource failover, server curriculum lookup with editable fallback, concise Ask Hana modes, per-node placement, compact Journey Why actions, paused-memory behavior, and security/privacy contracts are now implemented and regression-tested. Authenticated end-to-end walkthroughs and provider/terms verification remain open.
 
 Therefore, the truthful result is **not 100% complete**. The latest published prototype may be reviewed at [hanacompact-lpgytise.manus.space](https://hanacompact-lpgytise.manus.space), but it should not be marketed as having every requested feature until the open items above are independently tested.
 

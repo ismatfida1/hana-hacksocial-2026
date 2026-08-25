@@ -36,6 +36,8 @@ describe("Hana interactive tour contract", () => {
     expect(source).toContain('Hana points here');
     expect(source).toContain('getBoundingClientRect');
     expect(source).toContain('Hana guides you with expressions and arrows.');
+    expect(source).toContain('Interactive guide');
+    expect(source).toContain('privateDemo = false');
   });
 
   it("does not invent university subjects when official curriculum data is unavailable", () => {

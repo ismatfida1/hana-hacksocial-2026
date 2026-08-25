@@ -896,3 +896,4 @@
 - [x] Pause video-tour generation and integration work until the user requests it again.
 - [x] Focus the next implementation pass on the in-app Hana robot tour, including real control guidance, expressive callouts, arrows/highlights, and reliable Back/Next/Skip navigation.
 - [x] Clear stale hand-cue geometry whenever the interactive tour changes stage or cannot find its current real target.
+- [x] Add accessible semantics to the interactive tour’s hand cue and Skip action without blocking control interaction.

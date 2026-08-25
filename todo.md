@@ -916,3 +916,4 @@
 - [x] Replace the student opportunity list’s static records with active account-backed records and show live, past, or unverified deadline states honestly.
 - [x] Verify official URLs server-side, add regression tests, run the production build, and run the release security scan.
 - [x] Use saved demonstrated skills in Hana’s opportunity-fit explanation while keeping the official record and eligibility source authoritative.
+- [x] Explain clearly when the active admin opportunity catalog is empty instead of presenting a blank or broken-looking student screen.

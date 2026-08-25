@@ -54,5 +54,7 @@ describe("admin-managed opportunity records", () => {
     expect(manager).toContain("Verify now");
     expect(manager).toContain("Official HTTPS URL");
     expect(manager).toContain("Current deadline");
+    expect(manager).toContain("Review recommended");
+    expect(manager).toContain("30 * 86_400_000");
   });
 });

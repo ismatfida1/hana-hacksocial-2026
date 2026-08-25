@@ -922,3 +922,4 @@
 - [x] Make the university profile show an explicit source result: official curriculum source found, or “not found—Hana will use the subjects you enter” with no guessed curriculum.
 - [x] Show each opportunity’s last verification time in the owner manager so stale records are easy to review before republishing.
 - [x] Show only active, admin-verified opportunity records to signed-in students; keep unverified and unreachable records visible only to the owner for repair.
+- [x] Flag verified opportunity records older than 30 days for owner review without automatically changing student visibility or inventing a new deadline.

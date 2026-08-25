@@ -934,3 +934,4 @@
 - [x] Add the documented `pnpm typecheck` alias alongside the existing `pnpm check` script for clean-checkout and CI compatibility.
 - [x] Confirm the Kaggle competitions directory responds to a normal browser GET; the earlier HEAD 404 was method-specific, and the official HTTPS destination remains `https://www.kaggle.com/competitions`.
 - [x] Run the Android CI TypeScript gate through the documented `pnpm typecheck` alias.
+- [x] Automatically show reachable learning resources first and hide unreachable alternatives when at least one verified route is available.

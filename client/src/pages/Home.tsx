@@ -32,6 +32,12 @@ function opportunityFitReason(area: string | undefined, type: string, demonstrat
   return `This can help you practise ${area} by building and explaining a real project.`;
 }
 
+export function selectReachableResources<T extends { url: string }>(resources: T[], health: Array<{ url: string; reachable: boolean }> | undefined) {
+  if (!health?.length) return resources;
+  const reachableUrls = new Set(health.filter((item) => item.reachable).map((item) => item.url));
+  return reachableUrls.size ? resources.filter((resource) => reachableUrls.has(resource.url)) : resources;
+}
+
 function resourcesForStep(area: string | undefined, step: JourneyStep) {
   const set = resourceSets[area || ""] || resourceSets.default;
   const primary = { label: `Start here · ${step.resource.label}`, url: step.resource.url, note: `Best first stop for ${step.title}. Use this before the alternatives.` };
@@ -159,9 +165,10 @@ function DetailStep({ step, index, active, completed, area, note, resourceUrl, f
   const resourceCandidates = useMemo(() => resources.map(({ label, url }) => ({ label, url })), [resources]);
   const resourceHealth = trpc.resources.verify.useQuery({ resources: resourceCandidates }, { enabled: Boolean(active && verifyResources), staleTime: 5 * 60 * 1000, retry: 1 });
   const displayResources = useMemo(() => {
-    if (!resourceHealth.data?.resources.length) return resources;
-    const healthByUrl = new Map(resourceHealth.data.resources.map((item) => [item.url, item.reachable]));
-    return [...resources].sort((left, right) => Number(healthByUrl.get(right.url) === true) - Number(healthByUrl.get(left.url) === true));
+        const selected = selectReachableResources(resources, resourceHealth.data?.resources);
+    const healthByUrl = new Map((resourceHealth.data?.resources || []).map((item) => [item.url, item.reachable]));
+    return [...selected].sort((left, right) => Number(healthByUrl.get(right.url) === true) - Number(healthByUrl.get(left.url) === true));
+
   }, [resources, resourceHealth.data]);
   const [personalUrl, setPersonalUrl] = useState(resourceUrl || "");
   const [referenceError, setReferenceError] = useState("");

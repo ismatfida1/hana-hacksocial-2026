@@ -643,41 +643,41 @@
 - [x] Validate checkbox interactions, save feedback, refresh restoration, mobile layout, tests, and production build.
 
 ## Roadmap filters, references, and completion celebration — 2026-08-24
-- [ ] Add a compact roadmap filter toggle for All, Pending, and Completed steps.
-- [ ] Store personal notes per roadmap step in the signed-in student memory.
-- [ ] Store helpful personal resource links per roadmap step in the signed-in student memory.
-- [ ] Keep notes and links hidden until the user opens a step’s details.
-- [ ] Show a restrained Hana badge or celebration when the saved roadmap reaches 100%.
-- [ ] Keep the Roadmap.sh-inspired behavior and structure without copying its site design.
+- [x] Add a compact roadmap filter toggle for All, Pending, and Completed steps.
+- [x] Store personal notes per roadmap step in the signed-in student memory.
+- [x] Store helpful personal resource links per roadmap step in the signed-in student memory.
+- [x] Keep notes and links hidden until the user opens a step’s details.
+- [x] Show a restrained Hana badge or celebration when the saved roadmap reaches 100%.
+- [x] Keep the Roadmap.sh-inspired behavior and structure without copying its site design.
 - [ ] Create and validate a reusable skill describing this Hana roadmap workflow.
 - [x] Run tests, responsive visual checks, and a production build before publishing.
 
 ## Simple interactive Journey map — 2026-08-24
-- [ ] Keep Home focused on Hana’s greeting and one Today’s Step action.
-- [ ] Replace the Journey list-first view with a connected major-topic career map.
-- [ ] Show clear completed, current, and upcoming/locked node states.
-- [ ] Allow a major topic to open its smaller subtopics without showing all details at once.
-- [ ] Add a focused learning screen for the selected topic with a short Learn list, time, Why, and one Start action.
-- [ ] Preserve compact click-to-expand details, filters, notes, personal links, resources, projects, mastery, and account-backed progress.
+- [x] Keep Home focused on Hana’s greeting and one Today’s Step action.
+- [x] Replace the Journey list-first view with a connected major-topic career map.
+- [x] Show clear completed, current, and upcoming/locked node states.
+- [x] Allow a major topic to open its smaller subtopics without showing all details at once.
+- [x] Add a focused learning screen for the selected topic with a short Learn list, time, Why, and one Start action.
+- [x] Preserve compact click-to-expand details, filters, notes, personal links, resources, projects, mastery, and account-backed progress.
 - [ ] Validate the map and drill-down flow on mobile and desktop and run the full test/build checks.
 
 ## Journey 2.0 layered map — 2026-08-24
-- [ ] Add a Level 1 career map showing connected major topics and outcomes.
-- [ ] Add Level 2 topic drill-down with compact topic nodes.
-- [ ] Add Level 3 subtopic drill-down with focused subtopic nodes.
-- [ ] Open detailed explanation, resources, practice, and mastery only at Level 4 after Start learning.
+- [x] Add a Level 1 career map showing connected major topics and outcomes.
+- [x] Add Level 2 topic drill-down with compact topic nodes.
+- [x] Add Level 3 subtopic drill-down with focused subtopic nodes.
+- [x] Open detailed explanation, resources, practice, and mastery only at Level 4 after Start learning.
 - [ ] Add visual complete, current, upcoming, locked, recommended, and needs-review states.
-- [ ] Keep the journey simple, mobile-first, and tap-driven while preserving saved progress and references.
+- [x] Keep the journey simple, mobile-first, and tap-driven while preserving saved progress and references.
 - [ ] Validate all four levels, back navigation, visual states, filters, notes, resources, and production behavior.
 
 ## Journey 2.0 full experience expansion — 2026-08-24
-- [ ] Add layered Career Map, Topic, Subtopic, and Learning views with back navigation.
+- [x] Add layered Career Map, Topic, Subtopic, and Learning views with back navigation.
 - [ ] Add clear visual states for complete, current, upcoming, locked, recommended, and needs review.
 - [ ] Add concise Why actions for major topics and connect them to the student’s goal.
 - [ ] Add logically ordered career-specific dependencies and only useful alternate routes.
-- [ ] Add practical skill verification before marking claimed skills complete.
+- [x] Add practical skill verification before marking claimed skills complete.
 - [ ] Add non-numeric skill confidence states and lightweight review prompts.
-- [ ] Add smart prerequisite explanations that name the missing skill and reason.
+- [x] Add smart prerequisite explanations that name the missing skill and reason.
 - [ ] Keep university and industry views connected but visibly separate.
 - [ ] Add a compact semester-aware and four-year planning layer behind the current next step.
 - [ ] Add meaningful career milestones without XP or arbitrary gamification.

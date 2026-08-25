@@ -918,3 +918,4 @@
 - [x] Use saved demonstrated skills in Hana’s opportunity-fit explanation while keeping the official record and eligibility source authoritative.
 - [x] Explain clearly when the active admin opportunity catalog is empty instead of presenting a blank or broken-looking student screen.
 - [x] Add a protected “Verify now” action for admins so an existing opportunity URL can be rechecked and its verification timestamp/status refreshed before students rely on it.
+- [x] Show the last official-link verification time in opportunity details so students can judge how current the record is.

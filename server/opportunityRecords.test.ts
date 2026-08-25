@@ -36,6 +36,8 @@ describe("admin-managed opportunity records", () => {
     expect(home).toContain("trpc.opportunities.list.useQuery");
     expect(home).toContain("displayOpportunities = demoMode");
     expect(home).toContain('formatOpportunityDeadline');
+    expect(home).toContain('formatOpportunityVerification');
+    expect(home).toContain('Official page checked:');
     expect(home).toContain('Current deadline:');
     expect(home).toContain('Passed on');
     expect(home).toContain('Deadline not verified yet.');

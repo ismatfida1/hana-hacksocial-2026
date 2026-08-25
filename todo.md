@@ -899,3 +899,4 @@
 - [x] Add accessible semantics to the interactive tour’s hand cue and Skip action without blocking control interaction.
 - [x] Link the verified official FCIT/PUCIT curriculum source when the entered university matches, while keeping student-entered subjects as the source of truth.
 - [x] Make the tour’s career stage describe the student’s selected direction rather than imply that the header opens career selection.
+- [x] Support Escape, Left, and Right keyboard navigation in the in-app Hana tour while retaining button navigation.

@@ -908,3 +908,10 @@
 - [x] Add regression coverage for valid and malformed opportunity outcomes.
 - [x] Treat accepted or completed opportunity outcomes as practical career evidence in Hana’s readiness calculation, with regression coverage.
 - [x] Keep opportunity outcome controls read-only in private Demo Mode so demo activity cannot redirect into or alter a real account.
+
+## Admin-managed opportunities — 2026-08-25
+- [x] Add a database-backed opportunity record model with title, type, description, official URL, deadline, eligibility, prize/details, verification timestamp, and active status.
+- [x] Add admin-only create, update, archive, and list procedures with ownership/role checks and strict input validation.
+- [x] Add an admin management surface that does not appear to ordinary students.
+- [x] Replace the student opportunity list’s static records with active account-backed records and show live, past, or unverified deadline states honestly.
+- [x] Verify official URLs server-side, add regression tests, run the production build, and run the release security scan.

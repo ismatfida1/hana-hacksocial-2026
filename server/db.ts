@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { AccountDeletionRequest, HanaStudentMemory, InsertHanaStudentMemory, InsertUser, accountDeletionRequests, hanaStudentMemory, users } from "../drizzle/schema";
+import { AccountDeletionRequest, HanaStudentMemory, InsertHanaStudentMemory, InsertOpportunity, InsertUser, Opportunity, accountDeletionRequests, hanaStudentMemory, opportunities, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -102,6 +102,33 @@ export async function upsertHanaStudentMemory(input: Omit<InsertHanaStudentMemor
   await db.insert(hanaStudentMemory).values(input).onDuplicateKeyUpdate({
     set: { profile: input.profile, conversations: input.conversations, memoryEnabled: input.memoryEnabled },
   });
+}
+
+export async function listOpportunities(activeOnly = true): Promise<Opportunity[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(opportunities).where(activeOnly ? eq(opportunities.active, 1) : undefined).orderBy(desc(opportunities.deadlineAt), desc(opportunities.updatedAt));
+}
+
+export async function createOpportunity(input: Omit<InsertOpportunity, "id" | "createdAt" | "updatedAt">): Promise<Opportunity> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.insert(opportunities).values(input);
+  const rows = await db.select().from(opportunities).where(and(eq(opportunities.title, input.title), eq(opportunities.officialUrl, input.officialUrl))).orderBy(desc(opportunities.id)).limit(1);
+  if (!rows[0]) throw new Error("Opportunity was not created");
+  return rows[0];
+}
+
+export async function updateOpportunity(id: number, changes: Partial<Omit<InsertOpportunity, "id" | "createdAt" | "updatedAt" | "createdBy">>): Promise<Opportunity | undefined> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.update(opportunities).set(changes).where(eq(opportunities.id, id));
+  const rows = await db.select().from(opportunities).where(eq(opportunities.id, id)).limit(1);
+  return rows[0];
+}
+
+export async function archiveOpportunity(id: number): Promise<Opportunity | undefined> {
+  return updateOpportunity(id, { active: 0 });
 }
 
 /** Delete the complete HANA-owned account scope without touching other users. */

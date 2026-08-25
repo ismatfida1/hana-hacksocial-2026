@@ -73,6 +73,27 @@ export const hanaStudentMemory = mysqlTable("hana_student_memory", {
 export type HanaStudentMemory = typeof hanaStudentMemory.$inferSelect;
 export type InsertHanaStudentMemory = typeof hanaStudentMemory.$inferInsert;
 
+/** Admin-managed opportunities. Student-facing pages only show active records. */
+export const opportunities = mysqlTable("opportunities", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 200 }).notNull(),
+  type: varchar("type", { length: 80 }).notNull(),
+  detail: text("detail").notNull(),
+  officialUrl: varchar("officialUrl", { length: 500 }).notNull(),
+  deadlineAt: timestamp("deadlineAt"),
+  eligibility: text("eligibility").notNull(),
+  prizeDetails: text("prizeDetails"),
+  verificationStatus: mysqlEnum("verificationStatus", ["unverified", "verified", "unreachable"]).default("unverified").notNull(),
+  verifiedAt: timestamp("verifiedAt"),
+  active: int("active").default(1).notNull(),
+  createdBy: int("createdBy").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Opportunity = typeof opportunities.$inferSelect;
+export type InsertOpportunity = typeof opportunities.$inferInsert;
+
 /** Public deletion requests contain only a contact identifier and workflow metadata. */
 export const accountDeletionRequests = mysqlTable("account_deletion_requests", {
   id: int("id").autoincrement().primaryKey(),

@@ -3,8 +3,8 @@ import { z } from "zod";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
-import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { createAccountDeletionRequest, deleteUserAccount, getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
+import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { archiveOpportunity, createAccountDeletionRequest, createOpportunity, deleteUserAccount, getHanaStudentMemory, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setOpportunityOutcome, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
@@ -29,6 +29,8 @@ export const memoryProfileSchema = z.object({
 
 type HanaMemoryProfileInput = z.infer<typeof memoryProfileSchema>;
 const memoryConversation = z.object({ role: z.enum(["user", "hana"]), text: z.string().max(4000), createdAt: z.string().datetime() });
+const opportunityFields = z.object({ title: z.string().min(1).max(200), type: z.string().min(1).max(80), detail: z.string().min(1).max(4000), officialUrl: z.string().url().max(500), deadlineAt: z.string().datetime().nullable().optional(), eligibility: z.string().min(1).max(4000), prizeDetails: z.string().max(2000).nullable().optional(), active: z.boolean().default(true) });
+const opportunityUpdate = opportunityFields.partial();
 
 const chatInput = z.object({
   message: z.string().min(1).max(6000),
@@ -92,6 +94,24 @@ export const appRouter = router({
       const safeCandidates = input.resources.filter(validateResourceCandidate);
       return { resources: await verifyResourceCandidates(safeCandidates) };
     }),
+  }),
+  opportunities: router({
+    list: protectedProcedure.query(() => listOpportunities(true)),
+    adminList: adminProcedure.query(() => listOpportunities(false)),
+    adminCreate: adminProcedure.input(opportunityFields).mutation(async ({ ctx, input }) => {
+      if (!validateResourceCandidate({ label: input.title, url: input.officialUrl })) throw new Error("Official URL must be a public HTTPS page");
+      const checked = (await verifyResourceCandidates([{ label: input.title, url: input.officialUrl }]))[0];
+      const created = await createOpportunity({ ...input, deadlineAt: input.deadlineAt ? new Date(input.deadlineAt) : null, prizeDetails: input.prizeDetails ?? null, active: input.active ? 1 : 0, createdBy: ctx.user.id, verificationStatus: checked?.reachable ? "verified" : "unreachable", verifiedAt: checked?.reachable ? new Date() : null });
+      return created;
+    }),
+    adminUpdate: adminProcedure.input(z.object({ id: z.number().int().positive(), changes: opportunityUpdate })).mutation(async ({ input }) => {
+      if (input.changes.officialUrl && !validateResourceCandidate({ label: input.changes.title || "Opportunity", url: input.changes.officialUrl })) throw new Error("Official URL must be a public HTTPS page");
+      const checked = input.changes.officialUrl ? (await verifyResourceCandidates([{ label: input.changes.title || "Opportunity", url: input.changes.officialUrl }]))[0] : undefined;
+      const { active, deadlineAt, prizeDetails, ...rest } = input.changes;
+      const changes = { ...rest, ...(deadlineAt !== undefined ? { deadlineAt: deadlineAt ? new Date(deadlineAt) : null } : {}), ...(prizeDetails !== undefined ? { prizeDetails: prizeDetails ?? null } : {}), ...(active !== undefined ? { active: active ? 1 : 0 } : {}), ...(checked ? { verificationStatus: checked.reachable ? "verified" as const : "unreachable" as const, verifiedAt: checked.reachable ? new Date() : null } : {}) };
+      return updateOpportunity(input.id, changes);
+    }),
+    adminArchive: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(({ input }) => archiveOpportunity(input.id)),
   }),
   studentContext: router({
     get: protectedProcedure.query(({ ctx }) => buildHanaContext(ctx.user.id)),

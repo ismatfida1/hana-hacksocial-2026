@@ -255,7 +255,7 @@
 - [x] Add secure cloud/user-account memory for university, semester, career, skills, progress, projects, and approved conversation context.
 - [x] Preserve complexity behind the scenes and avoid onboarding instructions, feature walls, and long explanatory paragraphs.
 - [x] Validate the separate prototype on mobile and desktop before delivery.
-- [ ] Add Vitest coverage for the memory contract and Today’s Mission selection behavior.
+- [x] Add Vitest coverage for the memory contract and Today’s Mission selection behavior.
 
 ## Separate visual prototype — 2026-08-24
 - [x] Create a separate Hana prototype copy so the current published release is not overwritten.

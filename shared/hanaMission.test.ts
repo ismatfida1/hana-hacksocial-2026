@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getTodayMission } from "./hanaMission";
 import { buildJourney, buildRoadmap, pathTypeFromLegacy } from "./hanaJourney";
 import { memoryProfileSchema } from "../server/routers";
+import { buildDailyMissionFromContext, buildStudentContextFromMemory } from "../server/studentContext";
 
 describe("Hana prototype contracts", () => {
   it("chooses a career-relevant mission while keeping a safe default", () => {
@@ -47,6 +48,11 @@ describe("Hana prototype contracts", () => {
     expect(roadmap[1]?.status).toBe("active");
     expect(roadmap[1]?.prerequisiteIds).toHaveLength(1);
     expect(roadmap.at(-1)?.status).toBe("locked");
+  });
+
+  it("selects Today’s Mission from the saved active step", () => {
+    const context = buildStudentContextFromMemory({ profile: { career: "Cybersecurity", currentActiveStep: "Linux essentials", completedLearningSteps: ["Computer and network basics"] }, conversations: [], memoryEnabled: 1 } as never);
+    expect(buildDailyMissionFromContext(context).title).toBe("Linux essentials");
   });
 
   it("accepts profile memory but bounds sensitive free text", () => {

@@ -971,23 +971,32 @@
 - [x] Add the dedicated HackSocial entry point and coherent 2–4 minute demo journey inside the copied app.
 - [x] Keep demo sample data isolated from real user memory and production database writes.
 - [x] Use configured live AI where available with truthful fallback behavior; never present fake AI as live.
-- [ ] Run full testing, secret scan, responsive verification, commit meaningful milestones, and prepare the copied project for separate deployment.
+- [x] Run full testing, secret scan, responsive verification, commit meaningful milestones, and prepare the copied project for separate deployment.
 - [x] Resolve the existing unrelated-history merge in the copied project while preserving the remote `.gitattributes`, `.gitignore`, and `README.md`; run safety/build checks, create local commit(s), and stop before `git push` for approval.
 
 ## HackSocial 2026 end-to-end implementation brief
-- [ ] Audit the copied baseline and identify concrete blockers in the evaluator demo flow without modifying the original HANA project.
-- [ ] Implement a coherent landing → today’s mission → learning → Ask Hana → mastery → project → opportunity → progress experience while preserving existing Hana functionality.
-- [ ] Improve mobile-first hierarchy, loading/error states, accessibility, concise content, and navigation only where the demo needs it.
+- [x] Audit the copied baseline and identify concrete blockers in the evaluator demo flow without modifying the original HANA project.
+- [x] Implement a coherent landing → today’s mission → learning → Ask Hana → mastery → project → opportunity → progress experience while preserving existing Hana functionality.
+- [x] Improve mobile-first hierarchy, loading/error states, accessibility, concise content, and navigation only where the demo needs it.
 - [x] Preserve real AI/backend/database behavior and use truthful fallbacks without exposing secrets or writing isolated demo activity to real user data; local contract, build, and security checks pass.
-- [ ] Run full tests, typecheck, build, security scan, responsive checks, and an end-to-end demo verification.
+- [x] Run full tests, typecheck, build, security scan, responsive checks, and an end-to-end demo verification.
 - [ ] Commit and push the completed copied HackSocial implementation normally to `ismatfida1/hana-hacksocial-2026` and prepare separate deployment verification.
 - [x] Inspect hosting options and prepare separate public full-stack production configuration for the copied HackSocial project; do not modify the original HANA deployment or publish without explicit approval. The guide recommends separate managed full-stack Autoscale hosting; actual managed deployment remains open.
 - [x] Create a presentation-ready script summarizing HackSocial 2026’s separate deployment configuration, security boundaries, validation evidence, and remaining release gates.
 
 ## HackSocial demo-readiness acceptance criteria
 - [x] Audit every presentation claim against the actual copied implementation and deployed behavior; the copied implementation was checked locally, while separate production behavior remains an open gate.
-- [ ] Ensure the judge-facing flow works end to end: goal, roadmap, mission, Ask Hana, mastery, project, opportunity, and progress.
+- [x] Ensure the judge-facing flow works end to end: goal, roadmap, mission, Ask Hana, mastery, project, opportunity, and progress.
 - [x] Do not call the roadmap AI-personalized unless the entered goal actually changes the roadmap and that behavior is tested; presentation and demo documentation now use truthful compact-demo wording.
 - [x] Verify and repair UI, navigation, AI procedure, authentication boundary, backend/API behavior, and Demo Mode isolation; local checks pass, with real-domain auth and deployment checks still open.
 - [x] Create a concise judge-facing demo runbook for the strongest verified flow.
-- [ ] Run final local and deployed checks, update presentation/readiness documentation, synchronize only the copied project, and report remaining release gates; local checks and browser sign-in-gate verification are complete, but authenticated demo and separate production deployment remain open.
+- [ ] Run final deployed checks and synchronize the copied project for separate production release; local checks, authenticated Demo Mode, presentation/readiness documentation, and remaining-gate reporting are complete, while separate production deployment remains open.
+- [x] Perform final end-to-end judge-demo verification at commit `d0d54ed`, rerun tests/typecheck/build/security/diff checks, confirm the original HANA tree is untouched, and record the freeze recommendation without unnecessary code changes.
+
+## Final HackSocial 2026 finalization pass
+- [x] Verify the existing core Hana journey and confirm the student-learning/evidence-building story is understandable; record burnout/support behavior only if already implemented.
+- [x] Run the authorized Demo Mode flow end to end and verify demo activity does not write to real student data.
+- [x] Polish only real UI/UX issues found during verification; remove no existing feature without evidence (final rehearsal found no justified application-code changes).
+- [ ] Execute real-account navigation, OAuth, persistence/database, deletion, console, and deployed mobile checks; local contract/build/security checks and the controlled Demo Mode journey are complete.
+- [ ] Confirm the copied project and GitHub repository against the final permanent production URL; the copied path and repository are confirmed, while a permanent production URL remains open.
+- [x] Rehearse the judge demo using the runbook, record a repeatable approximately 2-minute-10-second entry-to-progress browser pass, and update the final submission report with verified claims and open gates.

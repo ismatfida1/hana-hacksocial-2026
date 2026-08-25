@@ -137,3 +137,13 @@ The latest validation run passed TypeScript, the complete Vitest suite (**9 file
 HANA now exposes two distinct selectable tracks: **BSCS Foundation**, represented by 16 ordered steps across semesters 1–8, and **AI Automation Engineer**, represented by eight ordered specialization stages from programming foundation through production AI systems and earning/portfolio proof. The shared builder also applies the student’s university, degree, semester, subjects, current level, goal, and study pace to the generated step descriptions.
 
 The official-source review found that the University of the Punjab BS Computer Science page does not currently expose a complete semester-by-semester course table in the retrieved content, while the reviewed official PUCIT page was for BS Information Technology. Therefore HANA keeps the university curriculum as optional context and retains the editable subjects fallback. It does not claim the supplied Fall 2026 PUCIT/FCIT details are officially verified.
+
+## HackSocial 2026 final judge-demo addendum — 26 August 2026
+
+The copied project was verified at baseline commit `d0d54ed2d91a2346b5f2c61bf954007c0d8611f1`. The authorized Demo Mode boundary accepted the configured demo password without bypassing the existing sign-in screen. The complete judge flow was replayed: Goal → Roadmap → Mission → Ask Hana → Mastery → Project → Opportunity → Progress. Ask Hana returned a structured response in the controlled preview, the correct mastery answer unlocked the next stage, the official Devpost directory loaded, and the final Progress screen reached 100%.
+
+The demo remains intentionally compact and is not described as a dynamically AI-generated personalized roadmap. Demo activity is isolated component state; the server-side `demoChat` procedure does not save a conversation or change a real student profile and identifies unavailable live AI truthfully. The original `/home/ubuntu/hana-learning-companion` tree remained clean.
+
+Final automated evidence: 21 Vitest files and 67 tests passed, `pnpm typecheck` passed, `pnpm build` passed with only a non-blocking large-client-chunk warning, and `pnpm security:scan` passed. A tracked-file secret scan found no matching credentials or signing material. The copied project has a repeatable approximately 2-minute-10-second browser path from HackSocial entry to Progress 100%.
+
+This addendum establishes **HackSocial judge-demo readiness**. It does not close the separate production deployment, real OAuth callback, real-account persistence/deletion, signed AAB, Google Play declaration, provider/legal/licensing, or product-video gates documented elsewhere in this audit.

@@ -68,7 +68,8 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Demo isolation | **VERIFIED at code/test level** | Ran Demo Mode regression tests and inspected demo mutations | Demo data is isolated and demo controls do not write real student memory. |
 | AI data minimization | **VERIFIED at formatter/test level** | Ran `context-minimization.test.ts` and inspected Ask Hana router call | Learning, university, or work context is selected by question instead of sending the complete stored context every time. Provider retention and plan terms still require external review. |
 | Privacy policy and Terms | **PARTIAL** | Ran public-policy source-contract test and inspected public routes/UI links | Public `/privacy`, `/terms`, and account-deletion surfaces exist and use `ismat542008@gmail.com`. They still require jurisdiction-specific human/legal review. |
-| Account deletion | **PARTIAL** | Inspected protected delete procedure, public deletion request route, schema, and tests | Technical deletion controls exist. End-to-end confirmation that every database, storage, conversation, and third-party-retention path is deleted or documented has not been completed. |
+| Account deletion | **PARTIAL** | Inspected protected delete procedure, public deletion request route, schema, and tests | Technical deletion controls exist, including Teach Hana upload metadata cleanup. End-to-end confirmation that every database object, storage object, conversation, session, and third-party-retention path is deleted or documented has not been completed. |
+| Teach Hana uploads | **VERIFIED at code/test level** | Inspected protected upload procedures, managed storage path, metadata table, Profile deletion control, and security contract test | Code/text files are confirmed before upload, limited to 1 MB and known extensions, stored through server-side managed storage, represented in the database as metadata only, and removable by the owning account. Production storage deletion and provider retention still require operational verification. |
 | Minimal permissions | **PARTIAL** | Inspected Android project/workflow and release scan | No unnecessary private credentials were found; a final manifest/permission review against the exact signed AAB remains required. |
 | Commercial licensing | **PARTIAL** | Refreshed dependency inventory, flagged-license evidence, notices, and asset register | The streamdown/khroma production path was removed and notices were generated. Ambiguous package terms, Canva/asset provenance, provider terms, and legal review remain open. |
 | Google Play Data Safety | **PARTIAL** | Prepared `GOOGLE_PLAY_DATA_SAFETY_DRAFT.md` | A source-of-truth draft exists; the Play Console form and exact final AAB declarations are not submitted or independently verified. |
@@ -78,7 +79,7 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Check | Result |
 |---|---|
 | TypeScript | Passed with `pnpm run check` |
-| Automated tests | Passed: 15 test files, 47 tests |
+| Automated tests | Passed: 15 test files, 48 tests |
 | Production build | Passed with `pnpm run build` |
 | Release security scan | Passed with `pnpm run security:scan` |
 | Mobile visual check | Greeting screen rendered cleanly at 390×844; full authenticated flows were not exercised end to end |

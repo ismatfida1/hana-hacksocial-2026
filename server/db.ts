@@ -1,6 +1,6 @@
 import { and, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { AccountDeletionRequest, HanaStudentMemory, InsertHanaStudentMemory, InsertOpportunity, InsertUser, Opportunity, accountDeletionRequests, hanaStudentMemory, opportunities, users } from "../drizzle/schema";
+import { AccountDeletionRequest, HanaStudentMemory, HanaUpload, InsertHanaStudentMemory, InsertHanaUpload, InsertOpportunity, InsertUser, Opportunity, accountDeletionRequests, hanaStudentMemory, hanaUploads, opportunities, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -135,6 +135,27 @@ export async function deleteHanaConversation(userId: number, target: HanaStudent
   await upsertHanaStudentMemory({ userId, profile: memory.profile, conversations, memoryEnabled: memory.memoryEnabled });
 }
 
+export async function listHanaUploads(userId: number): Promise<HanaUpload[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(hanaUploads).where(eq(hanaUploads.userId, userId)).orderBy(desc(hanaUploads.createdAt));
+}
+
+export async function createHanaUpload(input: Omit<InsertHanaUpload, "id" | "createdAt">): Promise<HanaUpload> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.insert(hanaUploads).values(input);
+  const rows = await db.select().from(hanaUploads).where(and(eq(hanaUploads.userId, input.userId), eq(hanaUploads.storageKey, input.storageKey))).limit(1);
+  if (!rows[0]) throw new Error("Upload metadata was not created");
+  return rows[0];
+}
+
+export async function deleteHanaUpload(userId: number, uploadId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.delete(hanaUploads).where(and(eq(hanaUploads.id, uploadId), eq(hanaUploads.userId, userId)));
+}
+
 export async function listOpportunities(activeOnly = true): Promise<Opportunity[]> {
   const db = await getDb();
   if (!db) return [];
@@ -174,6 +195,7 @@ export async function deleteUserAccount(userId: number): Promise<void> {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   await db.transaction(async (tx) => {
+    await tx.delete(hanaUploads).where(eq(hanaUploads.userId, userId));
     await tx.delete(hanaStudentMemory).where(eq(hanaStudentMemory.userId, userId));
     await tx.delete(users).where(eq(users.id, userId));
   });

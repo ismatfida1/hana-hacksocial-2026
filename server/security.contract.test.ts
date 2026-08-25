@@ -33,4 +33,17 @@ describe("Hana security and privacy contracts", () => {
   it("does not place browser-exposed VITE credentials in the server credential path", () => {
     expect(readFileSync(resolve(process.cwd(), "server/_core/env.ts"), "utf8")).not.toContain("VITE_FRONTEND_FORGE_API_KEY");
   });
+
+  it("keeps Teach Hana uploads protected and stores metadata separately from bytes", () => {
+    const schema = readFileSync(resolve(process.cwd(), "drizzle/schema.ts"), "utf8");
+    expect(schema).toContain('mysqlTable("hana_uploads"');
+    expect(schema).toContain("storageKey");
+    expect(routers).toContain("uploads: protectedProcedure");
+    expect(routers).toContain("saveUpload: protectedProcedure");
+    expect(routers).toContain("deleteUpload: protectedProcedure");
+    expect(routers).toContain("storagePut");
+    expect(routers).not.toContain("contentBase64: input.contentBase64");
+    const db = readFileSync(resolve(process.cwd(), "server/db.ts"), "utf8");
+    expect(db).toContain("tx.delete(hanaUploads)");
+  });
 });

@@ -4,11 +4,12 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { archiveOpportunity, clearHanaConversations, createAccountDeletionRequest, deleteHanaConversation, createOpportunity, deleteUserAccount, getHanaStudentMemory, getOpportunity, listHanaConversations, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
+import { archiveOpportunity, clearHanaConversations, createAccountDeletionRequest, createHanaUpload, deleteHanaConversation, deleteHanaUpload, createOpportunity, deleteUserAccount, getHanaStudentMemory, getOpportunity, listHanaConversations, listHanaUploads, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setOpportunityOutcome, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
 import { validateResourceCandidate, verifyResourceCandidates } from "./resourceVerification";
+import { storagePut } from "./storage";
 
 const hanaSystemPrompt = `You are Hana, a cute cream robot who helps people learn. You are a smart, patient friend — not a professor or a business tool.
 
@@ -29,6 +30,7 @@ export const memoryProfileSchema = z.object({
 
 type HanaMemoryProfileInput = z.infer<typeof memoryProfileSchema>;
 const memoryConversation = z.object({ role: z.enum(["user", "hana"]), text: z.string().max(4000), createdAt: z.string().datetime() });
+const teachHanaUpload = z.object({ fileName: z.string().trim().min(1).max(255), mimeType: z.enum(["text/plain", "text/markdown", "text/javascript", "text/typescript", "application/json", "text/x-python", "text/x-java-source", "text/x-c", "text/x-c++src"]), sizeBytes: z.number().int().positive().max(1_000_000), contentBase64: z.string().min(1).max(1_400_000) });
 const opportunityFields = z.object({ title: z.string().min(1).max(200), type: z.string().min(1).max(80), detail: z.string().min(1).max(4000), officialUrl: z.string().url().max(500), deadlineAt: z.string().datetime().nullable().optional(), eligibility: z.string().min(1).max(4000), prizeDetails: z.string().max(2000).nullable().optional(), location: z.string().max(200).nullable().optional(), requirements: z.string().max(4000).nullable().optional(), applicationSteps: z.string().max(4000).nullable().optional(), submissionFormat: z.string().max(4000).nullable().optional(), teamInfo: z.string().max(2000).nullable().optional(), difficulty: z.string().max(80).nullable().optional(), active: z.boolean().default(true) });
 const opportunityUpdate = opportunityFields.partial();
 
@@ -95,6 +97,18 @@ export const appRouter = router({
     }),
     deleteMessage: protectedProcedure.input(memoryConversation).mutation(async ({ ctx, input }) => {
       await deleteHanaConversation(ctx.user.id, input);
+      return { success: true } as const;
+    }),
+    uploads: protectedProcedure.query(({ ctx }) => listHanaUploads(ctx.user.id)),
+    saveUpload: protectedProcedure.input(teachHanaUpload).mutation(async ({ ctx, input }) => {
+      const bytes = Buffer.from(input.contentBase64, "base64");
+      if (bytes.byteLength !== input.sizeBytes || bytes.byteLength > 1_000_000) throw new Error("Upload size could not be verified");
+      const stored = await storagePut(`users/${ctx.user.id}/teach-hana/${input.fileName}`, bytes, input.mimeType);
+      const upload = await createHanaUpload({ userId: ctx.user.id, fileName: input.fileName, mimeType: input.mimeType, sizeBytes: bytes.byteLength, storageKey: stored.key });
+      return { ...upload, url: stored.url };
+    }),
+    deleteUpload: protectedProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ ctx, input }) => {
+      await deleteHanaUpload(ctx.user.id, input.id);
       return { success: true } as const;
     }),
   }),

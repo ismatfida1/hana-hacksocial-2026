@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { Loader2, Send, User, Sparkles } from "lucide-react";
+import { Loader2, Send, User, Sparkles, Paperclip } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -57,6 +57,7 @@ export type AIChatBoxProps = {
    * Click to send directly
    */
   suggestedPrompts?: string[];
+  onFileSelected?: (file: File) => void;
 };
 
 /**
@@ -119,6 +120,7 @@ export function AIChatBox({
   height = "600px",
   emptyStateMessage = "Start a conversation with AI",
   suggestedPrompts,
+  onFileSelected,
 }: AIChatBoxProps) {
   const [input, setInput] = useState("");
   const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -308,6 +310,11 @@ export function AIChatBox({
         onSubmit={handleSubmit}
         className="flex gap-2 p-4 border-t bg-background/50 items-end"
       >
+        {onFileSelected && <label className="grid h-[38px] w-[38px] shrink-0 cursor-pointer place-items-center rounded-md border border-border bg-background text-muted-foreground transition-colors hover:bg-accent" title="Teach Hana with a small code or text file">
+          <Paperclip className="size-4" />
+          <span className="sr-only">Choose a small code or text file for Hana</span>
+          <input type="file" accept=".txt,.md,.js,.jsx,.ts,.tsx,.json,.py,.java,.c,.h,.cpp,.hpp,text/plain,text/markdown,application/json" className="sr-only" onChange={(event) => { const file = event.target.files?.[0]; if (file) onFileSelected(file); event.currentTarget.value = ""; }} />
+        </label>}
         <Textarea
           ref={textareaRef}
           value={input}

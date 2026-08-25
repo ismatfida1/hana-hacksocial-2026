@@ -109,3 +109,19 @@ export const accountDeletionRequests = mysqlTable("account_deletion_requests", {
 
 export type AccountDeletionRequest = typeof accountDeletionRequests.$inferSelect;
 export type InsertAccountDeletionRequest = typeof accountDeletionRequests.$inferInsert;
+
+/** Metadata for learner-selected Teach Hana files; bytes live in managed storage. */
+export const hanaUploads = mysqlTable("hana_uploads", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  fileName: varchar("fileName", { length: 255 }).notNull(),
+  mimeType: varchar("mimeType", { length: 120 }).notNull(),
+  sizeBytes: int("sizeBytes").notNull(),
+  storageKey: varchar("storageKey", { length: 500 }).notNull().unique(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type HanaUpload = typeof hanaUploads.$inferSelect;
+export type InsertHanaUpload = typeof hanaUploads.$inferInsert;
+
+export const hanaUploadsRelations = undefined;

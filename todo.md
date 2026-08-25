@@ -833,10 +833,10 @@
 
 ## Security, privacy, and simple-UX master specification — 2026-08-25
 - [ ] Verify real authentication options supported by the configured backend: Google, other supported sign-in, sign-out, recovery, and account deletion; do not add fake email/password behavior.
-- [ ] Confirm user-owned data is authorization-scoped server-side for profiles, university data, subjects, skills, journey, progress, mastery, projects, portfolio, conversations, preferences, goals, and opportunity interactions.
-- [ ] Verify creator/admin-only controls are server-side protected and cannot be activated through hidden UI, URLs, query parameters, or local storage.
-- [ ] Keep Demo Mode isolated and authorized without bypassing authentication or database authorization.
-- [ ] Confirm private AI, OAuth, database, Supabase, GitHub, and admin credentials never enter web or Android client artifacts.
+- [x] Confirm user-owned data is authorization-scoped server-side for profiles, university data, subjects, skills, journey, progress, mastery, projects, portfolio, conversations, preferences, goals, and opportunity interactions.
+- [x] Verify creator/admin-only controls are server-side protected and cannot be activated through hidden UI, URLs, query parameters, or local storage.
+- [x] Keep Demo Mode isolated and authorized without bypassing authentication or database authorization.
+- [x] Confirm private AI, OAuth, database, Supabase, GitHub, and admin credentials never enter web or Android client artifacts.
 - [x] Minimize AI context per request so Hana receives only the information needed for the current task.
 - [ ] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
 - [ ] Verify account deletion removes associated HANA data according to the documented retention policy and remains accessible in-app and publicly.
@@ -930,3 +930,4 @@
 - [x] Add compact Journey actions for “What should I learn?”, “Why am I learning this?”, and “Am I ready?” that use Hana’s saved context.
 - [x] Add focused regression coverage for verified university-source mapping and no-deadline study-capacity choices.
 - [x] Add concise Ask Hana quick actions for Further info, Give me an example, Test me, and I’m confused using the existing context-aware chat surface.
+- [x] Add Teach Hana code/text upload persistence through server-side storage with confirmation, account ownership, metadata-only database records, and deletion from the visible memory surface.

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { officialCurriculumSourceFor } from "@shared/curriculum";
 
 describe("Hana interactive tour contract", () => {
   const source = readFileSync(resolve(process.cwd(), "client/src/pages/Home.tsx"), "utf8");
@@ -52,8 +53,7 @@ describe("Hana interactive tour contract", () => {
   it("does not invent university subjects when official curriculum data is unavailable", () => {
     expect(source).toContain('No verified curriculum source was found. Hana will not guess your subjects—add them here instead.');
     expect(source).toContain('No verified curriculum source was found. Hana will use only these saved subjects with your degree and semester.');
-    expect(source).toContain('https://pucit.edu.pk/approved-curriculum/');
-    expect(source).toContain('Open the official curriculum source');
+    expect(officialCurriculumSourceFor("PUCIT / FCIT")).toBe("https://pucit.edu.pk/approved-curriculum/");
     expect(source).toContain('Hana’s fit:');
     expect(source).toContain('Before applying:');
     expect(source).toContain('Hana never invents deadlines, eligibility, or income promises.');

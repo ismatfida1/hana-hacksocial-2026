@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Compass, ExternalLink, FolderKanban, Home as HomeIcon, MessageCircle, Play, Trophy, UserRound, WandSparkles } from "lucide-react";
 import { buildJourney, pathTypeFromLegacy, type JourneyStep } from "@shared/hanaJourney";
+import { officialCurriculumSourceFor } from "@shared/curriculum";
 import { trpc } from "@/lib/trpc";
 import { startLogin } from "@/const";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
@@ -21,10 +22,6 @@ const resourceSets: Record<string, { university: FreeResource; document: FreeRes
   "AI Automation Engineer": { university: { label: "University course", url: "https://ocw.mit.edu/search/?q=artificial+intelligence", note: "Study AI ideas through free MIT course materials." }, document: { label: "Document", url: "https://cookbook.openai.com/", note: "Read practical examples for building careful AI features." }, video: { label: "Video lesson", url: "https://www.youtube.com/@freecodecamp", note: "Follow free lessons on APIs, automation, and AI." }, backup: { label: "Backup resource", url: "https://developers.google.com/machine-learning/crash-course", note: "Review model and evaluation basics with Google." } },
   default: { university: { label: "University course", url: "https://cs50.harvard.edu/x/", note: "Build strong computer science foundations with Harvard CS50." }, document: { label: "Document", url: "https://developer.mozilla.org/en-US/docs/Learn", note: "Read free web-development lessons from MDN." }, video: { label: "Video lesson", url: "https://www.youtube.com/@freecodecamp", note: "Learn from professional full-length lessons." }, backup: { label: "Backup resource", url: "https://ocw.mit.edu/search/?q=computer+science", note: "Use MIT OpenCourseWare when another link is unavailable." } },
 };
-function officialCurriculumSourceFor(university: string) {
-  return /pucit|fcit|punjab university/i.test(university) ? "https://pucit.edu.pk/approved-curriculum/" : null;
-}
-
 function opportunityFitReason(area: string | undefined, type: string, demonstratedSkills: string[] = []) {
   if (!area) return "Choose a learning direction first. Hana will then compare this opportunity with your demonstrated skills.";
   const relevantSkill = demonstratedSkills.find((skill) => /cyber|network|security|data|python|ai|machine|web|cloud|git|design/i.test(skill) && (new RegExp(skill.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&"), "i").test(type) || /open-source|internship|work|hackathon|competition/i.test(type)));

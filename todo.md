@@ -928,3 +928,4 @@
 - [x] Show a compact opportunity-activity summary in Profile using the existing saved outcomes, without adding another progress store.
 - [x] Mark Hana’s current next Journey step as “Current · Recommended” in the layered map without changing saved completion state.
 - [x] Add compact Journey actions for “What should I learn?”, “Why am I learning this?”, and “Am I ready?” that use Hana’s saved context.
+- [x] Add focused regression coverage for verified university-source mapping and no-deadline study-capacity choices.

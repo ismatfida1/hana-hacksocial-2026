@@ -919,3 +919,4 @@
 - [x] Explain clearly when the active admin opportunity catalog is empty instead of presenting a blank or broken-looking student screen.
 - [x] Add a protected “Verify now” action for admins so an existing opportunity URL can be rechecked and its verification timestamp/status refreshed before students rely on it.
 - [x] Show the last official-link verification time in opportunity details so students can judge how current the record is.
+- [x] Make the university profile show an explicit source result: official curriculum source found, or “not found—Hana will use the subjects you enter” with no guessed curriculum.

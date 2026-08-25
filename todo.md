@@ -902,3 +902,4 @@
 - [x] Support Escape, Left, and Right keyboard navigation in the in-app Hana tour while retaining button navigation.
 - [x] Show a quiet “Use ← → or Esc” hint inside the interactive tour rather than adding instructions to the main app.
 - [x] Prevent background page scrolling while Hana’s interactive tour handles Left, Right, and Escape keys.
+- [x] Move keyboard focus to the first active tour control whenever Hana’s guide opens or changes step.

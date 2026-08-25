@@ -75,6 +75,7 @@ export type StudentContext = {
   };
   work: {
     projects: string[];
+    projectRecords: ProjectRecord[];
     projectSkills: string[];
     githubProjects: string[];
     portfolioProjects: string[];
@@ -191,6 +192,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
     },
     work: {
       projects: profile.projects,
+      projectRecords: profile.projectRecords,
       projectSkills: profile.projectSkills,
       githubProjects: profile.githubProjects,
       portfolioProjects: profile.portfolioProjects,

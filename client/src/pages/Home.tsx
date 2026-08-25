@@ -79,7 +79,7 @@ function todayText() {
 type DemoTourProps = { stage: number; onStage: (stage: number) => void; onDestination: (destination: Destination) => void; privateDemo?: boolean };
 const demoTourStages = [
   { title: "Welcome to Home", text: "Hi! I’m Hana. I’ll help you choose a direction, build skills, and find your next step.", mood: "😊", target: "Home" as Destination, selector: "#tour-home" },
-  { title: "Choose your career", text: "Choose the direction you want to explore. Hana uses it to shape your Journey.", mood: "👀", target: "Home" as Destination, selector: "#tour-career" },
+  { title: "Your chosen direction", text: "This is the career direction you selected. Hana uses it to shape your Journey.", mood: "👀", target: "Home" as Destination, selector: "#tour-career" },
   { title: "Follow your Journey", text: "This is your roadmap. It turns a big goal into clear steps and progress.", mood: "🤔", target: "Journey" as Destination, selector: "#tour-journey" },
   { title: "Learn with resources", text: "Open the current step to find a document, a video, and a university-style lesson.", mood: "🌸", target: "Journey" as Destination, selector: "#tour-resources" },
   { title: "Build projects", text: "Practice as you learn. Small projects turn lessons into proof you can show.", mood: "🛠️", target: "Projects" as Destination, selector: "#tour-projects" },

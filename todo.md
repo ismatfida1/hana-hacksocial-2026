@@ -250,11 +250,11 @@
 ## Separate visual prototype — 2026-08-24
 - [ ] Create a separate Hana prototype copy so the current published release is not overwritten.
 - [ ] Keep the supplied Hana robot as visual inspiration while creating original, improved artwork and expressive states.
-- [ ] Make Home mobile-first and minimal: Hana greeting, Today’s Mission, duration, reason, and one Start action.
-- [ ] Refine Hana’s personality to calm, focused, warm, professional, and occasionally playful without childish or emotional-support language.
-- [ ] Add secure cloud/user-account memory for university, semester, career, skills, progress, projects, and approved conversation context.
-- [ ] Preserve complexity behind the scenes and avoid onboarding instructions, feature walls, and long explanatory paragraphs.
-- [ ] Validate the separate prototype on mobile and desktop before delivery.
+- [x] Make Home mobile-first and minimal: Hana greeting, Today’s Mission, duration, reason, and one Start action.
+- [x] Refine Hana’s personality to calm, focused, warm, professional, and occasionally playful without childish or emotional-support language.
+- [x] Add secure cloud/user-account memory for university, semester, career, skills, progress, projects, and approved conversation context.
+- [x] Preserve complexity behind the scenes and avoid onboarding instructions, feature walls, and long explanatory paragraphs.
+- [x] Validate the separate prototype on mobile and desktop before delivery.
 - [ ] Add Vitest coverage for the memory contract and Today’s Mission selection behavior.
 
 ## Separate visual prototype — 2026-08-24
@@ -281,13 +281,13 @@
 ## Complete product specification follow-through — 2026-08-24
 - [x] Preserve Screen 1 as Hana greeting only with one ready action and no feature content.
 - [x] Preserve Screen 2 as career choice only, including Other and Help me find my path, without mission or dashboard content.
-- [ ] Add Screen 3 university profile for university, degree, and semester.
+- [x] Add Screen 3 university profile for university, degree, and semester.
 - [ ] Add safe curriculum retrieval with an official-source preference and manual Add / Edit Subjects fallback when verification fails.
-- [ ] Keep post-onboarding Home focused on one automatically selected Today’s Step card and the exact five-item bottom navigation.
-- [ ] Use the label Your Journey instead of Roadmap and keep learning complexity behind the current step.
-- [ ] Keep Projects, Opportunities, and Ask Hana as focused destinations rather than Home cards.
-- [ ] Preserve original expressive Hana artwork and the cream, rose, lavender, sage, blue, ink design tokens.
-- [ ] Validate the ordered flow and prevent invented university subjects or unsupported curriculum claims.
+- [x] Keep post-onboarding Home focused on one automatically selected Today’s Step card and the exact five-item bottom navigation.
+- [x] Use the label Your Journey instead of Roadmap and keep learning complexity behind the current step.
+- [x] Keep Projects, Opportunities, and Ask Hana as focused destinations rather than Home cards.
+- [x] Preserve original expressive Hana artwork and the cream, rose, lavender, sage, blue, ink design tokens.
+- [x] Validate the ordered flow and prevent invented university subjects or unsupported curriculum claims.
 
 ## Adaptive journey architecture — 2026-08-24
 - [x] Replace the fixed Python mission with a study-area-first onboarding question.
@@ -828,7 +828,7 @@
 - [ ] Personalize weekly pace from realistic study hours and keep one primary progress signal visible.
 - [ ] Make recommendations traceable with a concise “Why?” explanation and use reliable career/industry requirements without unsupported statistics.
 - [ ] Ensure learning produces proof through practice, projects, GitHub/README, portfolio, and resume-ready evidence.
-- [ ] Match opportunities to demonstrated skills and track student-provided outcomes such as applied, interview, accepted, rejected, or completed.
+- [x] Match opportunities to demonstrated skills and track student-provided outcomes such as applied, interview, accepted, rejected, or completed.
 - [ ] Add regression tests, mobile visual checks, and honest release documentation for every critical fix.
 
 ## Security, privacy, and simple-UX master specification — 2026-08-25

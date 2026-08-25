@@ -22,7 +22,12 @@ const resourceSets: Record<string, { university: FreeResource; document: FreeRes
 };
 function resourcesForStep(area: string | undefined, step: JourneyStep) {
   const set = resourceSets[area || ""] || resourceSets.default;
-  return [set.document, set.video, set.university].map((resource) => ({ ...resource, label: `${resource.label} · ${step.title}` }));
+  const primary = { label: `Start here · ${step.resource.label}`, url: step.resource.url, note: `Best first stop for ${step.title}. Use this before the alternatives.` };
+  const alternatives = [
+    { ...set.video, label: `Alternative video · ${step.title}` },
+    { ...set.backup, label: `Alternative course · ${step.title}` },
+  ];
+  return [primary, ...alternatives].filter((resource, index, all) => all.findIndex((item) => item.url === resource.url) === index);
 }
 
 type Screen = "greeting" | "signin" | "start" | "career" | "profile" | "custom" | "customLevel" | "customGoal" | "customTime" | "skill" | "discover" | "preview" | "app";

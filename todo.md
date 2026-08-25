@@ -248,8 +248,8 @@
 - [x] Do not add unnecessary external APIs; use the existing secure AI layer unless a new integration is clearly required.
 
 ## Separate visual prototype — 2026-08-24
-- [ ] Create a separate Hana prototype copy so the current published release is not overwritten.
-- [ ] Keep the supplied Hana robot as visual inspiration while creating original, improved artwork and expressive states.
+- [x] Create a separate Hana prototype copy so the current published release is not overwritten; tracked in the validated `hana-learning-companion` project.
+- [x] Keep the supplied Hana robot as visual inspiration while creating original, improved artwork and expressive states.
 - [x] Make Home mobile-first and minimal: Hana greeting, Today’s Mission, duration, reason, and one Start action.
 - [x] Refine Hana’s personality to calm, focused, warm, professional, and occasionally playful without childish or emotional-support language.
 - [x] Add secure cloud/user-account memory for university, semester, career, skills, progress, projects, and approved conversation context.
@@ -335,14 +335,14 @@
 - [ ] Verify Supabase can support Hana’s account memory and unified Journey data safely.
 
 ## End-to-end Hana app build — 2026-08-24
-- [ ] Build the approved greeting screen and three starting pathways without crowding the first view.
-- [ ] Build adaptive onboarding for Build My Career, Create My Own Journey, and Learn a Skill & Earn.
-- [ ] Build one unified Your Journey engine with Learn, Practice, Demonstrate, Master, and Unlock next step states.
-- [ ] Store active journey progress, verified skills, mastery checks, projects, goals, portfolio work, opportunities, and direction in account memory.
-- [ ] Build focused Journey, Projects, Opportunities, and Ask Hana destinations with the exact bottom navigation.
-- [ ] Keep AI provider calls server-side and use connected OpenAI, Gemini, and existing fallback services safely.
+- [x] Build the approved greeting screen and three starting pathways without crowding the first view.
+- [x] Build adaptive onboarding for Build My Career, Create My Own Journey, and Learn a Skill & Earn.
+- [x] Build one unified Your Journey engine with Learn, Practice, Demonstrate, Master, and Unlock next step states.
+- [x] Store active journey progress, verified skills, mastery checks, projects, goals, portfolio work, opportunities, and direction in account memory.
+- [x] Build focused Journey, Projects, Opportunities, and Ask Hana destinations with the exact bottom navigation.
+- [x] Keep AI provider calls server-side and use connected OpenAI, Gemini, and existing fallback services safely.
 - [ ] Use Supabase-backed capabilities only where they improve account memory or journey persistence.
-- [ ] Validate the full app with tests, typecheck, production build, and mobile/desktop browser checks.
+- [x] Validate the full app with tests, typecheck, production build, and mobile/desktop browser checks.
 
 ## Expo mobile app conversion — 2026-08-24
 - [ ] Create a separate Expo SDK 54 mobile project without overwriting the web prototype or published app.

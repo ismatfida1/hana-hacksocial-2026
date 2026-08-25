@@ -683,7 +683,7 @@
 - [x] Add meaningful career milestones without XP or arbitrary gamification; milestones are derived from roadmap categories and completion evidence.
 - [x] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections through the persisted project summary and focused Projects view; downstream external submission automation remains out of scope.
 - [x] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.
-- [ ] Keep earning pathways separate, support Create my own Journey, and preserve prior progress when the Journey adapts.
+- [x] Keep earning pathways separate, support Create my own Journey, and preserve prior progress when the Journey adapts through distinct `career`, `custom`, and `skill` pathway state plus account-backed progress.
 - [x] Update the reusable skill with the complete Journey 2.0 interaction and validation rules.
 
 ## Connector and AI integration vision — 2026-08-24

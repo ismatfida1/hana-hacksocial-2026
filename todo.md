@@ -942,3 +942,4 @@
 - [x] Prepare an evidence-based Google Play Data Safety draft from Hana’s actual data flows, Android permissions, AI processing, storage, and deletion controls; label it as a draft requiring Play Console confirmation.
 - [x] Re-run the current automated validation after the Play-readiness documentation update: 19 Vitest files / 61 tests, typecheck, production build, release security scan, and a 375×812 mobile greeting-screen visual check all passed; retain the non-blocking bundle-size warning.
 - [x] Add authoritative source citations and practical notice obligations for Blue Oak 1.0.0, MPL-2.0, Unlicense, and wouter to the dependency-license audit; retain unresolved package/asset/provider gates.
+- [x] Add and pass authentication contract coverage for greeting-first routing, Google sign-in, alternate sign-in, and the separate authorized-demo password area; external OAuth callback/recovery behavior remains open.

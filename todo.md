@@ -716,15 +716,15 @@
 - [ ] Validate the one-primary-action pattern and mobile readability across the app.
 
 ## Complete Hana pre-publish audit — 2026-08-24
-- [ ] Consolidate all supplied text specifications into a coverage matrix with working, incomplete, unavailable, and authorization-required states.
-- [ ] Audit every client screen, server router, database model, asset, integration, security rule, and Android/deployment file.
+- [x] Consolidate all supplied text specifications into a coverage matrix with working, incomplete, unavailable, and authorization-required states.
+- [x] Audit every client screen, server router, database model, asset, integration, security rule, and Android/deployment file.
 - [ ] Verify sign-in, private Demo Mode, profile save, progress save, memory controls, and account ownership behavior.
 - [ ] Verify Home, Journey 2.0 layers, filters, notes, links, learning details, projects, opportunities, Profile, and Ask Hana behavior.
-- [ ] Verify AI provider routing and real student-context delivery without exposing credentials.
-- [ ] Verify Web, GitHub, Canva, storage, file, and voice capabilities honestly without inventing support.
-- [ ] Fix only verified defects and add regression tests for each fix.
-- [ ] Run production build, responsive screenshots, security review, and Android readiness checks before publishing.
-- [ ] Deliver a detailed integration and feature coverage report with exact limitations and user authorization steps.
+- [x] Verify AI provider routing and real student-context delivery without exposing credentials.
+- [x] Verify Web, GitHub, Canva, storage, file, and voice capabilities honestly without inventing support.
+- [x] Fix only verified defects and add regression tests for each fix.
+- [x] Run production build, responsive screenshots, security review, and Android readiness checks before publishing; signed release verification remains open.
+- [x] Deliver a detailed integration and feature coverage report with exact limitations and user authorization steps.
 - [x] Resolve the Android audit finding: the workflow and Capacitor config exist, but the current repository has no generated `android/` platform directory.
 
 ## Persistent account memory and session audit — 2026-08-24

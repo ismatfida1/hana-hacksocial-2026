@@ -63,6 +63,13 @@ export type SemesterPlanSummary = {
   milestones: CareerMilestone[];
 };
 
+export type ProjectProgressSummary = {
+  activeProject?: string;
+  nextGate: string;
+  completedProjects: string[];
+  portfolioReadyProjects: string[];
+};
+
 export type StudentContext = {
   student: {
     university?: string;
@@ -100,6 +107,7 @@ export type StudentContext = {
     portfolioProjects: string[];
     competitions: string[];
     opportunityOutcomes: OpportunityOutcome[];
+    progressSummary: ProjectProgressSummary;
   };
   preferences: {
     preferredLearningTime?: string;
@@ -199,6 +207,14 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
   };
 }
 
+export function buildProjectProgressSummary(projects: ProjectRecord[]): ProjectProgressSummary {
+  const active = projects.find((project) => project.status === "in_progress" || project.status === "active");
+  const completedProjects = projects.filter((project) => project.status === "complete").map((project) => project.title);
+  const portfolioReadyProjects = projects.filter((project) => project.status === "complete" && project.milestones.some((milestone) => /readme|review|portfolio/i.test(milestone.title))).map((project) => project.title);
+  const nextGate = active?.milestones.find((milestone) => !milestone.complete)?.title || (active ? "Review this project with Hana" : "Choose a small project after your current learning step");
+  return { activeProject: active?.title, nextGate, completedProjects, portfolioReadyProjects };
+}
+
 export function buildSemesterPlanSummary(profile: StudentProfile, roadmap: RoadmapNode[] = []): SemesterPlanSummary {
   const academicAnchor = [profile.university, profile.degree, profile.semester].filter(Boolean).join(" · ") || "Add university details when ready";
   const industryFocus = profile.currentActiveStep || profile.career || "Choose a direction first";
@@ -250,6 +266,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
       portfolioProjects: profile.portfolioProjects,
       competitions: profile.competitions,
       opportunityOutcomes: profile.opportunityOutcomes,
+      progressSummary: buildProjectProgressSummary(profile.projectRecords),
     },
     preferences: {
       preferredLearningTime: profile.preferredLearningTime,

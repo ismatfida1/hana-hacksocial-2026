@@ -104,6 +104,37 @@ export async function upsertHanaStudentMemory(input: Omit<InsertHanaStudentMemor
   });
 }
 
+export async function listHanaConversations(userId: number): Promise<HanaStudentMemory["conversations"]> {
+  const memory = await getHanaStudentMemory(userId);
+  return memory?.conversations ?? [];
+}
+
+/** Clear only user-visible chat history; profile and learning progress remain intact. */
+export async function clearHanaConversations(userId: number): Promise<void> {
+  const memory = await getHanaStudentMemory(userId);
+  if (!memory) return;
+  await upsertHanaStudentMemory({
+    userId,
+    profile: memory.profile,
+    conversations: [],
+    memoryEnabled: memory.memoryEnabled,
+  });
+}
+
+export function removeHanaConversation(conversations: HanaStudentMemory["conversations"], target: HanaStudentMemory["conversations"][number]): HanaStudentMemory["conversations"] {
+  const index = conversations.findIndex((message) => message.role === target.role && message.text === target.text && message.createdAt === target.createdAt);
+  if (index < 0) return conversations;
+  return [...conversations.slice(0, index), ...conversations.slice(index + 1)];
+}
+
+export async function deleteHanaConversation(userId: number, target: HanaStudentMemory["conversations"][number]): Promise<void> {
+  const memory = await getHanaStudentMemory(userId);
+  if (!memory) return;
+  const conversations = removeHanaConversation(memory.conversations, target);
+  if (conversations === memory.conversations) return;
+  await upsertHanaStudentMemory({ userId, profile: memory.profile, conversations, memoryEnabled: memory.memoryEnabled });
+}
+
 export async function listOpportunities(activeOnly = true): Promise<Opportunity[]> {
   const db = await getDb();
   if (!db) return [];

@@ -4,7 +4,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { archiveOpportunity, createAccountDeletionRequest, createOpportunity, deleteUserAccount, getHanaStudentMemory, getOpportunity, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
+import { archiveOpportunity, clearHanaConversations, createAccountDeletionRequest, deleteHanaConversation, createOpportunity, deleteUserAccount, getHanaStudentMemory, getOpportunity, listHanaConversations, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setOpportunityOutcome, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
@@ -85,7 +85,16 @@ export const appRouter = router({
       return { success: true, enabled: input.enabled } as const;
     }),
     clear: protectedProcedure.mutation(async ({ ctx }) => {
-      await upsertHanaStudentMemory({ userId: ctx.user.id, profile: {}, conversations: [], memoryEnabled: 0 });
+      await upsertHanaStudentMemory({ profile: {}, conversations: [], memoryEnabled: 0, userId: ctx.user.id });
+      return { success: true } as const;
+    }),
+    history: protectedProcedure.query(({ ctx }) => listHanaConversations(ctx.user.id)),
+    clearHistory: protectedProcedure.mutation(async ({ ctx }) => {
+      await clearHanaConversations(ctx.user.id);
+      return { success: true } as const;
+    }),
+    deleteMessage: protectedProcedure.input(memoryConversation).mutation(async ({ ctx, input }) => {
+      await deleteHanaConversation(ctx.user.id, input);
       return { success: true } as const;
     }),
   }),

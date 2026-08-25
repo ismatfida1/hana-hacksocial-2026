@@ -538,7 +538,7 @@
 
 ## Reliable saving blocker — 2026-08-24
 - [x] Add a visible save state and success/error feedback for student profile updates.
-- [ ] Add a clear progress-save action for energy, mastery, journey progress, projects, and opportunities.
+- [x] Add a clear progress-save action for energy, mastery, journey progress, projects, and opportunities.
 - [x] Confirm saved profile and progress restore from the account database after refresh.
 - [x] Add regression coverage and publish the save-flow repair.
 
@@ -765,13 +765,13 @@
 - [x] Report whether Hana is fully implemented and whether final publication is justified.
 
 ## Privacy management implementation — 2026-08-24
-- [ ] Add account-scoped chat-history viewing with clear timestamps and conversation boundaries.
-- [ ] Add selective and full chat-history deletion with confirmation and ownership checks.
-- [ ] Add confirmed account/data deletion that removes Hana-owned user data without affecting other accounts.
-- [ ] Keep essential learning memory separate from user-visible chat history during deletion.
-- [ ] Add a simple privacy panel explaining stored profile/progress data, chat history, AI processing, memory pause, and deletion.
+- [x] Add account-scoped chat-history viewing with clear timestamps and conversation boundaries.
+- [x] Add selective and full chat-history deletion with confirmation and ownership checks.
+- [x] Add confirmed account/data deletion that removes Hana-owned user data without affecting other accounts.
+- [x] Keep essential learning memory separate from user-visible chat history during deletion.
+- [x] Add a simple privacy panel explaining stored profile/progress data, chat history, AI processing, memory pause, and deletion.
 - [ ] Add tests for ownership isolation, deletion safety, memory pause behavior, session invalidation, and refresh restoration.
-- [ ] Run responsive, security, data-integrity, TypeScript, regression, and production-build validation before publishing.
+- [x] Run responsive, security, data-integrity, TypeScript, regression, and production-build validation before publishing.
 
 ## Security, privacy, and Play readiness requirements — 2026-08-24
 - [ ] Add visible Privacy Policy, Terms of Service, AI disclosure, creator/ownership notice, app version, and support/contact surfaces.

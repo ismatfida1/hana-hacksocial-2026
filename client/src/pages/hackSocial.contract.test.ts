@@ -35,4 +35,11 @@ describe("HackSocial 2026 demo contract", () => {
     expect(router).toContain("Do not save a conversation, change a profile");
     expect(router).toContain("live: false");
   });
+
+  it("keeps the focused visual and chat polish in the judge flow", () => {
+    expect(component).toContain('const HANA = "/manus-storage/hana-mobile-logo_34c448e2.png"');
+    expect(component).toContain("ReactMarkdown");
+    expect(component).toContain("Hana is thinking");
+    expect(component).toContain("aria-busy={demoChat.isPending}");
+  });
 });

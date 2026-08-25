@@ -1,8 +1,11 @@
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, ExternalLink, Lightbulb, MessageCircle, Sparkles, Trophy } from "lucide-react";
 import { trpc } from "@/lib/trpc";
+import ReactMarkdown from "react-markdown";
 
 type Stage = "goal" | "roadmap" | "mission" | "ask" | "mastery" | "project" | "opportunity" | "progress";
+
+const HANA = "/manus-storage/hana-mobile-logo_34c448e2.png";
 
 const demoRoadmap = [
   { title: "Understand the problem", detail: "Choose one student problem that is worth solving.", state: "complete" },
@@ -58,7 +61,7 @@ export function HackSocial({ onExit }: { onExit: () => void }) {
   };
 
   return (
-    <main className="min-h-screen bg-[#FBF7F1] px-4 pb-10 text-[#3A3540] sm:px-6">
+    <main className="min-h-screen overflow-x-hidden bg-[#FBF7F1] px-4 pb-10 text-[#3A3540] sm:px-6">
       <div className="mx-auto max-w-2xl">
         <header className="flex items-center justify-between gap-3 py-5">
           <button type="button" onClick={onExit} className="inline-flex items-center gap-1 rounded-full border border-[#D9CEC4] bg-[#FFFCF8] px-3 py-2 text-xs font-bold text-[#62566A]">
@@ -75,7 +78,7 @@ export function HackSocial({ onExit }: { onExit: () => void }) {
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#E8DFD8]" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-label="HackSocial demo progress"><div className="h-full rounded-full bg-[#947DA3] transition-[width] duration-200" style={{ width: `${progress}%` }} /></div>
 
           <div className="mt-8 grid gap-6 md:grid-cols-[180px_1fr] md:items-center">
-            <div className="relative mx-auto grid size-40 place-items-center rounded-[38px] bg-[#E5E5F0] text-7xl shadow-inner">🤖<span className="absolute right-3 top-3 rounded-full bg-[#FFFCF8] px-2 py-1 text-sm">{stage === "mastery" ? "🤔" : stage === "progress" ? "🥹" : stage === "ask" ? "💡" : "😊"}</span></div>
+            <div className="relative mx-auto grid size-40 place-items-center overflow-hidden rounded-[38px] bg-[#E5E5F0] shadow-inner sm:size-44"><img src={HANA} alt="Hana, your AI learning companion" className="size-full object-cover" /><span className="absolute right-3 top-3 rounded-full bg-[#FFFCF8] px-2 py-1 text-sm shadow-sm" aria-label={stage === "mastery" ? "Hana is thinking" : stage === "progress" ? "Hana is proud" : stage === "ask" ? "Hana is ready to help" : "Hana is happy"}>{stage === "mastery" ? "🤔" : stage === "progress" ? "🥹" : stage === "ask" ? "💡" : "😊"}</span></div>
             <div><h1 className="font-display text-4xl leading-[.98] text-[#3A3540] sm:text-5xl">{copy.title}</h1><p className="mt-4 max-w-xl text-sm leading-6 text-[#625D65]">{copy.caption}</p></div>
           </div>
 
@@ -85,7 +88,7 @@ export function HackSocial({ onExit }: { onExit: () => void }) {
 
           {stage === "mission" && <div className="mt-8 rounded-2xl bg-[#F0EEE6] p-5"><div className="flex items-start gap-3"><Lightbulb className="mt-0.5 text-[#947D55]" size={19} /><div><h2 className="text-lg font-bold">Build the first question screen</h2><p className="mt-2 text-sm leading-5 text-[#625D65]">Write three questions a student might ask. Then choose one answer Hana should make simpler.</p><p className="mt-3 text-xs font-bold text-[#746B72]">No deadline · work at your own pace</p></div></div></div>}
 
-          {stage === "ask" && <div className="mt-8 rounded-2xl bg-[#F5F3FB] p-4"><label htmlFor="hack-question" className="text-xs font-bold uppercase tracking-[.12em] text-[#62566A]">Ask Hana about this mission</label><div className="mt-3 flex gap-2"><input id="hack-question" value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="What should I build first?" className="min-w-0 flex-1 rounded-xl border border-[#D8D4E4] bg-white px-3 py-3 text-sm outline-none focus:border-[#947DA3]" /><button type="button" onClick={askHana} disabled={!question.trim() || demoChat.isPending} className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#3A3540] text-white disabled:opacity-50" aria-label="Ask Hana">{demoChat.isPending ? "…" : <MessageCircle size={17} />}</button></div>{aiReply ? <div className="mt-4 rounded-xl bg-white p-4 text-sm leading-6 text-[#514B53]"><p className="mb-2 text-xs font-bold uppercase tracking-[.12em] text-[#C98C93]">Hana · {demoChat.data?.model || "live response"}</p><p className="whitespace-pre-wrap">{aiReply}</p></div> : <p className="mt-3 text-xs leading-5 text-[#746B72]">Demo Mode sends no conversation to personal memory. If live AI is unavailable, Hana will say so clearly.</p>}</div>}
+          {stage === "ask" && <div className="mt-8 rounded-2xl bg-[#F5F3FB] p-4"><label htmlFor="hack-question" className="text-xs font-bold uppercase tracking-[.12em] text-[#62566A]">Ask Hana about this mission</label><div className="mt-3 flex gap-2"><input id="hack-question" value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="What should I build first?" className="min-w-0 flex-1 rounded-xl border border-[#D8D4E4] bg-white px-3 py-3 text-sm outline-none focus:border-[#947DA3]" aria-describedby="hack-question-help" /><button type="button" onClick={askHana} disabled={!question.trim() || demoChat.isPending} className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#3A3540] text-white transition hover:bg-[#514A59] disabled:cursor-not-allowed disabled:opacity-50" aria-label={demoChat.isPending ? "Hana is thinking" : "Ask Hana"} aria-busy={demoChat.isPending}>{demoChat.isPending ? "…" : <MessageCircle size={17} />}</button></div>{demoChat.isPending && <p className="mt-3 text-xs font-bold text-[#62566A]" role="status" aria-live="polite">Hana is thinking…</p>}{aiReply ? <div className="mt-4 min-h-28 rounded-xl bg-white p-4 text-sm leading-6 text-[#514B53]" role="status" aria-live="polite"><p className="mb-3 text-xs font-bold uppercase tracking-[.12em] text-[#C98C93]">Hana · {demoChat.data?.model || "response"}</p><div className="space-y-2 [&_h1]:font-display [&_h1]:text-xl [&_h1]:leading-tight [&_h2]:font-bold [&_h2]:text-base [&_h2]:text-[#3A3540] [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:m-0 [&_strong]:font-bold [&_ul]:list-disc [&_ul]:pl-5"><ReactMarkdown>{aiReply}</ReactMarkdown></div></div> : <p id="hack-question-help" className="mt-3 text-xs leading-5 text-[#746B72]">Demo Mode sends no conversation to personal memory. If live AI is unavailable, Hana will say so clearly.</p>}</div>}
 
           {stage === "mastery" && <div className="mt-8 rounded-2xl bg-[#F5F3FB] p-4"><p className="text-sm font-bold">Which choice makes this project easier to test?</p><div className="mt-3 grid gap-2"><button type="button" onClick={() => setMastery("correct")} className={`rounded-xl border px-4 py-3 text-left text-sm ${mastery === "correct" ? "border-[#A5BD9C] bg-[#EAF2E7]" : "border-[#D8D4E4] bg-white"}`}>Use three small examples and compare the answers.</button><button type="button" onClick={() => setMastery("try-again")} className={`rounded-xl border px-4 py-3 text-left text-sm ${mastery === "try-again" ? "border-[#E7B7BC] bg-[#F6E9EA]" : "border-[#D8D4E4] bg-white"}`}>Add many features before trying one example.</button></div>{mastery === "correct" && <p className="mt-3 text-sm font-bold text-[#4A6845]">Nice. Small examples make the result easier to understand.</p>}{mastery === "try-again" && <p className="mt-3 text-sm font-bold text-[#6F4D55]">Try again. Start with one small example.</p>}</div>}
 

@@ -1000,3 +1000,15 @@
 - [ ] Execute real-account navigation, OAuth, persistence/database, deletion, console, and deployed mobile checks; local contract/build/security checks and the controlled Demo Mode journey are complete.
 - [ ] Confirm the copied project and GitHub repository against the final permanent production URL; the copied path and repository are confirmed, while a permanent production URL remains open.
 - [x] Rehearse the judge demo using the runbook, record a repeatable approximately 2-minute-10-second entry-to-progress browser pass, and update the final submission report with verified claims and open gates.
+
+- [ ] Deploy the copied HackSocial project to a public judge-accessible platform, preserving full-stack authentication, AI, and database behavior; do not touch the original HANA project.
+
+- [ ] Provide judges with one verified live public URL for the copied HackSocial experience, alongside the GitHub source repository; keep the original HANA deployment untouched.
+
+- [ ] Diagnose the failed Vercel connection; if it cannot be authorized, use a separate compatible managed full-stack deployment for the copied HackSocial project and verify one public judge URL.
+
+- [ ] Complete the approved read-only final HackSocial readiness audit of the repository main branch; do not modify code, delete files, reset history, push, or deploy until the report is approved.
+
+- [ ] Apply only the approved HackSocial visual and Ask Hana polish; do not add major features or alter the core concept.
+- [ ] Re-run the complete HackSocial judge flow, desktop/mobile checks, automated validation, and final public-URL smoke test after polishing.
+- [ ] Prepare and verify a separate public deployment URL for judges, or document the exact external hosting blocker if no compatible deployment can be authorized.

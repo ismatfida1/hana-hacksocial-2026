@@ -3,6 +3,8 @@ import type { HanaStudentMemory } from "../drizzle/schema";
 import { buildRoadmap, type RoadmapNode } from "../shared/hanaJourney";
 
 export type ProjectStatus = "locked" | "active" | "in_progress" | "complete";
+export type OpportunityOutcomeStatus = "saved" | "applied" | "interview" | "accepted" | "rejected" | "completed";
+export type OpportunityOutcome = { opportunityTitle: string; status: OpportunityOutcomeStatus; updatedAt: string };
 
 export type ProjectRecord = {
   id: string;
@@ -36,6 +38,7 @@ export type StudentProfile = {
   githubProjects: string[];
   portfolioProjects: string[];
   competitions: string[];
+  opportunityOutcomes: OpportunityOutcome[];
   careerReadiness?: string;
   preferredLearningTime?: string;
   availableStudyTime?: string;
@@ -82,6 +85,7 @@ export type StudentContext = {
     githubProjects: string[];
     portfolioProjects: string[];
     competitions: string[];
+    opportunityOutcomes: OpportunityOutcome[];
   };
   preferences: {
     preferredLearningTime?: string;
@@ -122,6 +126,19 @@ const asProjectRecords = (value: unknown): ProjectRecord[] => {
   }).slice(0, 40);
 };
 
+const asOpportunityOutcomes = (value: unknown): OpportunityOutcome[] => {
+  if (!Array.isArray(value)) return [];
+  const statuses: OpportunityOutcomeStatus[] = ["saved", "applied", "interview", "accepted", "rejected", "completed"];
+  return value.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const record = item as Record<string, unknown>;
+    const opportunityTitle = asText(record.opportunityTitle);
+    const updatedAt = asText(record.updatedAt);
+    const status = typeof record.status === "string" && statuses.includes(record.status as OpportunityOutcomeStatus) ? record.status as OpportunityOutcomeStatus : null;
+    return opportunityTitle && updatedAt && status ? [{ opportunityTitle, status, updatedAt }] : [];
+  }).slice(-80);
+};
+
 const asMap = (value: unknown): Record<string, string> => {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   return Object.entries(value as Record<string, unknown>).reduce<Record<string, string>>((result, [key, item]) => {
@@ -155,6 +172,7 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
     githubProjects: asList(profile.githubProjects),
     portfolioProjects: asList(profile.portfolioProjects),
     competitions: asList(profile.competitions),
+    opportunityOutcomes: asOpportunityOutcomes(profile.opportunityOutcomes),
     careerReadiness: asText(profile.careerReadiness),
     preferredLearningTime: asText(profile.preferredLearningTime),
     availableStudyTime: asText(profile.availableStudyTime ?? profile.studyTime),
@@ -201,6 +219,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
       githubProjects: profile.githubProjects,
       portfolioProjects: profile.portfolioProjects,
       competitions: profile.competitions,
+      opportunityOutcomes: profile.opportunityOutcomes,
     },
     preferences: {
       preferredLearningTime: profile.preferredLearningTime,
@@ -446,6 +465,16 @@ export async function addPortfolioProject(studentId: number, title: string) {
 
 export async function addCompetition(studentId: number, title: string) {
   return appendProfileItem(studentId, "competitions", title);
+}
+
+export async function setOpportunityOutcome(studentId: number, opportunityTitle: string, status: OpportunityOutcomeStatus) {
+  const existing = await getHanaStudentMemory(studentId);
+  const profile = normalizeStudentProfile(existing?.profile);
+  const cleanTitle = opportunityTitle.trim().slice(0, 200);
+  if (!cleanTitle) return buildStudentContextFromMemory(existing);
+  const outcome: OpportunityOutcome = { opportunityTitle: cleanTitle, status, updatedAt: new Date().toISOString() };
+  const outcomes = [...profile.opportunityOutcomes.filter((item) => item.opportunityTitle.toLowerCase() !== cleanTitle.toLowerCase()), outcome].slice(-80);
+  return updateStudentProfile(studentId, { opportunityOutcomes: outcomes });
 }
 
 export function buildWeeklyReportFromContext(context: StudentContext) {

@@ -5,7 +5,7 @@ import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { createAccountDeletionRequest, deleteUserAccount, getHanaStudentMemory, upsertHanaStudentMemory } from "./db";
-import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
+import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setOpportunityOutcome, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
 import { validateResourceCandidate, verifyResourceCandidates } from "./resourceVerification";
@@ -23,7 +23,7 @@ export const memoryProfileSchema = z.object({
   subjects: z.array(z.string().max(160)).max(80).default([]), upcomingSubjects: z.array(z.string().max(160)).max(80).default([]), completedSubjects: z.array(z.string().max(160)).max(80).default([]),
   career: z.string().max(120).optional(), careerGoal: z.string().max(160).optional(), currentJourney: z.string().max(160).optional(), currentActiveStep: z.string().max(160).optional(),
   demonstratedSkills: z.array(z.string().max(120)).max(80).default([]), completedSkills: z.array(z.string().max(120)).max(80).default([]), weakAreas: z.array(z.string().max(120)).max(80).default([]), completedLearningSteps: z.array(z.string().max(160)).max(100).default([]),
-  skills: z.array(z.string().max(80)).max(40).default([]), progress: z.array(z.string().max(120)).max(80).default([]), projects: z.array(z.string().max(160)).max(40).default([]), projectSkills: z.array(z.string().max(120)).max(80).default([]), githubProjects: z.array(z.string().max(200)).max(40).default([]), portfolioProjects: z.array(z.string().max(200)).max(40).default([]), competitions: z.array(z.string().max(200)).max(40).default([]),
+  skills: z.array(z.string().max(80)).max(40).default([]), progress: z.array(z.string().max(120)).max(80).default([]), projects: z.array(z.string().max(160)).max(40).default([]), projectSkills: z.array(z.string().max(120)).max(80).default([]), githubProjects: z.array(z.string().max(200)).max(40).default([]), portfolioProjects: z.array(z.string().max(200)).max(40).default([]), competitions: z.array(z.string().max(200)).max(40).default([]), opportunityOutcomes: z.array(z.object({ opportunityTitle: z.string().min(1).max(200), status: z.enum(["saved", "applied", "interview", "accepted", "rejected", "completed"]), updatedAt: z.string().datetime() })).max(80).default([]),
   careerReadiness: z.string().max(160).optional(), preferredLearningTime: z.string().max(120).optional(), availableStudyTime: z.string().max(120).optional(), energyMode: z.enum(["light", "normal", "deep"]).optional(), tourCompleted: z.boolean().optional(), stepNotes: z.record(z.string().max(160), z.string().max(2000)).default({}), stepResources: z.record(z.string().max(160), z.string().url().max(500)).default({}), masteryChecks: z.array(z.string().max(2400)).max(100).default([]), learningHistory: z.array(z.string().max(240)).max(100).default([]), goals: z.array(z.string().max(160)).max(20).default([]),
 });
 
@@ -112,6 +112,7 @@ export const appRouter = router({
     setProjectStatus: protectedProcedure.input(z.object({ projectId: z.string().min(1).max(120), status: z.enum(["locked", "active", "in_progress", "complete"]) })).mutation(({ ctx, input }) => setProjectStatus(ctx.user.id, input.projectId, input.status)),
     addPortfolioProject: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addPortfolioProject(ctx.user.id, input.title)),
     addCompetition: protectedProcedure.input(z.object({ title: z.string().min(1).max(200) })).mutation(({ ctx, input }) => addCompetition(ctx.user.id, input.title)),
+    setOpportunityOutcome: protectedProcedure.input(z.object({ opportunityTitle: z.string().min(1).max(200), status: z.enum(["saved", "applied", "interview", "accepted", "rejected", "completed"]) })).mutation(({ ctx, input }) => setOpportunityOutcome(ctx.user.id, input.opportunityTitle, input.status)),
     recordLearning: protectedProcedure.input(z.object({ note: z.string().min(1).max(240) })).mutation(({ ctx, input }) => recordLearningHistory(ctx.user.id, input.note)),
   }),
   hana: router({

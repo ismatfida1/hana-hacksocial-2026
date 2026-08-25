@@ -24,6 +24,7 @@ describe("student context layer", () => {
         githubProjects: ["https://github.com/example/study-timer"],
         portfolioProjects: ["Study timer"],
         competitions: ["Campus hackathon"],
+        opportunityOutcomes: [{ opportunityTitle: "Kaggle Competitions", status: "applied", updatedAt: "2026-08-24T00:00:00.000Z" }],
         careerReadiness: "Foundation stage",
         preferredLearningTime: "Morning",
         availableStudyTime: "Full study day",
@@ -42,6 +43,7 @@ describe("student context layer", () => {
     expect(context.learning.completedSkills).toEqual(["Python Variables"]);
     expect(context.learning.weakAreas).toEqual(["Lists"]);
     expect(context.work.githubProjects).toHaveLength(1);
+    expect(context.work.opportunityOutcomes).toEqual([{ opportunityTitle: "Kaggle Competitions", status: "applied", updatedAt: "2026-08-24T00:00:00.000Z" }]);
     expect(context.learning.recentConversations[0]?.text).toContain("What should");
     expect(context.roadmap[0]?.status).toBe("active");
     expect(resolveJourneyArea("AI Engineering")).toBe("AI / Machine Learning");
@@ -70,6 +72,11 @@ describe("student context layer", () => {
     expect(context.learning.completedSkills).toEqual([]);
     expect(prompt).toContain('"completedSkills": []');
     expect(prompt).toContain('"currentActiveStep": "APIs"');
+  });
+
+  it("drops malformed opportunity outcomes instead of trusting them", () => {
+    const context = buildStudentContextFromMemory({ profile: { opportunityOutcomes: [{ opportunityTitle: "Kaggle", status: "unknown", updatedAt: "not-a-date" }, { opportunityTitle: "Devpost", status: "saved", updatedAt: "2026-08-24T00:00:00.000Z" }] }, conversations: [] } as never);
+    expect(context.work.opportunityOutcomes).toEqual([{ opportunityTitle: "Devpost", status: "saved", updatedAt: "2026-08-24T00:00:00.000Z" }]);
   });
 
   it("keeps energy mode in the unified context", () => {

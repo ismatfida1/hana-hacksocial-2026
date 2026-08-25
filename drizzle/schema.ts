@@ -56,6 +56,7 @@ export const hanaStudentMemory = mysqlTable("hana_student_memory", {
     githubProjects?: string[];
     portfolioProjects?: string[];
     competitions?: string[];
+    opportunityOutcomes?: Array<{ opportunityTitle: string; status: "saved" | "applied" | "interview" | "accepted" | "rejected" | "completed"; updatedAt: string }>;
     careerReadiness?: string;
     preferredLearningTime?: string;
     availableStudyTime?: string;

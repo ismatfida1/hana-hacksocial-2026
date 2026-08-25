@@ -904,3 +904,5 @@
 - [x] Prevent background page scrolling while Hana’s interactive tour handles Left, Right, and Escape keys.
 - [x] Move keyboard focus to the first active tour control whenever Hana’s guide opens or changes step.
 - [x] Add context-aware Hana fit guidance and a safe official-page application checklist inside expandable opportunity details without inventing deadlines or eligibility.
+- [x] Add a protected account-backed opportunity outcome selector for Saved, Applied, Interview, Accepted, Rejected, and Completed, with strict normalization and unified AI context exposure.
+- [x] Add regression coverage for valid and malformed opportunity outcomes.

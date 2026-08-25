@@ -687,7 +687,7 @@
 - [x] Update the reusable skill with the complete Journey 2.0 interaction and validation rules.
 
 ## Connector and AI integration vision — 2026-08-24
-- [ ] Audit actual OpenAI, Gemini, Supabase, Web, GitHub, Canva, and optional voice/file availability before claiming support.
+- [x] Audit actual OpenAI, Gemini, Supabase, Web, GitHub, Canva, and optional voice/file availability before claiming support: OpenAI/Gemini adapters and server-side file storage are present; MySQL/Drizzle is the active memory architecture; Browser, GitHub, Canva, and Supabase API availability are recorded; voice is framework-capable but not exposed as a Hana feature.
 - [x] Keep OpenAI as Hana’s primary server-side AI and route every personalized answer through real student context.
 - [x] Keep Gemini optional and avoid duplicating every request across providers.
 - [x] Keep Canva optional for visual content and never make normal Hana operation depend on it: Canva is enabled, but the app has no runtime dependency on it.

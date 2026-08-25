@@ -100,7 +100,7 @@ function DemoTour({ stage, onStage, onDestination, privateDemo = false }: DemoTo
     target.scrollIntoView({ behavior: "smooth", block: "center" });
     const updateTarget = () => { const rect = target.getBoundingClientRect(); setTargetRect({ top: rect.top, left: rect.left, width: rect.width, height: rect.height }); };
     updateTarget();
-    const handleKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") onStage(demoTourStages.length); if (event.key === "ArrowLeft" && stage > 0) onStage(stage - 1); if (event.key === "ArrowRight" && stage < demoTourStages.length) onStage(stage + 1); };
+    const handleKeyDown = (event: KeyboardEvent) => { if (!["Escape", "ArrowLeft", "ArrowRight"].includes(event.key)) return; event.preventDefault(); if (event.key === "Escape") onStage(demoTourStages.length); if (event.key === "ArrowLeft" && stage > 0) onStage(stage - 1); if (event.key === "ArrowRight" && stage < demoTourStages.length) onStage(stage + 1); };
     window.addEventListener("resize", updateTarget);
     window.addEventListener("scroll", updateTarget, { passive: true });
     window.addEventListener("keydown", handleKeyDown);

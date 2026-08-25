@@ -78,8 +78,8 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 
 | Check | Result |
 |---|---|
-| TypeScript | Passed with `pnpm run check` |
-| Automated tests | Passed: 15 test files, 48 tests |
+| TypeScript | Passed with `pnpm run typecheck` (alias `pnpm run check`) |
+| Automated tests | Passed: 16 test files, 51 tests |
 | Production build | Passed with `pnpm run build` |
 | Release security scan | Passed with `pnpm run security:scan` |
 | Mobile visual check | Greeting screen rendered cleanly at 390×844; full authenticated flows were not exercised end to end |

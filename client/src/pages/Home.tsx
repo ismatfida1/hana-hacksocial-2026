@@ -29,7 +29,7 @@ type Pathway = "career" | "custom" | "skill";
 type Plan = { pathway: Pathway; area: string; title: string; goal: string; level: string; time: string; steps: JourneyStep[] };
 type NavItem = { label: Destination; shortLabel: string; icon: typeof HomeIcon };
 
-const careers = ["Software Engineering", "AI / Machine Learning", "Cybersecurity", "Cloud / DevOps", "Data Science", "Mathematics for Computing", "Mobile Development", "UI/UX Design"];
+const careers = ["BSCS Foundation", "AI Automation Engineer", "Software Engineering", "AI / Machine Learning", "Cybersecurity", "Cloud / DevOps", "Data Science", "Mathematics for Computing", "Mobile Development", "UI/UX Design"];
 const practicalSkills = ["AI Automation", "Web Development", "Python Automation", "Data Analysis", "UI/UX Design", "Video Editing", "Content Creation", "SEO"];
 const levels = ["Starting from zero", "I know the basics", "I’ve built a few things", "Ready for advanced work"];
 const goals = ["Pass my university courses", "Build a portfolio", "Get an internship or job", "Explore this field first"];

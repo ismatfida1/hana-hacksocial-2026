@@ -129,3 +129,9 @@ The new attachments reinforce, rather than remove, the previously identified blo
 Since the earlier matrix, HANA added a backward-compatible account-memory `projectRecords` model with durable project identifiers, skills, milestone lists, and `locked`, `active`, `in_progress`, and `complete` states. Protected tRPC mutations now update milestones and derive project status from milestone completion. This improves the project requirement from **NOT IMPLEMENTED** to **PARTIAL** because the current Projects UI is not yet wired to render and toggle these records end to end, and existing string-only projects are not migrated into milestone records.
 
 The latest validation run passed TypeScript, the complete Vitest suite (**9 files, 23 tests**), the production build, and the release security scan. The scan reported no literal secret patterns, environment files, signing material, or source maps in the scanned paths.
+
+## Complete-from-start implementation addendum — 25 August 2026
+
+HANA now exposes two distinct selectable tracks: **BSCS Foundation**, represented by 16 ordered steps across semesters 1–8, and **AI Automation Engineer**, represented by eight ordered specialization stages from programming foundation through production AI systems and earning/portfolio proof. The shared builder also applies the student’s university, degree, semester, subjects, current level, goal, and study pace to the generated step descriptions.
+
+The official-source review found that the University of the Punjab BS Computer Science page does not currently expose a complete semester-by-semester course table in the retrieved content, while the reviewed official PUCIT page was for BS Information Technology. Therefore HANA keeps the university curriculum as optional context and retains the editable subjects fallback. It does not claim the supplied Fall 2026 PUCIT/FCIT details are officially verified.

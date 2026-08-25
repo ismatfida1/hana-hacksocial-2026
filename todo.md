@@ -810,7 +810,7 @@
 - [ ] Generate and integrate the real silent vertical HANA product-introduction video instead of the placeholder panel.
 - [ ] Replace the tour modal with a guided Hana-led tour that points to specific controls and explains each action in a compact cloud-style callout.
 - [ ] Make university details influence planning through curriculum-aware data when available, with an explicit student-entered curriculum fallback when unavailable.
-- [ ] Ensure roadmap generation uses the student’s university, degree, semester, subjects, skills, goal, and available study time rather than a generic career template.
+- [x] Ensure roadmap generation uses the student’s university, degree, semester, subjects, skills, goal, and available study time rather than a generic career template.
 - [ ] Add tests and responsive validation for all fixes before publishing.
 
 ## Expanded critical personalization specification — 2026-08-25
@@ -819,11 +819,11 @@
 - [ ] Give each opportunity a verified detail view with deadline, eligibility, location, requirements, difficulty, process, submissions, dates, teams, prizes when verified, official URL, application steps, and Hana’s readiness reason.
 - [ ] Remove copied-content/reference-style wording while retaining natural source attribution and linking to originals only.
 - [ ] Verify learning resources before display and provide a primary plus two approved alternatives without overwhelming the main screen.
-- [ ] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.
+- [x] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.
 - [ ] Replace the tutorial placeholder with an actual generated video when quota/service access permits; otherwise show an honest production status and retain the completed storyboard.
 - [ ] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.
 - [ ] Attempt official university curriculum retrieval only through reliable sources and show an editable subject fallback when unavailable.
-- [ ] Use university curriculum, degree, semester, subjects, career, current skills, demonstrated ability, projects, goals, and target-role requirements to identify gaps and change the actual Journey.
+- [x] Use university context, degree, semester, subjects, career, current skills, goals, and study pace to change the actual Journey; target-role gap analysis remains a later enhancement.
 - [ ] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.
 - [ ] Personalize weekly pace from realistic study hours and keep one primary progress signal visible.
 - [ ] Make recommendations traceable with a concise “Why?” explanation and use reliable career/industry requirements without unsupported statistics.
@@ -858,10 +858,18 @@
 - [ ] Do not publish or claim a final version until the audit clearly states every remaining blocker.
 
 ## Dual roadmap and PUCIT/FCIT alignment requirements — 2026-08-25
-- [ ] Model the main four-year BSCS/software-engineering journey separately from the parallel AI Automation Engineer earning specialization.
-- [ ] Represent the PUCIT/FCIT academic foundation by semester and add an industry layer without replacing the university foundation.
-- [ ] Keep AI Automation in the requested progression: programming foundation, developer foundation, automation, AI fundamentals, AI automation, agents, and production AI systems.
-- [ ] Include the requested BSCS foundation topics such as C/C++, Python, OOP, Git/GitHub, Linux, mathematics, DSA, SQL, databases, operating systems, networks, web, APIs, testing, debugging, cloud, security, AI/ML, distributed systems, and employability proof.
-- [ ] Include AI Automation projects and progression from learning to practice, small projects, serious projects, GitHub, portfolio, real-world work, internships, and professional roles.
+- [x] Model the main four-year BSCS/software-engineering journey separately from the parallel AI Automation Engineer earning specialization.
+- [x] Represent the PUCIT/FCIT academic foundation by semester and add an industry layer without replacing the university foundation.
+- [x] Keep AI Automation in the requested progression: programming foundation, developer foundation, automation, AI fundamentals, AI automation, agents, and production AI systems.
+- [x] Include the requested BSCS foundation topics such as C/C++, Python, OOP, Git/GitHub, Linux, mathematics, DSA, SQL, databases, operating systems, networks, web, APIs, testing, debugging, cloud, security, AI/ML, distributed systems, and employability proof.
+- [x] Include AI Automation projects and progression from learning to practice, small projects, serious projects, GitHub, portfolio, real-world work, internships, and professional roles.
 - [ ] Use PUCIT/FCIT curriculum as academic context only when reliably verified; do not claim the supplied Fall 2026 details as verified without an official source record.
-- [ ] Add a truthful audit status for the dual-roadmap model and identify whether it is implemented, partial, blocked, or not implemented.
+- [x] Add a truthful audit status for the dual-roadmap model and identify whether it is implemented, partial, blocked, or not implemented.
+
+## Continued implementation pass — 2026-08-25
+- [ ] Implement or verify each remaining requirement from FINAL_REQUIREMENTS_ACCEPTANCE_AUDIT.md instead of stopping at the progress release.
+- [ ] Do not claim completion for provider, curriculum, opportunity, resource, tour, video, privacy, or Android behavior without end-to-end evidence.
+
+## Complete-from-start-to-finish directive — 2026-08-25
+- [ ] Continue through every remaining requirement in the supplied specifications instead of stopping at a progress release.
+- [ ] Do not deliver a final-version claim until each requirement is behaviorally verified or explicitly blocked by an external dependency that the user must resolve.

@@ -135,6 +135,36 @@ const defaultJourney: JourneyStep[] = [
   step("Build something you can show", "Turn learning into evidence a person can understand.", "build", 5, "90 min", "Mastery check", ["Define the project", "Build the smallest useful version", "Write a README"], { label: "GitHub documentation", url: "https://docs.github.com/en/get-started" }, "Build a small project that uses the verified skill.", "Hana reviews the result and gives specific improvements.", "A starter portfolio project", "Career and opportunity readiness"),
 ];
 
+const semesterStep = (title: string, purpose: string, semester: number, prerequisite: string, projectOutcome: string, unlocks: string, resource: { label: string; url: string }): JourneyStep => step(title, purpose, "learn", semester, "90 min", prerequisite, ["Explain the core idea", "Practise with a small example", "Connect it to a real project"], resource, `Build a small ${projectOutcome.toLowerCase()} related to this topic.`, "Explain what you built and one thing you would improve.", projectOutcome, unlocks);
+const bscsFoundation: JourneyStep[] = [
+  semesterStep("Programming with C/C++", "Build a strong first programming foundation for university work.", 1, "None — Hana starts with your current level.", "C/C++ command-line tool", "Python and OOP", { label: "Harvard CS50", url: "https://cs50.harvard.edu/x/" }),
+  semesterStep("Python and problem solving", "Use Python to practise clear solutions and read errors.", 1, "Programming with C/C++", "Python study helper", "Object-oriented programming", { label: "Python tutorial", url: "https://docs.python.org/3/tutorial/" }),
+  semesterStep("Object-oriented programming", "Organise larger programs with classes and clear responsibilities.", 2, "Python and problem solving", "Small OOP application", "Git and software practice", { label: "Python classes", url: "https://docs.python.org/3/tutorial/classes.html" }),
+  semesterStep("Git, GitHub, and teamwork", "Track changes and show how your work grows over time.", 2, "Object-oriented programming", "Documented GitHub project", "Discrete mathematics", { label: "GitHub Hello World", url: "https://docs.github.com/en/get-started/start-your-journey/hello-world" }),
+  semesterStep("Discrete mathematics", "Use logic, sets, relations, and proof ideas for computer science.", 3, "Git, GitHub, and teamwork", "Logic and sets worksheet", "Data structures", { label: "MIT Mathematics for Computer Science", url: "https://courses.csail.mit.edu/6.042/spring18/mcs.pdf" }),
+  semesterStep("Data structures", "Choose the right way to store and access information.", 3, "Discrete mathematics", "Data-structure visualiser", "Algorithms", { label: "Open Data Structures", url: "https://opendatastructures.org/" }),
+  semesterStep("Algorithms", "Compare solutions and explain time and space trade-offs.", 4, "Data structures", "Algorithm comparison report", "SQL and databases", { label: "MIT Algorithms", url: "https://ocw.mit.edu/search/?q=algorithms" }),
+  semesterStep("SQL and databases", "Store, query, and protect structured application data.", 4, "Data structures", "Student records database", "Operating systems", { label: "SQLBolt", url: "https://sqlbolt.com/" }),
+  semesterStep("Operating systems", "Understand processes, memory, files, and permissions.", 5, "Algorithms", "Process and file explorer", "Computer networks", { label: "OSTEP", url: "https://pages.cs.wisc.edu/~remzi/OSTEP/" }),
+  semesterStep("Computer networks", "Trace how devices communicate across the internet.", 5, "Operating systems", "Network request map", "Web development", { label: "Computer Networking: Principles, Protocols and Practice", url: "https://www.computer-networking.info/" }),
+  semesterStep("Web development", "Build accessible pages and handle user actions safely.", 6, "Computer networks", "Accessible web app", "APIs and testing", { label: "MDN Learn", url: "https://developer.mozilla.org/en-US/docs/Learn" }),
+  semesterStep("APIs and software testing", "Connect services and prove important behavior with tests.", 6, "Web development", "Tested API application", "Cloud and deployment", { label: "MDN HTTP overview", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" }),
+  semesterStep("Cloud and deployment", "Run a service reliably and document how to recover it.", 7, "APIs and software testing", "Deployed service runbook", "Security and responsible computing", { label: "Google SRE Workbook", url: "https://sre.google/workbook/" }),
+  semesterStep("Security and responsible computing", "Protect accounts, data, dependencies, and users.", 7, "Cloud and deployment", "Security review checklist", "AI and machine learning", { label: "OWASP Cheat Sheet Series", url: "https://cheatsheetseries.owasp.org/" }),
+  semesterStep("AI and machine learning", "Understand data, models, evaluation, and safe use.", 8, "Data structures, mathematics, and Python", "Model evaluation notebook", "Capstone and employability proof", { label: "Google ML Crash Course", url: "https://developers.google.com/machine-learning/crash-course" }),
+  semesterStep("Capstone and employability proof", "Turn your university learning into a reviewed portfolio project.", 8, "AI and machine learning", "Capstone with README and demo", "Internships, interviews, and graduate roles", { label: "GitHub documentation", url: "https://docs.github.com/en/get-started" }),
+];
+const aiAutomationSpecialization: JourneyStep[] = [
+  semesterStep("Programming foundation", "Write small, reliable programs before automating larger workflows.", 1, "None — Hana checks your current level.", "Automation command-line tool", "Developer foundation", { label: "Python tutorial", url: "https://docs.python.org/3/tutorial/" }),
+  semesterStep("Developer foundation", "Use Git, APIs, JSON, HTTP, and debugging together.", 2, "Programming foundation", "API-powered developer tool", "Workflow automation", { label: "MDN Fetch API", url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" }),
+  semesterStep("Workflow automation", "Turn repeatable work into safe, observable steps.", 3, "Developer foundation", "Personal workflow automation", "AI fundamentals", { label: "n8n documentation", url: "https://docs.n8n.io/" }),
+  semesterStep("AI fundamentals", "Understand prompts, embeddings, evaluation, and model limits.", 4, "Python and APIs", "Prompt evaluation notebook", "AI automation", { label: "Google ML Crash Course", url: "https://developers.google.com/machine-learning/crash-course" }),
+  semesterStep("AI automation", "Connect models to tools with validation and human review.", 5, "AI fundamentals", "Reviewed AI workflow", "Agents and tool use", { label: "OpenAI Cookbook", url: "https://cookbook.openai.com/" }),
+  semesterStep("Agents and tool use", "Design bounded agents that can plan, call tools, and stop safely.", 6, "AI automation", "Tool-using study agent", "Production AI systems", { label: "Anthropic building effective agents", url: "https://www.anthropic.com/research/building-effective-agents" }),
+  semesterStep("Production AI systems", "Add observability, privacy, cost awareness, and fallback behavior.", 7, "Agents and tool use", "Production-ready AI service", "Earning and portfolio proof", { label: "Google responsible AI", url: "https://ai.google/responsibility/principles/" }),
+  semesterStep("Earning and portfolio proof", "Show real capability through a serious project, README, demo, and review.", 8, "Production AI systems", "AI automation portfolio project", "Freelance, internship, and AI engineering roles", { label: "GitHub documentation", url: "https://docs.github.com/en/get-started" }),
+];
+const specialJourneys: Record<string, JourneyStep[]> = { "BSCS Foundation": bscsFoundation, "AI Automation Engineer": aiAutomationSpecialization };
 const minutesFromDuration = (duration: string) => Number(duration.match(/\d+/)?.[0] ?? 60);
 
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -150,6 +180,11 @@ const journeyAreaAliases: Record<string, string> = {
   "cloud & devops": "Cloud / DevOps",
   "mobile development": "Mobile Development",
   "ui/ux design": "UI/UX",
+  "ai automation": "AI Automation Engineer",
+  "ai automation engineer": "AI Automation Engineer",
+  "bscs": "BSCS Foundation",
+  "bscs foundation": "BSCS Foundation",
+  "computer science": "BSCS Foundation",
 };
 
 export function resolveJourneyArea(area: string): string {
@@ -194,10 +229,11 @@ export function buildRoadmap(input: RoadmapInput): RoadmapNode[] {
 }
 
 export function buildJourney(area: string, level = "", goal = "", time = "", context?: { university?: string; degree?: string; semester?: string; subjects?: string[] }): JourneyStep[] {
-  const base = journeys[resolveJourneyArea(area)] || defaultJourney;
+  const resolvedArea = resolveJourneyArea(area);
+  const base = specialJourneys[resolvedArea] || journeys[resolvedArea] || defaultJourney;
   const start = level.toLowerCase().includes("built") || level.toLowerCase().includes("advanced") ? Math.min(1, base.length - 1) : 0;
   const subjects = (context?.subjects || []).filter(Boolean);
-  const universityLine = context?.university ? ` Hana will connect this to ${context.degree || "your degree"}${context.semester ? ` in semester ${context.semester}` : ""}${subjects.length ? ` and your subjects: ${subjects.slice(0, 3).join(", ")}` : ""}.` : "";
+  const universityLine = context?.university ? ` Hana will connect this to ${context.degree || "your degree"} at ${context.university}${context.semester ? ` in semester ${context.semester}` : ""}${subjects.length ? ` and your subjects: ${subjects.slice(0, 3).join(", ")}` : ""}.` : "";
   const timeLine = time.toLowerCase().includes("half") ? " Hana will keep this focused on one small outcome." : time.toLowerCase().includes("flexible") ? " Hana will let you continue at your own pace." : "";
   const steps = base.map((item, index) => ({ ...item, day: index + 1, status: index < start ? "complete" as const : index === start ? "active" as const : "locked" as const, purpose: `${item.purpose}${universityLine}${timeLine}` }));
   if (goal.toLowerCase().includes("university")) return steps.map((item) => ({ ...item, purpose: `${item.purpose} Hana will connect it to your current university work.` }));

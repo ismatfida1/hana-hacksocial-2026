@@ -731,10 +731,10 @@
 - [ ] Verify the first sign-in creates a durable secure session and reopening Hana restores the account without repeated login.
 - [ ] Verify explicit logout, session expiry, reauthentication, and security-event boundaries.
 - [ ] Verify one account restores profile, journey, progress, projects, notes, resources, preferences, and history across devices.
-- [ ] Keep essential progress memory separate from user-visible chat history.
-- [ ] Add or verify user-controlled chat-history viewing and deletion without deleting essential progress memory.
-- [ ] Confirm all memory and progress reads/writes enforce signed-in account ownership.
-- [ ] Add regression coverage for session restore, logout, memory separation, chat deletion, and cross-device restoration semantics.
+- [x] Keep essential progress memory separate from user-visible chat history.
+- [x] Add or verify user-controlled chat-history viewing and deletion without deleting essential progress memory.
+- [x] Confirm all memory and progress reads/writes enforce signed-in account ownership.
+- [x] Add regression coverage for session restore, logout, memory separation, chat deletion, and cross-device restoration semantics; cross-device execution remains externally unverified.
 
 ## Commercial-readiness and privacy review — 2026-08-24
 - [x] Create a dependency and ownership record covering Hana code, original content, assets, fonts, icons, open-source packages, Manus, AI providers, storage, and Canva.

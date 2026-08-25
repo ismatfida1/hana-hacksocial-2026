@@ -950,3 +950,6 @@
 - [x] Re-run typecheck, production build, and release security scan after the latest audit/resource updates; all passed, with only the existing client bundle-size warning.
 - [x] Lazy-load the large Home experience behind a branded loading shell to improve initial responsiveness; tests, typecheck, and production build pass, with a remaining non-blocking vendor chunk warning.
 - [x] Align the acceptance audit with the managed-storage contract: account deletion removes user memory, upload metadata, and database references; no unsupported underlying-object delete endpoint is claimed.
+- [x] Add Canva MCP policy evidence and operational constraints to the asset register; keep specific export, account-plan, content-category, and commercial-rights verification open.
+- [ ] Diagnose and repair the user-reported “not working properly” issue; identify the affected flow from runtime evidence, fix it without changing the approved UI direction, and verify desktop/mobile behavior.
+- [ ] Create an isolated Hana project copy, preserve the original project unchanged, verify the copy builds and runs independently, and provide its separate version/preview details.

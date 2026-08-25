@@ -16,6 +16,12 @@
 | Product introduction video | No verified production video in the repository | Prior generation request was quota-blocked | ❌ Not shipped/cleared | Do not advertise or distribute until an original or commercially licensed video is actually included |
 | External learning thumbnails/media | External linked pages, not copied into the app | Third-party websites | ⚠️ Link-only use | Do not copy or rehost protected media; keep links and marks accurate |
 
+## Canva policy evidence — 2026-08-25
+
+The [Canva MCP usage policy](https://www.canva.dev/docs/mcp/usage-policy/) requires secure OAuth and scope handling, data minimization, no retention beyond operational necessity, no use of Canva-sourced data or Brand Kit data to train external AI, and no extraction or reuse of Brand Kit or template internals outside Canva. It also requires compatibility-only Canva naming, approved unaltered Canva logos, clear user-facing data flows, and authenticated access to Canva-derived operations.
+
+This policy confirms the controls Hana must preserve if Canva is used: access only after explicit user action, do not crawl or bulk-index designs, do not copy Brand Kit colors/fonts/logos into the Hana web app, and do not imply Canva endorsement. It does not prove that any particular Canva export, image, template element, or account plan is commercially redistributable. The Canva asset row therefore remains **unverified** until the specific design/export, account plan, content category, and applicable terms are recorded.
+
 ## Release rule
 
 An asset is not commercially cleared merely because it renders. Before charging users or distributing an APK/AAB, attach source evidence and the applicable license or permission to this register. If evidence cannot be obtained, replace the asset with an original or clearly licensed alternative.

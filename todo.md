@@ -936,3 +936,4 @@
 - [x] Run the Android CI TypeScript gate through the documented `pnpm typecheck` alias.
 - [x] Automatically show reachable learning resources first and hide unreachable alternatives when at least one verified route is available.
 - [x] Synchronize stale Android/build-release documents with the successful hosted debug APK run `32843621562` and the exact progress branch `hana-progress-2026-08-25`.
+- [x] Refresh the existing GitHub progress branch with the latest release-document corrections without changing the protected `main` branch: remote commit `053f914`.

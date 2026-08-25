@@ -25,4 +25,13 @@ describe("Hana interactive tour contract", () => {
     expect(source).toContain('Alternative video · ${step.title}');
     expect(source).toContain('Alternative course · ${step.title}');
   });
+
+  it("opens first-entry onboarding and preserves the tutorial attachment wording", () => {
+    expect(source).toContain('const firstEntryTour = !demoMode && profile?.tourCompleted !== true && !tourDismissed;');
+    expect(source).toContain('Welcome to HANA');
+    expect(source).toContain('How would you like to explore HANA?');
+    expect(source).toContain('Skip for now');
+    expect(source).toContain('You’re ready! Let’s start your HANA journey.');
+    expect(source).toContain('Start Exploring');
+  });
 });

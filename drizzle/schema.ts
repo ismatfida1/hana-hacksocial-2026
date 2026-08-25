@@ -51,7 +51,7 @@ export const hanaStudentMemory = mysqlTable("hana_student_memory", {
     skills?: string[];
     progress?: string[];
     projects?: string[];
-    projectRecords?: Array<{ id: string; title: string; skills: string[]; status: "locked" | "active" | "in_progress" | "complete"; milestones: Array<{ title: string; complete: boolean }>; requiresReview?: boolean }>;
+    projectRecords?: Array<{ id: string; title: string; skills: string[]; status: "locked" | "active" | "in_progress" | "complete"; milestones: Array<{ title: string; complete: boolean }>; linkedStep?: string; requiresReview?: boolean }>;
     projectSkills?: string[];
     githubProjects?: string[];
     portfolioProjects?: string[];

@@ -12,6 +12,7 @@ export type ProjectRecord = {
   skills: string[];
   status: ProjectStatus;
   milestones: Array<{ title: string; complete: boolean }>;
+  linkedStep?: string;
   requiresReview?: boolean;
 };
 
@@ -122,7 +123,7 @@ const asProjectRecords = (value: unknown): ProjectRecord[] => {
       return milestoneTitle ? [{ title: milestoneTitle, complete: entry.complete === true }] : [];
     }).slice(0, 30);
     const status: ProjectStatus = record.status === "locked" || record.status === "active" || record.status === "in_progress" || record.status === "complete" ? record.status : "active";
-    return [{ id: asText(record.id) || `project-${index + 1}`, title, skills: asList(record.skills), status, milestones, requiresReview: record.requiresReview === true }];
+    return [{ id: asText(record.id) || `project-${index + 1}`, title, skills: asList(record.skills), status, milestones, linkedStep: asText(record.linkedStep), requiresReview: record.requiresReview === true }];
   }).slice(0, 40);
 };
 
@@ -422,7 +423,7 @@ async function appendProfileItem(studentId: number, field: "projects" | "portfol
   return updateStudentProfile(studentId, { [field]: next });
 }
 
-export function buildProjectRecord(title: string, skills: string[] = [], milestones: string[] = []): ProjectRecord {
+export function buildProjectRecord(title: string, skills: string[] = [], milestones: string[] = [], linkedStep?: string): ProjectRecord {
   const cleanTitle = title.trim().slice(0, 160);
   return {
     id: `project-${cleanTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80) || Date.now()}`,
@@ -430,13 +431,14 @@ export function buildProjectRecord(title: string, skills: string[] = [], milesto
     skills: skills.map((skill) => skill.trim().slice(0, 120)).filter(Boolean).slice(0, 12),
     status: "active",
     milestones: milestones.map((milestone) => ({ title: milestone.trim().slice(0, 160), complete: false })).filter((milestone) => milestone.title).slice(0, 20),
+    linkedStep: linkedStep?.trim().slice(0, 160) || undefined,
   };
 }
 
-export async function addStudentProject(studentId: number, title: string, skills: string[] = [], milestones: string[] = []) {
+export async function addStudentProject(studentId: number, title: string, skills: string[] = [], milestones: string[] = [], linkedStep?: string) {
   const existing = await getHanaStudentMemory(studentId);
   const profile = normalizeStudentProfile(existing?.profile);
-  const record = buildProjectRecord(title, skills, milestones);
+  const record = buildProjectRecord(title, skills, milestones, linkedStep);
   const records = [...profile.projectRecords.filter((item) => item.title.toLowerCase() !== record.title.toLowerCase()), record].slice(-40);
   return updateStudentProfile(studentId, { projects: [...profile.projects, record.title].filter((item, index, list) => list.indexOf(item) === index).slice(-40), projectRecords: records });
 }
@@ -444,13 +446,19 @@ export async function addStudentProject(studentId: number, title: string, skills
 export async function setProjectMilestone(studentId: number, projectId: string, milestoneTitle: string, complete: boolean) {
   const existing = await getHanaStudentMemory(studentId);
   const profile = normalizeStudentProfile(existing?.profile);
+  let linkedStepToComplete: string | undefined;
   const records = profile.projectRecords.map((project) => {
     if (project.id !== projectId) return project;
     const milestones = project.milestones.map((milestone) => milestone.title === milestoneTitle ? { ...milestone, complete } : milestone);
     const status: ProjectStatus = milestones.length > 0 && milestones.every((milestone) => milestone.complete) ? "complete" : milestones.some((milestone) => milestone.complete) ? "in_progress" : "active";
+    if (status === "complete" && project.linkedStep) linkedStepToComplete = project.linkedStep;
     return { ...project, milestones, status };
   });
-  return updateStudentProfile(studentId, { projectRecords: records });
+  if (!linkedStepToComplete) return updateStudentProfile(studentId, { projectRecords: records });
+  const completedLearningSteps = mergeCompletedLearningSteps(profile.completedLearningSteps, linkedStepToComplete, true);
+  const context = buildStudentContextFromMemory({ ...(existing as HanaStudentMemory), profile: { ...profile, completedLearningSteps } });
+  const nextStep = context.roadmap.find((node) => !completedLearningSteps.some((title) => title.toLowerCase() === node.title.toLowerCase()) && node.status !== "locked");
+  return updateStudentProfile(studentId, { projectRecords: records, completedLearningSteps, currentActiveStep: nextStep?.title || linkedStepToComplete, learningHistory: [...profile.learningHistory, `Completed project milestones for ${linkedStepToComplete}.`].slice(-100) });
 }
 
 export async function setProjectStatus(studentId: number, projectId: string, status: ProjectStatus) {

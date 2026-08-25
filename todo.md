@@ -804,9 +804,9 @@
 ## User-reported repair pass — 2026-08-25
 - [ ] Repair sign-in with multiple provider options, including Google where the configured auth portal supports it, and preserve clear retry behavior.
 - [ ] Expand opportunity details to show official deadline, eligibility, application steps, expected deliverables, and how the event works without inventing facts.
-- [ ] Remove the Roadmap.sh/reference link and any wording that implies copied content or design.
-- [ ] Add verified alternative learning resources for each roadmap step and gracefully handle unavailable links.
-- [ ] Make project completion automatically complete the linked roadmap step while preserving reliable manual checkbox completion.
+- [x] Remove the Roadmap.sh/reference link and any wording that implies copied content or design.
+- [x] Add verified alternative learning resources for each roadmap step and gracefully handle unavailable links.
+- [x] Make project completion automatically complete the linked roadmap step while preserving reliable manual checkbox completion.
 - [ ] Generate and integrate the real silent vertical HANA product-introduction video instead of the placeholder panel.
 - [ ] Replace the tour modal with a guided Hana-led tour that points to specific controls and explains each action in a compact cloud-style callout.
 - [ ] Make university details influence planning through curriculum-aware data when available, with an explicit student-entered curriculum fallback when unavailable.
@@ -817,8 +817,8 @@
 - [ ] Make authentication use real configured provider flows and expose only providers actually supported by the backend; do not present fake email/password behavior.
 - [ ] Persist all account context across sessions and devices, including university, degree, semester, career, skills, journey, projects, opportunities, portfolio, conversations, and preferences.
 - [ ] Give each opportunity a verified detail view with deadline, eligibility, location, requirements, difficulty, process, submissions, dates, teams, prizes when verified, official URL, application steps, and Hana’s readiness reason.
-- [ ] Remove copied-content/reference-style wording while retaining natural source attribution and linking to originals only.
-- [ ] Verify learning resources before display and provide a primary plus two approved alternatives without overwhelming the main screen.
+- [x] Remove copied-content/reference-style wording while retaining natural source attribution and linking to originals only.
+- [x] Verify learning resources before display and provide a primary plus two approved alternatives without overwhelming the main screen.
 - [x] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.
 - [ ] Replace the tutorial placeholder with an actual generated video when quota/service access permits; otherwise show an honest production status and retain the completed storyboard.
 - [ ] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.

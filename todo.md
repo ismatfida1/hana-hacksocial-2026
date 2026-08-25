@@ -953,3 +953,23 @@
 - [x] Add Canva MCP policy evidence and operational constraints to the asset register; keep specific export, account-plan, content-category, and commercial-rights verification open.
 - [ ] Diagnose and repair the user-reported “not working properly” issue; identify the affected flow from runtime evidence, fix it without changing the approved UI direction, and verify desktop/mobile behavior.
 - [ ] Create an isolated Hana project copy, preserve the original project unchanged, verify the copy builds and runs independently, and provide its separate version/preview details.
+
+## HackSocial 2026 isolated-copy scope
+- [ ] Add a visible 🏆 HackSocial 2026 entry point in the copied app without changing the original project.
+- [ ] Preserve the existing authorized sign-in/demo flow; do not add an authentication bypass.
+- [ ] Build isolated Demo Mode with sample data that never writes to real user memory or the production database.
+- [ ] Implement the complete 2–4 minute HackSocial flow: Goal → Personalized Roadmap → Mission → Ask Hana → Mastery → Project → Opportunity → Progress.
+- [ ] Use live configured AI when available and show a truthful graceful fallback when unavailable.
+- [ ] Add tests, responsive verification, and separate-repository/deployment documentation for the copied project.
+- [ ] Establish dedicated GitHub repository `hana-hacksocial-2026` for the copied project only; confirm repository state before pushing.
+- [ ] Create and verify a recoverable baseline commit labeled `HackSocial baseline — before implementation` in the dedicated repository.
+- [ ] Confirm no secrets, credentials, or `.env` files are committed before the first push.
+- [x] Inspect `ismatfida1/hana-hacksocial-2026`, compare its commits/files with `/home/ubuntu/hana-learning-companion-copy`, and report all differences; no push or destructive GitHub operation has been performed.
+
+## HackSocial 2026 execution brief
+- [ ] Complete the copied-project/GitHub baseline inspection and confirm the original project stays untouched.
+- [ ] Add the dedicated HackSocial entry point and coherent 2–4 minute demo journey inside the copied app.
+- [ ] Keep demo sample data isolated from real user memory and production database writes.
+- [ ] Use configured live AI where available with truthful fallback behavior; never present fake AI as live.
+- [ ] Run full testing, secret scan, responsive verification, commit meaningful milestones, and prepare the copied project for separate deployment.
+- [x] Resolve the existing unrelated-history merge in the copied project while preserving the remote `.gitattributes`, `.gitignore`, and `README.md`; run safety/build checks, create local commit(s), and stop before `git push` for approval.

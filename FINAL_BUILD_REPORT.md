@@ -26,10 +26,10 @@ OpenAI is preferred when configured, Gemini is used as the next provider, and th
 
 ## Build validation
 
-The web prototype and Android-ready copy passed tests, TypeScript validation, production web builds, and Capacitor asset synchronization. The native Gradle build is prepared but cannot complete in this sandbox until an Android SDK is installed and configured. Java 21 is installed and the Capacitor Android project has been generated successfully.
+The web prototype and Android-ready copy passed tests, TypeScript validation, production web builds, Capacitor asset synchronization, and release-path security scanning. The authoritative hosted GitHub Actions build also generated and uploaded a debug APK in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562) on branch `hana-progress-2026-08-25`. The sandbox itself still lacks a complete Android SDK for local Gradle verification, and no signed release AAB has been generated or verified.
 
 ## Remaining manual steps
 
-Install Android SDK Platform 36 and matching build tools, set `ANDROID_HOME` or `ANDROID_SDK_ROOT`, and run `cd android && ./gradlew assembleDebug` for an APK. For a release AAB, configure a signing key and run the appropriate Gradle bundle task. Review the creator/about wording, legal text, and Canva video URL before public presentation.
+For local reproduction, install Android SDK Platform 36 and matching build tools, set `ANDROID_HOME` or `ANDROID_SDK_ROOT`, and run `cd android && ./gradlew assembleDebug`. The hosted debug artifact is already available from the successful Actions run above. For a release AAB, configure protected signing secrets and run the appropriate Gradle bundle task; signed-release, Play declarations, licensing, provider terms, deletion operations, and the product video still require separate verification.
 
 The original published Hana release was not overwritten by this work.

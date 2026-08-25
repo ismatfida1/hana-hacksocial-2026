@@ -393,10 +393,10 @@
 - [x] Validate and push the curated resource update.
 
 ## Master product specification comparison — 2026-08-24
-- [ ] Read and extract the complete attached master specification.
-- [ ] Audit the current web/mobile UI, adaptive journey, memory, AI, opportunities, resources, and Android packaging against the specification.
-- [ ] Record an honest implemented/partial/missing gap assessment.
-- [ ] Report current functionality separately from future work.
+- [x] Read and extract the complete attached master specification into the inherited requirements and acceptance audit.
+- [x] Audit the current web/mobile UI, adaptive journey, memory, AI, opportunities, resources, and Android packaging against the specification.
+- [x] Record an honest implemented/partial/missing gap assessment in `FINAL_REQUIREMENTS_ACCEPTANCE_AUDIT.md`.
+- [x] Report current functionality separately from future work.
 
 ## Persistent student context system — 2026-08-24
 - [x] Inspect the existing schema, database helpers, routers, AI context, journey model, UI, and tests.
@@ -439,7 +439,7 @@
 - [x] Persist profile changes through `studentContext.updateProfile` instead of local-only state.
 - [x] Load the saved profile into the existing demo so Hana’s current plan reflects it.
 - [x] Add tests for profile normalization and persistence contract.
-- [ ] Validate and publish the updated demo.
+- [x] Validate and publish the updated demo: the live published domain responds with HTTP 200 and the expected HANA title.
 
 ## Complete 60-feature Hana implementation — 2026-08-24
 - [ ] Audit all 60 checklist items against the current website and Android source.

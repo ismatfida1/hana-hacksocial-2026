@@ -268,7 +268,7 @@
 - [x] Add Vitest coverage for the memory contract and Today’s Mission selection behavior.
 - [x] Keep the existing secure server-side AI layer; no new external API was needed for this prototype.
 - [x] Host the separate prototype on a temporary public preview URL and verify the Home screen loads successfully.
-- [ ] Publish this separate prototype at a stable public URL without overwriting the existing Hana release.
+- [x] Publish this separate prototype at a stable public URL without overwriting the existing Hana release: `https://hanacompact-lpgytise.manus.space/` returned HTTP 200 and the expected HANA title.
 - [x] Correct the separate prototype page order so the first screen is only Hana’s greeting, the next moment focuses on Today’s Mission, and the third screen asks the student to choose a career.
 - [x] Remove the incorrect one-screen Home implementation from the separate prototype.
 - [x] Revalidate the corrected page sequence on mobile before sharing another preview.

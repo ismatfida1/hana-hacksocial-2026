@@ -317,17 +317,17 @@
 - [ ] Allow Hana to update the Journey when the student changes direction instead of forcing a restart.
 
 ## GitHub progress source — 2026-08-24
-- [ ] Verify that ismatfida1/baymax-care-companion is accessible and identify its default branch.
-- [ ] Confirm whether the current session has permission to write to the repository.
-- [ ] Prepare a non-destructive sync of the separate Hana prototype into the repository.
-- [ ] Save the prototype progress to a clearly named branch or commit if write access is available.
-- [ ] Validate the repository state after syncing and report any access blocker without overwriting unrelated work.
+- [x] Verify that ismatfida1/baymax-care-companion is accessible and identify its default branch: private repository, default branch `main`.
+- [x] Confirm whether the current session has permission to write to the repository: GitHub CLI reports `ADMIN`.
+- [x] Prepare a non-destructive sync of the separate Hana prototype into the repository on branch `hana-progress-2026-08-25`.
+- [x] Save the prototype progress to a clearly named branch or commit if write access is available: commit `f2e4fe5`.
+- [x] Validate the repository state after syncing and report any access blocker without overwriting unrelated work: branch is clean and workflow is at `.github/workflows/android-build.yml`.
 
 ## Browser and GitHub connection — 2026-08-24
 - [ ] Inspect whether My Browser is available and whether it is currently enabled.
 - [ ] Enable My Browser and GitHub through the supported connector flow.
 - [ ] Connect the user’s browser session when GitHub login or repository access requires it.
-- [ ] Verify access to ismatfida1/baymax-care-companion before syncing any files.
+- [x] Verify access to ismatfida1/baymax-care-companion before syncing any files.
 
 ## Supabase connection — 2026-08-24
 - [ ] Inspect whether a Supabase connector already exists and whether it is enabled.
@@ -822,7 +822,7 @@
 - [x] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.
 - [ ] Replace the tutorial placeholder with an actual generated video when quota/service access permits; otherwise show an honest production status and retain the completed storyboard.
 - [x] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.
-- [ ] Attempt official university curriculum retrieval only through reliable sources and show an editable subject fallback when unavailable.
+- [x] Attempt official university curriculum retrieval only through reliable sources and show an editable subject fallback when unavailable.
 - [x] Use university context, degree, semester, subjects, career, current skills, goals, and study pace to change the actual Journey; target-role gap analysis remains a later enhancement.
 - [x] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.
 - [x] Personalize weekly pace from realistic study hours and keep one primary progress signal visible.
@@ -838,7 +838,7 @@
 - [x] Keep Demo Mode isolated and authorized without bypassing authentication or database authorization.
 - [x] Confirm private AI, OAuth, database, Supabase, GitHub, and admin credentials never enter web or Android client artifacts.
 - [x] Minimize AI context per request so Hana receives only the information needed for the current task.
-- [ ] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
+- [x] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
 - [ ] Verify account deletion removes associated HANA data according to the documented retention policy and remains accessible in-app and publicly.
 - [ ] Avoid unnecessary Android permissions and do not collect contacts, location, microphone, camera, or device identifiers without a real feature need.
 - [x] Add security/privacy regression tests and update the release-risk documentation without claiming 100% security or legal compliance.

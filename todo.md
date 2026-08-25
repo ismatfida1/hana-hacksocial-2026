@@ -1011,4 +1011,6 @@
 
 - [ ] Apply only the approved HackSocial visual and Ask Hana polish; do not add major features or alter the core concept.
 - [ ] Re-run the complete HackSocial judge flow, desktop/mobile checks, automated validation, and final public-URL smoke test after polishing.
-- [ ] Prepare and verify a separate public deployment URL for judges, or document the exact external hosting blocker if no compatible deployment can be authorized.
+- [x] Prepare and verify a separate public deployment URL for judges, or document the exact external hosting blocker if no compatible deployment can be authorized.
+
+- [x] Resume autonomous final public-demo preparation: reconfirm repository/deployment state, run safe validation, attempt authorized publication, verify the public URL if available, and document any blocker without touching original HANA.

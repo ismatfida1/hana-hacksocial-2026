@@ -47,5 +47,8 @@ describe("Hana interactive tour contract", () => {
     expect(source).toContain('Hana will use these saved subjects with your degree and semester.');
     expect(source).toContain('https://pucit.edu.pk/approved-curriculum/');
     expect(source).toContain('Open the official curriculum source');
+    expect(source).toContain('Hana’s fit:');
+    expect(source).toContain('Before applying:');
+    expect(source).toContain('Hana never invents deadlines, eligibility, or income promises.');
   });
 });

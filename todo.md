@@ -907,3 +907,4 @@
 - [x] Add a protected account-backed opportunity outcome selector for Saved, Applied, Interview, Accepted, Rejected, and Completed, with strict normalization and unified AI context exposure.
 - [x] Add regression coverage for valid and malformed opportunity outcomes.
 - [x] Treat accepted or completed opportunity outcomes as practical career evidence in Hana’s readiness calculation, with regression coverage.
+- [x] Keep opportunity outcome controls read-only in private Demo Mode so demo activity cannot redirect into or alter a real account.

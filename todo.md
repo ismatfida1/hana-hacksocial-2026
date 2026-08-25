@@ -688,14 +688,14 @@
 
 ## Connector and AI integration vision — 2026-08-24
 - [ ] Audit actual OpenAI, Gemini, Supabase, Web, GitHub, Canva, and optional voice/file availability before claiming support.
-- [ ] Keep OpenAI as Hana’s primary server-side AI and route every personalized answer through real student context.
-- [ ] Keep Gemini optional and avoid duplicating every request across providers.
+- [x] Keep OpenAI as Hana’s primary server-side AI and route every personalized answer through real student context.
+- [x] Keep Gemini optional and avoid duplicating every request across providers.
 - [ ] Keep Canva optional for visual content and never make normal Hana operation depend on it.
-- [ ] Verify account-backed student memory, university context, skills, learning steps, projects, opportunities, portfolio, and conversations use one source of truth.
-- [ ] Add or verify evidence-based skill confidence, review prompts, prerequisite explanations, project gates, opportunity matching, and simple next-action coaching.
-- [ ] Add safe file/screenshot learning workflows only when storage and model support are genuinely available.
-- [ ] Keep all secrets server-side, enforce ownership and admin boundaries, and avoid fake or invented external data.
-- [ ] Produce an honest connected/not-available integration report with tests and user authorization requirements.
+- [x] Verify account-backed student memory, university context, skills, learning steps, projects, opportunities, portfolio, and conversations use one source of truth.
+- [x] Add or verify evidence-based skill confidence, review prompts, prerequisite explanations, project gates, opportunity matching, and simple next-action coaching.
+- [x] Add safe file/screenshot learning workflows only when storage and model support are genuinely available.
+- [x] Keep all secrets server-side, enforce ownership and admin boundaries, and avoid fake or invented external data.
+- [x] Produce an honest connected/not-available integration report with tests and user authorization requirements.
 
 ## Hana simple-friend teaching loop — 2026-08-24
 - [x] Add concise explanation modes: normal, simple, new learner, before-test, example, exam answer, and practice questions.

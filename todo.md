@@ -920,3 +920,4 @@
 - [x] Add a protected “Verify now” action for admins so an existing opportunity URL can be rechecked and its verification timestamp/status refreshed before students rely on it.
 - [x] Show the last official-link verification time in opportunity details so students can judge how current the record is.
 - [x] Make the university profile show an explicit source result: official curriculum source found, or “not found—Hana will use the subjects you enter” with no guessed curriculum.
+- [x] Show each opportunity’s last verification time in the owner manager so stale records are easy to review before republishing.

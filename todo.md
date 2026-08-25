@@ -690,7 +690,7 @@
 - [ ] Audit actual OpenAI, Gemini, Supabase, Web, GitHub, Canva, and optional voice/file availability before claiming support.
 - [x] Keep OpenAI as Hana’s primary server-side AI and route every personalized answer through real student context.
 - [x] Keep Gemini optional and avoid duplicating every request across providers.
-- [ ] Keep Canva optional for visual content and never make normal Hana operation depend on it.
+- [x] Keep Canva optional for visual content and never make normal Hana operation depend on it: Canva is enabled, but the app has no runtime dependency on it.
 - [x] Verify account-backed student memory, university context, skills, learning steps, projects, opportunities, portfolio, and conversations use one source of truth.
 - [x] Add or verify evidence-based skill confidence, review prompts, prerequisite explanations, project gates, opportunity matching, and simple next-action coaching.
 - [x] Add safe file/screenshot learning workflows only when storage and model support are genuinely available.

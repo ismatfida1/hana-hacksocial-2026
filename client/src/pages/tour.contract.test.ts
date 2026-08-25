@@ -50,6 +50,11 @@ describe("Hana interactive tour contract", () => {
     expect(source).toContain('Hana will not guess your subjects');
   });
 
+  it("keeps the video introduction unavailable until a real asset exists", () => {
+    expect(source).toContain('The video player will appear when the real introduction video is available. No broken preview is shown.');
+    expect(source).toContain('function VideoUnavailableCard');
+  });
+
   it("does not invent university subjects when official curriculum data is unavailable", () => {
     expect(source).toContain('No verified curriculum source was found. Hana will not guess your subjects—add them here instead.');
     expect(source).toContain('No verified curriculum source was found. Hana will use only these saved subjects with your degree and semester.');

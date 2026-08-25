@@ -573,9 +573,9 @@
 - [x] Confirm Demo Mode never reads or writes a real student account and publish only after testing the exact flow.
 
 ## Expanded opportunities — 2026-08-24
-- [ ] Add more verified competitions and hackathons across software, AI, data, cybersecurity, and design.
-- [ ] Add CTFs, open-source programs, internships, and online-work paths with short purpose labels.
-- [ ] Keep opportunity cards compact, categorized, and free to browse where possible.
+- [x] Add more verified competitions and hackathons across software, AI, data, cybersecurity, and design.
+- [x] Add CTFs, open-source programs, internships, and online-work paths with short purpose labels.
+- [x] Keep opportunity cards compact, categorized, and free to browse where possible.
 - [ ] Verify every new opportunity URL, add regression coverage, and publish the update.
 
 ## Normal sign-in and speed blockers — 2026-08-24
@@ -609,7 +609,7 @@
 
 ## Demo introduction selector and sign-in failure — 2026-08-24
 - [x] Add a Demo Mode choice between the product-introduction video and the interactive Hana tour.
-- [ ] Keep the video option clearly marked unavailable until a real video asset exists; do not show a fake or broken player.
+- [x] Keep the video option clearly marked unavailable until a real video asset exists; do not show a fake or broken player.
 - [x] Trace the reported normal sign-in failure through OAuth redirect, callback, session cookie, and auth hydration.
 - [x] Improve the sign-in error message and retry behavior without weakening authentication or changing Demo Mode isolation.
 - [ ] Test both Demo Mode introduction choices and the normal sign-in error path before publishing.
@@ -932,3 +932,4 @@
 - [x] Add concise Ask Hana quick actions for Further info, Give me an example, Test me, and I’m confused using the existing context-aware chat surface.
 - [x] Add Teach Hana code/text upload persistence through server-side storage with confirmation, account ownership, metadata-only database records, and deletion from the visible memory surface.
 - [x] Add the documented `pnpm typecheck` alias alongside the existing `pnpm check` script for clean-checkout and CI compatibility.
+- [x] Confirm the Kaggle competitions directory responds to a normal browser GET; the earlier HEAD 404 was method-specific, and the official HTTPS destination remains `https://www.kaggle.com/competitions`.

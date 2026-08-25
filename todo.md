@@ -814,7 +814,7 @@
 - [ ] Add tests and responsive validation for all fixes before publishing.
 
 ## Expanded critical personalization specification — 2026-08-25
-- [ ] Make authentication use real configured provider flows and expose only providers actually supported by the backend; do not present fake email/password behavior.
+- [x] Make authentication use real configured provider flows and expose only providers actually supported by the backend; do not present fake email/password behavior. External provider callback success remains unverified.
 - [ ] Persist all account context across sessions and devices, including university, degree, semester, career, skills, journey, projects, opportunities, portfolio, conversations, and preferences.
 - [x] Give each opportunity a verified detail view with deadline, eligibility, location, requirements, difficulty, process, submissions, dates, teams, prizes when verified, official URL, application steps, and Hana’s readiness reason.
 - [x] Remove copied-content/reference-style wording while retaining natural source attribution and linking to originals only.
@@ -832,7 +832,7 @@
 - [ ] Add regression tests, mobile visual checks, and honest release documentation for every critical fix.
 
 ## Security, privacy, and simple-UX master specification — 2026-08-25
-- [ ] Verify real authentication options supported by the configured backend: Google, other supported sign-in, sign-out, recovery, and account deletion; do not add fake email/password behavior.
+- [x] Verify the configured backend exposes its real provider portal without fake email/password behavior; Google/other-provider callback, recovery, and deletion flows still require external end-to-end verification.
 - [x] Confirm user-owned data is authorization-scoped server-side for profiles, university data, subjects, skills, journey, progress, mastery, projects, portfolio, conversations, preferences, goals, and opportunity interactions.
 - [x] Verify creator/admin-only controls are server-side protected and cannot be activated through hidden UI, URLs, query parameters, or local storage.
 - [x] Keep Demo Mode isolated and authorized without bypassing authentication or database authorization.

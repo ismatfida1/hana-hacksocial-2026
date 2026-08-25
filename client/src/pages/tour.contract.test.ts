@@ -22,8 +22,9 @@ describe("Hana interactive tour contract", () => {
   it("keeps placement checks and resource alternatives in the focused learning view", () => {
     expect(source).toContain('I already know this');
     expect(source).toContain('Placement check: ${answer.trim()}');
-    expect(source).toContain('Alternative video · ${step.title}');
-    expect(source).toContain('Alternative course · ${step.title}');
+    expect(source).toContain('Video lesson · ${step.title}');
+    expect(source).toContain('University lesson · ${step.title}');
+    expect(source).toContain('Backup course · ${step.title}');
   });
 
   it("opens first-entry onboarding and preserves the tutorial attachment wording", () => {

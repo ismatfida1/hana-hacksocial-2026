@@ -549,8 +549,8 @@
 - [x] Support career switching with a warning and preserve the previous roadmap in history.
 - [x] Show a visible Back action on relevant screens, including after sign-in.
 - [x] Route no-career users to Career options and returning users to saved Home/Journey.
-- [ ] Make University Coach request university context when it is useful, while keeping onboarding fields optional.
-- [ ] Show the best resource by default, optional alternatives when useful, and direct university lessons when available.
+- [x] Make University Coach request university context when it is useful, while keeping onboarding fields optional.
+- [x] Show the best resource by default, optional alternatives when useful, and direct university lessons when available.
 - [x] Keep resource links working and hide or replace broken links.
 - [x] Keep private Demo Mode isolated with temporary data and demonstrate saving/progress without writing to real student data.
 - [x] Superseded by the final navigation clarification: keep Ask Hana only in the top-right.
@@ -666,13 +666,13 @@
 - [x] Add Level 2 topic drill-down with compact topic nodes.
 - [x] Add Level 3 subtopic drill-down with focused subtopic nodes.
 - [x] Open detailed explanation, resources, practice, and mastery only at Level 4 after Start learning.
-- [ ] Add visual complete, current, upcoming, locked, recommended, and needs-review states.
+- [x] Add visual complete, current, upcoming, locked, recommended, and needs-review states.
 - [x] Keep the journey simple, mobile-first, and tap-driven while preserving saved progress and references.
 - [ ] Validate all four levels, back navigation, visual states, filters, notes, resources, and production behavior.
 
 ## Journey 2.0 full experience expansion — 2026-08-24
 - [x] Add layered Career Map, Topic, Subtopic, and Learning views with back navigation.
-- [ ] Add clear visual states for complete, current, upcoming, locked, recommended, and needs review.
+- [x] Add clear visual states for complete, current, upcoming, locked, recommended, and needs review.
 - [ ] Add concise Why actions for major topics and connect them to the student’s goal.
 - [ ] Add logically ordered career-specific dependencies and only useful alternate routes.
 - [x] Add practical skill verification before marking claimed skills complete.
@@ -682,7 +682,7 @@
 - [ ] Add a compact semester-aware and four-year planning layer behind the current next step.
 - [ ] Add meaningful career milestones without XP or arbitrary gamification.
 - [ ] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections.
-- [ ] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.
+- [x] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.
 - [ ] Keep earning pathways separate, support Create my own Journey, and preserve prior progress when the Journey adapts.
 - [ ] Update the reusable skill with the complete Journey 2.0 interaction and validation rules.
 

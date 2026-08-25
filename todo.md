@@ -925,5 +925,6 @@
 - [x] Flag verified opportunity records older than 30 days for owner review without automatically changing student visibility or inventing a new deadline.
 - [x] Add a concise owner note explaining that only active, verified records appear to signed-in students and Demo Mode remains separate.
 - [x] Recheck the minimal HANA greeting shell at a 375px mobile viewport after the opportunity-management updates.
-- [ ] Show a compact opportunity-activity summary in Profile using the existing saved outcomes, without adding another progress store.
+- [x] Show a compact opportunity-activity summary in Profile using the existing saved outcomes, without adding another progress store.
 - [x] Mark Hana’s current next Journey step as “Current · Recommended” in the layered map without changing saved completion state.
+- [x] Add compact Journey actions for “What should I learn?”, “Why am I learning this?”, and “Am I ready?” that use Hana’s saved context.

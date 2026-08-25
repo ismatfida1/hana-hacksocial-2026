@@ -649,7 +649,7 @@
 - [x] Keep notes and links hidden until the user opens a step’s details.
 - [x] Show a restrained Hana badge or celebration when the saved roadmap reaches 100%.
 - [x] Keep the Roadmap.sh-inspired behavior and structure without copying its site design.
-- [ ] Create and validate a reusable skill describing this Hana roadmap workflow.
+- [x] Create and validate a reusable skill describing this Hana roadmap workflow.
 - [x] Run tests, responsive visual checks, and a production build before publishing.
 
 ## Simple interactive Journey map — 2026-08-24
@@ -684,7 +684,7 @@
 - [ ] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections.
 - [x] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.
 - [ ] Keep earning pathways separate, support Create my own Journey, and preserve prior progress when the Journey adapts.
-- [ ] Update the reusable skill with the complete Journey 2.0 interaction and validation rules.
+- [x] Update the reusable skill with the complete Journey 2.0 interaction and validation rules.
 
 ## Connector and AI integration vision — 2026-08-24
 - [ ] Audit actual OpenAI, Gemini, Supabase, Web, GitHub, Canva, and optional voice/file availability before claiming support.
@@ -704,7 +704,7 @@
 - [ ] Store useful explanation preferences from real interactions without rigidly labeling the student.
 - [ ] Keep Hana calm, smart, patient, and occasionally playful without constant emojis or forced slang.
 - [ ] Keep Home and Android-ready entry points focused on Ask, Study, Test Prep, and My Path while preserving the approved main navigation.
-- [ ] Update the reusable Hana skill with the simple-friend teaching loop and validate the existing web architecture.
+- [x] Update the reusable Hana skill with the simple-friend teaching loop and validate the existing web architecture.
 
 ## Progressive disclosure across Hana — 2026-08-24
 - [ ] Keep Journey topic cards limited to a short summary and one primary action by default.
@@ -837,7 +837,7 @@
 - [ ] Verify creator/admin-only controls are server-side protected and cannot be activated through hidden UI, URLs, query parameters, or local storage.
 - [ ] Keep Demo Mode isolated and authorized without bypassing authentication or database authorization.
 - [ ] Confirm private AI, OAuth, database, Supabase, GitHub, and admin credentials never enter web or Android client artifacts.
-- [ ] Minimize AI context per request so Hana receives only the information needed for the current task.
+- [x] Minimize AI context per request so Hana receives only the information needed for the current task.
 - [ ] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
 - [ ] Verify account deletion removes associated HANA data according to the documented retention policy and remains accessible in-app and publicly.
 - [ ] Avoid unnecessary Android permissions and do not collect contacts, location, microphone, camera, or device identifiers without a real feature need.
@@ -929,3 +929,4 @@
 - [x] Mark Hana’s current next Journey step as “Current · Recommended” in the layered map without changing saved completion state.
 - [x] Add compact Journey actions for “What should I learn?”, “Why am I learning this?”, and “Am I ready?” that use Hana’s saved context.
 - [x] Add focused regression coverage for verified university-source mapping and no-deadline study-capacity choices.
+- [x] Add concise Ask Hana quick actions for Further info, Give me an example, Test me, and I’m confused using the existing context-aware chat surface.

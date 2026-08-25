@@ -938,3 +938,4 @@
 - [x] Synchronize stale Android/build-release documents with the successful hosted debug APK run `32843621562` and the exact progress branch `hana-progress-2026-08-25`.
 - [x] Refresh the existing GitHub progress branch with the latest release-document corrections without changing the protected `main` branch: remote commit `053f914`.
 - [x] Synchronize `FINAL_BUILD_REPORT.md` with the verified hosted debug APK artifact and retain the signed-AAB limitation.
+- [x] Synchronize the latest validated managed-project checkpoint to the existing GitHub progress branch without changing protected `main`: remote commit `bd5ffda`.

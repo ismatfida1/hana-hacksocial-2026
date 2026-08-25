@@ -770,7 +770,7 @@
 - [x] Add confirmed account/data deletion that removes Hana-owned user data without affecting other accounts.
 - [x] Keep essential learning memory separate from user-visible chat history during deletion.
 - [x] Add a simple privacy panel explaining stored profile/progress data, chat history, AI processing, memory pause, and deletion.
-- [ ] Add tests for ownership isolation, deletion safety, memory pause behavior, session invalidation, and refresh restoration.
+- [x] Add tests for ownership isolation, deletion safety, memory pause behavior, session invalidation, and refresh restoration contracts; external OAuth end-to-end behavior remains separately unverified.
 - [x] Run responsive, security, data-integrity, TypeScript, regression, and production-build validation before publishing.
 
 ## Security, privacy, and Play readiness requirements — 2026-08-24

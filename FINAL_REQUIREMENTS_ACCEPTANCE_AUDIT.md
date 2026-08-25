@@ -79,7 +79,7 @@ The review covered the three supplied attachments (`pasted_content.txt`, `pasted
 | Check | Result |
 |---|---|
 | TypeScript | Passed with `pnpm run typecheck` (alias `pnpm run check`) |
-| Automated tests | Passed: 17 test files, 54 tests |
+| Automated tests | Passed: 19 test files, 58 tests, including logout invalidation and returning-user hydration contract coverage |
 | Production build | Passed with `pnpm run build` |
 | Release security scan | Passed with `pnpm run security:scan` |
 | Mobile visual check | Greeting screen rendered cleanly at 390×844; full authenticated flows were not exercised end to end |
@@ -93,7 +93,8 @@ The third attachment is a list of 50 educational YouTube channels plus a WhatsAp
 
 ## Final decision
 
-HANA is a **published working prototype / progress release**, not a fully completed final implementation of all supplied requirements. The repository is technically healthy under the recorded checks, and the hosted debug APK is verified, but the following gates remain open: successful real authentication, full curriculum parsing and semester gap analysis, true per-student gap-driven Journey generation, production deletion verification, the complete product video, final signed-AAB scan, and Google Play Console declarations. Reachable-first resource failover, server curriculum lookup with editable fallback, concise Ask Hana modes, per-node placement, compact Journey Why actions, paused-memory behavior, and security/privacy contracts are now implemented and regression-tested. Authenticated end-to-end walkthroughs and provider/terms verification remain open.
+HANA is a **published working prototype / progress release**, not a fully completed final implementation of all supplied requirements. The repository is technically healthy under the recorded checks, and the hosted debug APK is verified, but the following gates remain open: successful real authentication, full curriculum parsing and semester gap analysis, true per-student gap-driven Journey generation, production deletion verification, the complete product video, final signed-AAB scan, and Google Play Console declarations. Reachable-first resource failover, server curriculum lookup with editable fallback, concise Ask Hana modes, per-node placement, compact Journey Why actions, paused-memory behavior, logout/session-hydration contracts, and security/privacy contracts are now implemented and regression-tested.
+ Authenticated end-to-end walkthroughs and provider/terms verification remain open.
 
 Therefore, the truthful result is **not 100% complete**. The latest published prototype may be reviewed at [hanacompact-lpgytise.manus.space](https://hanacompact-lpgytise.manus.space), but it should not be marketed as having every requested feature until the open items above are independently tested.
 

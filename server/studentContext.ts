@@ -498,7 +498,7 @@ export function buildCareerReadinessFromContext(context: StudentContext) {
     { label: "Completed learning", ready: context.learning.completedLearningSteps.length > 0 },
     { label: "Project proof", ready: context.work.projects.length > 0 },
     { label: "Portfolio", ready: context.work.portfolioProjects.length > 0 },
-    { label: "Practical experience", ready: context.work.competitions.length > 0 || context.work.githubProjects.length > 0 },
+    { label: "Practical experience", ready: context.work.competitions.length > 0 || context.work.githubProjects.length > 0 || context.work.opportunityOutcomes.some((item) => item.status === "accepted" || item.status === "completed") },
   ];
   const readyCount = evidence.filter((item) => item.ready).length;
   return { level: readyCount >= 4 ? "building" : readyCount >= 2 ? "starting" : "not-yet", evidence, nextAction: evidence.find((item) => !item.ready)?.label || "Keep practising with a real project." };

@@ -74,6 +74,12 @@ describe("student context layer", () => {
     expect(prompt).toContain('"currentActiveStep": "APIs"');
   });
 
+  it("counts accepted opportunities as practical career evidence", () => {
+    const context = buildStudentContextFromMemory({ profile: { opportunityOutcomes: [{ opportunityTitle: "Outreachy", status: "accepted", updatedAt: "2026-08-24T00:00:00.000Z" }] }, conversations: [] } as never);
+    const readiness = buildCareerReadinessFromContext(context);
+    expect(readiness.evidence.find((item) => item.label === "Practical experience")?.ready).toBe(true);
+  });
+
   it("drops malformed opportunity outcomes instead of trusting them", () => {
     const context = buildStudentContextFromMemory({ profile: { opportunityOutcomes: [{ opportunityTitle: "Kaggle", status: "unknown", updatedAt: "not-a-date" }, { opportunityTitle: "Devpost", status: "saved", updatedAt: "2026-08-24T00:00:00.000Z" }] }, conversations: [] } as never);
     expect(context.work.opportunityOutcomes).toEqual([{ opportunityTitle: "Devpost", status: "saved", updatedAt: "2026-08-24T00:00:00.000Z" }]);

@@ -50,11 +50,17 @@ export type StudentProfile = {
   tourCompleted?: boolean;
 };
 
+export type CareerMilestone = {
+  title: string;
+  status: "upcoming" | "current" | "complete";
+};
+
 export type SemesterPlanSummary = {
   academicAnchor: string;
   industryFocus: string;
   paceNote: string;
   scopeNote: string;
+  milestones: CareerMilestone[];
 };
 
 export type StudentContext = {
@@ -193,11 +199,19 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
   };
 }
 
-export function buildSemesterPlanSummary(profile: StudentProfile): SemesterPlanSummary {
+export function buildSemesterPlanSummary(profile: StudentProfile, roadmap: RoadmapNode[] = []): SemesterPlanSummary {
   const academicAnchor = [profile.university, profile.degree, profile.semester].filter(Boolean).join(" · ") || "Add university details when ready";
   const industryFocus = profile.currentActiveStep || profile.career || "Choose a direction first";
   const paceNote = profile.availableStudyTime || profile.preferredLearningTime || "Flexible pace · no deadline";
-  return { academicAnchor, industryFocus, paceNote, scopeNote: "Academic foundation + industry skills · move at your own pace" };
+  const completed = new Set(profile.completedLearningSteps.map((step) => step.toLowerCase()));
+  const categories: Array<[RoadmapNode["category"], string]> = [["foundation", "Foundation"], ["core", "Core skills"], ["project", "First project"], ["portfolio", "Portfolio proof"], ["career", "Career readiness"]];
+  const milestones = categories.map(([category, title], index) => {
+    const nodes = roadmap.filter((node) => node.category === category);
+    const complete = nodes.length > 0 && nodes.every((node) => completed.has(node.title.toLowerCase()));
+    const priorIncomplete = categories.slice(0, index).some(([previous]) => roadmap.filter((node) => node.category === previous).some((node) => !completed.has(node.title.toLowerCase())));
+    return { title, status: complete ? "complete" : !priorIncomplete && (index === 0 || roadmap.some((node) => node.category === categories[index - 1]?.[0] && completed.has(node.title.toLowerCase()))) ? "current" : "upcoming" } as CareerMilestone;
+  });
+  return { academicAnchor, industryFocus, paceNote, scopeNote: "Academic foundation + industry skills · move at your own pace", milestones };
 }
 
 export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null): StudentContext {
@@ -248,7 +262,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
       completedCount: profile.completedLearningSteps.length,
     },
     roadmap,
-    planning: buildSemesterPlanSummary(profile),
+    planning: buildSemesterPlanSummary(profile, roadmap),
   };
 }
 

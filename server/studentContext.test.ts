@@ -5,7 +5,7 @@ import { buildJourney, resolveJourneyArea } from "../shared/hanaJourney";
 describe("student context layer", () => {
   it("builds a compact semester-aware plan summary from the saved profile", () => {
     const profile = normalizeStudentProfile({ university: "PUCIT/FCIT", degree: "BSCS", semester: "3", career: "Software Engineering", currentActiveStep: "Data Structures", availableStudyTime: "Full study day · start now" });
-    expect(buildSemesterPlanSummary(profile)).toEqual({ academicAnchor: "PUCIT/FCIT · BSCS · 3", industryFocus: "Data Structures", paceNote: "Full study day · start now", scopeNote: "Academic foundation + industry skills · move at your own pace" });
+    expect(buildSemesterPlanSummary(profile)).toEqual({ academicAnchor: "PUCIT/FCIT · BSCS · 3", industryFocus: "Data Structures", paceNote: "Full study day · start now", scopeNote: "Academic foundation + industry skills · move at your own pace", milestones: [{ title: "Foundation", status: "current" }, { title: "Core skills", status: "upcoming" }, { title: "First project", status: "upcoming" }, { title: "Portfolio proof", status: "upcoming" }, { title: "Career readiness", status: "upcoming" }] });
   });
 
   it("normalizes the full student profile into one coach context", () => {

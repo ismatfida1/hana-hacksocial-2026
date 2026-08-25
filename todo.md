@@ -680,7 +680,7 @@
 - [x] Add smart prerequisite explanations that name the missing skill and reason.
 - [x] Keep university and industry views connected but visibly separate.
 - [x] Add a compact semester-aware and four-year planning layer behind the current next step. The unified context now carries an academic anchor, industry focus, and no-deadline pace note.
-- [ ] Add meaningful career milestones without XP or arbitrary gamification.
+- [x] Add meaningful career milestones without XP or arbitrary gamification; milestones are derived from roadmap categories and completion evidence.
 - [ ] Add project gates, difficulty progression, project-to-portfolio, and project-to-opportunity connections.
 - [x] Add simple What should I learn?, Why am I learning this?, and Am I ready? actions using real context.
 - [ ] Keep earning pathways separate, support Create my own Journey, and preserve prior progress when the Journey adapts.

@@ -946,3 +946,4 @@
 - [x] Document the verified provider-aware sign-in implementation and exact public-domain OAuth smoke-test sequence; keep provider allowlisting, Google enablement, callback, recovery, and cross-account testing open.
 - [x] Create a production verification runbook covering cross-device persistence, account ownership isolation, provider callback, deletion, final AAB scanning, and Play evidence capture; leave execution gates open until real tests are run.
 - [x] Synchronize FINAL_REQUIREMENTS_ACCEPTANCE_AUDIT.md with 20 Vitest files / 63 tests, the 375×812 mobile check, published legal-page reachability, and the documented external OAuth limitation.
+- [x] Verify representative official resource/opportunity destinations (Harvard CS50x, MIT OpenCourseWare, MDN Learn, and Devpost) and record that reachability does not grant redistribution rights; retain final link-health and license review as open.

@@ -840,7 +840,7 @@
 - [x] Minimize AI context per request so Hana receives only the information needed for the current task.
 - [x] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
 - [ ] Verify account deletion removes associated HANA data according to the documented retention policy and remains accessible in-app and publicly.
-- [ ] Avoid unnecessary Android permissions and do not collect contacts, location, microphone, camera, or device identifiers without a real feature need.
+- [x] Avoid unnecessary Android permissions and do not collect contacts, location, microphone, camera, or device identifiers without a real feature need: the manifest declares only `INTERNET`.
 - [x] Add security/privacy regression tests and update the release-risk documentation without claiming 100% security or legal compliance.
 
 ## Full supplied-requirements acceptance audit — 2026-08-25
@@ -863,7 +863,7 @@
 - [x] Keep AI Automation in the requested progression: programming foundation, developer foundation, automation, AI fundamentals, AI automation, agents, and production AI systems.
 - [x] Include the requested BSCS foundation topics such as C/C++, Python, OOP, Git/GitHub, Linux, mathematics, DSA, SQL, databases, operating systems, networks, web, APIs, testing, debugging, cloud, security, AI/ML, distributed systems, and employability proof.
 - [x] Include AI Automation projects and progression from learning to practice, small projects, serious projects, GitHub, portfolio, real-world work, internships, and professional roles.
-- [ ] Use PUCIT/FCIT curriculum as academic context only when reliably verified; do not claim the supplied Fall 2026 details as verified without an official source record.
+- [x] Use PUCIT/FCIT curriculum as academic context only when reliably verified; do not claim the supplied Fall 2026 details as verified without an official source record.
 - [x] Add a truthful audit status for the dual-roadmap model and identify whether it is implemented, partial, blocked, or not implemented.
 
 ## Continued implementation pass — 2026-08-25

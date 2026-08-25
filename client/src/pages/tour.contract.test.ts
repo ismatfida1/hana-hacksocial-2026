@@ -1,0 +1,21 @@
+import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+describe("Hana interactive tour contract", () => {
+  const source = readFileSync(resolve(process.cwd(), "client/src/pages/Home.tsx"), "utf8");
+
+  it("contains eight tutorial stages and real app anchors", () => {
+    expect(source).toContain('const demoTourStages = [');
+    expect(source.match(/selector: "#tour-/g)?.length).toBe(8);
+    for (const anchor of ["tour-home", "tour-career", "tour-journey", "tour-resources", "tour-projects", "tour-opportunities", "tour-ask", "tour-profile"]) {
+      expect(source).toContain(`id="${anchor}"`);
+    }
+  });
+
+  it("supports back navigation and progress wording", () => {
+    expect(source).toContain("Step {stage + 1} of {demoTourStages.length}");
+    expect(source).toContain('onStage(Math.max(0, stage - 1))');
+    expect(source).toContain('Next');
+  });
+});

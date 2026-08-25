@@ -43,6 +43,7 @@ export type StudentProfile = {
   masteryChecks: string[];
   learningHistory: string[];
   goals: string[];
+  tourCompleted?: boolean;
 };
 
 export type StudentContext = {
@@ -51,6 +52,7 @@ export type StudentContext = {
     degree?: string;
     department?: string;
     semester?: string;
+    tourCompleted?: boolean;
   };
   career: {
     goal?: string;
@@ -160,6 +162,7 @@ export function normalizeStudentProfile(raw: unknown): StudentProfile {
     masteryChecks: asList(profile.masteryChecks),
     learningHistory: asList(profile.learningHistory),
     goals: asList(profile.goals),
+    tourCompleted: profile.tourCompleted === true,
   };
 }
 
@@ -172,6 +175,7 @@ export function buildStudentContextFromMemory(memory?: HanaStudentMemory | null)
       degree: profile.degree,
       department: profile.department,
       semester: profile.semester,
+      tourCompleted: profile.tourCompleted,
     },
     career: { goal: profile.career, currentJourney: profile.currentJourney, readiness: profile.careerReadiness },
     university: {

@@ -850,10 +850,10 @@
 - [ ] Trace resource verification and fallback behavior against actual reachable-link logic and stored alternatives.
 - [ ] Trace automatic and manual project completion from event to database to refresh persistence.
 - [ ] Trace product video generation/integration and distinguish a real asset from a placeholder or storyboard.
-- [ ] Trace the Hana-led tour against actual highlighted controls and cloud-style guidance.
+- [x] Trace the Hana-led tour against actual highlighted controls and cloud-style guidance.
 - [ ] Trace university curriculum retrieval, fallback subjects, and personalized roadmap generation end to end.
 - [ ] Trace security, privacy, account deletion, AI data minimization, admin protection, demo isolation, and Android secret handling.
-- [ ] Run tests, production build, security scan, mobile visual checks, and artifact verification.
+- [x] Run tests, production build, security scan, mobile visual checks, and artifact verification.
 - [ ] Write a complete requirement-by-requirement matrix with Implemented, Partial, Blocked, and Not implemented statuses and evidence.
 - [ ] Do not publish or claim a final version until the audit clearly states every remaining blocker.
 
@@ -873,3 +873,11 @@
 ## Complete-from-start-to-finish directive — 2026-08-25
 - [ ] Continue through every remaining requirement in the supplied specifications instead of stopping at a progress release.
 - [ ] Do not deliver a final-version claim until each requirement is behaviorally verified or explicitly blocked by an external dependency that the user must resolve.
+
+## Interactive Robot Tour tutorial requirements — 2026-08-25
+- [x] Map eight tutorial steps to real HANA Home, Career, Journey, Projects, Opportunities, Resources, Ask Hana, and Profile controls.
+- [x] Add responsive guided overlay with dimming, real-control highlighting, Hana robot callout, Back, Next, Skip, and Step X of 8.
+- [x] Add real section navigation and prevent fake tour-only screens.
+- [x] Persist signed-in tour completion through cloud profile memory, keep demo state isolated, and allow restart from Profile.
+- [x] Add Watch the Tour entry point with honest video availability state.
+- [x] Add tour-specific regression tests and mobile visual validation.

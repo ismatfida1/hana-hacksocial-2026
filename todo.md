@@ -673,7 +673,7 @@
 ## Journey 2.0 full experience expansion — 2026-08-24
 - [x] Add layered Career Map, Topic, Subtopic, and Learning views with back navigation.
 - [x] Add clear visual states for complete, current, upcoming, locked, recommended, and needs review.
-- [ ] Add concise Why actions for major topics and connect them to the student’s goal.
+- [x] Add concise Why actions for major topics and connect them to the student’s goal.
 - [ ] Add logically ordered career-specific dependencies and only useful alternate routes.
 - [x] Add practical skill verification before marking claimed skills complete.
 - [ ] Add non-numeric skill confidence states and lightweight review prompts.

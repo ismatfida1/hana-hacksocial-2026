@@ -107,7 +107,7 @@ export async function upsertHanaStudentMemory(input: Omit<InsertHanaStudentMemor
 export async function listOpportunities(activeOnly = true): Promise<Opportunity[]> {
   const db = await getDb();
   if (!db) return [];
-  return db.select().from(opportunities).where(activeOnly ? eq(opportunities.active, 1) : undefined).orderBy(desc(opportunities.deadlineAt), desc(opportunities.updatedAt));
+  return db.select().from(opportunities).where(activeOnly ? and(eq(opportunities.active, 1), eq(opportunities.verificationStatus, "verified")) : undefined).orderBy(desc(opportunities.deadlineAt), desc(opportunities.updatedAt));
 }
 
 export async function createOpportunity(input: Omit<InsertOpportunity, "id" | "createdAt" | "updatedAt">): Promise<Opportunity> {

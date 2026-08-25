@@ -24,6 +24,7 @@ describe("admin-managed opportunity records", () => {
     expect(router).toContain("adminVerify: adminProcedure");
     expect(router).toContain("validateResourceCandidate");
     expect(db).toContain("export async function archiveOpportunity");
+    expect(db).toContain('and(eq(opportunities.active, 1), eq(opportunities.verificationStatus, "verified"))');
   });
 
   it("uses stored demonstrated skills when explaining opportunity fit", () => {
@@ -35,6 +36,7 @@ describe("admin-managed opportunity records", () => {
   it("renders active managed records and honest deadline states for students", () => {
     expect(home).toContain("trpc.opportunities.list.useQuery");
     expect(home).toContain("displayOpportunities = demoMode");
+    expect(home).toContain("No current opportunities have been published yet.");
     expect(home).toContain('formatOpportunityDeadline');
     expect(home).toContain('formatOpportunityVerification');
     expect(home).toContain('Official page checked:');

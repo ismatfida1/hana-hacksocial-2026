@@ -18,4 +18,11 @@ describe("Hana interactive tour contract", () => {
     expect(source).toContain('onStage(Math.max(0, stage - 1))');
     expect(source).toContain('Next');
   });
+
+  it("keeps placement checks and resource alternatives in the focused learning view", () => {
+    expect(source).toContain('I already know this');
+    expect(source).toContain('Placement check: ${answer.trim()}');
+    expect(source).toContain('Alternative video · ${step.title}');
+    expect(source).toContain('Alternative course · ${step.title}');
+  });
 });

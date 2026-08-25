@@ -824,7 +824,7 @@
 - [ ] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.
 - [ ] Attempt official university curriculum retrieval only through reliable sources and show an editable subject fallback when unavailable.
 - [x] Use university context, degree, semester, subjects, career, current skills, goals, and study pace to change the actual Journey; target-role gap analysis remains a later enhancement.
-- [ ] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.
+- [x] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.
 - [ ] Personalize weekly pace from realistic study hours and keep one primary progress signal visible.
 - [ ] Make recommendations traceable with a concise “Why?” explanation and use reliable career/industry requirements without unsupported statistics.
 - [ ] Ensure learning produces proof through practice, projects, GitHub/README, portfolio, and resume-ready evidence.
@@ -881,3 +881,9 @@
 - [x] Persist signed-in tour completion through cloud profile memory, keep demo state isolated, and allow restart from Profile.
 - [x] Add Watch the Tour entry point with honest video availability state.
 - [x] Add tour-specific regression tests and mobile visual validation.
+
+## Tutorial attachment refinement — 2026-08-25
+- [x] Match the tutorial’s completion message and primary action: “You’re ready! Let’s start your HANA journey.” with “Start Exploring”.
+- [x] Add an explicit “Skip for now” action to the first-entry tour choice while preserving later Profile restart access.
+- [x] Re-validate both tour paths and all Next, Back, Skip, and Start Exploring actions after the refinement.
+- [x] Keep the real-product video status honest until an actual HANA-interface walkthrough asset is integrated.

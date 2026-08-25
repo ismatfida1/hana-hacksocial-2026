@@ -76,7 +76,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Validate TypeScript
-        run: pnpm check
+        run: pnpm typecheck
 
       - name: Build production web assets
         env:

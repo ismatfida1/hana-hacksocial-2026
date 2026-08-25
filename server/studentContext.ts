@@ -250,8 +250,21 @@ export async function recordHanaConversation(studentId: number, messages: Array<
   });
 }
 
-export function formatStudentContextForHana(context: StudentContext): string {
-  return JSON.stringify(context, null, 2);
+export function formatStudentContextForHana(context: StudentContext, question = ""): string {
+  const q = question.toLowerCase();
+  const wantsUniversity = /university|degree|semester|subject|course|curriculum|class/.test(q);
+  const wantsWork = /project|portfolio|github|build|readme|competition|hackathon|internship|opportunit/.test(q);
+  const wantsProgress = /next|learn|skill|master|practice|stuck|ready|journey|progress|step|explain|error|debug/.test(q);
+  const minimal = {
+    student: context.student,
+    career: context.career,
+    ...(wantsUniversity || !wantsWork && !wantsProgress ? { university: context.university } : {}),
+    ...(wantsProgress || !wantsUniversity && !wantsWork ? { learning: { currentActiveStep: context.learning.currentActiveStep, completedLearningSteps: context.learning.completedLearningSteps.slice(-20), demonstratedSkills: context.learning.demonstratedSkills, completedSkills: context.learning.completedSkills, weakAreas: context.learning.weakAreas, history: context.learning.history.slice(-10) } } : {}),
+    ...(wantsWork ? { work: context.work } : {}),
+    preferences: { availableStudyTime: context.preferences.availableStudyTime, energyMode: context.preferences.energyMode, goals: context.preferences.goals },
+    ...(wantsProgress ? { roadmap: context.roadmap.slice(0, 20) } : {}),
+  };
+  return JSON.stringify(minimal, null, 2);
 }
 
 export function buildDailyMissionFromContext(context: StudentContext) {

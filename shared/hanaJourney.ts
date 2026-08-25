@@ -10,6 +10,8 @@ export type RoadmapInput = {
   degree?: string;
   semester?: string;
   existingSkills?: string[];
+  subjects?: string[];
+  availableStudyTime?: string;
 };
 
 export type RoadmapCategory = "foundation" | "core" | "project" | "portfolio" | "career";
@@ -163,7 +165,7 @@ export function pathTypeFromLegacy(pathway: "career" | "custom" | "skill", area?
 
 export function buildRoadmap(input: RoadmapInput): RoadmapNode[] {
   const area = resolveJourneyArea(input.target || (input.pathType === "skill-to-earn" ? "Programming" : "Software Engineering"));
-  const steps = buildJourney(area, "", "", "Full study day");
+  const steps = buildJourney(area, "", "", input.availableStudyTime || "Full study day", { university: input.university, degree: input.degree, semester: input.semester, subjects: input.subjects });
   const completed = new Set((input.existingSkills ?? []).map((skill) => skill.toLowerCase().trim()));
   let unlocked = true;
   return steps.map((step, index) => {
@@ -191,10 +193,13 @@ export function buildRoadmap(input: RoadmapInput): RoadmapNode[] {
   });
 }
 
-export function buildJourney(area: string, level = "", goal = "", _time = ""): JourneyStep[] {
+export function buildJourney(area: string, level = "", goal = "", time = "", context?: { university?: string; degree?: string; semester?: string; subjects?: string[] }): JourneyStep[] {
   const base = journeys[resolveJourneyArea(area)] || defaultJourney;
   const start = level.toLowerCase().includes("built") || level.toLowerCase().includes("advanced") ? Math.min(1, base.length - 1) : 0;
-  const steps = base.map((item, index) => ({ ...item, day: index + 1, status: index < start ? "complete" as const : index === start ? "active" as const : "locked" as const }));
+  const subjects = (context?.subjects || []).filter(Boolean);
+  const universityLine = context?.university ? ` Hana will connect this to ${context.degree || "your degree"}${context.semester ? ` in semester ${context.semester}` : ""}${subjects.length ? ` and your subjects: ${subjects.slice(0, 3).join(", ")}` : ""}.` : "";
+  const timeLine = time.toLowerCase().includes("half") ? " Hana will keep this focused on one small outcome." : time.toLowerCase().includes("flexible") ? " Hana will let you continue at your own pace." : "";
+  const steps = base.map((item, index) => ({ ...item, day: index + 1, status: index < start ? "complete" as const : index === start ? "active" as const : "locked" as const, purpose: `${item.purpose}${universityLine}${timeLine}` }));
   if (goal.toLowerCase().includes("university")) return steps.map((item) => ({ ...item, purpose: `${item.purpose} Hana will connect it to your current university work.` }));
   return steps;
 }

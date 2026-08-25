@@ -800,3 +800,68 @@
 - [x] Complete source and generated-Android release-path secret scans for API keys, environment files, source maps, logs, and signing material; scan the actual signed AAB when GitHub produces it.
 - [ ] Complete Google Play Data Safety and account-deletion declarations from the final release artifact.
 - [x] Produce final commercial-release readiness report and lawyer-review checklist.
+
+## User-reported repair pass — 2026-08-25
+- [ ] Repair sign-in with multiple provider options, including Google where the configured auth portal supports it, and preserve clear retry behavior.
+- [ ] Expand opportunity details to show official deadline, eligibility, application steps, expected deliverables, and how the event works without inventing facts.
+- [ ] Remove the Roadmap.sh/reference link and any wording that implies copied content or design.
+- [ ] Add verified alternative learning resources for each roadmap step and gracefully handle unavailable links.
+- [ ] Make project completion automatically complete the linked roadmap step while preserving reliable manual checkbox completion.
+- [ ] Generate and integrate the real silent vertical HANA product-introduction video instead of the placeholder panel.
+- [ ] Replace the tour modal with a guided Hana-led tour that points to specific controls and explains each action in a compact cloud-style callout.
+- [ ] Make university details influence planning through curriculum-aware data when available, with an explicit student-entered curriculum fallback when unavailable.
+- [ ] Ensure roadmap generation uses the student’s university, degree, semester, subjects, skills, goal, and available study time rather than a generic career template.
+- [ ] Add tests and responsive validation for all fixes before publishing.
+
+## Expanded critical personalization specification — 2026-08-25
+- [ ] Make authentication use real configured provider flows and expose only providers actually supported by the backend; do not present fake email/password behavior.
+- [ ] Persist all account context across sessions and devices, including university, degree, semester, career, skills, journey, projects, opportunities, portfolio, conversations, and preferences.
+- [ ] Give each opportunity a verified detail view with deadline, eligibility, location, requirements, difficulty, process, submissions, dates, teams, prizes when verified, official URL, application steps, and Hana’s readiness reason.
+- [ ] Remove copied-content/reference-style wording while retaining natural source attribution and linking to originals only.
+- [ ] Verify learning resources before display and provide a primary plus two approved alternatives without overwhelming the main screen.
+- [ ] Add project states LOCKED, ACTIVE, IN PROGRESS, and COMPLETED with milestone tracking, automatic completion when all milestones are done, and database-backed manual completion.
+- [ ] Replace the tutorial placeholder with an actual generated video when quota/service access permits; otherwise show an honest production status and retain the completed storyboard.
+- [ ] Make Hana’s tour point/highlight the real Career, Journey, Projects, Opportunities, and Ask Hana controls with short cloud-style guidance.
+- [ ] Attempt official university curriculum retrieval only through reliable sources and show an editable subject fallback when unavailable.
+- [ ] Use university curriculum, degree, semester, subjects, career, current skills, demonstrated ability, projects, goals, and target-role requirements to identify gaps and change the actual Journey.
+- [ ] Add placement checks through “I already know this” so demonstrated skills can be compressed or skipped rather than repeated.
+- [ ] Personalize weekly pace from realistic study hours and keep one primary progress signal visible.
+- [ ] Make recommendations traceable with a concise “Why?” explanation and use reliable career/industry requirements without unsupported statistics.
+- [ ] Ensure learning produces proof through practice, projects, GitHub/README, portfolio, and resume-ready evidence.
+- [ ] Match opportunities to demonstrated skills and track student-provided outcomes such as applied, interview, accepted, rejected, or completed.
+- [ ] Add regression tests, mobile visual checks, and honest release documentation for every critical fix.
+
+## Security, privacy, and simple-UX master specification — 2026-08-25
+- [ ] Verify real authentication options supported by the configured backend: Google, other supported sign-in, sign-out, recovery, and account deletion; do not add fake email/password behavior.
+- [ ] Confirm user-owned data is authorization-scoped server-side for profiles, university data, subjects, skills, journey, progress, mastery, projects, portfolio, conversations, preferences, goals, and opportunity interactions.
+- [ ] Verify creator/admin-only controls are server-side protected and cannot be activated through hidden UI, URLs, query parameters, or local storage.
+- [ ] Keep Demo Mode isolated and authorized without bypassing authentication or database authorization.
+- [ ] Confirm private AI, OAuth, database, Supabase, GitHub, and admin credentials never enter web or Android client artifacts.
+- [ ] Minimize AI context per request so Hana receives only the information needed for the current task.
+- [ ] Document what Hana stores, why it stores it, which services process it, retention, and deletion in a concise Privacy & Data surface.
+- [ ] Verify account deletion removes associated HANA data according to the documented retention policy and remains accessible in-app and publicly.
+- [ ] Avoid unnecessary Android permissions and do not collect contacts, location, microphone, camera, or device identifiers without a real feature need.
+- [ ] Add security/privacy regression tests and update the release-risk documentation without claiming 100% security or legal compliance.
+
+## Full supplied-requirements acceptance audit — 2026-08-25
+- [ ] Collect every supplied requirements attachment and existing acceptance/audit document into one normalized checklist.
+- [ ] Trace sign-in and provider support against the actual configured authentication backend; distinguish working options from UI labels.
+- [ ] Trace opportunity detail data and source-link presentation against real stored fields; mark missing verified fields as incomplete.
+- [ ] Trace resource verification and fallback behavior against actual reachable-link logic and stored alternatives.
+- [ ] Trace automatic and manual project completion from event to database to refresh persistence.
+- [ ] Trace product video generation/integration and distinguish a real asset from a placeholder or storyboard.
+- [ ] Trace the Hana-led tour against actual highlighted controls and cloud-style guidance.
+- [ ] Trace university curriculum retrieval, fallback subjects, and personalized roadmap generation end to end.
+- [ ] Trace security, privacy, account deletion, AI data minimization, admin protection, demo isolation, and Android secret handling.
+- [ ] Run tests, production build, security scan, mobile visual checks, and artifact verification.
+- [ ] Write a complete requirement-by-requirement matrix with Implemented, Partial, Blocked, and Not implemented statuses and evidence.
+- [ ] Do not publish or claim a final version until the audit clearly states every remaining blocker.
+
+## Dual roadmap and PUCIT/FCIT alignment requirements — 2026-08-25
+- [ ] Model the main four-year BSCS/software-engineering journey separately from the parallel AI Automation Engineer earning specialization.
+- [ ] Represent the PUCIT/FCIT academic foundation by semester and add an industry layer without replacing the university foundation.
+- [ ] Keep AI Automation in the requested progression: programming foundation, developer foundation, automation, AI fundamentals, AI automation, agents, and production AI systems.
+- [ ] Include the requested BSCS foundation topics such as C/C++, Python, OOP, Git/GitHub, Linux, mathematics, DSA, SQL, databases, operating systems, networks, web, APIs, testing, debugging, cloud, security, AI/ML, distributed systems, and employability proof.
+- [ ] Include AI Automation projects and progression from learning to practice, small projects, serious projects, GitHub, portfolio, real-world work, internships, and professional roles.
+- [ ] Use PUCIT/FCIT curriculum as academic context only when reliably verified; do not claim the supplied Fall 2026 details as verified without an official source record.
+- [ ] Add a truthful audit status for the dual-roadmap model and identify whether it is implemented, partial, blocked, or not implemented.

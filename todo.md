@@ -955,21 +955,29 @@
 - [ ] Create an isolated Hana project copy, preserve the original project unchanged, verify the copy builds and runs independently, and provide its separate version/preview details.
 
 ## HackSocial 2026 isolated-copy scope
-- [ ] Add a visible 🏆 HackSocial 2026 entry point in the copied app without changing the original project.
-- [ ] Preserve the existing authorized sign-in/demo flow; do not add an authentication bypass.
-- [ ] Build isolated Demo Mode with sample data that never writes to real user memory or the production database.
-- [ ] Implement the complete 2–4 minute HackSocial flow: Goal → Personalized Roadmap → Mission → Ask Hana → Mastery → Project → Opportunity → Progress.
-- [ ] Use live configured AI when available and show a truthful graceful fallback when unavailable.
-- [ ] Add tests, responsive verification, and separate-repository/deployment documentation for the copied project.
-- [ ] Establish dedicated GitHub repository `hana-hacksocial-2026` for the copied project only; confirm repository state before pushing.
-- [ ] Create and verify a recoverable baseline commit labeled `HackSocial baseline — before implementation` in the dedicated repository.
-- [ ] Confirm no secrets, credentials, or `.env` files are committed before the first push.
+- [x] Add a visible 🏆 HackSocial 2026 entry point in the copied app without changing the original project.
+- [x] Preserve the existing authorized sign-in/demo flow; do not add an authentication bypass.
+- [x] Build isolated Demo Mode with sample data that never writes to real user memory or the production database.
+- [x] Implement the complete 2–4 minute HackSocial flow: Goal → Personalized Roadmap → Mission → Ask Hana → Mastery → Project → Opportunity → Progress.
+- [x] Use live configured AI when available and show a truthful graceful fallback when unavailable.
+- [x] Add tests, responsive verification, and separate-repository/deployment documentation for the copied project; responsive verification currently covers the copied app shell, with HackSocial interaction coverage in contract tests.
+- [x] Establish dedicated GitHub repository `hana-hacksocial-2026` for the copied project only; confirm repository state before pushing.
+- [x] Create and verify a recoverable baseline commit labeled `HackSocial baseline — before implementation` in the dedicated repository.
+- [x] Confirm no secrets, credentials, or `.env` files are committed before the first push.
 - [x] Inspect `ismatfida1/hana-hacksocial-2026`, compare its commits/files with `/home/ubuntu/hana-learning-companion-copy`, and report all differences; no push or destructive GitHub operation has been performed.
 
 ## HackSocial 2026 execution brief
-- [ ] Complete the copied-project/GitHub baseline inspection and confirm the original project stays untouched.
-- [ ] Add the dedicated HackSocial entry point and coherent 2–4 minute demo journey inside the copied app.
-- [ ] Keep demo sample data isolated from real user memory and production database writes.
-- [ ] Use configured live AI where available with truthful fallback behavior; never present fake AI as live.
+- [x] Complete the copied-project/GitHub baseline inspection and confirm the original project stays untouched.
+- [x] Add the dedicated HackSocial entry point and coherent 2–4 minute demo journey inside the copied app.
+- [x] Keep demo sample data isolated from real user memory and production database writes.
+- [x] Use configured live AI where available with truthful fallback behavior; never present fake AI as live.
 - [ ] Run full testing, secret scan, responsive verification, commit meaningful milestones, and prepare the copied project for separate deployment.
 - [x] Resolve the existing unrelated-history merge in the copied project while preserving the remote `.gitattributes`, `.gitignore`, and `README.md`; run safety/build checks, create local commit(s), and stop before `git push` for approval.
+
+## HackSocial 2026 end-to-end implementation brief
+- [ ] Audit the copied baseline and identify concrete blockers in the evaluator demo flow without modifying the original HANA project.
+- [ ] Implement a coherent landing → today’s mission → learning → Ask Hana → mastery → project → opportunity → progress experience while preserving existing Hana functionality.
+- [ ] Improve mobile-first hierarchy, loading/error states, accessibility, concise content, and navigation only where the demo needs it.
+- [ ] Preserve real AI/backend/database behavior and use truthful fallbacks without exposing secrets or writing isolated demo activity to real user data.
+- [ ] Run full tests, typecheck, build, security scan, responsive checks, and an end-to-end demo verification.
+- [ ] Commit and push the completed copied HackSocial implementation normally to `ismatfida1/hana-hacksocial-2026` and prepare separate deployment verification.

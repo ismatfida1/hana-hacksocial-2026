@@ -170,6 +170,18 @@ export const appRouter = router({
     recordLearning: protectedProcedure.input(z.object({ note: z.string().min(1).max(240) })).mutation(({ ctx, input }) => recordLearningHistory(ctx.user.id, input.note)),
   }),
   hana: router({
+    demoChat: publicProcedure.input(z.object({ message: z.string().min(1).max(1200), goal: z.string().min(1).max(240), roadmapStage: z.string().min(1).max(80), mission: z.string().min(1).max(240), masteryResult: z.string().min(1).max(80), project: z.string().min(1).max(240) })).mutation(async ({ input }) => {
+      const fallback = "Live AI is unavailable right now. Start with one small version: write the question, choose three examples, and compare the answers before adding more features.";
+      try {
+        const response = await generateText([
+          { role: "system", content: `${hanaSystemPrompt} This is an isolated HackSocial demonstration. Do not save a conversation, change a profile, or claim that a real student completed anything. Use the supplied demo context only. Return one short heading and 2–4 concise bullets.` },
+          { role: "user", content: JSON.stringify({ goal: input.goal, roadmapStage: input.roadmapStage, mission: input.mission, masteryResult: input.masteryResult, project: input.project, question: input.message }) },
+        ]);
+        return { text: response.text, model: providerLabel(response.provider), live: true } as const;
+      } catch {
+        return { text: fallback, model: "fallback", live: false } as const;
+      }
+    }),
     chat: protectedProcedure.input(chatInput).mutation(async ({ ctx, input }) => {
       const studentContext = await buildHanaContext(ctx.user.id);
       const extraContext = input.context ? Object.entries(input.context)

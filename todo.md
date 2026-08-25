@@ -737,12 +737,12 @@
 - [ ] Add regression coverage for session restore, logout, memory separation, chat deletion, and cross-device restoration semantics.
 
 ## Commercial-readiness and privacy review — 2026-08-24
-- [ ] Create a dependency and ownership record covering Hana code, original content, assets, fonts, icons, open-source packages, Manus, AI providers, storage, and Canva.
-- [ ] Confirm the app does not claim ownership of third-party services, models, assets, or user data.
-- [ ] Document current data collection, storage, AI processing, retention, user controls, contact path, and deletion requirements.
-- [ ] Separate essential progress memory from user-visible chat history and plan secure account/data deletion controls.
-- [ ] Add launch documentation for privacy policy, terms of service, licenses, domain, repository history, and distribution readiness.
-- [ ] Keep commercial-launch advice clearly informational and flag items requiring legal or provider-term review.
+- [x] Create a dependency and ownership record covering Hana code, original content, assets, fonts, icons, open-source packages, Manus, AI providers, storage, and Canva.
+- [x] Confirm the app does not claim ownership of third-party services, models, assets, or user data.
+- [x] Document current data collection, storage, AI processing, retention, user controls, contact path, and deletion requirements.
+- [x] Separate essential progress memory from user-visible chat history and plan secure account/data deletion controls.
+- [x] Add launch documentation for privacy policy, terms of service, licenses, domain, repository history, and distribution readiness.
+- [x] Keep commercial-launch advice clearly informational and flag items requiring legal or provider-term review.
 
 ## Dependency license audit — 2026-08-24
 - [x] Inventory all direct and transitive dependencies from the lockfile.
@@ -776,19 +776,19 @@
 ## Security, privacy, and Play readiness requirements — 2026-08-24
 - [x] Add visible Privacy Policy, Terms of Service, AI disclosure, creator/ownership notice, app version, and support/contact surfaces.
 - [x] Document exactly what Hana stores, why it is stored, where it is stored, which providers process it, retention, and deletion behavior.
-- [ ] Verify no AI keys, service-role keys, database passwords, admin credentials, GitHub tokens, payment secrets, or signing keys enter web or Android client assets.
+- [x] Verify no AI keys, service-role keys, database passwords, admin credentials, GitHub tokens, payment secrets, or signing keys enter web or Android client assets; the actual signed AAB still needs a release scan.
 - [ ] Verify account ownership, session restoration, logout, recovery boundaries, and cross-account isolation.
 - [ ] Implement secure account deletion and applicable web-based deletion path before commercial/Play launch.
 - [ ] Prepare accurate Google Play Data Safety, content, developer, signing, target API, and store-listing records.
 - [ ] Complete ownership, third-party license, Canva, Manus, AI-provider, and open-source commercial-use records.
 
 ## Full ownership and commercial licensing audit — 2026-08-24
-- [ ] Inventory every third-party component, dependency, SDK, API, asset, font, icon, video, template, generated asset, and external service actually used by HANA.
-- [ ] Record source, exact version, license/terms, commercial-use permission, attribution, modification, redistribution, and Play Store obligations for each item.
+- [x] Inventory every third-party component, dependency, SDK, API, asset, font, icon, video, template, generated asset, and external service actually used by HANA.
+- [x] Record source, exact version, license/terms, commercial-use permission, attribution, modification, redistribution, and Play Store obligations for each item.
 - [ ] Audit Manus-generated code/assets and all connected AI, database, hosting, design, repository, storage, and research services against current terms.
-- [ ] Scan frontend bundles, Android files, configuration, logs, and documentation for exposed secrets, tokens, passwords, service-role keys, and signing material.
-- [ ] Produce source-linked Safe, Requires verification/legal review, and Must remove/replace sections.
-- [ ] Identify every issue that could block commercial sale or Google Play distribution and avoid legal-clearance claims.
+- [x] Scan frontend bundles, Android files, configuration, logs, and documentation for exposed secrets, tokens, passwords, service-role keys, and signing material; signed-AAB scanning remains pending.
+- [x] Produce source-linked Safe, Requires verification/legal review, and Must remove/replace sections.
+- [x] Identify every issue that could block commercial sale or Google Play distribution and avoid legal-clearance claims.
 ## Ordered commercial release clearance — 2026-08-25
 - [x] Audit and classify all unresolved package licenses: UNKNOWN, SEE LICENSE, BlueOak, CC-BY, MPL, and Unlicense.
 - [ ] Resolve or replace any package that does not clearly permit commercial distribution and preserve required notices.

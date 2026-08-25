@@ -324,14 +324,14 @@
 - [x] Validate the repository state after syncing and report any access blocker without overwriting unrelated work: branch is clean and workflow is at `.github/workflows/android-build.yml`.
 
 ## Browser and GitHub connection — 2026-08-24
-- [ ] Inspect whether My Browser is available and whether it is currently enabled.
-- [ ] Enable My Browser and GitHub through the supported connector flow.
+- [x] Inspect whether My Browser is available and whether it is currently enabled: enabled.
+- [x] Enable My Browser and GitHub through the supported connector flow: both are already enabled; no configuration change was needed.
 - [ ] Connect the user’s browser session when GitHub login or repository access requires it.
 - [x] Verify access to ismatfida1/baymax-care-companion before syncing any files.
 
 ## Supabase connection — 2026-08-24
-- [ ] Inspect whether a Supabase connector already exists and whether it is enabled.
-- [ ] Enable or request Supabase access without exposing project keys in source code.
+- [x] Inspect whether a Supabase connector already exists and whether it is enabled: Supabase API is enabled; the Supabase management connector is disabled.
+- [x] Enable or request Supabase access without exposing project keys in source code: the enabled Supabase API connector and server-side environment path are available; no client key exposure was found.
 - [ ] Verify Supabase can support Hana’s account memory and unified Journey data safely.
 
 ## End-to-end Hana app build — 2026-08-24

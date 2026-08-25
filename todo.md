@@ -940,3 +940,4 @@
 - [x] Synchronize `FINAL_BUILD_REPORT.md` with the verified hosted debug APK artifact and retain the signed-AAB limitation.
 - [x] Synchronize the latest validated managed-project checkpoint to the existing GitHub progress branch without changing protected `main`: remote commit `bd5ffda`.
 - [x] Prepare an evidence-based Google Play Data Safety draft from Hana’s actual data flows, Android permissions, AI processing, storage, and deletion controls; label it as a draft requiring Play Console confirmation.
+- [x] Re-run the current automated validation after the Play-readiness documentation update: 19 Vitest files / 61 tests, typecheck, production build, release security scan, and a 375×812 mobile greeting-screen visual check all passed; retain the non-blocking bundle-size warning.

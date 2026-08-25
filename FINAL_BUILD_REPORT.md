@@ -26,7 +26,7 @@ OpenAI is preferred when configured, Gemini is used as the next provider, and th
 
 ## Build validation
 
-The web prototype and Android-ready copy passed tests, TypeScript validation, production web builds, Capacitor asset synchronization, and release-path security scanning. The authoritative hosted GitHub Actions build also generated and uploaded a debug APK in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562) on branch `hana-progress-2026-08-25`. The sandbox itself still lacks a complete Android SDK for local Gradle verification, and no signed release AAB has been generated or verified.
+The web prototype and Android-ready copy passed the current automated suite: **19 Vitest files / 61 tests**, TypeScript validation, production web build, and release-path security scanning. The latest run completed with no test, typecheck, build, or secret-scan failures; the only build note is a non-blocking large-client-chunk warning. A representative mobile visual check at 375×812 showed the greeting-first Home screen legible with no text overlap. The authoritative hosted GitHub Actions build also generated and uploaded a debug APK in run [32843621562](https://github.com/ismatfida1/baymax-care-companion/actions/runs/32843621562) on branch `hana-progress-2026-08-25`. The sandbox itself still lacks a complete Android SDK for local Gradle verification, and no signed release AAB has been generated or verified.
 
 ## Remaining manual steps
 

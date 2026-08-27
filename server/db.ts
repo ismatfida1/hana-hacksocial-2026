@@ -1,6 +1,6 @@
 import { and, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { AccountDeletionRequest, HanaStudentMemory, HanaUpload, InsertHanaStudentMemory, InsertHanaUpload, InsertOpportunity, InsertUser, Opportunity, accountDeletionRequests, hanaStudentMemory, hanaUploads, opportunities, users } from "../drizzle/schema";
+import { AccountDeletionRequest, HanaLearnerProfile, HanaRoadmap, HanaStudentMemory, HanaUpload, InsertHanaLearnerProfile, InsertHanaRoadmap, InsertHanaStudentMemory, InsertHanaUpload, InsertOpportunity, InsertUser, Opportunity, accountDeletionRequests, hanaLearnerProfiles, hanaProgressEvents, hanaRoadmaps, hanaStudentMemory, hanaUploads, opportunities, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -191,10 +191,65 @@ export async function getOpportunity(id: number): Promise<Opportunity | undefine
 }
 
 /** Delete the complete HANA-owned account scope without touching other users. */
+export async function getHanaLearnerProfile(userId: number): Promise<HanaLearnerProfile | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(hanaLearnerProfiles).where(eq(hanaLearnerProfiles.userId, userId)).limit(1);
+  return rows[0];
+}
+
+export async function upsertHanaLearnerProfile(userId: number, profile: Record<string, unknown>, version?: number): Promise<HanaLearnerProfile | undefined> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const existing = await getHanaLearnerProfile(userId);
+  const nextVersion = version ?? (existing?.version || 0) + 1;
+  await db.insert(hanaLearnerProfiles).values({ userId, profile, version: nextVersion }).onDuplicateKeyUpdate({ set: { profile, version: nextVersion } });
+  return getHanaLearnerProfile(userId);
+}
+
+export async function getActiveHanaRoadmap(userId: number): Promise<HanaRoadmap | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(hanaRoadmaps).where(and(eq(hanaRoadmaps.userId, userId), eq(hanaRoadmaps.status, "active"))).orderBy(desc(hanaRoadmaps.version)).limit(1);
+  return rows[0];
+}
+
+export async function createHanaRoadmap(userId: number, profileVersion: number, roadmap: Record<string, unknown>): Promise<HanaRoadmap> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const previous = await getActiveHanaRoadmap(userId);
+  const version = (previous?.version || 0) + 1;
+  await db.transaction(async (tx) => {
+    await tx.update(hanaRoadmaps).set({ status: "archived" }).where(and(eq(hanaRoadmaps.userId, userId), eq(hanaRoadmaps.status, "active")));
+    await tx.insert(hanaRoadmaps).values({ userId, profileVersion, version, status: "active", roadmap });
+  });
+  const rows = await db.select().from(hanaRoadmaps).where(and(eq(hanaRoadmaps.userId, userId), eq(hanaRoadmaps.version, version))).limit(1);
+  if (!rows[0]) throw new Error("Roadmap was not created");
+  return rows[0];
+}
+
+export async function getHanaRoadmapForUser(userId: number, roadmapId: number): Promise<HanaRoadmap | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(hanaRoadmaps).where(and(eq(hanaRoadmaps.id, roadmapId), eq(hanaRoadmaps.userId, userId))).limit(1);
+  return rows[0];
+}
+
+export async function recordHanaProgressEvent(userId: number, roadmapId: number, eventType: string, payload: Record<string, unknown>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const ownedRoadmap = await getHanaRoadmapForUser(userId, roadmapId);
+  if (!ownedRoadmap) throw new Error("Roadmap not found");
+  await db.insert(hanaProgressEvents).values({ userId, roadmapId, eventType, payload });
+}
+
 export async function deleteUserAccount(userId: number): Promise<void> {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   await db.transaction(async (tx) => {
+    await tx.delete(hanaProgressEvents).where(eq(hanaProgressEvents.userId, userId));
+    await tx.delete(hanaRoadmaps).where(eq(hanaRoadmaps.userId, userId));
+    await tx.delete(hanaLearnerProfiles).where(eq(hanaLearnerProfiles.userId, userId));
     await tx.delete(hanaUploads).where(eq(hanaUploads.userId, userId));
     await tx.delete(hanaStudentMemory).where(eq(hanaStudentMemory.userId, userId));
     await tx.delete(users).where(eq(users.id, userId));

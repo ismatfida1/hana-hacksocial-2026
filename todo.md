@@ -1018,3 +1018,20 @@
 - [ ] Assess Netlify as the replacement public-hosting route after Vercel failed; preserve full-stack behavior and document any authorization or platform blocker without using a static-only workaround.
 
 - [ ] Create or request a separate managed Manus web project from the copied HackSocial GitHub repository, deploy it without using original HANA metadata/secrets, and verify the public URL or document the exact authorization blocker.
+
+## Personalized web-grounded roadmap
+- [x] Add a bounded adaptive diagnostic interview for goals, level, evidence, time, formats, constraints, university context, and preferences
+- [x] Normalize diagnostic answers into a student profile and show a confirmation summary before generation
+- [x] Add versioned personalized journeys, milestones, actions, and progress events with strict user ownership
+- [x] Add a server-side resource discovery adapter with curated fallback, URL validation, source-quality filters, deduplication, and caching
+- [x] Support external book resources as links only, with title/author metadata and no downloading or hosting
+- [x] Add university and YouTube resource metadata with provenance and freshness fields
+- [x] Generate structured roadmap JSON and MCQ/quiz sets through the server-side LLM helper with schema validation
+- [x] Add resource bundles, rationale, citations/provenance, and external-link presentation to the roadmap UI
+- [x] Add adaptive progress updates and roadmap versioning when student evidence or preferences change
+- [x] Ensure Ask Hana receives the actual current question plus bounded learner context and recent conversation
+- [x] Add rate limits, safe provider/search errors, prompt-injection boundaries, SSRF protections, and content-size limits
+- [x] Add tests for diagnostic normalization, ownership, URL/resource safety, structured outputs, quizzes, adaptation, and distinct chat questions
+- [x] Run type checks, tests, production build, and preview acceptance checks without publishing automatically
+- [x] Document search/model configuration, authorized resource policy, external book-link policy, costs, and rollout steps
+- [x] Fix the personalized-roadmap client payload type so external-book arrays match the generated tRPC input contract

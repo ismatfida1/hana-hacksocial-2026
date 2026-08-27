@@ -6,6 +6,9 @@ import { systemRouter } from "./_core/systemRouter";
 import { adminProcedure, protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { archiveOpportunity, clearHanaConversations, createAccountDeletionRequest, createHanaUpload, deleteHanaConversation, deleteHanaUpload, createOpportunity, deleteUserAccount, getHanaStudentMemory, getOpportunity, listHanaConversations, listHanaUploads, listOpportunities, updateOpportunity, upsertHanaStudentMemory } from "./db";
 import { addCompetition, addPortfolioProject, addStudentProject, buildCoachContext, buildHanaContext, formatStudentContextForHana, getCareerReadiness, getDailyMission, getStudentCareerContext, getStudentProjects, getStudentProgress, getStudentSkills, getWeeklyReport, recordHanaConversation, recordLearningHistory, saveStepReference, setLearningStepCompletion, setOpportunityOutcome, setProjectMilestone, setProjectStatus, submitMasteryCheck, updateStudentProfile } from "./studentContext";
+import { createHanaRoadmap, getActiveHanaRoadmap, getHanaLearnerProfile, recordHanaProgressEvent, upsertHanaLearnerProfile } from "./db";
+import { diagnosticQuestions, generatePersonalizedRoadmap, normalizeDiagnosticAnswers, type DiagnosticAnswers } from "./personalizedRoadmap";
+import { validateExternalBook } from "./resourceDiscovery";
 import { buildRoadmap, type PathType } from "../shared/hanaJourney";
 import { verifyDemoPassword } from "./demoAccess";
 import { validateResourceCandidate, verifyResourceCandidates } from "./resourceVerification";
@@ -35,6 +38,10 @@ const memoryConversation = z.object({ role: z.enum(["user", "hana"]), text: z.st
 const teachHanaUpload = z.object({ fileName: z.string().trim().min(1).max(255), mimeType: z.enum(["text/plain", "text/markdown", "text/javascript", "text/typescript", "application/json", "text/x-python", "text/x-java-source", "text/x-c", "text/x-c++src"]), sizeBytes: z.number().int().positive().max(1_000_000), contentBase64: z.string().min(1).max(1_400_000) });
 const opportunityFields = z.object({ title: z.string().min(1).max(200), type: z.string().min(1).max(80), detail: z.string().min(1).max(4000), officialUrl: z.string().url().max(500), deadlineAt: z.string().datetime().nullable().optional(), eligibility: z.string().min(1).max(4000), prizeDetails: z.string().max(2000).nullable().optional(), location: z.string().max(200).nullable().optional(), requirements: z.string().max(4000).nullable().optional(), applicationSteps: z.string().max(4000).nullable().optional(), submissionFormat: z.string().max(4000).nullable().optional(), teamInfo: z.string().max(2000).nullable().optional(), difficulty: z.string().max(80).nullable().optional(), active: z.boolean().default(true) });
 const opportunityUpdate = opportunityFields.partial();
+const diagnosticAnswersSchema = z.object({
+  target: z.string().min(1).max(240), subject: z.string().min(1).max(160), level: z.enum(["beginner", "early-intermediate", "intermediate", "advanced"]), evidence: z.string().min(1).max(1200), weeklyMinutes: z.number().int().min(30).max(2400), formats: z.array(z.string().min(1).max(80)).max(8), universityContext: z.string().max(400).default(""), obstacles: z.string().max(500).default(""), language: z.string().max(80).default("English"), interests: z.array(z.string().max(80)).max(8).default([]),
+});
+const externalBookSchema = z.object({ title: z.string().min(1).max(180), author: z.string().max(160).default("Unknown author"), url: z.string().url().max(500), guidance: z.string().max(400).optional() });
 
 const chatInput = z.object({
   message: z.string().min(1).max(6000),
@@ -114,6 +121,30 @@ export const appRouter = router({
       return { success: true } as const;
     }),
   }),
+  personalized: router({
+    questions: protectedProcedure.query(() => diagnosticQuestions()),
+    profile: protectedProcedure.query(({ ctx }) => getHanaLearnerProfile(ctx.user.id)),
+    active: protectedProcedure.query(({ ctx }) => getActiveHanaRoadmap(ctx.user.id)),
+    saveExternalBook: protectedProcedure.input(externalBookSchema).mutation(async ({ ctx, input }) => {
+      const current = await getHanaLearnerProfile(ctx.user.id);
+      const currentProfile = current?.profile || {};
+      const existingBooks = Array.isArray(currentProfile.externalBooks) ? currentProfile.externalBooks as Array<{ title: string; author: string; url: string; guidance?: string }> : [];
+      const book = validateExternalBook(input);
+      const externalBooks = [...existingBooks.filter((item) => item.url !== book.url), book].slice(-6);
+      const saved = await upsertHanaLearnerProfile(ctx.user.id, { ...currentProfile, externalBooks }, (current?.version || 0) + 1);
+      return { profile: saved };
+    }),
+    generate: protectedProcedure.input(diagnosticAnswersSchema.extend({ externalBooks: z.array(externalBookSchema).max(6).default([]) })).mutation(async ({ ctx, input }) => {
+      const generated = await generatePersonalizedRoadmap(input);
+      const savedProfile = await upsertHanaLearnerProfile(ctx.user.id, generated.profile as unknown as Record<string, unknown>);
+      const roadmap = await createHanaRoadmap(ctx.user.id, savedProfile?.version || generated.profile.version, generated.roadmap as unknown as Record<string, unknown>);
+      return { profile: generated.profile, roadmap: generated.roadmap, resources: generated.resources, roadmapId: roadmap.id, version: roadmap.version };
+    }),
+    recordProgress: protectedProcedure.input(z.object({ roadmapId: z.number().int().positive(), eventType: z.enum(["quiz", "action", "reflection", "preference_change", "evidence"]), payload: z.record(z.string(), z.unknown()).default({}) })).mutation(async ({ ctx, input }) => {
+      await recordHanaProgressEvent(ctx.user.id, input.roadmapId, input.eventType, input.payload);
+      return { success: true } as const;
+    }),
+  }),
   resources: router({
     verify: protectedProcedure.input(z.object({ resources: z.array(z.object({ label: z.string().min(1).max(180), url: z.string().url().max(500) })).min(1).max(4) })).query(async ({ input }) => {
       const safeCandidates = input.resources.filter(validateResourceCandidate);
@@ -184,6 +215,7 @@ export const appRouter = router({
     }),
     chat: protectedProcedure.input(chatInput).mutation(async ({ ctx, input }) => {
       const studentContext = await buildHanaContext(ctx.user.id);
+      const activeRoadmap = await getActiveHanaRoadmap(ctx.user.id);
       const extraContext = input.context ? Object.entries(input.context)
         .filter(([, value]) => value && (!Array.isArray(value) || value.length > 0))
         .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join("; ") : value}`)
@@ -191,7 +223,7 @@ export const appRouter = router({
       const modeInstruction = input.mode === "simple" ? "Use the heading ## Simple version. Explain with very common words, no jargon, and one tiny example." : input.mode === "new-learner" ? "Use the heading ## Start here. Assume no prior technical knowledge, define any necessary word immediately, and give one small first step." : input.mode === "before-test" ? "Use the headings ## Remember this and ## Quick check. Give only the key ideas likely needed for a test, then one short self-check question." : input.mode === "analogy" ? "Use the heading ## Simple picture, then one memorable analogy and one short check question." : input.mode === "example" ? "Use the heading ## Tiny example, then show a small concrete example and one thing to try." : input.mode === "exam-answer" ? "Use the heading ## Exam answer. Give a concise, accurate answer first, then 2–4 supporting points and no motivational filler." : input.mode === "practice" ? "Use the headings ## Try this and ## Check yourself. Give one practice question without the answer first, then a short hint." : input.mode === "debug" ? "Use the headings ## What I see and ## Try this, with a calm numbered debugging checklist and one next diagnostic step." : input.mode === "deep" ? "Use the headings ## Short answer and ## More detail. Keep the second section compact." : input.mode === "career" ? "Use the headings ## Paths that may fit and ## My first suggestion. Return 2–3 exploratory directions with a short fit reason, compact role description, one project idea, and key skills." : input.mode === "project" ? "Use the headings ## Small project and ## First step. Turn the idea into a scoped plan with outcome, short stages, suggested technology, and a definition of done." : "Use the heading ## Simple answer, then 2–4 short points and one clear next action.";
       const response = await generateText([
         { role: "system", content: `${hanaSystemPrompt}\n\nYou are a context-aware university and career coach. Treat the database context as the source of truth. Never say the student completed or demonstrated a skill unless it appears in completedLearningSteps, completedSkills, or demonstratedSkills. If the student asks about a next step, prefer currentActiveStep and the first unmet prerequisite. If they ask about APIs or another future skill, check completed skills and learning history first; explain the missing prerequisites instead of unlocking it. Never invent university subjects, projects, competitions, deadlines, or resources.` },
-        { role: "user", content: `Response mode: ${modeInstruction}\n\nDatabase student context:\n${formatStudentContextForHana(studentContext, input.message)}\n\nScreen context:\n${extraContext}\n\nLearner message:\n${input.message}` },
+        { role: "user", content: `Response mode: ${modeInstruction}\n\nDatabase student context:\n${formatStudentContextForHana(studentContext, input.message)}\n\nActive personalized roadmap context:\n${activeRoadmap ? JSON.stringify(activeRoadmap.roadmap).slice(0, 12000) : "No personalized roadmap has been generated yet."}\n\nScreen context:\n${extraContext}\n\nLearner message:\n${input.message}` },
       ]);
       await recordHanaConversation(ctx.user.id, [
         { role: "user", text: input.message, createdAt: new Date().toISOString() },

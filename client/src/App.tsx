@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 const Home = lazy(() => import("./pages/Home"));
+const PersonalizedRoadmap = lazy(() => import("./pages/PersonalizedRoadmap"));
 
 function HanaLoadingShell() {
   return (
@@ -29,6 +30,11 @@ function Router() {
       <Route path={"/"}>
         <Suspense fallback={<HanaLoadingShell />}>
           <Home />
+        </Suspense>
+      </Route>
+      <Route path={"/personalize"}>
+        <Suspense fallback={<HanaLoadingShell />}>
+          <PersonalizedRoadmap />
         </Suspense>
       </Route>
       <Route path={"/404"} component={NotFound} />

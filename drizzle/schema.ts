@@ -1,4 +1,4 @@
-import { int, json, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { index, int, json, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -125,3 +125,41 @@ export type HanaUpload = typeof hanaUploads.$inferSelect;
 export type InsertHanaUpload = typeof hanaUploads.$inferInsert;
 
 export const hanaUploadsRelations = undefined;
+
+export const hanaLearnerProfiles = mysqlTable("hana_learner_profiles", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().unique(),
+  profile: json("profile").$type<Record<string, unknown>>().notNull(),
+  version: int("version").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ({ userIdIndex: index("hana_learner_profiles_user_id_idx").on(table.userId) }));
+
+export type HanaLearnerProfile = typeof hanaLearnerProfiles.$inferSelect;
+export type InsertHanaLearnerProfile = typeof hanaLearnerProfiles.$inferInsert;
+
+export const hanaRoadmaps = mysqlTable("hana_roadmaps", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  profileVersion: int("profileVersion").notNull(),
+  version: int("version").notNull(),
+  status: mysqlEnum("status", ["active", "archived"]).default("active").notNull(),
+  roadmap: json("roadmap").$type<Record<string, unknown>>().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ({ userVersionUnique: uniqueIndex("hana_roadmaps_user_version_uq").on(table.userId, table.version), userStatusIndex: index("hana_roadmaps_user_status_idx").on(table.userId, table.status) }));
+
+export type HanaRoadmap = typeof hanaRoadmaps.$inferSelect;
+export type InsertHanaRoadmap = typeof hanaRoadmaps.$inferInsert;
+
+export const hanaProgressEvents = mysqlTable("hana_progress_events", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  roadmapId: int("roadmapId").notNull(),
+  eventType: varchar("eventType", { length: 80 }).notNull(),
+  payload: json("payload").$type<Record<string, unknown>>().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+}, (table) => ({ userRoadmapIndex: index("hana_progress_events_user_roadmap_idx").on(table.userId, table.roadmapId), userCreatedIndex: index("hana_progress_events_user_created_idx").on(table.userId, table.createdAt) }));
+
+export type HanaProgressEvent = typeof hanaProgressEvents.$inferSelect;
+export type InsertHanaProgressEvent = typeof hanaProgressEvents.$inferInsert;

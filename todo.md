@@ -1032,6 +1032,6 @@
 - [x] Add tests for validation, ownership, provider errors, persistence, and chat flows
 - [x] Run lint/typecheck/tests/build and verify the app locally
 - [x] Document environment variables, migration/rollout steps, assistant scope, and production safety
-- [ ] Commit changes and provide the user with the branch/commit and rollout instructions
+- [x] Commit changes and provide the user with the branch/commit and rollout instructions
 - [x] Install repository dependencies before running Hana HackSocial type checks and tests
 - [x] Add a focused contract test for Hana chat hydration, reset, retry, and accessible composer wiring

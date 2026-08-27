@@ -296,8 +296,9 @@ export function AIChatBox({
                   <div className="size-8 shrink-0 mt-1 rounded-full bg-primary/10 flex items-center justify-center">
                     <Sparkles className="size-4 text-primary" />
                   </div>
-                  <div className="rounded-lg bg-muted px-4 py-2.5">
+                  <div className="flex items-center gap-2 rounded-lg bg-muted px-4 py-2.5" role="status" aria-live="polite">
                     <Loader2 className="size-4 animate-spin text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground">Hana is thinking…</span>
                   </div>
                 </div>
               )}
@@ -311,13 +312,16 @@ export function AIChatBox({
         ref={inputAreaRef}
         onSubmit={handleSubmit}
         className="flex gap-2 p-4 border-t bg-background/50 items-end"
+        aria-label="Hana support chat message composer"
       >
         {onFileSelected && <label className="grid h-[38px] w-[38px] shrink-0 cursor-pointer place-items-center rounded-md border border-border bg-background text-muted-foreground transition-colors hover:bg-accent" title="Teach Hana with a small code or text file">
           <Paperclip className="size-4" />
           <span className="sr-only">Choose a small code or text file for Hana</span>
           <input type="file" accept=".txt,.md,.js,.jsx,.ts,.tsx,.json,.py,.java,.c,.h,.cpp,.hpp,text/plain,text/markdown,application/json" className="sr-only" onChange={(event) => { const file = event.target.files?.[0]; if (file) onFileSelected(file); event.currentTarget.value = ""; }} />
         </label>}
+        <label htmlFor="hana-chat-message" className="sr-only">Message Hana</label>
         <Textarea
+          id="hana-chat-message"
           ref={textareaRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -330,6 +334,7 @@ export function AIChatBox({
           type="submit"
           size="icon"
           disabled={!input.trim() || isLoading}
+          aria-label={isLoading ? "Hana is thinking" : "Send message to Hana"}
           className="shrink-0 h-[38px] w-[38px]"
         >
           {isLoading ? (

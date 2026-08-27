@@ -1018,3 +1018,20 @@
 - [ ] Assess Netlify as the replacement public-hosting route after Vercel failed; preserve full-stack behavior and document any authorization or platform blocker without using a static-only workaround.
 
 - [ ] Create or request a separate managed Manus web project from the copied HackSocial GitHub repository, deploy it without using original HANA metadata/secrets, and verify the public URL or document the exact authorization blocker.
+
+## Secure persistent support assistant integration
+- [x] Inspect Hana HackSocial architecture, auth, data, and existing chat-related components
+- [x] Choose an integration path that preserves the current production app and deployment workflow
+- [x] Add persistent conversation/message storage if the project already has a compatible database
+- [x] Add authenticated server-side LLM integration with private credentials
+- [x] Add strict conversation ownership checks and safe input/provider error handling
+- [x] Add conversation list, create, continue, reset, and duplicate-free retry flows
+- [x] Build or adapt a responsive ChatGPT-like support UI inside Hana HackSocial
+- [x] Apply the requested warm cream paper and playful hand-drawn work-in-progress aesthetic without disrupting existing brand-critical screens
+- [x] Add accessibility and mobile-friendly chat controls
+- [x] Add tests for validation, ownership, provider errors, persistence, and chat flows
+- [x] Run lint/typecheck/tests/build and verify the app locally
+- [x] Document environment variables, migration/rollout steps, assistant scope, and production safety
+- [ ] Commit changes and provide the user with the branch/commit and rollout instructions
+- [x] Install repository dependencies before running Hana HackSocial type checks and tests
+- [x] Add a focused contract test for Hana chat hydration, reset, retry, and accessible composer wiring

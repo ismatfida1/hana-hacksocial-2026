@@ -1,5 +1,6 @@
 import { COOKIE_NAME } from "@shared/const";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { generateText, providerLabel } from "./_core/aiProviders";
 import { systemRouter } from "./_core/systemRouter";
@@ -201,6 +202,30 @@ export const appRouter = router({
         await updateStudentProfile(ctx.user.id, { explanationStyle: input.mode as HanaMemoryProfileInput["explanationStyle"] });
       }
       return { text: response.text, model: providerLabel(response.provider) };
+    }),
+    retry: protectedProcedure.input(z.object({
+      mode: z.enum(["short", "simple", "new-learner", "before-test", "analogy", "example", "exam-answer", "practice", "debug", "deep", "career", "project"]).default("short"),
+      context: chatInput.shape.context,
+    })).mutation(async ({ ctx, input }) => {
+      const memory = await getHanaStudentMemory(ctx.user.id);
+      const lastUserMessage = [...(memory?.conversations || [])].reverse().find((message) => message.role === "user");
+      if (!lastUserMessage) throw new TRPCError({ code: "BAD_REQUEST", message: "There is no saved Hana message to retry." });
+
+      const studentContext = await buildHanaContext(ctx.user.id);
+      const extraContext = input.context ? Object.entries(input.context)
+        .filter(([, value]) => value && (!Array.isArray(value) || value.length > 0))
+        .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join("; ") : value}`)
+        .join("\\n") : "No extra context was supplied by the screen.";
+      try {
+        const response = await generateText([
+          { role: "system", content: `${hanaSystemPrompt}\\n\\nYou are retrying the last Hana answer. Keep the response concise, safe, and grounded in the saved learner context. Do not invent facts, deadlines, guarantees, sources, or requirements.` },
+          { role: "user", content: `Response mode: ${input.mode}\\n\\nDatabase student context:\\n${formatStudentContextForHana(studentContext, lastUserMessage.text)}\\n\\nScreen context:\\n${extraContext}\\n\\nLearner message to retry:\\n${lastUserMessage.text}` },
+        ]);
+        await recordHanaConversation(ctx.user.id, [{ role: "hana", text: response.text, createdAt: new Date().toISOString() }]);
+        return { text: response.text, model: providerLabel(response.provider) };
+      } catch {
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Hana is unavailable right now. Please try again." });
+      }
     }),
     deviseJourney: protectedProcedure.input(z.object({
       studyArea: z.string().min(1).max(160).optional(), target: z.string().min(1).max(160).optional(), pathType: z.enum(["career", "skill-to-earn", "create-own", "not-sure"] as [PathType, ...PathType[]]).default("career"),

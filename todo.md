@@ -1035,3 +1035,24 @@
 - [x] Run type checks, tests, production build, and preview acceptance checks without publishing automatically
 - [x] Document search/model configuration, authorized resource policy, external book-link policy, costs, and rollout steps
 - [x] Fix the personalized-roadmap client payload type so external-book arrays match the generated tRPC input contract
+
+## Production promotion of personalized roadmap
+- [ ] Confirm the Manus project owning the live Hana URL is connected to the updated Hana source branch
+- [ ] Merge or sync the reviewed personalized-roadmap branch into the real Manus project without changing unrelated production work
+- [ ] Apply migration 0005_bouncy_exiles.sql through the real project database workflow
+- [ ] Configure server-side AI/search variables in the real Manus project if runtime web search is enabled
+- [ ] Validate /personalize and distinct Ask Hana questions in the real project preview
+- [ ] User publishes the verified checkpoint through Manus and confirms live behavior
+- [ ] Deliver one consolidated Manus task prompt covering personalized ChatGPT support, adaptive roadmaps, web resources, external books, persistence, security, tests, migration, and rollout
+
+## ChatGPT-like assistant expansion
+- [x] Add model tool orchestration that decides when stable knowledge is enough and when live browsing is required
+- [x] Add cited web research results with source URL, title, retrieval time, and uncertainty labels
+- [x] Add secure server-side web fetch/search with timeouts, SSRF protections, content limits, and untrusted-content isolation
+- [x] Extend Ask Hana context handling for natural follow-ups and personalized learner context without generic canned responses
+- [ ] Add upload metadata and safe file analysis flow for supported documents, code, and images where platform capabilities allow
+- [ ] Add code explanation/debugging and tutoring response modes with difficulty adaptation
+- [x] Add response states for browsing, source cards, file analysis, clarifying questions, retry, and partial failures
+- [x] Add tests for tool selection, current-question inclusion, citations, source safety, upload limits, and multi-turn context
+- [x] Document required search/provider secrets, supported file types, limitations, privacy, and rollout steps
+- [x] Rerun the full test suite with the repository’s required HANA_PRIVACY_CONTACT test value after the live-browsing tests pass

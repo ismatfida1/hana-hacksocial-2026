@@ -371,7 +371,7 @@ export default function Home() {
       setChatMessages((messages) => [...messages, { role: "assistant", content: "## Sign in to continue\n\nHana needs your account to remember your journey and give personal advice. Your learning context stays tied to your account." }]);
       return;
     }
-    chat.mutate({ message: content, mode, context: { currentQuest: mission, availableTime: time || "Full study day", approvedMemories: [plan?.area, plan?.goal, plan?.level].filter(Boolean) as string[] } }, { onSuccess: (response) => setChatMessages((messages) => [...messages, { role: "assistant", content: response.text }]) });
+    chat.mutate({ message: content, mode, context: { currentQuest: mission, availableTime: time || "Full study day", approvedMemories: [plan?.area, plan?.goal, plan?.level].filter(Boolean) as string[] } }, { onSuccess: (response) => setChatMessages((messages) => [...messages, { role: "assistant", content: response.text, sources: response.sources }]), onError: () => setChatMessages((messages) => [...messages, { role: "assistant", content: "## I need a moment\n\nI could not connect to Hana right now. Please try that question again." }]) });
   };
 
   const handleDeleteUpload = (id: number) => {

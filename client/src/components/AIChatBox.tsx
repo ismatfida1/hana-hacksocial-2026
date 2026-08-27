@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { Loader2, Send, User, Sparkles, Paperclip } from "lucide-react";
+import { ExternalLink, Loader2, Send, User, Sparkles, Paperclip } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -12,6 +12,7 @@ import ReactMarkdown from "react-markdown";
 export type Message = {
   role: "system" | "user" | "assistant";
   content: string;
+  sources?: Array<{ title: string; url: string; source: string; snippet?: string; retrievedAt?: string }>;
 };
 
 export type AIChatBoxProps = {
@@ -267,6 +268,7 @@ export function AIChatBox({
                       {message.role === "assistant" ? (
                         <div className="prose prose-sm dark:prose-invert max-w-none">
                           <ReactMarkdown>{message.content}</ReactMarkdown>
+                          {message.sources && message.sources.length > 0 && <div className="mt-4 border-t border-border/70 pt-3"><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground">Sources checked live</p><div className="mt-2 space-y-2">{message.sources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer" className="block rounded-md border border-border bg-background/60 p-2 no-underline transition-colors hover:bg-accent"><span className="flex items-start justify-between gap-2 text-xs font-semibold text-foreground"><span>{source.title}</span><ExternalLink className="mt-0.5 size-3 shrink-0" /></span><span className="mt-1 block text-[10px] text-muted-foreground">{source.source}{source.snippet ? ` · ${source.snippet.slice(0, 140)}` : ""}</span></a>)}</div></div>}
                         </div>
                       ) : (
                         <p className="whitespace-pre-wrap text-sm">
@@ -323,6 +325,7 @@ export function AIChatBox({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
+          aria-label="Ask Hana a question"
           className="flex-1 max-h-32 resize-none min-h-9"
           rows={1}
         />
@@ -330,6 +333,7 @@ export function AIChatBox({
           type="submit"
           size="icon"
           disabled={!input.trim() || isLoading}
+          aria-label={isLoading ? "Hana is preparing a response" : "Send message to Hana"}
           className="shrink-0 h-[38px] w-[38px]"
         >
           {isLoading ? (
